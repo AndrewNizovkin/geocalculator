@@ -2,6 +2,7 @@ spring:
   application:
   name: geocalculator_service
 server:
+  port: 8181
   error:
     include-message: ALWAYS
   datasource:
@@ -11,5 +12,5 @@ server:
     driver-class-name: org.h2.Driver
   jpa:
     show-sql: true
-    hibername:
+    hibernate:
       ddl-auto: create-drop
