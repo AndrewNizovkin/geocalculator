@@ -21,4 +21,12 @@ public class InverseTaskDto {
     private long secondY;
 
     private long secondZ;
+
+    private long horDistance;
+
+    private long inclinedDistance;
+
+    private long direction;
+
+    private long elevation;
 }

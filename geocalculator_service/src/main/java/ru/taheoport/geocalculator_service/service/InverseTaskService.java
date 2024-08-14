@@ -1,39 +1,34 @@
 package ru.taheoport.geocalculator_service.service;
 
+import ru.taheoport.geocalculator_service.dto.InverseTaskDto;
 import ru.taheoport.geocalculator_service.model.InverseTask;
 
 import java.util.List;
 
 /**
- * This interface defines methods for solving the inverse geodesic task
+ * This interface defines methods for service layer
  */
 public interface InverseTaskService {
 
     /**
-     * Gets all InverseTaskRequests from db
-     * @return
+     * Finds all InverseTask from db
+     * @return List of instance of InverseTaskDto
      */
-    List<InverseTask> findAll();
+    List<InverseTaskDto> findAll();
 
     /**
-     * Gets horizontal distance between too points with 2D coordinates
-     * @param inverseTask instance of BackTaskRequest
-     * @return double result in millimeters
+     * Create new record in db
+     * @param inverseTaskDto instance of InverseTaskDto
+     * @return instance of InverseTaskDto
      */
-    long getHorDistance(InverseTask inverseTask);
+    InverseTaskDto createInverseTask(InverseTaskDto inverseTaskDto);
 
     /**
-     * Gets inclined distance between too points with 3D coordinates
-     * @param inverseTask instance of BackTaskRequest
-     * @return double result millimeters
+     * Finds InverseTask by Id
+     * @param id long id
+     * @return instance of InverseTaskDto
      */
-    long getInclinedDistance(InverseTask inverseTask);
+    InverseTaskDto findById(long id);
 
-    /**
-     * Gets directional angle first-second line
-     * @param inverseTask instance of BackTackRequest
-     * @return result in seconds
-     */
-    long getDirection(InverseTask inverseTask);
 
 }
