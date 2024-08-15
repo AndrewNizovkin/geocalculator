@@ -19,6 +19,16 @@ public class InverseTask {
     private long id;
 
     /**
+     * The id of base point in db
+     */
+    private long baseId;
+
+    /**
+     * The id of target point in db
+     */
+    private long targetId;
+
+    /**
      * Coordinate X base point
      */
     @Column(name = "baseX")
@@ -54,4 +64,13 @@ public class InverseTask {
     @Column(name = "targetZ")
     private long targetZ;
 
+    /**
+     * Constructor with two parameters
+     * @param baseId The id of base point
+     * @param targetId The id of target point
+     */
+    public InverseTask(long baseId, long targetId) {
+        this.baseId = baseId;
+        this.targetId = targetId;
+    }
 }
