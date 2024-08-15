@@ -1,6 +1,5 @@
 package ru.taheoport.geocalculator_service.mapper;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +27,12 @@ class InverseTaskCalculatorDefaultTest {
                             long secondZ,
                             long expect) {
         InverseTask inverseTask = new InverseTask();
-        inverseTask.setFirstX(firstX);
-        inverseTask.setFirstY(firstY);
-        inverseTask.setFirstZ(firstZ);
-        inverseTask.setSecondX(secondX);
-        inverseTask.setSecondY(secondY);
-        inverseTask.setSecondZ(secondZ);
+        inverseTask.setBaseX(firstX);
+        inverseTask.setBaseY(firstY);
+        inverseTask.setBaseZ(firstZ);
+        inverseTask.setTargetX(secondX);
+        inverseTask.setTargetY(secondY);
+        inverseTask.setTargetZ(secondZ);
 
         long actualResult = inverseTaskCalculator.getHorDistance(inverseTask);
 
@@ -56,12 +55,12 @@ class InverseTaskCalculatorDefaultTest {
                                  long secondZ,
                                  long expect) {
         InverseTask inverseTask = new InverseTask();
-        inverseTask.setFirstX(firstX);
-        inverseTask.setFirstY(firstY);
-        inverseTask.setFirstZ(firstZ);
-        inverseTask.setSecondX(secondX);
-        inverseTask.setSecondY(secondY);
-        inverseTask.setSecondZ(secondZ);
+        inverseTask.setBaseX(firstX);
+        inverseTask.setBaseY(firstY);
+        inverseTask.setBaseZ(firstZ);
+        inverseTask.setTargetX(secondX);
+        inverseTask.setTargetY(secondY);
+        inverseTask.setTargetZ(secondZ);
 
         long actualResult = inverseTaskCalculator.getInclinedDistance(inverseTask);
 
@@ -91,12 +90,12 @@ class InverseTaskCalculatorDefaultTest {
                           long secondZ,
                           long expect) {
         InverseTask inverseTask = new InverseTask();
-        inverseTask.setFirstX(firstX);
-        inverseTask.setFirstY(firstY);
-        inverseTask.setFirstZ(firstZ);
-        inverseTask.setSecondX(secondX);
-        inverseTask.setSecondY(secondY);
-        inverseTask.setSecondZ(secondZ);
+        inverseTask.setBaseX(firstX);
+        inverseTask.setBaseY(firstY);
+        inverseTask.setBaseZ(firstZ);
+        inverseTask.setTargetX(secondX);
+        inverseTask.setTargetY(secondY);
+        inverseTask.setTargetZ(secondZ);
 
         long actualResult = inverseTaskCalculator.getDirection(inverseTask);
 
@@ -118,14 +117,43 @@ class InverseTaskCalculatorDefaultTest {
                           long secondZ,
                           long expect) {
         InverseTask inverseTask = new InverseTask();
-        inverseTask.setFirstX(firstX);
-        inverseTask.setFirstY(firstY);
-        inverseTask.setFirstZ(firstZ);
-        inverseTask.setSecondX(secondX);
-        inverseTask.setSecondY(secondY);
-        inverseTask.setSecondZ(secondZ);
+        inverseTask.setBaseX(firstX);
+        inverseTask.setBaseY(firstY);
+        inverseTask.setBaseZ(firstZ);
+        inverseTask.setTargetX(secondX);
+        inverseTask.setTargetY(secondY);
+        inverseTask.setTargetZ(secondZ);
 
         long actualResult = inverseTaskCalculator.getElevation(inverseTask);
+
+        assertEquals(expect, actualResult);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1000000000, 1000000000, 0, 1000000000, 2000000000, 1000000000, 162000",
+            "1000000000, 1000000000, 1000000000, 1000000000, 2000000000, 0, -162000",
+            "1000000000, 1000045000, 10000155, 1000000000, 2000000000, 10000155, 0",
+            "1000130000, 1000045000, 10000155, 1000000000, 2000000000, 10135456, 28",
+            "1000130000, 1000045000, 10135456, 1000000000, 2000000000, 10000155, -28",
+            "0, 0, 0, 0, 0, 0, 0"
+    })
+    void getTiltAngleTest(long firstX,
+                          long firstY,
+                          long firstZ,
+                          long secondX,
+                          long secondY,
+                          long secondZ,
+                          long expect) {
+        InverseTask inverseTask = new InverseTask();
+        inverseTask.setBaseX(firstX);
+        inverseTask.setBaseY(firstY);
+        inverseTask.setBaseZ(firstZ);
+        inverseTask.setTargetX(secondX);
+        inverseTask.setTargetY(secondY);
+        inverseTask.setTargetZ(secondZ);
+
+        long actualResult = inverseTaskCalculator.getTiltAngle(inverseTask);
 
         assertEquals(expect, actualResult);
     }

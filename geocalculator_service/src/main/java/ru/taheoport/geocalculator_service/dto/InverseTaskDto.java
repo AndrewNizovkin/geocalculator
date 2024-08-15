@@ -1,6 +1,5 @@
 package ru.taheoport.geocalculator_service.dto;
 
-import jakarta.persistence.Column;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,23 +9,59 @@ public class InverseTaskDto {
 
     private long id;
 
-    private long firstX;
+    /**
+     * Coordinate X base point, in millimeters
+     */
+    private long baseX;
 
-    private long firstY;
+    /**
+     * Coordinate Y base point, in millimeters
+     */
+    private long baseY;
 
-    private long firstZ;
+    /**
+     * Coordinate Z base point, in millimeters
+     */
+    private long baseZ;
 
-    private long secondX;
+    /**
+     * Coordinate X target point, in millimeters
+     */
+    private long targetX;
 
-    private long secondY;
+    /**
+     * Coordinate Y target point, in millimeters
+     */
+    private long targetY;
 
-    private long secondZ;
+    /**
+     * Coordinate Z target point, in millimeters
+     */
+    private long targetZ;
 
-    private long horDistance;
-
-    private long inclinedDistance;
-
+    /**
+     * The angle between the direction to the north and
+     * the direction to the target, in seconds
+     */
     private long direction;
 
+    /**
+     * Horizontal distance between base and target, in millimeters
+     */
+    private long horDistance;
+
+    /**
+     * Inclined distance between base and target, in millimeters
+     */
+    private long inclinedDistance;
+
+    /**
+     * The tilt angle of base->target line, in seconds
+     */
+    private long tiltAngle;
+
+    /**
+     * The height difference between the target and the base
+     */
     private long elevation;
 }

@@ -2,11 +2,10 @@ package ru.taheoport.geocalculator_service.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * This class implements 3D coordinates of basis
+ * This class implements 3D coordinates base and target
  */
 @Entity
 @Data
@@ -19,22 +18,40 @@ public class InverseTask {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "firstX")
-    private long firstX;
+    /**
+     * Coordinate X base point
+     */
+    @Column(name = "baseX")
+    private long baseX;
 
-    @Column(name = "firstY")
-    private long firstY;
+    /**
+     * Coordinate Y base point
+     */
+    @Column(name = "baseY")
+    private long baseY;
 
-    @Column(name = "firstZ")
-    private long firstZ;
+    /**
+     * Coordinate Z base point
+     */
+    @Column(name = "baseZ")
+    private long baseZ;
 
-    @Column(name = "secondX")
-    private long secondX;
+    /**
+     * Coordinate X target point
+     */
+    @Column(name = "targetX")
+    private long targetX;
 
-    @Column(name = "secondY")
-    private long secondY;
+    /**
+     * Coordinate Y target point
+     */
+    @Column(name = "targetY")
+    private long targetY;
 
-    @Column(name = "secondZ")
-    private long secondZ;
+    /**
+     * Coordinate Z target point
+     */
+    @Column(name = "targetZ")
+    private long targetZ;
 
 }

@@ -17,16 +17,17 @@ public class InverseTaskMapperDefault implements InverseTaskMapper{
     public InverseTaskDto toInverseTaskDto(InverseTask inverseTask) {
         InverseTaskDto inverseTaskDto = new InverseTaskDto();
         inverseTaskDto.setId(inverseTask.getId());
-        inverseTaskDto.setFirstX(inverseTask.getFirstX());
-        inverseTaskDto.setFirstY(inverseTask.getFirstY());
-        inverseTaskDto.setFirstZ(inverseTask.getFirstZ());
-        inverseTaskDto.setSecondX(inverseTask.getSecondX());
-        inverseTaskDto.setSecondY(inverseTask.getSecondY());
-        inverseTaskDto.setSecondZ(inverseTask.getSecondZ());
+        inverseTaskDto.setBaseX(inverseTask.getBaseX());
+        inverseTaskDto.setBaseY(inverseTask.getBaseY());
+        inverseTaskDto.setBaseZ(inverseTask.getBaseZ());
+        inverseTaskDto.setTargetX(inverseTask.getTargetX());
+        inverseTaskDto.setTargetY(inverseTask.getTargetY());
+        inverseTaskDto.setTargetZ(inverseTask.getTargetZ());
         inverseTaskDto.setHorDistance(inverseTaskCalculator.getHorDistance(inverseTask));
         inverseTaskDto.setInclinedDistance(inverseTaskCalculator.getInclinedDistance(inverseTask));
         inverseTaskDto.setDirection(inverseTaskCalculator.getDirection(inverseTask));
         inverseTaskDto.setElevation(inverseTaskCalculator.getElevation(inverseTask));
+        inverseTaskDto.setTiltAngle(inverseTaskCalculator.getTiltAngle(inverseTask));
 
 
 
@@ -36,12 +37,12 @@ public class InverseTaskMapperDefault implements InverseTaskMapper{
     @Override
     public InverseTask toInverseTask(InverseTaskDto inverseTaskDto) {
         InverseTask inverseTask = new InverseTask();
-        inverseTask.setFirstX(inverseTaskDto.getFirstX());
-        inverseTask.setFirstY(inverseTaskDto.getFirstY());
-        inverseTask.setFirstZ(inverseTaskDto.getFirstZ());
-        inverseTask.setSecondX(inverseTaskDto.getSecondX());
-        inverseTask.setSecondY(inverseTaskDto.getSecondY());
-        inverseTask.setSecondZ(inverseTaskDto.getSecondZ());
+        inverseTask.setBaseX(inverseTaskDto.getBaseX());
+        inverseTask.setBaseY(inverseTaskDto.getBaseY());
+        inverseTask.setBaseZ(inverseTaskDto.getBaseZ());
+        inverseTask.setTargetX(inverseTaskDto.getTargetX());
+        inverseTask.setTargetY(inverseTaskDto.getTargetY());
+        inverseTask.setTargetZ(inverseTaskDto.getTargetZ());
 
         return inverseTask;
     }

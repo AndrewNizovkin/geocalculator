@@ -21,17 +21,24 @@ public interface InverseTaskCalculator {
     long getInclinedDistance(InverseTask inverseTask);
 
     /**
-     * Gets directional angle first-second line
+     * Gets directional angle base->target line
      * @param inverseTask instance of InverseTask
      * @return result in seconds
      */
     long getDirection(InverseTask inverseTask);
 
     /**
-     * Gets elevation second point under first
+     * Gets height difference between the target and the base
      * @param inverseTask instance of InverseTask
      * @return result in millimeters
      */
     long getElevation(InverseTask inverseTask);
+
+    /**
+     * Gets tilt angle base->target line
+     * @param inverseTask instance of InverseTask
+     * @return result in seconds
+     */
+    long getTiltAngle(InverseTask inverseTask);
 
 }
