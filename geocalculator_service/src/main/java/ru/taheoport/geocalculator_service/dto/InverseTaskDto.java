@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InverseTaskDto {
 
-    private long id;
-
     /**
      * Coordinate X base point, in millimeters
      */
