@@ -1,11 +1,9 @@
 package ru.taheoport.geocalculator_service.mapper;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.taheoport.geocalculator_service.model.InverseTask;
 
 import static org.junit.jupiter.api.Assertions.*;
 
