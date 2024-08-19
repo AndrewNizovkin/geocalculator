@@ -10,6 +10,7 @@ import static java.lang.Math.*;
  */
 @Component
 public class InverseCalculatorDefault implements InverseCalculator{
+
     @Override
     public long getHorDistance(long baseX,
                                long baseY,
