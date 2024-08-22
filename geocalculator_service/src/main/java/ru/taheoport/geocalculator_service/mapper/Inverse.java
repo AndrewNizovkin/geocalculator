@@ -3,7 +3,8 @@ package ru.taheoport.geocalculator_service.mapper;
 /**
  * This interface defines methods for solving the inverse geodesic task
  */
-public interface InverseCalculator {
+public interface Inverse {
+
     /**
      * Gets horizontal distance between too points with 2D coordinates
      * @param baseX Coordinate X of base point in millimeters
@@ -54,6 +55,7 @@ public interface InverseCalculator {
      * @return result in millimeters
      */
     long getElevation(long baseZ, long targetZ);
+
 
     /**
      * Gets tilt angle base->target line

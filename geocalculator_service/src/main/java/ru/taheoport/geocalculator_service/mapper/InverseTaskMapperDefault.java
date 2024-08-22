@@ -8,7 +8,7 @@ import ru.taheoport.geocalculator_service.dto.InverseTaskDto;
 @RequiredArgsConstructor
 public class InverseTaskMapperDefault implements InverseTaskMapper{
 
-    private final InverseCalculator inverseCalculator;
+    private final Inverse inverseCalculator;
 
     @Override
     public InverseTaskDto toInverseTaskDto(InverseTaskDto inverseTaskDto) {

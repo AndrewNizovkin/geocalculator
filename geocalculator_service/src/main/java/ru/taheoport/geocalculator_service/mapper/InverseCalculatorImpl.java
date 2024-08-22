@@ -9,26 +9,19 @@ import static java.lang.Math.*;
  * @author Nizovkin A.V.
  */
 @Component
-public class InverseCalculatorDefault implements InverseCalculator{
+public class InverseCalculatorImpl implements Inverse{
 
     @Override
-    public long getHorDistance(long baseX,
-                               long baseY,
-                               long targetX,
-                               long targetY) {
+    public long getHorDistance(long baseX, long baseY, long targetX, long targetY) {
         double result;
         result = sqrt(pow((double) (targetX - baseX), 2) +
                 pow((double) (targetY - baseY), 2));
         return round(result);
+
     }
 
     @Override
-    public long getInclinedDistance(long baseX,
-                                    long baseY,
-                                    long baseZ,
-                                    long targetX,
-                                    long targetY,
-                                    long targetZ) {
+    public long getInclinedDistance(long baseX, long baseY, long baseZ, long targetX, long targetY, long targetZ) {
         double result;
         result = sqrt(pow((double) (targetX - baseX), 2) +
                 pow((double) (targetY - baseY), 2) +
@@ -37,10 +30,7 @@ public class InverseCalculatorDefault implements InverseCalculator{
     }
 
     @Override
-    public long getDirection(long baseX,
-                             long baseY,
-                             long targetX,
-                             long targetY) {
+    public long getDirection(long baseX, long baseY, long targetX, long targetY) {
         double dir = 0.0;
         long dX = targetX - baseX;
         long dY = targetY - baseY;
@@ -85,12 +75,7 @@ public class InverseCalculatorDefault implements InverseCalculator{
     }
 
     @Override
-    public long getTiltAngle(long baseX,
-                             long baseY,
-                             long baseZ,
-                             long targetX,
-                             long targetY,
-                             long targetZ) {
+    public long getTiltAngle(long baseX, long baseY, long baseZ, long targetX, long targetY, long targetZ) {
         double tilt;
         long elevation = getElevation(baseZ, targetZ);
         long horDistance = getHorDistance(baseX, baseY, targetX, targetY);

@@ -7,11 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = {InverseCalculatorDefault.class})
-class InverseCalculatorDefaultTest {
+@SpringBootTest(classes = {InverseCalculatorImpl.class})
+class InverseCalculatorImplTest {
 
     @Autowired
-    private InverseCalculator inverseCalculator;
+    Inverse inverseCalculator;
 
     @ParameterizedTest
     @CsvSource({
