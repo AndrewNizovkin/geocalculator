@@ -18,10 +18,10 @@ public class DirectTaskMapperDefault implements DirectTaskMapper{
     public DirectTaskDto toDirectTaskDto(DirectTaskDto directTaskDto) {
 
         long landmarkDirectionalAngle = inverseCalculator.getDirection(
+                directTaskDto.getBaseX(),
+                directTaskDto.getBaseY(),
                 directTaskDto.getLandmarkX(),
-                directTaskDto.getLandmarkY(),
-                directTaskDto.getTargetX(),
-                directTaskDto.getTargetY()
+                directTaskDto.getLandmarkY()
         );
 
         long targetDirectionAngle = directCalculator.getDirectionalAngle(

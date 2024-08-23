@@ -3,7 +3,7 @@ package ru.taheoport.geocalculator_service.service;
 import ru.taheoport.geocalculator_service.dto.InverseTaskDto;
 
 /**
- * This interface defines methods for service layer
+ * This interface defines methods for solving Inverse Geodetic Task
  */
 public interface InverseTaskService {
 
