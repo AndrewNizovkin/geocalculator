@@ -16,7 +16,7 @@ public class InverseTackController {
 
 
     /**
-     * Creates new InverseTask
+     * Resolves Inverse Geodetic Problem
      * @param inverseTaskDto Instance of InverseTaskDto
      * @return Instance InverseTaskDto
      */
