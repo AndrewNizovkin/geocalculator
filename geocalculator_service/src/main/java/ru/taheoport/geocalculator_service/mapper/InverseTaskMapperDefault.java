@@ -2,7 +2,8 @@ package ru.taheoport.geocalculator_service.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.taheoport.geocalculator_service.dto.InverseTaskDto;
+import ru.taheoport.geocalculator_service.dto.InverseTaskRequest;
+import ru.taheoport.geocalculator_service.dto.InverseTaskResponse;
 
 @Component
 @RequiredArgsConstructor
@@ -11,39 +12,41 @@ public class InverseTaskMapperDefault implements InverseTaskMapper{
     private final Inverse inverseCalculator;
 
     @Override
-    public InverseTaskDto toInverseTaskDto(InverseTaskDto inverseTaskDto) {
+    public InverseTaskResponse toInverseTaskResponse(InverseTaskRequest inverseTaskRequest) {
 
-        inverseTaskDto.setHorDistance(inverseCalculator.getHorDistance(inverseTaskDto.getBaseX(),
-                inverseTaskDto.getBaseY(),
-                inverseTaskDto.getTargetX(),
-                inverseTaskDto.getTargetY()));
-        inverseTaskDto.setInclinedDistance(inverseCalculator.getInclinedDistance(
-                inverseTaskDto.getBaseX(),
-                inverseTaskDto.getBaseY(),
-                inverseTaskDto.getBaseZ(),
-                inverseTaskDto.getTargetX(),
-                inverseTaskDto.getTargetY(),
-                inverseTaskDto.getTargetZ()));
-        inverseTaskDto.setDirection(inverseCalculator.getDirection(
-                inverseTaskDto.getBaseX(),
-                inverseTaskDto.getBaseY(),
-                inverseTaskDto.getTargetX(),
-                inverseTaskDto.getTargetY()
+        InverseTaskResponse inverseTaskResponse = new InverseTaskResponse();
+
+        inverseTaskResponse.setHorDistance(inverseCalculator.getHorDistance(inverseTaskRequest.getBaseX(),
+                inverseTaskRequest.getBaseY(),
+                inverseTaskRequest.getTargetX(),
+                inverseTaskRequest.getTargetY()));
+        inverseTaskResponse.setInclinedDistance(inverseCalculator.getInclinedDistance(
+                inverseTaskRequest.getBaseX(),
+                inverseTaskRequest.getBaseY(),
+                inverseTaskRequest.getBaseZ(),
+                inverseTaskRequest.getTargetX(),
+                inverseTaskRequest.getTargetY(),
+                inverseTaskRequest.getTargetZ()));
+        inverseTaskResponse.setDirection(inverseCalculator.getDirection(
+                inverseTaskRequest.getBaseX(),
+                inverseTaskRequest.getBaseY(),
+                inverseTaskRequest.getTargetX(),
+                inverseTaskRequest.getTargetY()
         ));
-        inverseTaskDto.setElevation(inverseCalculator.getElevation(
-                inverseTaskDto.getBaseZ(),
-                inverseTaskDto.getTargetZ()
+        inverseTaskResponse.setElevation(inverseCalculator.getElevation(
+                inverseTaskRequest.getBaseZ(),
+                inverseTaskRequest.getTargetZ()
         ));
-        inverseTaskDto.setTiltAngle(inverseCalculator.getTiltAngle(
-                inverseTaskDto.getBaseX(),
-                inverseTaskDto.getBaseY(),
-                inverseTaskDto.getBaseZ(),
-                inverseTaskDto.getTargetX(),
-                inverseTaskDto.getTargetY(),
-                inverseTaskDto.getTargetZ()
+        inverseTaskResponse.setTiltAngle(inverseCalculator.getTiltAngle(
+                inverseTaskRequest.getBaseX(),
+                inverseTaskRequest.getBaseY(),
+                inverseTaskRequest.getBaseZ(),
+                inverseTaskRequest.getTargetX(),
+                inverseTaskRequest.getTargetY(),
+                inverseTaskRequest.getTargetZ()
         ));
 
-        return inverseTaskDto;
+        return inverseTaskResponse;
     }
 
 }

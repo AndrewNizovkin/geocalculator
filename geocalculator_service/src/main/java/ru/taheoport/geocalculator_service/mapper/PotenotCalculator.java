@@ -8,5 +8,38 @@ public interface PotenotCalculator {
      * @param second angle in second
      * @return angle in radians
      */
-    double difAngle(long first, long second);
+    long difAngle(long first, long second);
+
+    /**
+     * Calculates X coordinate with Delambra formula
+     * @param firstX
+     * @param firstY
+     * @param secondX
+     * @param secondY
+     * @param dirFromFirst
+     * @param dirFromSecond
+     * @return
+     */
+    double targetX(
+            double firstX,
+            double firstY,
+            double secondX,
+            double secondY,
+            double dirFromFirst,
+            double dirFromSecond
+    );
+
+    /**
+     * Calculates Y coordinate with Delambra formula
+     * @param firstY
+     * @param targetX
+     * @param dirFromFirst
+     * @return
+     */
+    double targetY(
+      double firstY,
+      double targetX,
+      double firstX,
+      double dirFromFirst
+    );
 }

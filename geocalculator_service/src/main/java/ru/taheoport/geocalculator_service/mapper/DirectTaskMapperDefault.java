@@ -2,7 +2,8 @@ package ru.taheoport.geocalculator_service.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.taheoport.geocalculator_service.dto.DirectTaskDto;
+import ru.taheoport.geocalculator_service.dto.DirectTaskRequest;
+import ru.taheoport.geocalculator_service.dto.DirectTaskResponse;
 
 /**
  * This class implements interface DirectTaskMapper
@@ -15,42 +16,44 @@ public class DirectTaskMapperDefault implements DirectTaskMapper{
     private final Inverse inverseCalculator;
 
     @Override
-    public DirectTaskDto toDirectTaskDto(DirectTaskDto directTaskDto) {
+    public DirectTaskResponse toDirectTaskResponse(DirectTaskRequest directTaskRequest) {
+
+        DirectTaskResponse directTaskResponse = new DirectTaskResponse();
 
         long landmarkDirectionalAngle = inverseCalculator.getDirection(
-                directTaskDto.getBaseX(),
-                directTaskDto.getBaseY(),
-                directTaskDto.getLandmarkX(),
-                directTaskDto.getLandmarkY()
+                directTaskRequest.getBaseX(),
+                directTaskRequest.getBaseY(),
+                directTaskRequest.getLandmarkX(),
+                directTaskRequest.getLandmarkY()
         );
 
         long targetDirectionAngle = directCalculator.getDirectionalAngle(
                 landmarkDirectionalAngle,
-                directTaskDto.getLandmarkDirection(),
-                directTaskDto.getTargetDirection()
+                directTaskRequest.getLandmarkDirection(),
+                directTaskRequest.getTargetDirection()
         );
 
         long deltaX = directCalculator.getDeltaX(
                 targetDirectionAngle,
-                directTaskDto.getTargetInclinedDistance(),
-                directTaskDto.getTargetTiltAngle()
+                directTaskRequest.getTargetInclinedDistance(),
+                directTaskRequest.getTargetTiltAngle()
         );
 
         long deltaY = directCalculator.getDeltaY(
                 targetDirectionAngle,
-                directTaskDto.getTargetInclinedDistance(),
-                directTaskDto.getTargetTiltAngle()
+                directTaskRequest.getTargetInclinedDistance(),
+                directTaskRequest.getTargetTiltAngle()
         );
 
         long deltaZ = directCalculator.getDeltaZ(
-                directTaskDto.getTargetInclinedDistance(),
-                directTaskDto.getTargetTiltAngle()
+                directTaskRequest.getTargetInclinedDistance(),
+                directTaskRequest.getTargetTiltAngle()
         );
 
-        directTaskDto.setTargetX(directTaskDto.getBaseX() + deltaX);
-        directTaskDto.setTargetY(directTaskDto.getBaseY() + deltaY);
-        directTaskDto.setTargetZ(directTaskDto.getBaseZ() + deltaZ);
+        directTaskResponse.setTargetX(directTaskRequest.getBaseX() + deltaX);
+        directTaskResponse.setTargetY(directTaskRequest.getBaseY() + deltaY);
+        directTaskResponse.setTargetZ(directTaskRequest.getBaseZ() + deltaZ);
 
-        return directTaskDto;
+        return directTaskResponse;
     }
 }

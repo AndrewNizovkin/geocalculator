@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class PotenotTaskDto {
+public class PotenotTaskRequest {
 
     /**
      * Coordinate X in millimeters
@@ -22,14 +22,14 @@ public class PotenotTaskDto {
      */
     private long direction;
 
-    /**
-     * X accuracy in millimeters
-     */
-    private long deltaX;
-
-    /**
-     * Y accuracy in millimeters
-     */
-    private long deltaY;
+//    /**
+//     * X accuracy in millimeters
+//     */
+//    private long deltaX;
+//
+//    /**
+//     * Y accuracy in millimeters
+//     */
+//    private long deltaY;
 
 }

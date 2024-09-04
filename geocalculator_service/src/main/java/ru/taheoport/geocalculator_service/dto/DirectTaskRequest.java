@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class DirectTaskDto {
+public class DirectTaskRequest {
 
     /**
      * Coordinate X of landmark in millimeters
@@ -55,18 +55,18 @@ public class DirectTaskDto {
      */
     private long targetTiltAngle;
 
-    /**
-     * Coordinate X of target in millimeters
-     */
-    private long targetX;
-
-    /**
-     * Coordinate Y of target in millimeters
-     */
-    private long targetY;
-
-    /**
-     * Coordinate Z of target in millimeters
-     */
-    private long targetZ;
+//    /**
+//     * Coordinate X of target in millimeters
+//     */
+//    private long targetX;
+//
+//    /**
+//     * Coordinate Y of target in millimeters
+//     */
+//    private long targetY;
+//
+//    /**
+//     * Coordinate Z of target in millimeters
+//     */
+//    private long targetZ;
 }

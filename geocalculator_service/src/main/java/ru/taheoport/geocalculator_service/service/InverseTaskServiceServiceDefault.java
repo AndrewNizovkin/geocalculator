@@ -2,7 +2,8 @@ package ru.taheoport.geocalculator_service.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.taheoport.geocalculator_service.dto.InverseTaskDto;
+import ru.taheoport.geocalculator_service.dto.InverseTaskRequest;
+import ru.taheoport.geocalculator_service.dto.InverseTaskResponse;
 import ru.taheoport.geocalculator_service.mapper.InverseTaskMapper;
 
 @Service
@@ -13,8 +14,8 @@ public class InverseTaskServiceServiceDefault implements InverseTaskService {
 
 
     @Override
-    public InverseTaskDto solveInverseTask(InverseTaskDto inverseTaskDto) {
-        return inverseTaskMapper.toInverseTaskDto(inverseTaskDto);
+    public InverseTaskResponse solveInverseTask(InverseTaskRequest inverseTaskRequest) {
+        return inverseTaskMapper.toInverseTaskResponse(inverseTaskRequest);
     }
 }
 

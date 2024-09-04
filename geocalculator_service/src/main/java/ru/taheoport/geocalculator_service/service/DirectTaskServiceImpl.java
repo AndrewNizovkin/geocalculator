@@ -2,7 +2,8 @@ package ru.taheoport.geocalculator_service.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.taheoport.geocalculator_service.dto.DirectTaskDto;
+import ru.taheoport.geocalculator_service.dto.DirectTaskRequest;
+import ru.taheoport.geocalculator_service.dto.DirectTaskResponse;
 import ru.taheoport.geocalculator_service.mapper.DirectTaskMapper;
 
 /**
@@ -14,8 +15,8 @@ public class DirectTaskServiceImpl implements DirectTaskService{
 
     private final DirectTaskMapper directTaskMapper;
     @Override
-    public DirectTaskDto solveDirectTask(DirectTaskDto directTaskDto) {
+    public DirectTaskResponse solveDirectTask(DirectTaskRequest directTaskRequest) {
 
-        return directTaskMapper.toDirectTaskDto(directTaskDto);
+        return directTaskMapper.toDirectTaskResponse(directTaskRequest);
     }
 }

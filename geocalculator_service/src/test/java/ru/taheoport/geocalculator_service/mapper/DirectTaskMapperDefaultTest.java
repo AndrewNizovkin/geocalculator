@@ -1,12 +1,12 @@
 package ru.taheoport.geocalculator_service.mapper;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.taheoport.geocalculator_service.dto.DirectTaskDto;
+import ru.taheoport.geocalculator_service.dto.DirectTaskRequest;
+import ru.taheoport.geocalculator_service.dto.DirectTaskResponse;
 
 @SpringBootTest(classes = {
         DirectTaskMapperDefault.class,
@@ -22,7 +22,7 @@ class DirectTaskMapperDefaultTest {
             "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0",
             "2000000, 2000000, 0, 1000000, 1000000, 100000, 108000, 100000, 120, 1025882, 1096593, 100058",
             "2000000, 2000000, 108000, 1000000, 1000000, 100000, 1042872, 200156, -825, 1113906, 835418, 99199"})
-    void toDirectTaskDtoTest(
+    void toDirectTaskResponseTest(
             long landmarkX,
             long landmarkY,
             long landmarkDirection,
@@ -36,21 +36,21 @@ class DirectTaskMapperDefaultTest {
             long expectTargetY,
             long expectTargetZ
     ) {
-        DirectTaskDto directTaskDto = new DirectTaskDto();
-        directTaskDto.setLandmarkX(landmarkX);
-        directTaskDto.setLandmarkY(landmarkY);
-        directTaskDto.setLandmarkDirection(landmarkDirection);
-        directTaskDto.setBaseX(baseX);
-        directTaskDto.setBaseY(baseY);
-        directTaskDto.setBaseZ(baseZ);
-        directTaskDto.setTargetDirection(targetDirection);
-        directTaskDto.setTargetInclinedDistance(targetInclinedDistance);
-        directTaskDto.setTargetTiltAngle(targetTiltAngle);
+        DirectTaskRequest directTaskRequest = new DirectTaskRequest();
+        directTaskRequest.setLandmarkX(landmarkX);
+        directTaskRequest.setLandmarkY(landmarkY);
+        directTaskRequest.setLandmarkDirection(landmarkDirection);
+        directTaskRequest.setBaseX(baseX);
+        directTaskRequest.setBaseY(baseY);
+        directTaskRequest.setBaseZ(baseZ);
+        directTaskRequest.setTargetDirection(targetDirection);
+        directTaskRequest.setTargetInclinedDistance(targetInclinedDistance);
+        directTaskRequest.setTargetTiltAngle(targetTiltAngle);
 
-        DirectTaskDto actualDirectTaskDto = directTaskMapper.toDirectTaskDto(directTaskDto);
+        DirectTaskResponse actualDirectTaskResponse = directTaskMapper.toDirectTaskResponse(directTaskRequest);
 
-        Assertions.assertEquals(expectTargetX, actualDirectTaskDto.getTargetX());
-        Assertions.assertEquals(expectTargetY, actualDirectTaskDto.getTargetY());
-        Assertions.assertEquals(expectTargetZ, actualDirectTaskDto.getTargetZ());
+        Assertions.assertEquals(expectTargetX, actualDirectTaskResponse.getTargetX());
+        Assertions.assertEquals(expectTargetY, actualDirectTaskResponse.getTargetY());
+        Assertions.assertEquals(expectTargetZ, actualDirectTaskResponse.getTargetZ());
     }
 }

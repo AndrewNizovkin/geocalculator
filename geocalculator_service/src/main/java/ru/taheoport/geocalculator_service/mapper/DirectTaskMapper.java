@@ -1,6 +1,7 @@
 package ru.taheoport.geocalculator_service.mapper;
 
-import ru.taheoport.geocalculator_service.dto.DirectTaskDto;
+import ru.taheoport.geocalculator_service.dto.DirectTaskRequest;
+import ru.taheoport.geocalculator_service.dto.DirectTaskResponse;
 
 /**
  * This interface defines methods for converting from
@@ -10,8 +11,8 @@ public interface DirectTaskMapper {
 
     /**
      * Sets the calculated fields of an instance of DirectTaskDto
-     * @param directTaskDto Instance of DirectTaskDto
-     * @return Instance of InverseTaskDto
+     * @param directTaskRequest Instance of DirectTaskDto
+     * @return Instance of InverseTaskResponse
      */
-    DirectTaskDto toDirectTaskDto(DirectTaskDto directTaskDto);
+    DirectTaskResponse toDirectTaskResponse(DirectTaskRequest directTaskRequest);
 }

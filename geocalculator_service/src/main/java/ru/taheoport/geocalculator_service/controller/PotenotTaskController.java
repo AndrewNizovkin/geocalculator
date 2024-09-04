@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import ru.taheoport.geocalculator_service.dto.PotenotTaskDto;
+import ru.taheoport.geocalculator_service.dto.PotenotTaskRequest;
+import ru.taheoport.geocalculator_service.dto.PotenotTaskResponse;
 import ru.taheoport.geocalculator_service.service.PotenotService;
 
 import java.util.List;
@@ -21,9 +22,9 @@ public class PotenotTaskController {
     private final PotenotService potenotService;
 
     @PostMapping
-    public ResponseEntity<PotenotTaskDto> solvePotenotProblem(@RequestBody List<PotenotTaskDto> potenotTaskDtoList) {
+    public ResponseEntity<PotenotTaskResponse> solvePotenotProblem(@RequestBody List<PotenotTaskRequest> potenotTaskRequestList) {
         try {
-            return ResponseEntity.ok().body(potenotService.resolvePotenotTask(potenotTaskDtoList));
+            return ResponseEntity.ok().body(potenotService.resolvePotenotTask(potenotTaskRequestList));
         } catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

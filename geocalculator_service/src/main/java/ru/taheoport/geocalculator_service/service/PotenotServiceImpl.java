@@ -1,7 +1,7 @@
 package ru.taheoport.geocalculator_service.service;
 
 import org.springframework.stereotype.Component;
-import ru.taheoport.geocalculator_service.dto.PotenotTaskDto;
+import ru.taheoport.geocalculator_service.dto.PotenotTaskRequest;
 
 import java.util.List;
 
@@ -11,12 +11,12 @@ import java.util.List;
 @Component
 public class PotenotServiceImpl implements PotenotService{
     @Override
-    public PotenotTaskDto resolvePotenotTask(List<PotenotTaskDto> potenotTaskDtoList) {
-        if (potenotTaskDtoList.size() != 3) {
+    public PotenotTaskRequest resolvePotenotTask(List<PotenotTaskRequest> potenotTaskRequestList) {
+        if (potenotTaskRequestList.size() != 3) {
             throw new RuntimeException("There is not enough data to calculate");
         } else {
 
-            return potenotTaskDtoList.getFirst();
+            return potenotTaskRequestList.getFirst();
 
         }
     }

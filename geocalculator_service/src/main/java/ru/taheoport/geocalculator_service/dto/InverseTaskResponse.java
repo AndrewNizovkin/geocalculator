@@ -3,39 +3,13 @@ package ru.taheoport.geocalculator_service.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * This class encapsulates result of solving inverse geodetic task
+ * @author Nizovkin A.V.
+ */
 @Data
 @NoArgsConstructor
-public class InverseTaskDto {
-
-    /**
-     * Coordinate X base point, in millimeters
-     */
-    private long baseX;
-
-    /**
-     * Coordinate Y base point, in millimeters
-     */
-    private long baseY;
-
-    /**
-     * Coordinate Z base point, in millimeters
-     */
-    private long baseZ;
-
-    /**
-     * Coordinate X target point, in millimeters
-     */
-    private long targetX;
-
-    /**
-     * Coordinate Y target point, in millimeters
-     */
-    private long targetY;
-
-    /**
-     * Coordinate Z target point, in millimeters
-     */
-    private long targetZ;
+public class InverseTaskResponse {
 
     /**
      * The angle between the direction to the north and
