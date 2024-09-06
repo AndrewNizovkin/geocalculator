@@ -6,6 +6,7 @@ import static java.lang.Math.*;
 /**
  * This class implements interface PotenotCalculator and
  * presents methods fo solving geodetic Potenot Problem
+ * @author Nizovkin A.V.
  */
 @Component
 public class PotenotCalculatorImpl implements PotenotCalculator{
@@ -38,5 +39,24 @@ public class PotenotCalculatorImpl implements PotenotCalculator{
                 tan(dirFromFirst);
     }
 
+    @Override
+    public double dirFromFirst(
+            double firstX,
+            double firstY,
+            double secondX,
+            double secondY,
+            double thirdX,
+            double thirdY,
+            double firstAngle,
+            double secondAngle) {
+        return atan(
+                ((secondY - firstY) * 1 / tan(firstAngle) +
+                        (firstY - thirdY) * 1 /tan(secondAngle) -
+                        secondX + thirdX) /
+                        ((secondX - firstX) * 1 / tan(firstAngle) +
+                                (firstX - thirdX) * 1 / tan(secondAngle) +
+                                secondY - thirdY)
+        );
+    }
 
 }

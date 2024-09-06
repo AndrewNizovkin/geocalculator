@@ -42,4 +42,27 @@ public interface PotenotCalculator {
       double firstX,
       double dirFromFirst
     );
+
+    /**
+     * Calculates directional angle to target from first point
+     * @param firstX
+     * @param firstY
+     * @param secondX
+     * @param secondY
+     * @param thirdX
+     * @param thirdY
+     * @param firstAngle
+     * @param secondAngle
+     * @return
+     */
+    double dirFromFirst(
+            double firstX,
+            double firstY,
+            double secondX,
+            double secondY,
+            double thirdX,
+            double thirdY,
+            double firstAngle,
+            double secondAngle
+    );
 }
