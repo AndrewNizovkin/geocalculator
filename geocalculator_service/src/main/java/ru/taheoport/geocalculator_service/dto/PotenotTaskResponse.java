@@ -20,11 +20,6 @@ public class PotenotTaskResponse {
     private long pointY;
 
     /**
-     * Direction in seconds
-     */
-    private long direction;
-
-    /**
      * X accuracy in millimeters
      */
     private long deltaX;

@@ -23,6 +23,7 @@ public class PotenotTaskMapperImpl implements PotenotTaskMapper{
         double secondY = (double) potenotTaskRequestList.get(1).getPointY();
         double thirdX = (double) potenotTaskRequestList.get(2).getPointX();
         double thirdY = (double) potenotTaskRequestList.get(2).getPointY();
+
         double firstAngle = toRadians((double) potenotCalculator.difAngle(potenotTaskRequestList.get(0).getDirection(),
                 potenotTaskRequestList.get(1).getDirection()) / 3600);
         double secondAngle = toRadians((double) potenotCalculator.difAngle(potenotTaskRequestList.get(0).getDirection(),
@@ -39,8 +40,8 @@ public class PotenotTaskMapperImpl implements PotenotTaskMapper{
                 secondAngle
         );
 
-        double dirFromSecond = dirFromFirst + firstAngle;
-        double dirFromThird = dirFromFirst + secondAngle;
+        double dirFromSecond = potenotCalculator.addAngle(dirFromFirst, firstAngle);
+        double dirFromThird = potenotCalculator.addAngle(dirFromFirst, secondAngle);
 
         double targetX1 = potenotCalculator.targetX(
                 firstX,
@@ -76,10 +77,12 @@ public class PotenotTaskMapperImpl implements PotenotTaskMapper{
 
         PotenotTaskResponse potenotTaskResponse = new PotenotTaskResponse();
 
-        potenotTaskResponse.setPointX(round((targetX1 + targetX2) / 2));
-        potenotTaskResponse.setPointY(round((targetY1 + targetY2) / 2));
-        potenotTaskResponse.setDeltaX(round(targetX1 - targetX2));
-        potenotTaskResponse.setDeltaY(round(targetY1 - targetY2));
+        potenotTaskResponse.setPointX(round(targetX1));
+        potenotTaskResponse.setPointY(round(targetY1));
+//        potenotTaskResponse.setPointX(round((targetX1 + targetX2) / 2));
+//        potenotTaskResponse.setPointY(round((targetY1 + targetY2) / 2));
+//        potenotTaskResponse.setDeltaX(round(targetX1 - targetX2));
+//        potenotTaskResponse.setDeltaY(round(targetY1 - targetY2));
 
         return potenotTaskResponse;
     }

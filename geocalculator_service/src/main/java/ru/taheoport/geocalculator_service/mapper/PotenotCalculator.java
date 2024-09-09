@@ -11,6 +11,14 @@ public interface PotenotCalculator {
     long difAngle(long first, long second);
 
     /**
+     * Adds two angle in radians
+     * @param firstAngle angle in radians
+     * @param secondAngle angle in radians
+     * @return angle in a range 0 - 2*Pi radians
+     */
+    double addAngle(double firstAngle, double secondAngle);
+
+    /**
      * Calculates X coordinate with Delambra formula
      * @param firstX
      * @param firstY
@@ -53,7 +61,7 @@ public interface PotenotCalculator {
      * @param thirdY
      * @param firstAngle
      * @param secondAngle
-     * @return
+     * @return Direction angle in radians
      */
     double dirFromFirst(
             double firstX,

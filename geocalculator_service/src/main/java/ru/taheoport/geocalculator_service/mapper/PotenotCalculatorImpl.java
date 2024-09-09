@@ -20,8 +20,29 @@ public class PotenotCalculatorImpl implements PotenotCalculator{
         return angle;
     }
 
+    /**
+     * Adds two angle in radians
+     * @param firstAngle angle in radians
+     * @param secondAngle angle in radians
+     * @return angle in a range 0 - 2*Pi radians
+     */
     @Override
-    public double targetX(double firstX, double firstY, double secondX, double secondY, double dirFromFirst, double dirFromSecond) {
+    public double addAngle(double firstAngle, double secondAngle) {
+        double result = firstAngle + secondAngle;
+        while (result >= 2 * PI) {
+            result -= 2 * PI;
+        }
+        return result;
+    }
+
+    @Override
+    public double targetX(
+            double firstX,
+            double firstY,
+            double secondX,
+            double secondY,
+            double dirFromFirst,
+            double dirFromSecond) {
         return (firstX * tan(dirFromFirst) -
                 secondX * tan(dirFromSecond) +
                         secondY - firstY) /
@@ -49,14 +70,44 @@ public class PotenotCalculatorImpl implements PotenotCalculator{
             double thirdY,
             double firstAngle,
             double secondAngle) {
-        return atan(
-                ((secondY - firstY) * 1 / tan(firstAngle) +
-                        (firstY - thirdY) * 1 /tan(secondAngle) -
-                        secondX + thirdX) /
-                        ((secondX - firstX) * 1 / tan(firstAngle) +
-                                (firstX - thirdX) * 1 / tan(secondAngle) +
-                                secondY - thirdY)
-        );
+
+        double dir = 0.0;
+        double dY = (secondY - firstY) * 1 / tan(firstAngle) + (firstY - thirdY) * 1 /tan(secondAngle) - secondX + thirdX;
+        double dX = ((secondX - firstX) * 1 / tan(firstAngle) + (firstX - thirdX) * 1 / tan(secondAngle) + secondY - thirdY);
+
+        if (dX == 0) {
+            if (dY > 0) {
+                return PI / 2;
+            }
+            if (dY < 0) {
+                return PI + PI / 2;
+            }
+
+        } else {
+            dir = atan(dY / dX);
+            if (dY == 0) {
+                if (dX < 0) {
+                    return PI;
+                } else {
+                    return 0;
+                }
+            }
+            if ( dY < 0) {
+                if (dX < 0) {
+                    dir += PI;
+                } else {
+                    dir += 2 * PI;
+                }
+
+            } else {
+                if (dX < 0) {
+                    dir += PI;
+                }
+            }
+        }
+
+        return dir;
+
     }
 
 }
