@@ -43,18 +43,20 @@ public class PotenotCalculatorImpl implements PotenotCalculator{
             double secondY,
             double dirFromFirst,
             double dirFromSecond) {
-        return (firstX * tan(dirFromFirst) -
-                secondX * tan(dirFromSecond) +
-                        secondY - firstY) /
-                (tan(dirFromFirst - tan(dirFromSecond))
-                        );
+
+        double numerator = firstX * tan(dirFromFirst) - secondX * tan(dirFromSecond) + secondY - firstY;
+
+        double denominator = tan(dirFromFirst) - tan(dirFromSecond);
+
+        return numerator / denominator;
     }
 
     @Override
-    public double targetY(double firstY,
-                          double targetX,
-                          double firstX,
-                          double dirFromFirst) {
+    public double targetY(
+            double firstY,
+            double targetX,
+            double firstX,
+            double dirFromFirst) {
         return firstY +
                 (targetX - firstX) *
                 tan(dirFromFirst);

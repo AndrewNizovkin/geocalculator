@@ -46,7 +46,10 @@ class PotenotCalculatorImplTest {
 
     @ParameterizedTest
     @CsvSource({
-            "100000, 100000, 200000, 200000, 100000, 300000, 1.752451165, 3.85727461, 4.384873098"
+            "100000, 100000, 200000, 200000, 100000, 300000, 1.752451165, 3.85727461, 4.384873098",
+            "100000, 100000, 200000, 200000, 100000, 300000, 0.791317738, 1.579809013, 2.653017829",
+            "100000, 100000, 200000, 200000, 100000, 300000, 0.127026032, 0.151140665, 5.537963654",
+            "-100000, -100000, -200000, -200000, -100000, -300000, 0.163236954, 0.754787027, 2.846627162"
     })
     void dirFromFirstTest(
             double firstX,
@@ -74,12 +77,50 @@ class PotenotCalculatorImplTest {
 
     }
 
-    @Test
-    void targetX() {
+    @ParameterizedTest
+    @CsvSource({
+            "100000, 100000, 200000, 200000, 4.384873098, 6.137324263, 137114"
+    })
+    void targetXTest(
+            double firstX,
+            double firstY,
+            double secondX,
+            double secondY,
+            double dirFromFirst,
+            double dirFromSecond,
+            double expect
+    ) {
+        double actual = potenotCalculator.targetX(
+        firstX,
+        firstY,
+        secondX,
+        secondY,
+        dirFromFirst,
+        dirFromSecond
+        );
+
+        Assertions.assertEquals(expect, actual, 1);
     }
 
-    @Test
-    void targetY() {
+    @ParameterizedTest
+    @CsvSource({
+            "100000, 137114, 100000, 4.384873098, 209238"
+    })
+    void targetYTest(
+            double firstY,
+            double targetX,
+            double firstX,
+            double dirFromFirst,
+            double expect
+    ) {
+        double actual = potenotCalculator.targetY(
+                firstY,
+                targetX,
+                firstX,
+                dirFromFirst
+        );
+
+        Assertions.assertEquals(expect, actual, 1);
     }
 
 }
