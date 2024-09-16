@@ -36,4 +36,25 @@ public class InverseTaskResponse {
      * The height difference between the target and the base
      */
     private long elevation;
+
+//    /**
+//     * Constructor with all arguments
+//     * @param direction Directional angle base to target
+//     * @param horDistance Horizontal distance between base and target
+//     * @param inclinedDistance Inclined distance between base and target
+//     * @param tiltAngle Tilt angle of line base to target
+//     * @param elevation The height difference between the base and the target
+//     */
+//    public InverseTaskResponse(
+//            long direction,
+//            long horDistance,
+//            long inclinedDistance,
+//            long tiltAngle,
+//            long elevation) {
+//        this.direction = direction;
+//        this.horDistance = horDistance;
+//        this.inclinedDistance = inclinedDistance;
+//        this.tiltAngle = tiltAngle;
+//        this.elevation = elevation;
+//    }
 }

@@ -43,7 +43,7 @@ public class PotenotTaskMapperImpl implements PotenotTaskMapper{
         double dirFromSecond = potenotCalculator.addAngle(dirFromFirst, firstAngle);
         double dirFromThird = potenotCalculator.addAngle(dirFromFirst, secondAngle);
 
-        double targetX1 = potenotCalculator.targetX(
+        double targetX = potenotCalculator.targetX(
                 firstX,
                 firstY,
                 secondX,
@@ -52,37 +52,18 @@ public class PotenotTaskMapperImpl implements PotenotTaskMapper{
                 dirFromSecond
         );
 
-        double targetY1 = potenotCalculator.targetY(
+        double targetY = potenotCalculator.targetY(
                 firstY,
-                targetX1,
+                targetX,
                 firstX,
                 dirFromFirst
         );
 
-        double targetX2 = potenotCalculator.targetX(
-                secondX,
-                secondY,
-                thirdX,
-                thirdY,
-                dirFromSecond,
-                dirFromThird
-        );
-
-        double targetY2 = potenotCalculator.targetY(
-                secondY,
-                targetX2,
-                secondX,
-                dirFromSecond
-        );
 
         PotenotTaskResponse potenotTaskResponse = new PotenotTaskResponse();
 
-        potenotTaskResponse.setPointX(round(targetX1));
-        potenotTaskResponse.setPointY(round(targetY1));
-//        potenotTaskResponse.setPointX(round((targetX1 + targetX2) / 2));
-//        potenotTaskResponse.setPointY(round((targetY1 + targetY2) / 2));
-//        potenotTaskResponse.setDeltaX(round(targetX1 - targetX2));
-//        potenotTaskResponse.setDeltaY(round(targetY1 - targetY2));
+        potenotTaskResponse.setPointX(round(targetX));
+        potenotTaskResponse.setPointY(round(targetY));
 
         return potenotTaskResponse;
     }

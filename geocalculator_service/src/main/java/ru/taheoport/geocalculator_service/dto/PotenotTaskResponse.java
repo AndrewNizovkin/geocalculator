@@ -20,13 +20,12 @@ public class PotenotTaskResponse {
     private long pointY;
 
     /**
-     * X accuracy in millimeters
+     * Constructor with all arguments
+     * @param pointX X coordinate
+     * @param pointY X coordinate
      */
-    private long deltaX;
-
-    /**
-     * Y accuracy in millimeters
-     */
-    private long deltaY;
-
+    public PotenotTaskResponse(long pointX, long pointY) {
+        this.pointX = pointX;
+        this.pointY = pointY;
+    }
 }

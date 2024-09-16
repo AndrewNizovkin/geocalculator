@@ -55,18 +55,4 @@ public class DirectTaskRequest {
      */
     private long targetTiltAngle;
 
-//    /**
-//     * Coordinate X of target in millimeters
-//     */
-//    private long targetX;
-//
-//    /**
-//     * Coordinate Y of target in millimeters
-//     */
-//    private long targetY;
-//
-//    /**
-//     * Coordinate Z of target in millimeters
-//     */
-//    private long targetZ;
 }
