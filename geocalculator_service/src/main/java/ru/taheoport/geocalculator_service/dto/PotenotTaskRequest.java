@@ -25,6 +25,12 @@ public class PotenotTaskRequest {
      */
     private long direction;
 
+    /**
+     * Constructor with all arguments
+     * @param pointX X coordinate in millimeters
+     * @param pointY Y coordinate in millimeters
+     * @param direction Direction to this point in seconds
+     */
     public PotenotTaskRequest(long pointX, long pointY, long direction) {
         this.pointX = pointX;
         this.pointY = pointY;
