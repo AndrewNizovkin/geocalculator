@@ -24,7 +24,8 @@ public class PotenotTaskController {
     @PostMapping
     public ResponseEntity<PotenotTaskResponse> solvePotenotProblem(@RequestBody List<PotenotTaskRequest> potenotTaskRequestList) {
         try {
-            return ResponseEntity.ok().body(potenotService.resolvePotenotTask(potenotTaskRequestList));
+//            return ResponseEntity.ok().body(potenotService.resolvePotenotTask(potenotTaskRequestList));
+            return new ResponseEntity<>(potenotService.resolvePotenotTask(potenotTaskRequestList), HttpStatus.CREATED);
         } catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
