@@ -21,7 +21,7 @@ class DirectTaskServiceImplTest {
     DirectTaskMapper directTaskMapper;
 
     @Test
-    void solveDirectTask() {
+    void solveDirectTaskTest() {
 
         DirectTaskRequest directTaskRequest = new DirectTaskRequest();
         DirectTaskResponse expect = new DirectTaskResponse();

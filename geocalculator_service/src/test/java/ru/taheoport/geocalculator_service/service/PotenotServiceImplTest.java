@@ -38,4 +38,17 @@ class PotenotServiceImplTest {
         Assertions.assertEquals(expect.getPointX(), actual.getPointX());
         Assertions.assertEquals(expect.getPointY(), actual.getPointY());
     }
+
+    @Test
+    void resolvePotenotTaskNoValidDataTest() {
+
+        List<PotenotTaskRequest> potenotTaskRequestList = List.of(
+                new PotenotTaskRequest(10, 10, 10),
+                new PotenotTaskRequest(20, 20, 20)
+        );
+
+        Assertions.assertThrows(
+                RuntimeException.class,
+                () -> potenotService.resolvePotenotTask(potenotTaskRequestList));
+    }
 }

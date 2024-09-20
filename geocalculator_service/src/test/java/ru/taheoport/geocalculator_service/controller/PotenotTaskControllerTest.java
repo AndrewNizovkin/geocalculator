@@ -9,10 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.taheoport.geocalculator_service.dto.DirectTaskRequest;
-import ru.taheoport.geocalculator_service.dto.DirectTaskResponse;
 import ru.taheoport.geocalculator_service.dto.PotenotTaskRequest;
 import ru.taheoport.geocalculator_service.dto.PotenotTaskResponse;
 import ru.taheoport.geocalculator_service.service.PotenotService;
@@ -59,9 +56,9 @@ class PotenotTaskControllerTest {
         );
 
         PotenotTaskResponse responseBody = webTestClient.post()
-                .uri("direct")
+                .uri("potenot")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(Flux.just(potenotTaskRequestList), PotenotTaskRequest.class)
+                .body(Mono.just(potenotTaskRequestList), PotenotTaskRequest.class)
                 .exchange()
                 .expectStatus().isCreated()
                 .expectBody(PotenotTaskResponse.class)
@@ -69,5 +66,23 @@ class PotenotTaskControllerTest {
                 .getResponseBody();
 
         assertNotNull(responseBody);
+        assertEquals(expectX, responseBody.getPointX());
+        assertEquals(expectY, responseBody.getPointY());
+    }
+
+    @Test
+    void solvePotenotProblemTestBadRequest() {
+        List<PotenotTaskRequest> potenotTaskRequestList = List.of(
+                new PotenotTaskRequest(),
+                new PotenotTaskRequest()
+        );
+
+        webTestClient.post()
+                .uri("potenot")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(Mono.just(potenotTaskRequestList), PotenotTaskRequest.class)
+                .exchange()
+                .expectStatus().isBadRequest();
+
     }
 }
