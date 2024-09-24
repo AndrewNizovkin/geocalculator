@@ -1,5 +1,6 @@
 package ru.taheoport.geocalculator_service.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,21 +9,25 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
+@Schema(name = "Исходные данные для решения обратной засечки.")
 public class PotenotTaskRequest {
 
     /**
      * Coordinate X in millimeters
      */
+    @Schema(name = "Координата X, мм.")
     private long pointX;
 
     /**
      * Coordinate Y in millimeters
      */
+    @Schema(name = "Координата Y, мм.")
     private long pointY;
 
     /**
      * Direction in seconds
      */
+    @Schema(name = "Угловое направление на эту точку с определяемой, сек.")
     private long direction;
 
     /**

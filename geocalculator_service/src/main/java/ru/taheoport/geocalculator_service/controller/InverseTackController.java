@@ -1,5 +1,8 @@
 package ru.taheoport.geocalculator_service.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,17 @@ public class InverseTackController {
      * @param inverseTaskRequest Instance of InverseTaskDto
      * @return Instance InverseTaskDto
      */
+    @Operation(summary = "Resolves Inverse Geodetic Problem", description =
+            "По известным трёхмерным координатам двух пунктов (base и target) " +
+                    "определяет горизонтальное и наклонное расстояние между ними, " +
+                    "дирекционный угол направления base->target, " +
+                    "угол наклона линии base->target, " +
+                    "превышение между пунктами")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Created"),
+            @ApiResponse(responseCode = "400", description = "Bad request"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @PostMapping
     public ResponseEntity<InverseTaskResponse> solveInverseTask(@RequestBody InverseTaskRequest inverseTaskRequest) {
         return new ResponseEntity<>(inverseTaskService.solveInverseTask(inverseTaskRequest), HttpStatus.CREATED);

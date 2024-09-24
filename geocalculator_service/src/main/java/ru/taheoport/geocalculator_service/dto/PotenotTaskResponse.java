@@ -1,5 +1,6 @@
 package ru.taheoport.geocalculator_service.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,15 +9,18 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
+@Schema(name = "Результат решения прямой геодезической засечки")
 public class PotenotTaskResponse {
     /**
      * Coordinate X in millimeters
      */
+    @Schema(name = "Координата X, мм.")
     private long pointX;
 
     /**
      * Coordinate Y in millimeters
      */
+    @Schema(name = "Координата Y, мм.")
     private long pointY;
 
     /**
