@@ -8,6 +8,6 @@ public class GeocalculatorWebApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GeocalculatorWebApplication.class, args);
-	}
+			}
 
 }
