@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.taheoport.geocalculator_service.dto.DirectTaskFullResponse;
 import ru.taheoport.geocalculator_service.dto.DirectTaskRequest;
 import ru.taheoport.geocalculator_service.dto.DirectTaskResponse;
 import ru.taheoport.geocalculator_service.service.DirectTaskService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("direct")
@@ -31,5 +34,10 @@ public class DirectTaskController {
     @PostMapping
     public ResponseEntity<DirectTaskResponse> solveDirectTask(@RequestBody DirectTaskRequest directTaskRequest) {
         return new ResponseEntity<>(directTaskService.solveDirectTask(directTaskRequest), HttpStatus.CREATED);
+    }
+
+    @PostMapping("full")
+    public ResponseEntity<List<DirectTaskFullResponse>> getDirectTaskFullResponse(@RequestBody List<DirectTaskRequest> directTaskRequests) {
+        return new ResponseEntity<>(directTaskService.getDirectTaskFullResponse(directTaskRequests), HttpStatus.CREATED);
     }
 }

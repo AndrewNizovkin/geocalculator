@@ -49,6 +49,11 @@ public class DirectTaskRequest {
     private long baseZ;
 
     /**
+     * Tool height base point
+     */
+    private long baseHeight;
+
+    /**
      * Direction to target in seconds
      */
 //    @Schema(name = "Угловое направление base->target, сек.")
@@ -65,4 +70,9 @@ public class DirectTaskRequest {
      */
 //    @Schema(name = "Угол наклона линии base->target, сек.")
     private long targetTiltAngle;
+
+    /**
+     * target height of target
+     */
+    private long targetHeight;
 }
