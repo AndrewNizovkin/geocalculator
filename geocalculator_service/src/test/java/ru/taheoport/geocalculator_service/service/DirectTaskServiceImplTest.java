@@ -5,9 +5,13 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import ru.taheoport.geocalculator_service.dto.DirectTaskFullResponse;
 import ru.taheoport.geocalculator_service.dto.DirectTaskRequest;
 import ru.taheoport.geocalculator_service.dto.DirectTaskResponse;
 import ru.taheoport.geocalculator_service.mapper.DirectTaskMapper;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,4 +42,5 @@ class DirectTaskServiceImplTest {
         assertEquals(expect.getTargetZ(), actual.getTargetZ());
 
     }
+
 }
