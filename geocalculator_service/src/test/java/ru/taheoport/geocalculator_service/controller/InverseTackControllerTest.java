@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
+import ru.taheoport.geocalculator_service.dto.InverseTaskFullResponse;
 import ru.taheoport.geocalculator_service.dto.InverseTaskRequest;
 import ru.taheoport.geocalculator_service.dto.InverseTaskResponse;
 import ru.taheoport.geocalculator_service.service.InverseTaskService;
@@ -29,7 +30,7 @@ class InverseTackControllerTest {
     @ParameterizedTest
     @CsvSource({
             "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0",
-            "1000000000, 1000000000, 100000, 2000000000, 2000000000, 200000, 162000, 1414213562, 1414213566, 14, 100000"
+            "1000000000, 1000000000, 100000, 2000000000, 2000000000, 200000, 162000, 1414213562, 1414213566, 15, 100000"
     })
     void solveInverseTaskTest(
             long baseX,
@@ -52,17 +53,23 @@ class InverseTackControllerTest {
         inverseTaskRequest.setTargetY(targetY);
         inverseTaskRequest.setTargetZ(targetZ);
 
-        InverseTaskResponse responseBody = webTestClient.post()
+        InverseTaskFullResponse responseBody = webTestClient.post()
                 .uri("inverse")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(inverseTaskRequest), InverseTaskRequest.class)
                 .exchange()
                 .expectStatus().isCreated()
-                .expectBody(InverseTaskResponse.class)
+                .expectBody(InverseTaskFullResponse.class)
                 .returnResult()
                 .getResponseBody();
 
         assertNotNull(responseBody);
+        assertEquals(baseX, responseBody.getBaseX());
+        assertEquals(baseY, responseBody.getBaseY());
+        assertEquals(baseZ, responseBody.getBaseZ());
+        assertEquals(targetX, responseBody.getTargetX());
+        assertEquals(targetY, responseBody.getTargetY());
+        assertEquals(targetZ, responseBody.getTargetZ());
         assertEquals(expectDirection, responseBody.getDirection(), 1);
         assertEquals(expectHorDistance, responseBody.getHorDistance(), 1);
         assertEquals(expectInclinedDistance, responseBody.getInclinedDistance(), 1);

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.taheoport.geocalculator_service.dto.InverseTaskFullResponse;
 import ru.taheoport.geocalculator_service.dto.InverseTaskRequest;
 import ru.taheoport.geocalculator_service.dto.InverseTaskResponse;
 import ru.taheoport.geocalculator_service.service.InverseTaskService;
@@ -36,7 +37,7 @@ public class InverseTackController {
 //            @ApiResponse(responseCode = "500", description = "Internal server error")
 //    })
     @PostMapping
-    public ResponseEntity<InverseTaskResponse> solveInverseTask(@RequestBody InverseTaskRequest inverseTaskRequest) {
-        return new ResponseEntity<>(inverseTaskService.solveInverseTask(inverseTaskRequest), HttpStatus.CREATED);
+    public ResponseEntity<InverseTaskFullResponse> solveInverseTask(@RequestBody InverseTaskRequest inverseTaskRequest) {
+        return new ResponseEntity<>(inverseTaskService.getInverseTaskFullResponse(inverseTaskRequest), HttpStatus.CREATED);
     }
 }
