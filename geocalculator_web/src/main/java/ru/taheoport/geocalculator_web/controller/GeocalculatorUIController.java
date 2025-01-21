@@ -1,13 +1,21 @@
 package ru.taheoport.geocalculator_web.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.taheoport.geocalculator_web.dto.InverseTaskRequest;
+import ru.taheoport.geocalculator_web.service.InverseTaskService;
 
 @Controller
 @RequestMapping("geocalculator")
+@RequiredArgsConstructor
 public class GeocalculatorUIController {
+
+    private final InverseTaskService inverseTaskService;
 
     /**
      * Main page of Geocalculator Service
@@ -23,8 +31,9 @@ public class GeocalculatorUIController {
      * @param model
      * @return inverse.html
      */
-    @GetMapping("inverse")
-    public String resolveInverseTask(Model model) {
+    @PostMapping("inverse")
+    public String resolveInverseTask(Model model, @RequestBody InverseTaskRequest inverseTaskRequest) {
+        model.addAttribute("inverse", inverseTaskService.solveInverseTask(inverseTaskRequest));
         return "inverse";
     }
 
