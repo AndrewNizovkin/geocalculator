@@ -8,11 +8,11 @@ import ru.taheoport.geocalculator_web.dto.InverseTaskResponse;
 @Component
 public class InverseTaskProviderDefault implements InverseTaskProvider{
 
-    private final WebClient webClient;
+//    private final WebClient webClient;
 
-    public InverseTaskProviderDefault(WebClient webClient) {
-        this.webClient = webClient;
-    }
+//    public InverseTaskProviderDefault(WebClient webClient) {
+//        this.webClient = webClient;
+//    }
 
 
     /**
@@ -22,6 +22,20 @@ public class InverseTaskProviderDefault implements InverseTaskProvider{
      */
     @Override
     public InverseTaskResponse getInverseTaskResponse(InverseTaskRequest inverseTaskRequest) {
-        return null;
+        InverseTaskResponse inverseTaskResponse = new InverseTaskResponse();
+
+        inverseTaskResponse.setBaseX(inverseTaskRequest.getBaseX());
+        inverseTaskResponse.setBaseY(inverseTaskRequest.getBaseY());
+        inverseTaskResponse.setBaseZ(inverseTaskRequest.getBaseZ());
+        inverseTaskResponse.setTargetX(inverseTaskRequest.getTargetX());
+        inverseTaskResponse.setTargetY(inverseTaskRequest.getTargetY());
+        inverseTaskResponse.setTargetZ(inverseTaskRequest.getTargetZ());
+        inverseTaskResponse.setDirection(201);
+        inverseTaskResponse.setHorDistance(202);
+        inverseTaskResponse.setInclinedDistance(203);
+        inverseTaskResponse.setTiltAngle(204);
+        inverseTaskResponse.setElevation(-205);
+
+        return inverseTaskResponse;
     }
 }

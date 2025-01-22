@@ -7,6 +7,41 @@
 <body>
 <h3>Обратная геодезическая задача</h3>
 <p>Решение обратной геодезической задачи</p>
+<form>
+  <b>Координаты базовой точки</b><br>
+  X:<br>
+  <input type="text" name="baseX" th:value="${inverse.baseX}"><br>
+  Y:<br>
+  <input type="text" name="baseY" th:value="${inverse.baseY}"><br>
+  Z:<br>
+  <input type="text" name="baseZ" th:value="${inverse.baseZ}"><br>
+  <br>
+  <br>
+  <b>Координаты цели</b><br>
+  X:<br>
+  <input type="text" name="targetX" th:value="${inverse.targetX}"><br>
+  Y:<br>
+  <input type="text" name="targetY" th:value="${inverse.targetY}"><br>
+  Z:<br>
+  <input type="text" name="targetZ" th:value="${inverse.targetZ}"><br>
+  <br>
+  <br>
+  <b>Результаты обработки</b><br>
+  Дирекционный угол:<br>
+  <input type="text" name="direction" th:value="${inverse.direction}"><br>
+  Горизонтальное проложение:<br>
+  <input type="text" name="horDistance" th:value="${inverse.horDistance}"><br>
+  Наклонное расстояние:<br>
+  <input type="text" name="inclinedDistance" th:value="${inverse.inclinedDistance}"><br>
+  Угол наклона линии:<br>
+  <input type="text" name="tiltAngle" th:value="${inverse.tiltAngle}"><br>
+  Превышение цели над базовой точкой:<br>
+  <input type="text" name="elevation" th:value="${inverse.elevation}"><br>
+  <br>
+  <br>
+  <input type="submit" value="Обработать">
+
+</form>
 <!--<ul>-->
 <!--  <li th:each="book: ${books}" th:text="${book.name}"></li>-->
 <!--</ul>-->

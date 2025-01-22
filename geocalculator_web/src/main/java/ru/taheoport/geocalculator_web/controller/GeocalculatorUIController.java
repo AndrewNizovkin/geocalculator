@@ -37,6 +37,12 @@ public class GeocalculatorUIController {
         return "inverse";
     }
 
+//    @GetMapping("inverse")
+//    public String resolveInverseTask(Model model) {
+//        return "inverse";
+//    }
+
+
     /**
      * Resolving of Direct Geodetic Task
      * @param model
