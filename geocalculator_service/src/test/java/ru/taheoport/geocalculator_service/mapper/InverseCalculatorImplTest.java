@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class InverseCalculatorImplTest {
 
     @Autowired
-    Inverse inverseCalculator;
+    private InverseCalculator inverseCalculator;
 
     @ParameterizedTest
     @CsvSource({
@@ -122,4 +122,6 @@ class InverseCalculatorImplTest {
 
         assertEquals(expect, actualResult);
     }
+
+
 }

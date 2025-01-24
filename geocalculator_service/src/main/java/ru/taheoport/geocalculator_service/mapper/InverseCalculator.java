@@ -3,7 +3,7 @@ package ru.taheoport.geocalculator_service.mapper;
 /**
  * This interface defines methods for solving the inverse geodesic task
  */
-public interface Inverse {
+public interface InverseCalculator {
 
     /**
      * Gets horizontal distance between too points with 2D coordinates

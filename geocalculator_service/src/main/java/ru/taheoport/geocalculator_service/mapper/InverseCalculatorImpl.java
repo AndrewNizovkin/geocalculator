@@ -9,7 +9,7 @@ import static java.lang.Math.*;
  * @author Nizovkin A.V.
  */
 @Component
-public class InverseCalculatorImpl implements Inverse{
+public class InverseCalculatorImpl implements InverseCalculator {
 
     @Override
     public long getHorDistance(long baseX, long baseY, long targetX, long targetY) {
@@ -85,4 +85,5 @@ public class InverseCalculatorImpl implements Inverse{
         tilt = atan((double) elevation / horDistance);
         return round(toDegrees(tilt) * 3600);
     }
+
 }

@@ -1,6 +1,5 @@
 package ru.taheoport.geocalculator_service.mapper;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;

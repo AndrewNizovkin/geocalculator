@@ -11,7 +11,7 @@ import ru.taheoport.geocalculator_service.mapper.InverseTaskMapper;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = {InverseTaskServiceImpl.class})
-class InverseTaskServiceImplTest {
+class InverseCalculatorTaskServiceImplTest {
 
     @Autowired
     InverseTaskService inverseTaskService;

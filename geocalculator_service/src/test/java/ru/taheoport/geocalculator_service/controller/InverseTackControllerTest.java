@@ -1,6 +1,5 @@
 package ru.taheoport.geocalculator_service.controller;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 import ru.taheoport.geocalculator_service.dto.InverseTaskFullResponse;
 import ru.taheoport.geocalculator_service.dto.InverseTaskRequest;
-import ru.taheoport.geocalculator_service.dto.InverseTaskResponse;
 import ru.taheoport.geocalculator_service.service.InverseTaskService;
 import static org.junit.jupiter.api.Assertions.*;
 

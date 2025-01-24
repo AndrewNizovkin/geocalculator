@@ -14,7 +14,7 @@ import ru.taheoport.geocalculator_service.dto.DirectTaskResponse;
 public class DirectTaskMapperDefault implements DirectTaskMapper{
 
     private final DirectCalculator directCalculator;
-    private final Inverse inverseCalculator;
+    private final InverseCalculator inverseCalculator;
 
     @Override
     public DirectTaskResponse toDirectTaskResponse(DirectTaskRequest directTaskRequest) {
