@@ -1,6 +1,5 @@
 package ru.taheoport.geocalculator_service.mapper;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,43 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = {DataHandlerDefault.class})
-class DataHandlerDefaultTest {
+@SpringBootTest(classes = {DataMapperDefault.class})
+class DataMapperDefaultTest {
 
     @Autowired
-    private DataHandler dataHandler;
-
-    @ParameterizedTest
-    @CsvSource({
-            "0",
-            "100000",
-            "-10000",
-            "100.2345",
-            "-23323342.2121",
-            ".100",
-            "-.234234"
-    })
-    void isDigitTrueTest(String number) {
-
-        boolean actualResult = dataHandler.isDigit(number);
-
-        assertTrue(actualResult);
-    }
-
-    @ParameterizedTest
-    @CsvSource({
-            "a",
-            "/ / ",
-            "aALsdf",
-            "-.@,",
-            "-#.234234"
-    })
-    void isDigitFalseTest(String number) {
-
-        boolean actualResult = dataHandler.isDigit(number);
-
-        assertFalse(actualResult);
-    }
+    private DataMapper dataMapper;
 
     @ParameterizedTest
     @CsvSource({
@@ -60,7 +27,7 @@ class DataHandlerDefaultTest {
     })
     void secondToDmsTest(long valueAtSeconds, String expectValueAtDms) {
 
-        String actualValueAtDms = dataHandler.secondsToDms(valueAtSeconds);
+        String actualValueAtDms = dataMapper.secondsToDms(valueAtSeconds);
 
         assertNotNull(actualValueAtDms);
         assertEquals(expectValueAtDms, actualValueAtDms);
@@ -80,8 +47,42 @@ class DataHandlerDefaultTest {
     })
     void dmsToSecondsTest(String dmsValue, long expectSecondsValue) {
 
-        long actualSecondsValue = dataHandler.dmsToSeconds(dmsValue);
+        long actualSecondsValue = dataMapper.dmsToSeconds(dmsValue);
 
         assertEquals(expectSecondsValue, actualSecondsValue);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "0, 0",
+            "1000, 1000",
+            "-1000, -1000",
+            "'0,234', 0.234",
+            "'-0,234', -0.234",
+            "-0.234, -0.234"
+    })
+    void commaToPointTest(String value, String expectValue) {
+
+        String actualValue = dataMapper.commaToPoint(value);
+
+        assertNotNull(actualValue);
+        assertEquals(expectValue, actualValue);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "0, 0.000",
+            "1000, 1.000",
+            "-1000, -1.000",
+            "14578965412, 14578965.412",
+            "-14578965412, -14578965.412"
+    })
+    void millimeterToMeterTest(long millimeters, String expectMeters) {
+
+        String actualMeters = dataMapper.millimeterToMeter(millimeters);
+
+        assertNotNull(actualMeters);
+        assertEquals(expectMeters, actualMeters);
+
     }
 }

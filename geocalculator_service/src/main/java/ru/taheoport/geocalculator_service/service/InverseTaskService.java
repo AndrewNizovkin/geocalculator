@@ -1,8 +1,6 @@
 package ru.taheoport.geocalculator_service.service;
 
-import ru.taheoport.geocalculator_service.dto.InverseTaskFullResponse;
-import ru.taheoport.geocalculator_service.dto.InverseTaskRequest;
-import ru.taheoport.geocalculator_service.dto.InverseTaskResponse;
+import ru.taheoport.geocalculator_service.dto.*;
 
 /**
  * This interface defines methods for solving Inverse Geodetic Task
@@ -24,6 +22,14 @@ public interface InverseTaskService {
      * @return instance of InverseTaskFullResponse
      */
     InverseTaskFullResponse getInverseTaskFullResponse(InverseTaskRequest inverseTaskRequest);
+
+    /**
+     * Solves the inverse geodesic problem,
+     * update fields of instance InverseTaskDto
+     * @param inverseStringRequest instance of InverseTaskDto
+     * @return instance of InverseStringResponse
+     */
+    InverseStringResponse getInverseStringResponse(InverseStringRequest inverseStringRequest);
 
 
 }

@@ -1,8 +1,6 @@
 package ru.taheoport.geocalculator_service.mapper;
 
-import ru.taheoport.geocalculator_service.dto.InverseTaskFullResponse;
-import ru.taheoport.geocalculator_service.dto.InverseTaskRequest;
-import ru.taheoport.geocalculator_service.dto.InverseTaskResponse;
+import ru.taheoport.geocalculator_service.dto.*;
 
 /**
  * This interface defines methods for converting from
@@ -23,5 +21,19 @@ public interface InverseTaskMapper {
      * @return Instance of InverseTaskFullResponse
      */
     InverseTaskFullResponse toInverseTaskFullResponse(InverseTaskRequest inverseTaskRequest);
+
+    /**
+     * Converts the correct InverseStringRequest to InverseTaskRequest
+     * @param inverseStringRequest InverseStringRequest
+     * @return InverseTaskRequest
+     */
+    InverseTaskRequest toInverseTaskRequest(InverseStringRequest inverseStringRequest);
+
+    /**
+     * Converts the InverseTaskFullResponse to InverseStringResponse
+     * @param inverseTaskFullResponse InverseTaskFullResponse
+     * @return InverseStringResponse
+     */
+    InverseStringResponse toInverseStringResponse(InverseTaskFullResponse inverseTaskFullResponse);
 
 }

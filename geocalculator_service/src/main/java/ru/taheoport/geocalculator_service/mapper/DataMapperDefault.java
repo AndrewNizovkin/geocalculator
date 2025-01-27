@@ -3,23 +3,7 @@ package ru.taheoport.geocalculator_service.mapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DataHandlerDefault implements DataHandler{
-
-    /**
-     * Checks the string contains a number
-     * @param string String
-     * @return result of check
-     */
-    @Override
-    public boolean isDigit(String string) {
-        try {
-            Double.parseDouble(string);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-
-    }
+public class DataMapperDefault implements DataMapper {
 
     /**
      * Converts angle value in seconds to D.MS format
@@ -83,5 +67,44 @@ public class DataHandlerDefault implements DataHandler{
         min = Integer.parseInt(angleValueAsDms.substring(sepPos + 1, sepPos + 3));
         sec = Integer.parseInt(angleValueAsDms.substring(sepPos + 3, sepPos + 5));
         return (deg * 3600L + min * 60L + sec) * sign;
+    }
+
+    /**
+     * Converts line value from millimeters to meters
+     * @param millimeters long value in millimeters
+     * @return String value in meters
+     */
+    @Override
+    public String millimeterToMeter(long millimeters) {
+        double meter = (double) millimeters / 1000;
+
+        return commaToPoint(String.format("%.3f", meter));
+    }
+
+    /**
+     * Converts line value from meters to millimeters
+     * @param meters String value in meters
+     * @return long value in millimeters
+     */
+    @Override
+    public long meterToMillimeter(String meters) {
+        double millimeter;
+        try {
+            millimeter = Double.parseDouble(meters) * 1000;
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+        return (long) millimeter;
+    }
+
+    /**
+     * Changes decimal separator from ',' to '.'
+     *
+     * @param value String
+     * @return String
+     */
+    @Override
+    public String commaToPoint(String value) {
+        return value.replaceAll(",", ".");
     }
 }
