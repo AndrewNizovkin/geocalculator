@@ -1,0 +1,8 @@
+version: '3.9'
+
+services:
+  myapp:
+    build: ./
+    container_name: geocalculator_container
+    ports:
+      - 8181:8181

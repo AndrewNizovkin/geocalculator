@@ -45,5 +45,39 @@ class ValidatorDefaultTest {
         assertFalse(actualResult);
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "1.0000",
+            "123.2345",
+            "-123.2345",
+            "-0.2345",
+            "-0.2355",
+            "359.5959",
+            "0.0000"
+    })
+    void isDmsTrueTest(String angleValueDms) {
+
+        boolean actualResult = validator.isDms(angleValueDms);
+
+        assertTrue(actualResult);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1,0000",
+            "123.234543",
+            "-123.2365",
+            "-.2345",
+            "-0.6355",
+            "3df59.5959",
+            "0"
+    })
+    void isDmsFalseTest(String angleValueDms) {
+
+        boolean actualResult = validator.isDms(angleValueDms);
+
+        assertFalse(actualResult);
+    }
+
 
 }

@@ -23,4 +23,16 @@ public class ValidatorDefault implements Validator{
         }
 
     }
+
+    /**
+     * Checks the string contains the angle value at d.mmss
+     *
+     * @param string String
+     * @return result of check
+     */
+    @Override
+    public boolean isDms(String string) {
+        String regex = "^-?[0-9]+\\.[0-5][0-9][0-5][0-9]";
+        return string.matches(regex);
+    }
 }
