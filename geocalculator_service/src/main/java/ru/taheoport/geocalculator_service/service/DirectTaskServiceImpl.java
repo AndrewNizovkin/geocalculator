@@ -2,9 +2,7 @@ package ru.taheoport.geocalculator_service.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.taheoport.geocalculator_service.dto.DirectTaskFullResponse;
-import ru.taheoport.geocalculator_service.dto.DirectTaskRequest;
-import ru.taheoport.geocalculator_service.dto.DirectTaskResponse;
+import ru.taheoport.geocalculator_service.dto.*;
 import ru.taheoport.geocalculator_service.mapper.DirectTaskMapper;
 
 import java.util.List;
@@ -39,5 +37,19 @@ public class DirectTaskServiceImpl implements DirectTaskService{
     @Override
     public List<DirectTaskFullResponse> getDirectTaskFullResponse(List<DirectTaskRequest> directTaskRequests) {
         return directTaskRequests.stream().map(directTaskMapper::toDirectTaskFullResponse).toList();
+    }
+
+    /**
+     * Solves the direct geodesic problem fo list,
+     * update fields of list element
+     *
+     * @param directStringRequest list of DirectTaskRequest
+     * @return List of instance of DirectTaskFullResponse
+     */
+    @Override
+    public DirectStringResponse getDirectStringResponse(DirectStringRequest directStringRequest) {
+        DirectTaskRequest directTaskRequest = directTaskMapper.toDirectTaskRequest(directStringRequest);
+        DirectTaskFullResponse directTaskFullResponse = directTaskMapper.toDirectTaskFullResponse(directTaskRequest);
+        return directTaskMapper.toDirectStringResponse(directTaskFullResponse);
     }
 }

@@ -9,32 +9,32 @@ import lombok.Setter;
 @NoArgsConstructor
 public class InverseStringRequest {
     /**
-     * Coordinate X base point, in millimeters
+     * Coordinate X base point, in meters
      */
     private String baseX;
 
     /**
-     * Coordinate Y base point, in millimeters
+     * Coordinate Y base point, in meters
      */
     private String baseY;
 
     /**
-     * Coordinate Z base point, in millimeters
+     * Coordinate Z base point, in meters
      */
     private String baseZ;
 
     /**
-     * Coordinate X target point, in millimeters
+     * Coordinate X target point, in meters
      */
     private String targetX;
 
     /**
-     * Coordinate Y target point, in millimeters
+     * Coordinate Y target point, in meters
      */
     private String targetY;
 
     /**
-     * Coordinate Z target point, in millimeters
+     * Coordinate Z target point, in meters
      */
     private String targetZ;
 }

@@ -10,27 +10,27 @@ import lombok.Setter;
 public class InverseStringResponse extends InverseStringRequest{
     /**
      * The angle between the direction to the north and
-     * the direction to the target, in seconds
+     * the direction to the target, in d.mmss format
      */
     private String direction;
 
     /**
-     * Horizontal distance between base and target, in millimeters
+     * Horizontal distance between base and target, in meters
      */
     private String horDistance;
 
     /**
-     * Inclined distance between base and target, in millimeters
+     * Inclined distance between base and target, in meters
      */
     private String inclinedDistance;
 
     /**
-     * The tilt angle of base->target line, in seconds
+     * The tilt angle of base->target line, in d.mmss format
      */
     private String tiltAngle;
 
     /**
-     * The height difference between the target and the base
+     * The height difference between the target and the base in meters
      */
     private String elevation;
 }

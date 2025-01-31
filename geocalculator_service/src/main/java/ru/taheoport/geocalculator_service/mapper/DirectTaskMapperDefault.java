@@ -2,9 +2,7 @@ package ru.taheoport.geocalculator_service.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.taheoport.geocalculator_service.dto.DirectTaskFullResponse;
-import ru.taheoport.geocalculator_service.dto.DirectTaskRequest;
-import ru.taheoport.geocalculator_service.dto.DirectTaskResponse;
+import ru.taheoport.geocalculator_service.dto.*;
 
 /**
  * This class implements interface DirectTaskMapper
@@ -15,6 +13,7 @@ public class DirectTaskMapperDefault implements DirectTaskMapper{
 
     private final DirectCalculator directCalculator;
     private final InverseCalculator inverseCalculator;
+    private final DataMapper dataMapper;
 
     @Override
     public DirectTaskResponse toDirectTaskResponse(DirectTaskRequest directTaskRequest) {
@@ -115,5 +114,57 @@ public class DirectTaskMapperDefault implements DirectTaskMapper{
         directTaskResponse.setTargetTiltAngle(directTaskRequest.getTargetTiltAngle());
         directTaskResponse.setTargetHeight(directTaskRequest.getTargetHeight());
         return directTaskResponse;
+    }
+
+    /**
+     * Converts DirectStringRequest to DirectTaskRequest
+     *
+     * @param directStringRequest DirectStringRequest
+     * @return DirectTaskRequest
+     */
+    @Override
+    public DirectTaskRequest toDirectTaskRequest(DirectStringRequest directStringRequest) {
+        DirectTaskRequest directTaskRequest = new DirectTaskRequest();
+
+        directTaskRequest.setLandmarkX(dataMapper.meterToMillimeter(directStringRequest.getLandmarkX()));
+        directTaskRequest.setLandmarkY(dataMapper.meterToMillimeter(directStringRequest.getLandmarkY()));
+        directTaskRequest.setLandmarkDirection(dataMapper.dmsToSeconds(directStringRequest.getLandmarkDirection()));
+        directTaskRequest.setBaseX(dataMapper.meterToMillimeter(directStringRequest.getBaseX()));
+        directTaskRequest.setBaseY(dataMapper.meterToMillimeter(directStringRequest.getBaseY()));
+        directTaskRequest.setBaseZ(dataMapper.meterToMillimeter(directStringRequest.getBaseZ()));
+        directTaskRequest.setBaseHeight(dataMapper.meterToMillimeter(directStringRequest.getBaseHeight()));
+        directTaskRequest.setTargetDirection(dataMapper.dmsToSeconds(directStringRequest.getTargetDirection()));
+        directTaskRequest.setTargetInclinedDistance(dataMapper.meterToMillimeter(directStringRequest.getTargetInclinedDistance()));
+        directTaskRequest.setTargetTiltAngle(dataMapper.dmsToSeconds(directStringRequest.getTargetTiltAngle()));
+        directTaskRequest.setTargetHeight(dataMapper.meterToMillimeter(directStringRequest.getTargetHeight()));
+
+        return directTaskRequest;
+    }
+
+    /**
+     * Converts the DirectTaskFullResponse to DirectStringResponse
+     * @param directTaskFullResponse DirectTaskFullResponse
+     * @return DirectStringResponse
+     */
+    @Override
+    public DirectStringResponse toDirectStringResponse(DirectTaskFullResponse directTaskFullResponse) {
+        DirectStringResponse directStringResponse = new DirectStringResponse();
+
+        directStringResponse.setLandmarkX(dataMapper.millimeterToMeter(directTaskFullResponse.getLandmarkX()));
+        directStringResponse.setLandmarkY(dataMapper.millimeterToMeter(directTaskFullResponse.getLandmarkY()));
+        directStringResponse.setLandmarkDirection(dataMapper.secondsToDms(directTaskFullResponse.getLandmarkDirection()));
+        directStringResponse.setBaseX(dataMapper.millimeterToMeter(directTaskFullResponse.getBaseX()));
+        directStringResponse.setBaseY(dataMapper.millimeterToMeter(directTaskFullResponse.getBaseY()));
+        directStringResponse.setBaseZ(dataMapper.millimeterToMeter(directTaskFullResponse.getBaseZ()));
+        directStringResponse.setBaseHeight(dataMapper.millimeterToMeter(directTaskFullResponse.getBaseHeight()));
+        directStringResponse.setTargetX(dataMapper.millimeterToMeter(directTaskFullResponse.getTargetX()));
+        directStringResponse.setTargetY(dataMapper.millimeterToMeter(directTaskFullResponse.getTargetY()));
+        directStringResponse.setTargetZ(dataMapper.millimeterToMeter(directTaskFullResponse.getTargetZ()));
+        directStringResponse.setTargetDirection(dataMapper.secondsToDms(directTaskFullResponse.getTargetDirection()));
+        directStringResponse.setTargetInclinedDistance(dataMapper.millimeterToMeter(directTaskFullResponse.getTargetInclinedDistance()));
+        directStringResponse.setTargetTiltAngle(dataMapper.secondsToDms(directTaskFullResponse.getTargetTiltAngle()));
+        directStringResponse.setTargetHeight(dataMapper.millimeterToMeter(directTaskFullResponse.getTargetHeight()));
+
+        return directStringResponse;
     }
 }
