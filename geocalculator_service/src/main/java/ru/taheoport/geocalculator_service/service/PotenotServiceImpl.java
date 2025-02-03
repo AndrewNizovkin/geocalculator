@@ -2,6 +2,8 @@ package ru.taheoport.geocalculator_service.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ru.taheoport.geocalculator_service.dto.PotenotStringRequest;
+import ru.taheoport.geocalculator_service.dto.PotenotStringResponse;
 import ru.taheoport.geocalculator_service.dto.PotenotTaskRequest;
 import ru.taheoport.geocalculator_service.dto.PotenotTaskResponse;
 import ru.taheoport.geocalculator_service.mapper.PotenotTaskMapper;
@@ -26,5 +28,17 @@ public class PotenotServiceImpl implements PotenotService{
             return potenotTaskMapper.solvePotenotTask(potenotTaskRequestList);
 
         }
+    }
+
+    /**
+     * Solves geodetic Potenot Problem
+     *
+     * @param potenotStringRequests List of landmark points with known coordinates
+     * @return Instance of PotenotTaskDto with coordinates calculated point and it's accuracy
+     */
+    @Override
+    public PotenotStringResponse getPotenotStringResponse(List<PotenotStringRequest> potenotStringRequests) {
+//        List<PotenotTaskRequest> = potenotStringRequests.stream().map(potenotStringRequest -> )
+        return null;
     }
 }

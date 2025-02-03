@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.taheoport.geocalculator_service.dto.DirectStringRequest;
 import ru.taheoport.geocalculator_service.dto.InverseStringRequest;
 import ru.taheoport.geocalculator_service.dto.InverseTaskRequest;
+import ru.taheoport.geocalculator_service.dto.PotenotStringRequest;
 import ru.taheoport.geocalculator_service.service.DirectTaskService;
 import ru.taheoport.geocalculator_service.service.InverseTaskService;
+import ru.taheoport.geocalculator_service.service.PotenotService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("geocalculator")
@@ -19,6 +23,7 @@ import ru.taheoport.geocalculator_service.service.InverseTaskService;
 public class UiController {
     private final InverseTaskService inverseTaskService;
     private final DirectTaskService directTaskService;
+    private final PotenotService potenotService;
 
     /**
      * Main page of Geocalculator Service
@@ -50,6 +55,21 @@ public class UiController {
     public String resolveDirectTask(Model model, @RequestBody DirectStringRequest directStringRequest) {
         model.addAttribute("direct", directTaskService.getDirectStringResponse(directStringRequest));
         return "direct";
+    }
+
+    /**
+     * Resolves the Potenot geodetic task.
+     * Determines the coordinates of the station in angular directions to landmarks with known coordinates
+     * @param model Model
+     * @param potenotStringRequests
+     * @return
+     */
+    @PostMapping("potenot")
+    public String resolvePotenotTask(Model model, @RequestBody List<PotenotStringRequest> potenotStringRequests) {
+        model.addAttribute("request", potenotStringRequests);
+        model.addAttribute("response", potenotService.getPotenotStringResponse(potenotStringRequests));
+
+         return "potenot";
     }
 
 }

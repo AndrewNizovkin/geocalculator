@@ -1,5 +1,7 @@
 package ru.taheoport.geocalculator_service.service;
 
+import ru.taheoport.geocalculator_service.dto.PotenotStringRequest;
+import ru.taheoport.geocalculator_service.dto.PotenotStringResponse;
 import ru.taheoport.geocalculator_service.dto.PotenotTaskRequest;
 import ru.taheoport.geocalculator_service.dto.PotenotTaskResponse;
 
@@ -17,4 +19,11 @@ public interface PotenotService {
      * @return Instance of PotenotTaskDto with coordinates calculated point and it's accuracy
      */
     PotenotTaskResponse resolvePotenotTask(List<PotenotTaskRequest> potenotTaskRequestList);
+
+    /**
+     * Solves geodetic Potenot Problem
+     * @param potenotStringRequests List of landmark points with known coordinates
+     * @return Instance of PotenotTaskDto with coordinates calculated point and it's accuracy
+     */
+    PotenotStringResponse getPotenotStringResponse(List<PotenotStringRequest> potenotStringRequests);
 }
