@@ -124,6 +124,10 @@ class DirectTaskControllerTest {
 
     }
 
+    /**
+     * Gets test list of data, measurements and processing results
+     * @return List of DirectTaskFullResponse
+     */
     private List<DirectTaskFullResponse> getDirectTaskFullResponses() {
         List<DirectTaskFullResponse> expectList = new LinkedList<>();
         DirectTaskFullResponse directTaskFullResponse = new DirectTaskFullResponse();

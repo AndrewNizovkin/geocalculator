@@ -146,7 +146,6 @@ class DirectTaskMapperDefaultTest {
         DirectStringResponse actualResponse = directTaskMapper.toDirectStringResponse(directTaskFullResponse);
 
         assertNotNull(actualResponse);
-
         assertEquals(expectResponse.getLandmarkX(), actualResponse.getLandmarkX());
         assertEquals(expectResponse.getLandmarkY(), actualResponse.getLandmarkY());
         assertEquals(expectResponse.getLandmarkDirection(), actualResponse.getLandmarkDirection());

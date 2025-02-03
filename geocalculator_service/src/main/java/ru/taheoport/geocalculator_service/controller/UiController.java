@@ -46,7 +46,7 @@ public class UiController {
      * @param directStringRequest DirectStringRequest
      * @return direct.html
      */
-        @PostMapping("direct")
+     @PostMapping("direct")
     public String resolveDirectTask(Model model, @RequestBody DirectStringRequest directStringRequest) {
         model.addAttribute("direct", directTaskService.getDirectStringResponse(directStringRequest));
         return "direct";

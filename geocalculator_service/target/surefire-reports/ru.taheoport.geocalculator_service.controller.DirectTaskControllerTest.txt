@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ru.taheoport.geocalculator_service.controller.DirectTaskControllerTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.985 s -- in ru.taheoport.geocalculator_service.controller.DirectTaskControllerTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.047 s -- in ru.taheoport.geocalculator_service.controller.DirectTaskControllerTest

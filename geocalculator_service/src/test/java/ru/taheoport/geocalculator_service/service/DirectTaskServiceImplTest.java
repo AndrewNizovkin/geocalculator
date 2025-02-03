@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class DirectTaskServiceImplTest {
 
     @Autowired
-    DirectTaskService directTaskService;
+    private DirectTaskService directTaskService;
 
     @MockBean
-    DirectTaskMapper directTaskMapper;
+    private DirectTaskMapper directTaskMapper;
 
     @Test
     void solveDirectTaskTest() {
@@ -40,7 +40,6 @@ class DirectTaskServiceImplTest {
         assertEquals(expect.getTargetX(), actual.getTargetX());
         assertEquals(expect.getTargetY(), actual.getTargetY());
         assertEquals(expect.getTargetZ(), actual.getTargetZ());
-
     }
 
 }

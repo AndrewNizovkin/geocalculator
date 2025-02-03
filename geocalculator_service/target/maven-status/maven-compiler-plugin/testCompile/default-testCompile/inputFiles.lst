@@ -10,6 +10,7 @@
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/test/java/ru/taheoport/geocalculator_service/mapper/PotenotCalculatorImplTest.java
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/test/java/ru/taheoport/geocalculator_service/mapper/PotenotTaskMapperImplTest.java
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/test/java/ru/taheoport/geocalculator_service/mapper/ValidatorDefaultTest.java
+/home/andrew/MyJava/geocalculator/geocalculator_service/src/test/java/ru/taheoport/geocalculator_service/service/DirectTaskServiceImplIIntegrationTest.java
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/test/java/ru/taheoport/geocalculator_service/service/DirectTaskServiceImplTest.java
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/test/java/ru/taheoport/geocalculator_service/service/InverseCalculatorTaskServiceImplTest.java
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/test/java/ru/taheoport/geocalculator_service/service/InverseTaskServiceImplTest.java

@@ -3,6 +3,8 @@
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/controller/InverseTackController.java
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/controller/PotenotTaskController.java
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/controller/UiController.java
+/home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/dto/DirectStringRequest.java
+/home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/dto/DirectStringResponse.java
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/dto/DirectTaskFullResponse.java
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/dto/DirectTaskRequest.java
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/dto/DirectTaskResponse.java

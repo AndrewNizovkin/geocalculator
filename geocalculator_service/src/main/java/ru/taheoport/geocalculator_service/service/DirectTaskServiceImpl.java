@@ -42,7 +42,6 @@ public class DirectTaskServiceImpl implements DirectTaskService{
     /**
      * Solves the direct geodesic problem fo list,
      * update fields of list element
-     *
      * @param directStringRequest list of DirectTaskRequest
      * @return List of instance of DirectTaskFullResponse
      */
