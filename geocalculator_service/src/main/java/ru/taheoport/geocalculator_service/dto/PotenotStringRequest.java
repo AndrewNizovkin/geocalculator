@@ -23,4 +23,16 @@ public class PotenotStringRequest {
      */
     private String direction;
 
+    /**
+     * Constructor with all arguments
+     * @param pointX X coordinate in meters
+     * @param pointY Y coordinate in meters
+     * @param direction Direction to this point in d.mmss format
+     */
+    public PotenotStringRequest(String pointX, String pointY, String direction) {
+        this.pointX = pointX;
+        this.pointY = pointY;
+        this.direction = direction;
+    }
+
 }

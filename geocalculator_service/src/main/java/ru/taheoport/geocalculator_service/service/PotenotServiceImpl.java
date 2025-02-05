@@ -32,13 +32,13 @@ public class PotenotServiceImpl implements PotenotService{
 
     /**
      * Solves geodetic Potenot Problem
-     *
      * @param potenotStringRequests List of landmark points with known coordinates
      * @return Instance of PotenotTaskDto with coordinates calculated point and it's accuracy
      */
     @Override
     public PotenotStringResponse getPotenotStringResponse(List<PotenotStringRequest> potenotStringRequests) {
-//        List<PotenotTaskRequest> = potenotStringRequests.stream().map(potenotStringRequest -> )
-        return null;
+        List<PotenotTaskRequest> potenotTaskRequests = potenotTaskMapper.toPotenotTaskRequests(potenotStringRequests);
+        PotenotTaskResponse potenotTaskResponse = potenotTaskMapper.solvePotenotTask(potenotTaskRequests);
+        return potenotTaskMapper.toPotenotStringResponse(potenotTaskResponse);
     }
 }

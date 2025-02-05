@@ -68,8 +68,7 @@ public class UiController {
     public String resolvePotenotTask(Model model, @RequestBody List<PotenotStringRequest> potenotStringRequests) {
         model.addAttribute("request", potenotStringRequests);
         model.addAttribute("response", potenotService.getPotenotStringResponse(potenotStringRequests));
-
-         return "potenot";
+        return "potenot";
     }
 
 }

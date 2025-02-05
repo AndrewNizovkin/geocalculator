@@ -6,9 +6,23 @@
 </head>
 <body>
 <h3>Обратная геодезическая засечка. Задача Потенота</h3>
-<p>Определение координат пункта по измеренным угловым направлениям на три и более пунктов с известными координатами</p>
-<!--<ul>-->
-<!--  <li th:each="book: ${books}" th:text="${book.name}"></li>-->
-<!--</ul>-->
+<p>Определение координат пункта по измеренным угловым направлениям на три пункта с известными координатами</p>
+<form>
+  <b>Координаты исходных пунктов </b><br>
+  <ul>
+    <li th:each="item: ${request}">
+      X: <input type="text" name="pointX" th:value="${item.pointX}">
+      Y: <input type="text" name="pointY" th:value="${item.pointY}">
+      Direction: <input type="text" name="direction" th:value="${item.direction}">
+    </li>
+  </ul>
+  <b>Результаты обработки</b><br>
+  X, м.:  <span th:text="${response.pointX}"></span><br>
+  Y, м.:  <span th:text="${response.pointY}"></span><br>
+  <br>
+  <br>
+  <input type="submit" value="Обработать">
+
+</form>
 </body>
 </html>

@@ -13,6 +13,8 @@
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/dto/InverseTaskFullResponse.java
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/dto/InverseTaskRequest.java
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/dto/InverseTaskResponse.java
+/home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/dto/PotenotStringRequest.java
+/home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/dto/PotenotStringResponse.java
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/dto/PotenotTaskRequest.java
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/dto/PotenotTaskResponse.java
 /home/andrew/MyJava/geocalculator/geocalculator_service/src/main/java/ru/taheoport/geocalculator_service/mapper/DataMapper.java
