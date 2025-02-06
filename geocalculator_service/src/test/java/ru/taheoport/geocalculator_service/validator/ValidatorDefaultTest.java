@@ -1,4 +1,4 @@
-package ru.taheoport.geocalculator_service.mapper;
+package ru.taheoport.geocalculator_service.validator;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

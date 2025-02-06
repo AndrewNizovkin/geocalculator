@@ -1,4 +1,4 @@
-package ru.taheoport.geocalculator_service.mapper;
+package ru.taheoport.geocalculator_service.validator;
 
 /**
  * This interface defines methods for data checking raw data
