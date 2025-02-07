@@ -121,12 +121,6 @@ public class InverseTaskMapperDefault implements InverseTaskMapper{
     @Override
     public InverseStringResponse toInverseStringResponse(InverseTaskFullResponse inverseTaskFullResponse) {
         InverseStringResponse inverseStringResponse = new InverseStringResponse();
-        inverseStringResponse.setBaseX(dataMapper.millimeterToMeter(inverseTaskFullResponse.getBaseX()));
-        inverseStringResponse.setBaseY(dataMapper.millimeterToMeter(inverseTaskFullResponse.getBaseY()));
-        inverseStringResponse.setBaseZ(dataMapper.millimeterToMeter(inverseTaskFullResponse.getBaseZ()));
-        inverseStringResponse.setTargetX(dataMapper.millimeterToMeter(inverseTaskFullResponse.getTargetX()));
-        inverseStringResponse.setTargetY(dataMapper.millimeterToMeter(inverseTaskFullResponse.getTargetY()));
-        inverseStringResponse.setTargetZ(dataMapper.millimeterToMeter(inverseTaskFullResponse.getTargetZ()));
         inverseStringResponse.setDirection(dataMapper.secondsToDms(inverseTaskFullResponse.getDirection()));
         inverseStringResponse.setHorDistance(dataMapper.millimeterToMeter(inverseTaskFullResponse.getHorDistance()));
         inverseStringResponse.setInclinedDistance(dataMapper.millimeterToMeter(inverseTaskFullResponse.getInclinedDistance()));
@@ -135,5 +129,7 @@ public class InverseTaskMapperDefault implements InverseTaskMapper{
 
         return inverseStringResponse;
     }
+
+
 
 }

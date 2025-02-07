@@ -26,4 +26,10 @@ public interface PotenotService {
      * @return Instance of PotenotTaskDto with coordinates calculated point and it's accuracy
      */
     PotenotStringResponse getPotenotStringResponse(List<PotenotStringRequest> potenotStringRequests);
+
+    /**
+     * Gives response if raw data is not valid
+     * @return PotenotStringResponse
+     */
+    PotenotStringResponse getPotenotStringErrorResponse();
 }

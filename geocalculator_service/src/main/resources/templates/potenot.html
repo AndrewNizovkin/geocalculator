@@ -5,7 +5,7 @@
   <title>Geodetic Potenot Problem</title>
 </head>
 <body>
-<h3>Обратная геодезическая засечка. Задача Потенота</h3>
+<h3>Обратная геодезическая засечка. Задача Потенота.</h3>
 <p>Определение координат пункта по измеренным угловым направлениям на три пункта с известными координатами</p>
 <form>
   <b>Координаты исходных пунктов </b><br>
@@ -16,9 +16,11 @@
       Direction: <input type="text" name="direction" th:value="${item.direction}">
     </li>
   </ul>
-  <b>Результаты обработки</b><br>
-  X, м.:  <span th:text="${response.pointX}"></span><br>
-  Y, м.:  <span th:text="${response.pointY}"></span><br>
+  <b>Результаты обработки</b>
+  <br><br>
+  X, м.  <span th:text="${response.pointX}"></span><br>
+  <br>
+  Y, м.  <span th:text="${response.pointY}"></span><br>
   <br>
   <br>
   <input type="submit" value="Обработать">

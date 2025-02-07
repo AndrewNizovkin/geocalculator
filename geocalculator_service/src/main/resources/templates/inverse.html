@@ -6,31 +6,38 @@
 </head>
 <body>
 <h3>Обратная геодезическая задача</h3>
-<p>Решение обратной геодезической задачи</p>
+<p>Определение расстояния, направления, превышения между двумя точками с известными координатами</p>
 <form>
-  <b>Координаты базовой точки</b><br>
-  X, м.:  <input type="text" name="baseX" th:value="${inverse.baseX}"><br>
-  Y, м.:  <input type="text" name="baseY" th:value="${inverse.baseY}"><br>
-  Z, м.:  <input type="text" name="baseZ" th:value="${inverse.baseZ}"><br>
+  <b>Координаты базовой точки</b>
+  <br><br>
+  X, м.  <input type="text" name="baseX" th:value="${request.baseX}"><br>
+  Y, м.  <input type="text" name="baseY" th:value="${request.baseY}"><br>
+  Z, м.  <input type="text" name="baseZ" th:value="${request.baseZ}"><br>
   <br>
   <br>
-  <b>Координаты цели</b><br>
-  X, м.:  <input type="text" name="targetX" th:value="${inverse.targetX}"><br>
-  Y, м.:  <input type="text" name="targetY" th:value="${inverse.targetY}"><br>
-  Z, м.:  <input type="text" name="targetZ" th:value="${inverse.targetZ}"><br>
+  <b>Координаты цели</b>
+  <br><br>
+  X, м.  <input type="text" name="targetX" th:value="${request.targetX}"><br>
+  Y, м.  <input type="text" name="targetY" th:value="${request.targetY}"><br>
+  Z, м.  <input type="text" name="targetZ" th:value="${request.targetZ}"><br>
   <br>
   <br>
-  <b>Результаты обработки</b><br>
-  Дирекционный угол, г.ммсс:<br>
-  <input type="text" name="direction" th:value="${inverse.direction}"><br>
-  Горизонтальное проложение, м.:<br>
-  <input type="text" name="horDistance" th:value="${inverse.horDistance}"><br>
-  Наклонное расстояние, м.:<br>
-  <input type="text" name="inclinedDistance" th:value="${inverse.inclinedDistance}"><br>
-  Угол наклона линии, г.ммсс:<br>
-  <input type="text" name="tiltAngle" th:value="${inverse.tiltAngle}"><br>
-  Превышение цели над базовой точкой, м.:<br>
-  <input type="text" name="elevation" th:value="${inverse.elevation}"><br>
+  <b>Результаты обработки</b>
+  <br><br>
+  Дирекционный угол, г.ммсс<br>
+  <input type="text" name="direction" th:value="${response.direction}"><br>
+  <br>
+  Горизонтальное проложение, м.<br>
+  <input type="text" name="horDistance" th:value="${response.horDistance}"><br>
+  <br>
+  Наклонное расстояние, м.<br>
+  <input type="text" name="inclinedDistance" th:value="${response.inclinedDistance}"><br>
+  <br>
+  Угол наклона линии, г.ммсс<br>
+  <input type="text" name="tiltAngle" th:value="${response.tiltAngle}"><br>
+  <br>
+  Превышение цели над базовой точкой, м.<br>
+  <input type="text" name="elevation" th:value="${response.elevation}"><br>
   <br>
   <br>
   <input type="submit" value="Обработать">

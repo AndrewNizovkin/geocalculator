@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DirectStringResponse extends DirectStringRequest{
+public class DirectStringResponse{
 
     /**
      * Coordinate X of target in meters

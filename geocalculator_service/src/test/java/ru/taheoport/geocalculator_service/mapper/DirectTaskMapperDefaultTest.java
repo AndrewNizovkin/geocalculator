@@ -146,17 +146,6 @@ class DirectTaskMapperDefaultTest {
         DirectStringResponse actualResponse = directTaskMapper.toDirectStringResponse(directTaskFullResponse);
 
         assertNotNull(actualResponse);
-        assertEquals(expectResponse.getLandmarkX(), actualResponse.getLandmarkX());
-        assertEquals(expectResponse.getLandmarkY(), actualResponse.getLandmarkY());
-        assertEquals(expectResponse.getLandmarkDirection(), actualResponse.getLandmarkDirection());
-        assertEquals(expectResponse.getBaseX(), actualResponse.getBaseX());
-        assertEquals(expectResponse.getBaseY(), actualResponse.getBaseY());
-        assertEquals(expectResponse.getBaseZ(), actualResponse.getBaseZ());
-        assertEquals(expectResponse.getBaseHeight(), actualResponse.getBaseHeight());
-        assertEquals(expectResponse.getTargetDirection(), actualResponse.getTargetDirection());
-        assertEquals(expectResponse.getTargetInclinedDistance(), actualResponse.getTargetInclinedDistance());
-        assertEquals(expectResponse.getTargetTiltAngle(), actualResponse.getTargetTiltAngle());
-        assertEquals(expectResponse.getTargetHeight(), actualResponse.getTargetHeight());
         assertEquals(expectResponse.getTargetX(), actualResponse.getTargetX());
         assertEquals(expectResponse.getTargetY(), actualResponse.getTargetY());
         assertEquals(expectResponse.getTargetZ(), actualResponse.getTargetZ());
@@ -191,17 +180,6 @@ class DirectTaskMapperDefaultTest {
      */
     private DirectStringResponse getDirectStringResponse() {
         DirectStringResponse expectResponse = new DirectStringResponse();
-        expectResponse.setLandmarkX("478685.352");
-        expectResponse.setLandmarkY("2296938.168");
-        expectResponse.setLandmarkDirection("0.0000");
-        expectResponse.setBaseX("478676.113");
-        expectResponse.setBaseY("2296967.264");
-        expectResponse.setBaseZ("11.220");
-        expectResponse.setBaseHeight("1.538");
-        expectResponse.setTargetDirection("185.4548");
-        expectResponse.setTargetInclinedDistance("39.878");
-        expectResponse.setTargetTiltAngle("0.0646");
-        expectResponse.setTargetHeight("1.600");
         expectResponse.setTargetX("478660.289");
         expectResponse.setTargetY("2297003.868");
         expectResponse.setTargetZ("11.236");

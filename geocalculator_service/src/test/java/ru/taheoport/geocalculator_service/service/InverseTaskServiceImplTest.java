@@ -98,16 +98,45 @@ class InverseTaskServiceImplTest {
         InverseStringResponse actualResponse = inverseTaskService.getInverseStringResponse(inverseTaskRequest);
 
         assertNotNull(actualResponse);
-        assertEquals(baseX, actualResponse.getBaseX());
-        assertEquals(baseY, actualResponse.getBaseY());
-        assertEquals(baseZ, actualResponse.getBaseZ());
-        assertEquals(targetX, actualResponse.getTargetX());
-        assertEquals(targetY, actualResponse.getTargetY());
-        assertEquals(targetZ, actualResponse.getTargetZ());
         assertEquals(expectDirection, actualResponse.getDirection());
         assertEquals(expectHorDistance, actualResponse.getHorDistance());
         assertEquals(expectInclinedDistance, actualResponse.getInclinedDistance());
         assertEquals(expectTiltAngle, actualResponse.getTiltAngle());
         assertEquals(expectElevation, actualResponse.getElevation());
     }
+
+    @Test
+    void toInverseStringErrorResponseTest() {
+        InverseStringRequest expectRequest = getInverseStringRequest();
+        String expectDirection = "0.0000";
+        String expectHorDistance = "0.000";
+        String expectInclinedDistance = "0.000";
+        String expectTiltAngle = "0.0000";
+        String expectElevation = "0.000";
+
+        InverseStringResponse actualResponse = inverseTaskService.getInverseStringErrorResponse();
+
+        assertNotNull(actualResponse);
+        assertEquals(expectDirection, actualResponse.getDirection());
+        assertEquals(expectHorDistance, actualResponse.getHorDistance());
+        assertEquals(expectInclinedDistance, actualResponse.getInclinedDistance());
+        assertEquals(expectTiltAngle, actualResponse.getTiltAngle());
+        assertEquals(expectElevation, actualResponse.getElevation());
+    }
+
+    /**
+     * Gives test instance of InverseStringRequest
+     * @return InverseStringRequest
+     */
+    private InverseStringRequest getInverseStringRequest() {
+        InverseStringRequest inverseStringRequest = new InverseStringRequest();
+        inverseStringRequest.setBaseX("0.000");
+        inverseStringRequest.setBaseY("2345678.234");
+        inverseStringRequest.setBaseZ("-12.345");
+        inverseStringRequest.setTargetX("467893.123");
+        inverseStringRequest.setTargetY("2345678.000");
+        inverseStringRequest.setTargetZ("8789987.123");
+        return inverseStringRequest;
+    }
+
 }

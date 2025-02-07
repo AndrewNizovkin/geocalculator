@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class InverseStringResponse extends InverseStringRequest{
+public class InverseStringResponse{
     /**
      * The angle between the direction to the north and
      * the direction to the target, in d.mmss format

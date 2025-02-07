@@ -13,7 +13,7 @@ public interface Validator {
     boolean isDigit(String string);
 
     /**
-     * Checks the string contains a angle value at d.mmss
+     * Checks the string contains the angle value at d.mmss
      * @param string String
      * @return result of check
      */

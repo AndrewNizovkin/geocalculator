@@ -39,7 +39,7 @@ public interface PotenotTaskMapper {
     PotenotStringResponse toPotenotStringResponse(PotenotTaskResponse potenotTaskResponse);
 
 
-
+//    PotenotStringResponse to
 
 
 }

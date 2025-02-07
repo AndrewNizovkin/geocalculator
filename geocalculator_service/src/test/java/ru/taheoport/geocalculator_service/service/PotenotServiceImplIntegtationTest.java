@@ -61,4 +61,16 @@ class PotenotServiceImplIntegtationTest {
         Assertions.assertEquals(expectX, actualResponse.getPointX());
         Assertions.assertEquals(expectY, actualResponse.getPointY());
     }
+
+    @Test
+    void getPotenotStringErrorResponseTest() {
+        String expectX = "0.000";
+        String expectY = "0.000";
+
+        PotenotStringResponse actualResponse = potenotService.getPotenotStringErrorResponse();
+
+        Assertions.assertNotNull(actualResponse);
+        Assertions.assertEquals(expectX, actualResponse.getPointX());
+        Assertions.assertEquals(expectY, actualResponse.getPointY());
+    }
 }

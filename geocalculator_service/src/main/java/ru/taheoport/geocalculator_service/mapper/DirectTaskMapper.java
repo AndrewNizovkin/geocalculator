@@ -35,4 +35,5 @@ public interface DirectTaskMapper {
      * @return DirectStringResponse
      */
     DirectStringResponse toDirectStringResponse(DirectTaskFullResponse directTaskFullResponse);
+
 }

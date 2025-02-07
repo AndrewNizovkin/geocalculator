@@ -9,38 +9,40 @@
 <p>Определение координат пункта по линейно-угловым измерениям с пункта и ориентира с известными координатами. </p>
 <br>
 <form>
-  <b>Координаты ориентира</b><br>
-  X, м.:  <input type="text" name="landmarkX" th:value="${direct.landmarkX}"><br>
-  Y, м.:  <input type="text" name="landmarkY" th:value="${direct.landmarkY}"><br>
+  <b>Координаты ориентира</b><br><br>
+  X, м.  <input type="text" name="landmarkX" th:value="${request.landmarkX}"><br>
+  Y, м.  <input type="text" name="landmarkY" th:value="${request.landmarkY}"><br>
+  <br>
   Угловое направление на ориентир, г.ммсс<br>
-  <input type="text" name="landmarkDirection" th:value="${direct.landmarkDirection}"><br>
+  <input type="text" name="landmarkDirection" th:value="${request.landmarkDirection}"><br>
   <br>
   <b>Координаты базы</b>
-  X, м.:  <input type="text" name="baseX" th:value="${direct.baseX}"><br>
-  Y, м.:  <input type="text" name="baseY" th:value="${direct.baseY}"><br>
-  Z, м.:  <input type="text" name="baseZ" th:value="${direct.baseZ}"><br>
-  Высота инструмента над базовой точкой, м.:<br>
-  <input type="text" name="baseHeight" th:value="${direct.baseHeight}"><br>
+  <br><br>
+  X, м.  <input type="text" name="baseX" th:value="${request.baseX}"><br>
+  Y, м.  <input type="text" name="baseY" th:value="${request.baseY}"><br>
+  Z, м.  <input type="text" name="baseZ" th:value="${request.baseZ}"><br>
+  <br>
+  Высота инструмента над базовой точкой, м.<br>
+  <input type="text" name="baseHeight" th:value="${request.baseHeight}"><br>
   <br>
   <br>
-  <b>Измерения на определяемую точку</b><br>
+  <b>Измерения на определяемую точку</b>
+  <br><br>
   Угловое направление на цель, г.ммсс<br>
-  <input type="text" name="targetDirection" th:value="${direct.targetDirection}"><br>
+  <input type="text" name="targetDirection" th:value="${request.targetDirection}"><br>
   Наклонное расстояние до цели, м.<br>
-  <input type="text" name="targetInclinedDistance" th:value="${direct.targetInclinedDistance}"><br>
+  <input type="text" name="targetInclinedDistance" th:value="${request.targetInclinedDistance}"><br>
   Угол наклона на цель, г.ммсс<br>
-  <input type="text" name="targetTiltAngle" th:value="${direct.targetTiltAngle}"><br>
+  <input type="text" name="targetTiltAngle" th:value="${request.targetTiltAngle}"><br>
   Высота цели над определяемой точкой, м.<br>
-  <input type="text" name="targetHeight" th:value="${direct.targetHeight}"><br>
+  <input type="text" name="targetHeight" th:value="${request.targetHeight}"><br>
   <br>
   <br>
   <b>Координаты определяемой точки</b>
-  X, м.:<br>
-  <input type="text" name="targetX" th:value="${direct.targetX}"><br>
-  Y, м.:<br>
-  <input type="text" name="targetY" th:value="${direct.targetY}"><br>
-  Z, м.:<br>
-  <input type="text" name="targetZ" th:value="${direct.targetZ}"><br>
+  <br><br>
+  X, м.  <input type="text" name="targetX" th:value="${response.targetX}"><br>
+  Y, м.  <input type="text" name="targetY" th:value="${response.targetY}"><br>
+  Z, м.  <input type="text" name="targetZ" th:value="${response.targetZ}"><br>
   <br>
   <br>
   <input type="submit" value="Обработать">

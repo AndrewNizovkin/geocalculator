@@ -41,4 +41,16 @@ public class PotenotServiceImpl implements PotenotService{
         PotenotTaskResponse potenotTaskResponse = potenotTaskMapper.solvePotenotTask(potenotTaskRequests);
         return potenotTaskMapper.toPotenotStringResponse(potenotTaskResponse);
     }
+
+    /**
+     * Gives response if raw data is not valid
+     * @return PotenotStringResponse
+     */
+    @Override
+    public PotenotStringResponse getPotenotStringErrorResponse() {
+        PotenotStringResponse potenotStringResponse = new PotenotStringResponse();
+        potenotStringResponse.setPointX("0.000");
+        potenotStringResponse.setPointY("0.000");
+        return potenotStringResponse;
+    }
 }

@@ -150,21 +150,11 @@ public class DirectTaskMapperDefault implements DirectTaskMapper{
     public DirectStringResponse toDirectStringResponse(DirectTaskFullResponse directTaskFullResponse) {
         DirectStringResponse directStringResponse = new DirectStringResponse();
 
-        directStringResponse.setLandmarkX(dataMapper.millimeterToMeter(directTaskFullResponse.getLandmarkX()));
-        directStringResponse.setLandmarkY(dataMapper.millimeterToMeter(directTaskFullResponse.getLandmarkY()));
-        directStringResponse.setLandmarkDirection(dataMapper.secondsToDms(directTaskFullResponse.getLandmarkDirection()));
-        directStringResponse.setBaseX(dataMapper.millimeterToMeter(directTaskFullResponse.getBaseX()));
-        directStringResponse.setBaseY(dataMapper.millimeterToMeter(directTaskFullResponse.getBaseY()));
-        directStringResponse.setBaseZ(dataMapper.millimeterToMeter(directTaskFullResponse.getBaseZ()));
-        directStringResponse.setBaseHeight(dataMapper.millimeterToMeter(directTaskFullResponse.getBaseHeight()));
         directStringResponse.setTargetX(dataMapper.millimeterToMeter(directTaskFullResponse.getTargetX()));
         directStringResponse.setTargetY(dataMapper.millimeterToMeter(directTaskFullResponse.getTargetY()));
         directStringResponse.setTargetZ(dataMapper.millimeterToMeter(directTaskFullResponse.getTargetZ()));
-        directStringResponse.setTargetDirection(dataMapper.secondsToDms(directTaskFullResponse.getTargetDirection()));
-        directStringResponse.setTargetInclinedDistance(dataMapper.millimeterToMeter(directTaskFullResponse.getTargetInclinedDistance()));
-        directStringResponse.setTargetTiltAngle(dataMapper.secondsToDms(directTaskFullResponse.getTargetTiltAngle()));
-        directStringResponse.setTargetHeight(dataMapper.millimeterToMeter(directTaskFullResponse.getTargetHeight()));
 
         return directStringResponse;
     }
+
 }
