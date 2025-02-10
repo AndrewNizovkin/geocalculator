@@ -11,16 +11,16 @@
   <b>Координаты исходных пунктов </b><br>
   <ul>
     <li th:each="item: ${request}">
-      X: <input type="text" name="pointX" th:value="${item.pointX}">
-      Y: <input type="text" name="pointY" th:value="${item.pointY}">
-      Direction: <input type="text" name="direction" th:value="${item.direction}">
+      X: <input type="text" name="pointX" value="0.000" th:value="${item.pointX}">
+      Y: <input type="text" name="pointY" value="0.000" th:value="${item.pointY}">
+      Direction: <input type="text" name="direction" value="0.0000" th:value="${item.direction}">
     </li>
   </ul>
   <b>Результаты обработки</b>
   <br><br>
-  X, м.  <span th:text="${response.pointX}"></span><br>
+  X = <span th:text="${response.pointX}">0.000</span> м.<br>
   <br>
-  Y, м.  <span th:text="${response.pointY}"></span><br>
+  Y = <span th:text="${response.pointY}">0.000</span> м.<br>
   <br>
   <br>
   <input type="submit" value="Обработать">

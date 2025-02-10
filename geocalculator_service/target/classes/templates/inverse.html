@@ -10,34 +10,34 @@
 <form>
   <b>Координаты базовой точки</b>
   <br><br>
-  X, м.  <input type="text" name="baseX" th:value="${request.baseX}"><br>
-  Y, м.  <input type="text" name="baseY" th:value="${request.baseY}"><br>
-  Z, м.  <input type="text" name="baseZ" th:value="${request.baseZ}"><br>
+  X, м.  <input type="text" name="baseX" value="0.000" th:value="${request.baseX}"><br>
+  Y, м.  <input type="text" name="baseY" value="0.000" th:value="${request.baseY}"><br>
+  Z, м.  <input type="text" name="baseZ" value="0.000" th:value="${request.baseZ}"><br>
   <br>
   <br>
   <b>Координаты цели</b>
   <br><br>
-  X, м.  <input type="text" name="targetX" th:value="${request.targetX}"><br>
-  Y, м.  <input type="text" name="targetY" th:value="${request.targetY}"><br>
-  Z, м.  <input type="text" name="targetZ" th:value="${request.targetZ}"><br>
+  X, м.  <input type="text" name="targetX" value="0.000" th:value="${request.targetX}"><br>
+  Y, м.  <input type="text" name="targetY" value="0.000" th:value="${request.targetY}"><br>
+  Z, м.  <input type="text" name="targetZ" value="0.000" th:value="${request.targetZ}"><br>
   <br>
   <br>
   <b>Результаты обработки</b>
   <br><br>
   Дирекционный угол, г.ммсс<br>
-  <input type="text" name="direction" th:value="${response.direction}"><br>
+  <input type="text" name="direction" value="0.0000" th:value="${response.direction}"><br>
   <br>
   Горизонтальное проложение, м.<br>
-  <input type="text" name="horDistance" th:value="${response.horDistance}"><br>
+  <input type="text" name="horDistance" value="0.000" th:value="${response.horDistance}"><br>
   <br>
   Наклонное расстояние, м.<br>
-  <input type="text" name="inclinedDistance" th:value="${response.inclinedDistance}"><br>
+  <input type="text" name="inclinedDistance" value="0.000" th:value="${response.inclinedDistance}"><br>
   <br>
   Угол наклона линии, г.ммсс<br>
-  <input type="text" name="tiltAngle" th:value="${response.tiltAngle}"><br>
+  <input type="text" name="tiltAngle" value="0.0000" th:value="${response.tiltAngle}"><br>
   <br>
   Превышение цели над базовой точкой, м.<br>
-  <input type="text" name="elevation" th:value="${response.elevation}"><br>
+  <input type="text" name="elevation" value="0.000" th:value="${response.elevation}"><br>
   <br>
   <br>
   <input type="submit" value="Обработать">

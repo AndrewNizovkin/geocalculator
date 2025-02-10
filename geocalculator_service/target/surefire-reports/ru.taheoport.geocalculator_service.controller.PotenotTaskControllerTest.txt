@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ru.taheoport.geocalculator_service.controller.PotenotTaskControllerTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.159 s -- in ru.taheoport.geocalculator_service.controller.PotenotTaskControllerTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.117 s -- in ru.taheoport.geocalculator_service.controller.PotenotTaskControllerTest
