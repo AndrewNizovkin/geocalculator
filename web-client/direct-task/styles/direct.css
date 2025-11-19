@@ -87,7 +87,12 @@ body {
     padding: 2px;
 }
 
-.panel-back-task {
+.panel-direct {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-direct-basis {
     display: flex;
     flex-direction: column;
 }
@@ -101,19 +106,52 @@ table > caption {
     text-align: center;
 } */
 
-.back-task.panel-base, .back-task.panel-target, .back-task.panel-result, .back-task.panel-back-task {
+.panel-direct, .panel-direct-basis, .panel-direct-measurement, .panel-direct-result, .panel-direct-measurement {
     /* background-color: var(--container-bg-color); */
     border: 2px outset #bab6b7;
     margin: 2px;
     /* color: var(--text-color); */
 }
 
-.back-task.panel-base, .back-task.panel-target, .back-task.panel-result {
+.panel-direct, .panel-direct-basis, .panel-direct-measurement, .panel-direct-result {
     flex: 1 1 auto;
 }
 
+.panel-direct-measurement {
+    display: flex;
+    flex-direction: column;
+    border-radius: 2px;
+
+}
+
+.frame-input {
+    display: flex;
+    flex-direction: column;
+    margin: 2px;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.direct-label {
+    margin: 2px;
+    padding: 2px;
+    border-bottom: 1px outset #bab6b7;
+}
+
+.direct-value {
+    padding: 5px;
+}
+
+.panel-direct-result {
+    display: flex;
+    flex-direction: column;
+}
+
 table caption{
-    font-size: 1.5em;
+    font-size: 1.1em;
     text-align: center;
 
 }
@@ -278,7 +316,7 @@ ul.list-stations a {
         flex: 1 1 80%;
     }
 
-.panel-back-task {
+.panel-direct {
     flex-direction: row;
     height: 100%;
 }

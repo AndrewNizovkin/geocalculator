@@ -24,11 +24,88 @@
   <div class="main">
     <div class="nav">Navigation</div>
     <div class="content">
-      <div class="back-task toolbar"><h2>toolbar</h2></div>
+
+      <div class="back-task toolbar">
+        <div class="button clear" title="Очистить"></div>
+        <div class="button run" title="Решить задачу"></div>
+      </div>
+
       <div class="back-task panel-back-task">
-        <div class="back-task panel-base"><h2>panel-base</h2></div>
-        <div class="back-task panel-target"><h2>panel-target</h2></div>
-        <div class="back-task panel-result"><h2>panel-result</h2></div>
+
+        <div class="back-task panel-base">
+
+          <table class="table-base">
+            <caption>Координаты базы</caption>
+            <tbody>
+              <tr>
+                <td>X = </td>
+                <td><input type="text" class="menu-item" name="baseX" value="2333444.555"/></td>
+              </tr>
+              <tr>
+                <td>Y = </td>
+                <td><input type="text" class="menu-item" name="baseY" value="2333444.555"/></td>
+              </tr>
+              <tr>
+                <td>Z = </td>
+                <td><input type="text" class="menu-item" name="baseZ" value="2333444.555"/></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="back-task panel-target">
+
+          <table class="table-target">
+            <caption>Координаты цели</caption>
+            <tbody>
+              <tr>
+                <td>X:</td>
+                <td><input type="text" class="menu-item coordinate" name="targetX" value="2333444.555"/></td>
+              </tr>
+              <tr>
+                <td>Y:</td>
+                <td><input type="text" class="menu-item coordinate" name="targetY" value="2333444.555"/></td>
+              </tr>
+              <tr>
+                <td>Z:</td>
+                <td><input type="text" class="menu-item coordinate" name="targetZ" value="2333444.555"/></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="back-task panel-result">
+
+          <table class="table-result">
+            <caption>Результаты обработки</caption>
+            <tbody>
+              <tr>
+                <td>Дирекционный угол:</td>
+                <td>359.5959</td>
+              </tr>
+              <tr>
+                <td>Горизонтальное проложение:</td>
+                <td>1000.000</td>
+              </tr>
+              <tr>
+                <td>Наклонное расстояние:</td>
+                <td>999.999</td>
+              </tr>
+              <tr>
+                <td>Угол наклона:</td>
+                <td>-9.5959</td>
+              </tr>
+              <tr>
+                <td>Превышение:</td>
+                <td>-10.000</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
       </div>
     </div>
 

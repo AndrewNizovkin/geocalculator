@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <title>taheoport</title>
+  <meta charset="utf-8">
+  <meta name="author" content="taheoport.ru">
+  <meta name="keywords" content="топография, геодезия, тахеометрия, тахеометр, теодолитный ход">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="./styles/direct.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+  <div class="header">
+    <!-- <div>☰</div> -->
+    <ul class="menu">
+      <li><a href="#">Файл</a></li>
+      <li><a href="#">Инструменты</a></li>
+      <li><a href="#">Поддержка</a></li>
+      <li><a href="#">Контакты</a></li>
+      <li><a href="#" id="reg">Вход/Регистрация</a></li>
+    </ul>
+  </div>
+  <div class="main">
+    <div class="nav">Navigation</div>
+    <div class="content">
+
+      <div class="back-task toolbar">
+        <div class="button clear" title="Очистить"></div>
+        <div class="button run" title="Решить задачу"></div>
+      </div>
+
+      <div class="panel-direct">
+
+        <div class="panel-direct-basis">
+
+          <table class="table-direct-base">
+            <caption>Координаты базы</caption>
+            <tbody>
+              <tr>
+                <td>X = </td>
+                <td><input type="text" class="menu-item" name="direct-baseX" value="2333444.555"/></td>
+              </tr>
+              <tr>
+                <td>Y = </td>
+                <td><input type="text" class="menu-item" name="direct-baseY" value="2333444.555"/></td>
+              </tr>
+              <tr>
+                <td>Z = </td>
+                <td><input type="text" class="menu-item" name="direct-baseZ" value="2333444.555"/></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table-direct-landmark">
+            <caption>Координаты ориентира</caption>
+            <tbody>
+              <tr>
+                <td>X = </td>
+                <td><input type="text" class="menu-item" name="direct-landmakrX" value="2333444.555"/></td>
+              </tr>
+              <tr>
+                <td>Y = </td>
+                <td><input type="text" class="menu-item" name="direct-landmakrY" value="2333444.555"/></td>
+              </tr>
+            </tbody>
+          </table>
+
+
+        </div>
+
+        <div class="panel-direct-measurement">
+
+          <div class="frame-input">
+            <div class="direct-label">Направление на ориентир</div>
+            <div class="direct-value"><input type="text" class="menu-item" name="direct-landmark-direction" value="359.5959"/></div>
+          </div>
+
+          <div class="frame-input">
+            <div class="direct-label">Высота инструмента над точкой</div>
+            <div class="direct-value"><input type="text" class="menu-item" name="direct-base-height" value="99.555"/></div>
+          </div>
+
+          <div class="frame-input">
+            <div class="direct-label">Направление на цель</div>
+            <div class="direct-value"><input type="text" class="menu-item" name="direct-target-direction" value="359.5959"/></div>
+          </div>
+
+          <div class="frame-input">
+            <div class="direct-label">Наклонное расстояние до цели</div>
+            <div class="direct-value"><input type="text" class="menu-item" name="direct-target-distance" value="99.555"/></div>
+          </div>
+
+          <div class="frame-input">
+            <div class="direct-label">Угол наклона</div>
+            <div class="direct-value"><input type="text" class="menu-item" name="direct-target-tilt" value="-9.5959"/></div>
+          </div>
+
+          <div class="frame-input">
+            <div class="direct-label">Высота цели над определяемой точкой</div>
+            <div><input type="text" class="menu-item" name="direct-target-height" value="99.555"/></div>
+          </div>
+
+        </div>
+
+        <div class="panel-direct-result">
+          <div class="frame-input">
+            <div class="direct-label">Координаты цели</div>
+            <div class="direct-value">X: 2000000.000</div>
+            <div class="direct-value">Y: 2000000.000</div>
+            <div class="direct-value">Z: 2000.000</div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="sidebar">Sidebar</div>
+  </div>
+  
+  <div class="footer">Footer</div>
+</body>
+</html>

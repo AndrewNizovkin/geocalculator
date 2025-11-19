@@ -1,3 +1,3 @@
 # geolaclulator_web
 
-This web-server used thymelif
+This web-server used thymeleaf
