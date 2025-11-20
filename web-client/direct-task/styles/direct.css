@@ -124,7 +124,7 @@ table > caption {
 
 }
 
-.frame-input {
+.frame {
     display: flex;
     flex-direction: column;
     margin: 2px;
@@ -135,13 +135,13 @@ table > caption {
     border-radius: 5px;
 }
 
-.direct-label {
+.frame-label {
     margin: 2px;
     padding: 2px;
     border-bottom: 1px outset #bab6b7;
 }
 
-.direct-value {
+.frame-value {
     padding: 5px;
 }
 
@@ -153,7 +153,13 @@ table > caption {
 table caption{
     font-size: 1.1em;
     text-align: center;
+}
 
+.panel-title {
+    font-size: 1.2em;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 /* .panel-stations, .panel-measurements, .panel-basis {
     display: flex;

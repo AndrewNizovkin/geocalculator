@@ -67,7 +67,7 @@ body {
 /* endregion */
 
 .nav, .sidebar {
-    display: none;
+    flex: 1 1 auto;
 }
 
 .main {
@@ -252,6 +252,11 @@ ul.list-stations a {
         /* min-height: 100%; */
         flex: 1 1 auto;
     }
+
+    .nav, .sidebar {
+        min-width: 7em;
+    }
+
 
     .content {
         flex-direction: column;

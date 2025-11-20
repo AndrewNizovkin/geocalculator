@@ -87,48 +87,31 @@ body {
     padding: 2px;
 }
 
-.panel-back-task {
+.panel-potenot {
     display: flex;
     flex-direction: column;
 }
 
-/* .panel-survey {
+.panel-potenot-basis, .panel-potenot-result {
     display: flex;
     flex-direction: column;
 }
 
-table > caption {
-    text-align: center;
-} */
-
-.back-task.panel-base, .back-task.panel-target, .back-task.panel-result, .back-task.panel-back-task {
+.panel-potenot, .panel-potenot-basis, .panel-potenot-result {
     /* background-color: var(--container-bg-color); */
     border: 2px outset #bab6b7;
     margin: 2px;
     /* color: var(--text-color); */
 }
 
-.back-task.panel-base, .back-task.panel-target, .back-task.panel-result {
+.panel-potenot, .panel-potenot-basis, .panel-potenot-result {
     flex: 1 1 auto;
-}
-
-table caption{
-    font-size: 1.5em;
-    text-align: center;
-
-}
-
-.panel-title {
-    font-size: 1.2em;
-    text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
 }
 
 .frame {
     display: flex;
     flex-direction: column;
-    margin: 5px;
+    margin: 2px;
     padding: 2px;
     display: flex;
     flex-direction: column;
@@ -146,39 +129,12 @@ table caption{
     padding: 5px;
 }
 
-/* .panel-stations, .panel-measurements, .panel-basis {
-    display: flex;
-    flex-direction: column;
-} */
-
-/* .scrollpanel-stations {
-    height: 20vh;
-    flex: 1 1 auto;
-    overflow: auto;
+.panel-title {
+    font-size: 1.2em;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
-
-ul.list-stations {
-    list-style: none;
-}
-
-ul.list-stations a {
-    display: block;
-    width: auto;
-    padding: 5px;
-    text-decoration: none;
-}
-
-.scrollpanel-measurements {
-
-    height: auto;
-    flex: 1 1 auto;
-    overflow: auto;
-}
-
-.picket {
-    width: 8em;
-} */
-
 .menu-item:hover {
     background-color: black;
     color: white;
@@ -210,59 +166,6 @@ ul.list-stations a {
     height: 20px;
     width: 20px;
 }
-
-/* .button.new {
-    background-image: url(/images/new.png);
-}
-
-.button.open {
-    background-image: url(/images/open.png);
-}
-
-.button.import {
-    background-image: url(/images/import.png);
-}
-
-.button.save {
-    background-image: url(/images/save.png);
-}
-
-.button.run {
-    background-image: url(/images/run.png);
-}
-
-.button.catalog {
-    background-image: url(/images/database.png);
-}
-
-.button.delete {
-    background-image: url(/images/delete_row.png);
-}
-
-.button.insert-before {
-    background-image: url(/images/insert_row.png);
-}
-
-.button.insert-after {
-    background-image: url(/images/insert_row_after.png);
-}
-
-.button.change-distance {
-    background-image: url(/images/change_distance.png);
-}
-
-.button.change-direction {
-    background-image: url(/images/change_direction.png);
-}
-
-.button.change-tilt {
-    background-image: url(/images/change_tilt.png);
-}
-
-.panel-basis {
-    display: flex;
-    flex-direction: column;
-} */
 
 .nav, .sidebar {
     flex: 1;
@@ -307,7 +210,7 @@ ul.list-stations a {
         flex: 1 1 80%;
     }
 
-.panel-back-task {
+.panel-potenot {
     flex-direction: row;
     height: 100%;
 }

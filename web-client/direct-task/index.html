@@ -34,81 +34,66 @@
 
         <div class="panel-direct-basis">
 
-          <table class="table-direct-base">
-            <caption>Координаты базы</caption>
-            <tbody>
-              <tr>
-                <td>X = </td>
-                <td><input type="text" class="menu-item" name="direct-baseX" value="2333444.555"/></td>
-              </tr>
-              <tr>
-                <td>Y = </td>
-                <td><input type="text" class="menu-item" name="direct-baseY" value="2333444.555"/></td>
-              </tr>
-              <tr>
-                <td>Z = </td>
-                <td><input type="text" class="menu-item" name="direct-baseZ" value="2333444.555"/></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="panel-title">Параметры базиса</div>
 
-          <table class="table-direct-landmark">
-            <caption>Координаты ориентира</caption>
-            <tbody>
-              <tr>
-                <td>X = </td>
-                <td><input type="text" class="menu-item" name="direct-landmakrX" value="2333444.555"/></td>
-              </tr>
-              <tr>
-                <td>Y = </td>
-                <td><input type="text" class="menu-item" name="direct-landmakrY" value="2333444.555"/></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="frame">
+            <div class="frame-label">Координаты базы</div>
+            <div class="frame-value"><span>X: </span><input type="text" class="menu-item" name="direct-baseX" value="2333444.555"/></div>
+            <div class="frame-value"><span>Y: </span><input type="text" class="menu-item" name="direct-baseY" value="2333444.555"/></div>
+            <div class="frame-value"><span>Z: </span><input type="text" class="menu-item" name="direct-baseZ" value="2333444.555"/></div>
+          </div>
 
+          <div class="frame">
+            <div class="frame-label">Координаты ориентира</div>
+            <div class="frame-value"><span>X: </span><input type="text" class="menu-item" name="direct-landmakrX" value="2333444.555"/></div>
+            <div class="frame-value"><span>Y: </span><input type="text" class="menu-item" name="direct-landmakrY" value="2333444.555"/></div>
+          </div>
 
         </div>
 
         <div class="panel-direct-measurement">
 
-          <div class="frame-input">
-            <div class="direct-label">Направление на ориентир</div>
-            <div class="direct-value"><input type="text" class="menu-item" name="direct-landmark-direction" value="359.5959"/></div>
+          <div class="panel-title">Измерения</div>
+
+          <div class="frame">
+            <div class="frame-label">Направление на ориентир</div>
+            <div class="frame-value"><input type="text" class="menu-item" name="direct-landmark-direction" value="359.5959"/></div>
           </div>
 
-          <div class="frame-input">
-            <div class="direct-label">Высота инструмента над точкой</div>
-            <div class="direct-value"><input type="text" class="menu-item" name="direct-base-height" value="99.555"/></div>
+          <div class="frame">
+            <div class="frame-label">Высота инструмента над точкой</div>
+            <div class="frame-value"><input type="text" class="menu-item" name="direct-base-height" value="99.555"/></div>
           </div>
 
-          <div class="frame-input">
-            <div class="direct-label">Направление на цель</div>
-            <div class="direct-value"><input type="text" class="menu-item" name="direct-target-direction" value="359.5959"/></div>
+          <div class="frame">
+            <div class="frame-label">Направление на цель</div>
+            <div class="frame-value"><input type="text" class="menu-item" name="direct-target-direction" value="359.5959"/></div>
           </div>
 
-          <div class="frame-input">
-            <div class="direct-label">Наклонное расстояние до цели</div>
-            <div class="direct-value"><input type="text" class="menu-item" name="direct-target-distance" value="99.555"/></div>
+          <div class="frame">
+            <div class="frame-label">Наклонное расстояние до цели</div>
+            <div class="frame-value"><input type="text" class="menu-item" name="direct-target-distance" value="99.555"/></div>
           </div>
 
-          <div class="frame-input">
-            <div class="direct-label">Угол наклона</div>
-            <div class="direct-value"><input type="text" class="menu-item" name="direct-target-tilt" value="-9.5959"/></div>
+          <div class="frame">
+            <div class="frame-label">Угол наклона</div>
+            <div class="frame-value"><input type="text" class="menu-item" name="direct-target-tilt" value="-9.5959"/></div>
           </div>
 
-          <div class="frame-input">
-            <div class="direct-label">Высота цели над определяемой точкой</div>
-            <div><input type="text" class="menu-item" name="direct-target-height" value="99.555"/></div>
+          <div class="frame">
+            <div class="frame-label">Высота цели над определяемой точкой</div>
+            <div class="frame-value"><input type="text" class="menu-item" name="direct-target-height" value="99.555"/></div>
           </div>
 
         </div>
 
         <div class="panel-direct-result">
-          <div class="frame-input">
-            <div class="direct-label">Координаты цели</div>
-            <div class="direct-value">X: 2000000.000</div>
-            <div class="direct-value">Y: 2000000.000</div>
-            <div class="direct-value">Z: 2000.000</div>
+          <div class="panel-title">Результаты обработки</div>
+          <div class="frame">
+            <div class="frame-label">Координаты цели</div>
+            <div class="frame-value">X: 2000000.000</div>
+            <div class="frame-value">Y: 2000000.000</div>
+            <div class="frame-value">Z: 2000.000</div>
           </div>
 
         </div>
