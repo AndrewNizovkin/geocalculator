@@ -7,7 +7,7 @@
   <meta name="keywords" content="топография, геодезия, тахеометрия, тахеометр, теодолитный ход">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="./styles/back-task.css" rel="stylesheet" type="text/css">
+  <link href="./styles/inverse.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -25,17 +25,18 @@
     <div class="nav">Navigation</div>
     <div class="content">
 
-      <div class="back-task toolbar">
+      <div class="toolbar">
         <div class="button clear" title="Очистить"></div>
         <div class="button run" title="Решить задачу"></div>
       </div>
 
-      <div class="back-task panel-back-task">
+      <div class="panel-inverse">
 
-        <div class="back-task panel-base">
+        <div class="panel-inverse-base">
+
+          <div class="panel-title">Координаты базы</div>
 
           <div class="frame">
-            <div class="frame-label">Координаты базы</div>
             <div class="frame-value"><span>X: </span><input type="text" class="menu-item" name="baseX" value="2333444.555"/></div>
             <div class="frame-value"><span>Y: </span><input type="text" class="menu-item" name="baseY" value="2333444.555"/></div>
             <div class="frame-value"><span>Z: </span><input type="text" class="menu-item" name="baseZ" value="2333.555"/></div>
@@ -43,10 +44,11 @@
 
         </div>
 
-        <div class="back-task panel-target">
+        <div class="panel-inverse-target">
+
+          <div class="panel-title">Координаты цели</div>
 
           <div class="frame">
-            <div class="frame-label">Координаты цели</div>
             <div class="frame-value"><span>X: </span><input type="text" class="menu-item" name="targetX" value="2333444.555"/></div>
             <div class="frame-value"><span>Y: </span><input type="text" class="menu-item" name="targetY" value="2333444.555"/></div>
             <div class="frame-value"><span>Z: </span><input type="text" class="menu-item" name="targetZ" value="2333.555"/></div>            
@@ -54,7 +56,7 @@
 
         </div>
 
-        <div class="back-task panel-result">
+        <div class="panel-inverse-result">
 
           <div class="panel-title">Результаты обработки</div>
 
