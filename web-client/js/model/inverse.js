@@ -1,13 +1,17 @@
-export let inverse = {
-    baseX: "0.000",
-    baseY: "0.000",
-    baseZ: "0.000",
-    targetX: "0.000",
-    targetY: "0.000",
-    targetZ: "0.000",
-    direction: "",
-    horDistance: "",
-    inclinedDistance: "",
-    tiltAngle: "",
-    elevation: "",
-};
+export class Inverse {
+
+    constructor() {
+
+        this.baseX = "0.000";
+        this.baseY = "0.000";
+        this.baseZ = "0.000";
+        this.targetX = "0.000";
+        this.targetY = "0.000";
+        this.targetZ = "0.000";
+        this.direction = "";
+        this.horDistance = "";
+        this.inclinedDistance = "";
+        this.tiltAngle = "";
+        this.elevation = ""       
+    }
+}
