@@ -1,11 +1,14 @@
+// import sdfs from '../../js/service/mapper/UnitsConverter.js'
+
 /**
- * Tests meterToMillimeter from value-mapper
+ * Tests meterToMillimeter from UnitsConverter
  */
 describe("meterToMillimeter", function() {
 
+ 
     it("Converts '100.123' to 100123", function() {
-        // assert.equal(meterToMillimeter("100.123"), 100123)
-        assert.strictEqual(meterToMillimeter("100.123"), 100123)
+        const rezult = meterToMillimeter('100.123');
+        assert.strictEqual(rezult, 100123);
     });
 
     it("Converts '0.000' to 0", function() {

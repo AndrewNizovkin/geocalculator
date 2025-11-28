@@ -1,4 +1,4 @@
-import {Inverse} from '../model/inverse.js';
+import {Inverse} from '../model/Inverse.js';
 
 /***
  * 
