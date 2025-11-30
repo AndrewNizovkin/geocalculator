@@ -17,11 +17,11 @@ export class InverseService {
         return this.inverse.baseY;
     }
 
-    setBaseX(value) {
+    saveBaseX(value) {
         this.inverse.baseX = value;
     }
 
-    setBaseY(value) {
+    saveBaseY(value) {
         this.inverse.baseY = value;
     }
 
