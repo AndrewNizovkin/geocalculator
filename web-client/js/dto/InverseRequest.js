@@ -1,5 +1,5 @@
 /**
- * This class represent data transfer entity for Invers Task
+ * This class represent data transfer entity for Inverse Task
  */
 export class InverseRequest {
 

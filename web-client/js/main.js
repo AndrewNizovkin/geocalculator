@@ -1,20 +1,27 @@
 import {InverseService} from './service/InverseService.js';
-// import { } from './service/mapper/UnitsConverter.js';
-// import (UnitsConverter) from ''
-
+// import {UnitsConverter } from './service/mapper/UnitsConverter.js';
+import { InverseMapper } from './service/mapper/InverseMapper.js';
+// export {UnitsConverter};
 // alert('Превет, создаю inverseService');
 
 let inverseService = new InverseService();
 
-getInverse();
+showInverse();
 
-setInverse('555')
+setInverse('222')
 
-getInverse();
+showInverse();
 
-inverseService.clearAll();
+// let inverseMapper = new InverseMapper();
 
-getInverse();
+let result = inverseService.solveInverseTask();
+
+alert(`rezult = ${ result }`);
+
+// alert(inverseService.solveInverseTask());
+// alert(inverseService.solveInverseTask());
+
+// showInverse();
 // inverseService.setBaseX(2000);
 // inverseService.setBaseY(3000);
 
@@ -29,7 +36,7 @@ getInverse();
 // alert(`1.0000d.mmss = ${UnitsConverter.dmsToSecond("1.0000")}sek`);
 // alert(`3600sek = ${UnitsConverter.secondToDms(3600)}d.mmss`);
 
-function getInverse() {
+function showInverse() {
     alert(`baseX: ${inverseService.getBaseX()} \n
     baseY: ${inverseService.getBaseY()} \n
     baseZ: ${inverseService.getBaseZ()} \n

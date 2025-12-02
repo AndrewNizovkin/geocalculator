@@ -1,5 +1,6 @@
 import {Inverse} from '../model/Inverse.js';
 import { InverseMapper } from './mapper/InverseMapper.js';
+import { InverseProvider } from './provider/InverseProvider.js';
 /***
  * This class provides methods for working with the inverse task.
  */
@@ -11,6 +12,16 @@ export class InverseService {
     constructor() {
         this.inverse = new Inverse();
         this.inverseMapper = new InverseMapper();
+        this.inverseProvider = new InverseProvider();
+    }
+
+
+    /**
+     * Solves inverse geodetic task
+     * 
+    //  */
+    solveInverseTask() {
+        return this.inverseProvider.getInverseResponse(this.inverseMapper.inverseToRequest(this.inverse));
     }
 
     /**
