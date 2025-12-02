@@ -1,5 +1,5 @@
 import {Inverse} from '../model/Inverse.js';
-
+import { InverseMapper } from './mapper/InverseMapper.js';
 /***
  * This class provides methods for working with the inverse task.
  */
@@ -10,6 +10,7 @@ export class InverseService {
      */
     constructor() {
         this.inverse = new Inverse();
+        this.inverseMapper = new InverseMapper();
     }
 
     /**

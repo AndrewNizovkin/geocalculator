@@ -8,10 +8,13 @@ let inverseService = new InverseService();
 
 getInverse();
 
-inverseService.saveDirection('234.4545');
+setInverse('555')
 
 getInverse();
 
+inverseService.clearAll();
+
+getInverse();
 // inverseService.setBaseX(2000);
 // inverseService.setBaseY(3000);
 
@@ -39,5 +42,18 @@ function getInverse() {
     tiltAngle: ${inverseService.getTiltAngle()} \n
     elevation: ${inverseService.getElevation()}
     `);
+}
 
+function setInverse(value) {
+    inverseService.saveBaseX(`${value}.000`);
+    inverseService.saveBaseY(`${value}.000`);
+    inverseService.saveBaseZ(`${value}.000`);
+    inverseService.saveTargetX(`${value}.000`);
+    inverseService.saveTargetY(`${value}.000`);
+    inverseService.saveTargetZ(`${value}.000`);
+    inverseService.saveDirection(`${value}.0000`);
+    inverseService.saveHorDistance(`${value}.000`);
+    inverseService.saveInclinedDistance(`${value}.000`);
+    inverseService.saveTiltAngle(`-${value}.0000`);
+    inverseService.saveElevation(`${value}.000`);
 }
