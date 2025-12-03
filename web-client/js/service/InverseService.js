@@ -21,7 +21,19 @@ export class InverseService {
      * 
     //  */
     solveInverseTask() {
-        return this.inverseProvider.getInverseResponse(this.inverseMapper.inverseToRequest(this.inverse));
+
+        let jsonRequest = this.inverseMapper.inverseToRequest(this.inverse);
+
+        let jsonResponse = this.inverseProvider.getInverseResponse(jsonRequest);
+
+        let inverseResponse = this.inverseMapper.responseToInverseResponse(jsonResponse);
+
+        this.inverse.direction = inverseResponse?.direction;
+        this.inverse.horDistance = inverseResponse?.horDistance;
+        this.inverse.inclinedDistance = inverseResponse?.inclinedDistance;
+        this.inverse.tiltAngle = inverseResponse?.tiltAngle;
+        this.inverse.elevation = inverseResponse?.elevation;
+
     }
 
     /**

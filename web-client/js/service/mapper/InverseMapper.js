@@ -21,7 +21,26 @@ export class InverseMapper {
         inverseRequest.targetY = UnitsConverter.meterToMillimeter(inverse?.targetY);
         inverseRequest.targetZ = UnitsConverter.meterToMillimeter(inverse?.targetZ);
 
-        return inverseRequest;
+        return JSON.stringify(inverseRequest);
+    }
+
+    /**
+     * Converts body of json response from  backend to instance of InverseResponse
+     * @param {string} jsonResponse json response from backend
+     * @returns 
+     */
+    responseToInverseResponse(jsonResponse) {
+        let inverseResponse = new InverseResponse();
+
+        let response = JSON.parse(jsonResponse);
+
+        inverseResponse.direction = UnitsConverter.secondToDms(response?.direction);
+        inverseResponse.horDistance = UnitsConverter.millimeterToMeter(response?.horDistance);
+        inverseResponse.inclinedDistance = UnitsConverter.millimeterToMeter(response?.inclinedDistance);
+        inverseResponse.tiltAngle = UnitsConverter.secondToDms(response?.tiltAngle);
+        inverseResponse.elevation = UnitsConverter.millimeterToMeter(response?.elevation);
+
+        return inverseResponse;
     }
 
 }

@@ -1,40 +1,47 @@
 import {InverseService} from './service/InverseService.js';
+import { DirectService } from './service/DirectService.js';
 // import {UnitsConverter } from './service/mapper/UnitsConverter.js';
-import { InverseMapper } from './service/mapper/InverseMapper.js';
+// import { InverseMapper } from './service/mapper/InverseMapper.js';
 // export {UnitsConverter};
 // alert('Превет, создаю inverseService');
 
 let inverseService = new InverseService();
+// testInverseService();
 
-showInverse();
+let directService = new DirectService();
 
-setInverse('222')
+testDirectService();
 
-showInverse();
+/**
+ * Tests directService
+ */
+function testDirectService() {
+    alert(directService.solveDirectTask());
 
-// let inverseMapper = new InverseMapper();
+}
 
-let result = inverseService.solveInverseTask();
+function showDirect() {
+    alert(`
+        
+        `);
+}
 
-alert(`rezult = ${ result }`);
 
-// alert(inverseService.solveInverseTask());
-// alert(inverseService.solveInverseTask());
+/**
+ * Tests inverseService
+ */
+function testInverseService() {
+    showInverse();
 
-// showInverse();
-// inverseService.setBaseX(2000);
-// inverseService.setBaseY(3000);
+    setInverse('222')
 
-// alert(`baseX: ${inverseService.getBaseX()} \nbaseY: ${inverseService.getBaseY()}`);
+    showInverse();
 
-// let unitsConverter = new UnitsConverter();
+    inverseService.solveInverseTask();
 
-// alert(`1000.999м. = ${unitsConverter.meterToMillimeter('1000.999')}`);
+    showInverse();
 
-// alert(`100.99m. = ${UnitsConverter.meterToMillimeter("100.99")}mm.`);
-// alert(`222333mm = ${UnitsConverter.millimeterToMeter(222333)}m.`);
-// alert(`1.0000d.mmss = ${UnitsConverter.dmsToSecond("1.0000")}sek`);
-// alert(`3600sek = ${UnitsConverter.secondToDms(3600)}d.mmss`);
+}
 
 function showInverse() {
     alert(`baseX: ${inverseService.getBaseX()} \n
@@ -58,9 +65,9 @@ function setInverse(value) {
     inverseService.saveTargetX(`${value}.000`);
     inverseService.saveTargetY(`${value}.000`);
     inverseService.saveTargetZ(`${value}.000`);
-    inverseService.saveDirection(`${value}.0000`);
-    inverseService.saveHorDistance(`${value}.000`);
-    inverseService.saveInclinedDistance(`${value}.000`);
-    inverseService.saveTiltAngle(`-${value}.0000`);
-    inverseService.saveElevation(`${value}.000`);
+    // inverseService.saveDirection(`${value}.0000`);
+    // inverseService.saveHorDistance(`${value}.000`);
+    // inverseService.saveInclinedDistance(`${value}.000`);
+    // inverseService.saveTiltAngle(`-${value}.0000`);
+    // inverseService.saveElevation(`${value}.000`);
 }
