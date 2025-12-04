@@ -10,6 +10,7 @@ export class InverseMapper {
 
     /**
      * Creates body of Post-request to backend with data fo solve inverse task
+     * @param {Inverse} inverse instance of Inverse
      */
     inverseToRequest(inverse) {
         let inverseRequest = new InverseRequest();

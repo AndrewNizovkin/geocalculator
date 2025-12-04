@@ -1,4 +1,5 @@
 import { Direct } from "../../js/model/Direct.js";
+import { DirectMapper } from './mapper/DirectMapper.js';
 
 /**
  * This class provides methods for working with the direct task model.
@@ -10,6 +11,7 @@ export class DirectService {
      */
     constructor() {
         this.direct = new Direct();
+        this.directMapper = new DirectMapper();
     }
 
     /**
@@ -18,7 +20,7 @@ export class DirectService {
      */
     solveDirectTask() {
 
-        return "Hello, I am DirectService";
+        return this.directMapper.directToRequest(this.direct);
     }
 
     /**
@@ -218,13 +220,10 @@ export class DirectService {
         return this.direct.targetDirection;
     }
 
-    /**
-     * 
-     * @returns {string} inclined distance from base to target in meters
-     */
-    getTargetInclindeDistance() {
+    getTargetInclinedDistance() {
         return this.direct.targetInclinedDistance;
     }
+
 
     /**
      * 
