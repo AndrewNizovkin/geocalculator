@@ -1,21 +1,11 @@
 import {InverseService} from './service/InverseService.js';
 import {DirectService} from './service/DirectService.js';
-// import { Direct } from './model/Direct.js';
-// import {UnitsConverter } from './service/mapper/UnitsConverter.js';
-// import { InverseMapper } from './service/mapper/InverseMapper.js';
-// export {UnitsConverter};
-// alert('Превет, создаю inverseService');
 
 let inverseService = new InverseService();
-// testInverseService();
+
+testInverseService();
 
 let directService = new DirectService();
-
-// alert(`targetX: ${directService.getTargetX()} \n
-// targetY: ${directService.getTargetY()} \n
-// targetZ: ${directService.getTargetZ()}
-// `);
-
 
 testDirectService();
 
@@ -27,17 +17,21 @@ testDirectService();
  */
 function testDirectService() {
 
-    showDirect("начальные значения");
+    showDirect("начальные значения direct");
         
     setDemoDirect();
 
-    showDirect("устанавливаем значения");
+    showDirect("устанавливаем демо значения direct");
 
-    let result = directService.solveDirectTask();
+    directService.solveDirectTask();
 
-    let currentContent = document.getElementsByClassName('content');
+    showDirect("Решаем прямую геодезическую задачу");
 
-    currentContent[0].innerHTML = currentContent[0].innerHTML + `<br>---directMapper.directToDirectRequest---<br>${result}`;
+    directService.clearAll();
+
+    showDirect("Очищаем модель");
+
+
 
     }
 
@@ -64,7 +58,7 @@ function showDirect(message) {
     
     let content = document.getElementsByClassName('content');
 
-    let page = `<br>${message}<br>----------<br>` + `
+    let page = `<br><br>------------------<br>${message}<br>------------------<br>` + `
     landmarkX: ${directService.getLandmarkX()} <br>
     landmarkY: ${directService.getLandmarkY()} <br>
     landmarkDirection: ${directService.getLandmarkDirection()} <br>
@@ -91,31 +85,42 @@ function showDirect(message) {
  * Tests inverseService
  */
 function testInverseService() {
-    showInverse();
+    showInverse("Начальное значение модели inverse");
 
     setInverse('222')
 
-    showInverse();
+    showInverse("Устанавиваем демо значения модели");
 
     inverseService.solveInverseTask();
 
-    showInverse();
+    showInverse("Решаем обратную задачу");
+
+    inverseService.clearAll();
+
+    showInverse("Очищаем inverse");
 
 }
 
-function showInverse() {
-    alert(`baseX: ${inverseService.getBaseX()} \n
-    baseY: ${inverseService.getBaseY()} \n
-    baseZ: ${inverseService.getBaseZ()} \n
-    targetX: ${inverseService.getTargetX()} \n
-    targetY: ${inverseService.getTargetY()} \n
-    targetZ: ${inverseService.getTargetZ()} \n
-    direction: ${inverseService.getDirection()} \n
-    horDistance: ${inverseService.getHorDistance()} \n
-    inclinedDistande: ${inverseService.getInclinedDistance()} \n
-    tiltAngle: ${inverseService.getTiltAngle()} \n
-    elevation: ${inverseService.getElevation()}
-    `);
+function showInverse(message) {
+
+    let content = document.getElementsByClassName('content');
+
+    let page = `<br><br>------------------<br>${message}<br>------------------<br>` + `
+    baseX: ${inverseService.getBaseX()} <br>
+    baseY: ${inverseService.getBaseY()} <br>
+    baseZ: ${inverseService.getBaseZ()} <br>
+    targetX: ${inverseService.getTargetX()} <br>
+    targetY: ${inverseService.getTargetY()} <br>
+    targetZ: ${inverseService.getTargetZ()} <br>
+    direction: ${inverseService.getDirection()} <br>
+    horDistance: ${inverseService.getHorDistance()} <br>
+    inclinedDistande: ${inverseService.getInclinedDistance()} <br>
+    tiltAngle: ${inverseService.getTiltAngle()} <br>
+    elevation: ${inverseService.getElevation()} <br>
+    `;
+
+    content[0].innerHTML = content[0].innerHTML + page;
+
 }
 
 function setInverse(value) {

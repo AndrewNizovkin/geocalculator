@@ -32,9 +32,24 @@ export class DirectMapper {
         directRequest.targetHeight = UnitsConverter.meterToMillimeter(direct?.targetHeight);
 
         return JSON.stringify(directRequest);
-
     }
 
-    
+    /**
+     * Converts body of json response from  backend to instance of DirectResponse
+     * @param {string} jsonResponse 
+     * @returns {DirectRequest} Contains a solution to the direct geodetic task
+     */
+    responseToDirectResponse(jsonResponse) {
+
+        let directResponse = new DirectResponse();
+
+        let response = JSON.parse(jsonResponse);
+
+        directResponse.targetX = UnitsConverter.millimeterToMeter(response?.targetX);
+        directResponse.targetY = UnitsConverter.millimeterToMeter(response?.targetY);
+        directResponse.targetZ = UnitsConverter.millimeterToMeter(response?.targetZ);
+
+        return directResponse;
+    }
 
 }

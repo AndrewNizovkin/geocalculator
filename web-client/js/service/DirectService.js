@@ -1,5 +1,6 @@
 import { Direct } from "../../js/model/Direct.js";
 import { DirectMapper } from './mapper/DirectMapper.js';
+import { DirectProvider } from './provider/DirectProvider.js';
 
 /**
  * This class provides methods for working with the direct task model.
@@ -12,15 +13,23 @@ export class DirectService {
     constructor() {
         this.direct = new Direct();
         this.directMapper = new DirectMapper();
+        this.directProvider = new DirectProvider();
     }
 
     /**
      * Solves direct geodetic task
-     * @returns {Any} test mode
      */
     solveDirectTask() {
 
-        return this.directMapper.directToRequest(this.direct);
+        let jsonRequest = this.directMapper.directToRequest(this.direct);
+
+        let jsonResponse = this.directProvider.getDirectResponse(jsonRequest);
+
+        let directResponse = this.directMapper.responseToDirectResponse(jsonResponse);
+
+        this.direct.targetX = directResponse?.targetX;
+        this.direct.targetY = directResponse?.targetY;
+        this.direct.targetZ = directResponse?.targetZ;
     }
 
     /**

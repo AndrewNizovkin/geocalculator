@@ -28,7 +28,7 @@ export class InverseMapper {
     /**
      * Converts body of json response from  backend to instance of InverseResponse
      * @param {string} jsonResponse json response from backend
-     * @returns 
+     * @returns {InverseResponse}
      */
     responseToInverseResponse(jsonResponse) {
         let inverseResponse = new InverseResponse();
