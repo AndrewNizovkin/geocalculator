@@ -1,5 +1,6 @@
 import {InverseService} from './service/InverseService.js';
 import {DirectService} from './service/DirectService.js';
+import { PotenotService } from './service/PotenotService.js';
 
 let inverseService = new InverseService();
 
@@ -8,6 +9,60 @@ testInverseService();
 let directService = new DirectService();
 
 testDirectService();
+
+let potenotService = new PotenotService();
+
+testPotenotService();
+
+/**
+ * Tests PotenotService
+ */
+function testPotenotService() {
+
+    showPotenot("Начальное значение модели 'potenot'")
+
+    setDemoPotenot();
+
+    showPotenot("Устанавливаем демо значения 'potenot'")
+}
+
+function showPotenot(message) {
+
+    let content = document.getElementsByClassName('content');
+
+    let page = `<br><br>------------------<br>${message}<br>------------------<br>` + `
+    firstX: ${potenotService.getFirstX()}<br>
+    firstY: ${potenotService.getFirstY()}<br>
+    firstDirection: ${potenotService.getFirstDirection()}<br>
+    secondX: ${potenotService.getSecondX()}<br>
+    secondY: ${potenotService.getSecondY()}<br>
+    secondDirection: ${potenotService.getSecondDirection()}<br>
+    thirdX: ${potenotService.getThirdX()}<br>
+    thirdY: ${potenotService.getThirdY()}<br>
+    thirdDirection: ${potenotService.getThirdDirection()}<br>
+    baseX: ${potenotService.getBaseX()}<br>
+    baseY: ${potenotService.getBaseY()}<br>
+    `;
+    // page = page + content[0].innerHTML;
+
+    content[0].innerHTML = content[0].innerHTML + page;    
+}
+
+function setDemoPotenot() {
+    potenotService.saveFirstX('100000.100');
+    potenotService.saveFirstY('100000.200');
+    potenotService.saveFirstDirection('89.0001');
+    potenotService.saveSecondX('200000.100');
+    potenotService.saveSecondY('200000.200');
+    potenotService.saveSecondDirection('220.2021');
+    potenotService.saveThirdX('300000.100');
+    potenotService.saveThirdY('300000.200');
+    potenotService.saveThirdDirection('359.5959');
+    potenotService.saveBaseX('0.001');
+    potenotService.saveBaseY('0.002');
+
+}
+
 
 
 

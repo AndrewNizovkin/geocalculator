@@ -28,7 +28,7 @@ export class InverseMapper {
     /**
      * Converts body of json response from  backend to instance of InverseResponse
      * @param {string} jsonResponse json response from backend
-     * @returns {InverseResponse}
+     * @returns {InverseResponse}  Contains a solution to the inverse geodetic task
      */
     responseToInverseResponse(jsonResponse) {
         let inverseResponse = new InverseResponse();
