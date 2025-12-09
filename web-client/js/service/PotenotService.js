@@ -1,4 +1,8 @@
 import { Potenot } from '../model/Potenot.js';
+import { PotenotMapper } from './mapper/PotenotMapper.js';
+import { UnitsConverter } from './mapper/UnitsConverter.js';
+import { PotenotProvider } from './provider/PotenotProvider.js';
+
 /**
  * This class provides methods for working with the potenot task model.
  */
@@ -9,6 +13,8 @@ export class PotenotService {
      */
     constructor() {
         this.potenot = new Potenot();
+        this.potenotMapper = new PotenotMapper();
+        this.potenotProvider = new PotenotProvider();
 
     }
 
@@ -33,12 +39,17 @@ export class PotenotService {
 
     /**
      * Solves potenot task
-     * @returns {Any} test mode
      */
     solvePotenotTask() {
 
-        return "Hello! I am potenotService :)";
-        
+        let jsonRequest = this.potenotMapper.potenotToPotenotRequest(this.potenot);
+
+        let jsonResponse = this.potenotProvider.getPotenotResponse(jsonRequest);
+
+        let potenotResponse = this.potenotMapper.responseToPotenotResponse(jsonResponse);
+
+        this.potenot.baseX = UnitsConverter.millimeterToMeter(potenotResponse?.pointX);
+        this.potenot.baseY = UnitsConverter.millimeterToMeter(potenotResponse?.pointY);
     }
 
     /**

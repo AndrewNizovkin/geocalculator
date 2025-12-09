@@ -15,6 +15,7 @@ export class DirectMapper {
      * Creates body of Post-request to backend with data 
      * for solve direct task
      * @param {Direct} direct instance of Direct
+     * @returns {string} json of instance of DirectreRequest
      */
     directToRequest(direct) {
         let directRequest = new DirectRequest();
