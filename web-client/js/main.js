@@ -1,9 +1,5 @@
-let page = "Hello! I am main page!";
+import {MainController} from './controller/MainController.js';
 
-addToContent(page);
+let mainController = new MainController();
 
-
-function addToContent(page) {
-    let content = document.getElementsByClassName('content');
-    content[0].innerHTML += page;    
-}
+mainController.start();

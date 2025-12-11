@@ -1,30 +1,16 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <title>taheoport</title>
-  <meta charset="utf-8">
-  <meta name="author" content="taheoport.ru">
-  <meta name="keywords" content="топография, геодезия, тахеометрия, тахеометр, теодолитный ход">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="./styles/direct.css" rel="stylesheet" type="text/css">
+import {DirectService} from '../service/DirectService.js';
 
-</head>
-<body>
-  <div class="header">
-    <!-- <div>☰</div> -->
-    <ul class="menu">
-      <li><a href="#">Файл</a></li>
-      <li><a href="#">Инструменты</a></li>
-      <li><a href="#">Поддержка</a></li>
-      <li><a href="#">Контакты</a></li>
-      <li><a href="#" id="reg">Вход/Регистрация</a></li>
-    </ul>
-  </div>
-  <div class="main">
-    <div class="nav">Navigation</div>
-    <div class="content">
+/**
+ * 
+ */
+export class DirectController {
+    constructor() {
+        this.directService = new DirectService();
+    }
 
+    loadPageDirect() {
+        let content = document.getElementById("content");
+        content.innerHTML = `
       <div class="back-task toolbar">
         <div class="button clear" title="Очистить" id="direct-clear"></div>
         <div class="button run" title="Решить задачу" id="direct-run"></div>
@@ -99,14 +85,20 @@
         </div>
 
       </div>
+        
+        `;
 
+        let buttonClear = document.getElementById("direct-clear");
+        buttonClear.addEventListener('click', this.directService.clearAll());
 
+        let buttonRun = document.getElementById("direct-run");
+        buttonRun.addEventListener('click', this.directService.solveDirectTask());
 
-    </div>
+        let inputBaseX = document.getElementById("direct-base-x");
+        inputBaseX.value = this.directService.getBaseX();
 
-    <div class="sidebar">Sidebar</div>
-  </div>
-  
-  <div class="footer">Footer</div>
-</body>
-</html>
+        
+
+    }
+
+}
