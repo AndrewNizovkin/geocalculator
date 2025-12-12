@@ -52,10 +52,10 @@ export class MainController {
         menuItemDirectPage.addEventListener('click', this.directController.loadPageDirect.bind(this.directController));
 
         let menuItemInversePage = document.getElementById("inverse-page");
-        menuItemInversePage.addEventListener('click', this.inverseController.loadPageInverse);
+        menuItemInversePage.addEventListener('click', this.inverseController.loadPageInverse.bind(this.inverseController));
 
         let menuItemPotenotPage = document.getElementById("potenot-page");
-        menuItemPotenotPage.addEventListener('click', this.potenotController.loadPagePotenot);
+        menuItemPotenotPage.addEventListener('click', this.potenotController.loadPagePotenot.bind(this.potenotController));
 
         let menuItemSurveyPage = document.getElementById("survey-page");
         menuItemSurveyPage.addEventListener('click', this.surveyController.loadPageSurvey);
