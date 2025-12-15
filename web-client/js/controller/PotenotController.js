@@ -15,12 +15,12 @@ export class PotenotController {
         let content  = document.getElementById("content");
 
         content.innerHTML = `
-      <div class="toolbar">
+      <div class="toolbar" id="potenot-toolbar">
         <div class="button clear" id="potenot-clear" title="Очистить"></div>
         <div class="button run" id="potenot-run" title="Решить задачу"></div>
       </div>
 
-      <div class="panel-potenot">
+      <div class="panel-potenot" id="potenot-panel">
 
         <div class="panel-potenot-basis">
 
@@ -73,17 +73,66 @@ export class PotenotController {
 
         this.setResult();
 
-        let buttonClear = document.getElementById("potenot-clear");
-        buttonClear.addEventListener('click', () => {
-          this.potenotService.clearAll();
-          this.setData();
-          this.setResult();
+        document.addEventListener('click', (event) => {
+
+          switch(event.target.id) {
+
+            case "potenot-clear":
+              this.potenotService.clearAll();
+              this.setData();
+              this.setResult();              
+              break;
+
+            case "potenot-run":
+              this.potenotService.solvePotenotTask();
+              this.setResult();
+              break;
+          }
         });
 
-        let buttonRun = document.getElementById("potenot-run");
-        buttonRun.addEventListener('click', () => {
-          this.potenotService.solvePotenotTask();
-          this.setResult();
+        document.getElementById("potenot-panel").addEventListener('input', (event) => {
+          let element = event.target;
+
+          switch(element.id) {
+
+            case "potenot-first-x":
+              this.potenotService.saveFirstX(element.value);
+              break;
+
+            case "potenot-first-y":
+              this.potenotService.saveFirstY(element.value);
+              break;
+
+            case "potenot-first-direction":
+              this.potenotService.saveFirstDirection(element.value);
+              break;
+
+            case "potenot-second-x":
+              this.potenotService.saveSecondX(element.value);
+              break;
+
+            case "potenot-second-y":
+              this.potenotService.saveSecondY(element.value);
+              break;
+
+            case "potenot-second-direction":
+              this.potenotService.saveSecondDirection(element.value);
+              break;
+
+            case "potenot-third-x":
+              this.potenotService.saveThirdX(element.value);
+              break;
+
+            case "potenot-third-y":
+              this.potenotService.saveThirdY(element.value);
+              break;
+
+            case "potenot-third-direction":
+              this.potenotService.saveThirdDirection(element.value);
+              break;
+
+
+          }
         });
 
     }

@@ -8,15 +8,18 @@ export class DirectController {
         this.directService = new DirectService();
     }
 
+    /**
+     * Loads direct page to content of main page
+     */
     loadPageDirect() {
         let content = document.getElementById("content");
         content.innerHTML = `
-      <div class="back-task toolbar">
+      <div class="toolbar" id="direct-toolbar">
         <div class="button clear" title="Очистить" id="direct-clear"></div>
         <div class="button run" title="Решить задачу" id="direct-run"></div>
       </div>
 
-      <div class="panel-direct">
+      <div class="panel-direct" id="direct-panel">
 
         <div class="panel-direct-basis">
 
@@ -85,6 +88,7 @@ export class DirectController {
         </div>
 
       </div>
+
         
         `;
 
@@ -92,19 +96,73 @@ export class DirectController {
 
         this.setResult();
 
-        let buttonClear = document.getElementById("direct-clear");
-        buttonClear.addEventListener('click', () => {
-          this.directService.clearAll();
-          this.setData();
-          this.setResult();
+        document.getElementById("direct-toolbar").addEventListener('click', (event) => {
+
+          switch(event.target.id) {
+
+            case "direct-clear":
+              this.directService.clearAll();
+              this.setData();
+              this.setResult();              
+              break;
+
+            case "direct-run":
+              this.directService.solveDirectTask();
+              this.setResult();
+              break;
+          }
         });
 
-        let buttonRun = document.getElementById("direct-run");
-        buttonRun.addEventListener('click', () => {
-          this.directService.solveDirectTask();
-          this.setResult();
-        });
+        document.getElementById("direct-panel").addEventListener('input', (event) => {
+          let element = event.target;
 
+          switch(element.id) {
+
+            case "direct-base-x":
+              this.directService.saveBaseX(element.value);
+              break;
+
+            case "direct-base-y":
+              this.directService.saveBaseY(element.value);
+              break;
+
+            case "direct-base-z":
+              this.directService.saveBaseZ(element.value);
+              break;
+
+            case "direct-landmark-x":
+              this.directService.saveLandmarkX(element.value);
+              break;
+
+            case "direct-landmark-y":
+              this.directService.saveLandmarkY(element.value);
+              break;
+
+            case "direct-landmark-direction":
+              this.directService.saveLandmarkDirection(element.value);
+              break;
+
+            case "direct-base-height":
+              this.directService.saveBaseHeight(element.value);
+              break;
+
+            case "direct-target-direction":
+              this.directService.saveTargetDirection(element.value);
+              break;
+
+            case "direct-target-distance":
+              this.directService.saveTargetInclindeDistance(element.value);
+              break;
+
+            case "direct-target-tilt":
+              this.directService.saveTargetTiltAngle(element.value);
+              break;
+
+            case "direct-target-height":
+              this.directService.saveTargetHeight(element.value);
+              break;
+          }
+        });
         
     }
 

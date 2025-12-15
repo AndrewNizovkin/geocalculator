@@ -30,7 +30,7 @@ export class MainController {
     </ul>
   </div>
   <div class="main">
-    <div class="nav">
+    <div class="nav"  id="nav-menu">
       <div class="menu-item" id="main-page">Главная</div>
       <div class="menu-item" id="direct-page">Прямая задача</div>
       <div class="menu-item" id="inverse-page">Обратная задача</div>
@@ -45,20 +45,32 @@ export class MainController {
 
         `;
 
-        let menuItemMainPage = document.getElementById("main-page");
-        menuItemMainPage.addEventListener('click', this.loadMainPage);
+        document.getElementById("nav-menu").addEventListener('click', (event) => {
 
-        let menuItemDirectPage = document.getElementById("direct-page");
-        menuItemDirectPage.addEventListener('click', this.directController.loadPageDirect.bind(this.directController));
+          switch(event.target.id) {
 
-        let menuItemInversePage = document.getElementById("inverse-page");
-        menuItemInversePage.addEventListener('click', this.inverseController.loadPageInverse.bind(this.inverseController));
+            case "main-page":
+              this.loadMainPage();
+              break;
+            
+            case "direct-page":
+              this.directController.loadPageDirect();
+              break;
 
-        let menuItemPotenotPage = document.getElementById("potenot-page");
-        menuItemPotenotPage.addEventListener('click', this.potenotController.loadPagePotenot.bind(this.potenotController));
+            case "inverse-page":
+              this.inverseController.loadPageInverse();
+              break;
 
-        let menuItemSurveyPage = document.getElementById("survey-page");
-        menuItemSurveyPage.addEventListener('click', this.surveyController.loadPageSurvey);
+            case "potenot-page":
+              this.potenotController.loadPagePotenot();
+              break;
+
+            case "survey-page":
+              this.surveyController.loadPageSurvey();
+              break;
+          }
+
+        });
 
         this.loadMainPage();
 

@@ -9,19 +9,19 @@ export class InverseController {
     }
 
     /**
-     * Loaded page Inverse to panel content
+     * Loads page Inverse to panel content
      * sets listeners
      */
     loadPageInverse() {
         let content = document.getElementById("content");
 
         content.innerHTML = `
-      <div class="toolbar">
+      <div class="toolbar" id="inverse-toolbar">
         <div class="button clear" id="inverse-clear" title="Очистить"></div>
         <div class="button run" id="inverse-run" title="Решить задачу"></div>
       </div>
 
-      <div class="panel-inverse">
+      <div class="panel-inverse" id="inverse-panel">
 
         <div class="panel-inverse-base">
 
@@ -85,19 +85,54 @@ export class InverseController {
 
         this.setResult();
 
-        let buttonClear = document.getElementById("inverse-clear");
-        buttonClear.addEventListener('click', () => {
-          this.inverseService.clearAll();
-          this.setData();
-          this.setResult();
+        document.getElementById("inverse-toolbar").addEventListener('click', (event) => {
+
+          switch(event.target.id) {
+
+            case "inverse-clear":
+              this.inverseService.clearAll();
+              this.setData();
+              this.setResult();              
+              break;
+
+            case "inverse-run":
+              this.inverseService.solveInverseTask();
+              this.setResult();
+              break;
+          }
         });
 
-        let buttonRun = document.getElementById("inverse-run");
-        buttonRun.addEventListener('click', () => {
-          this.inverseService.solveInverseTask();
-          this.setResult();
-        });
+        document.getElementById("inverse-panel").addEventListener('input', (event) => {
+          let element = event.target;
 
+          switch(element.id) {
+
+            case "inverse-base-x":
+              this.inverseService.saveBaseX(element.value);
+              break;
+
+            case "inverse-base-y":
+              this.inverseService.saveBaseY(element.value);
+              break;
+
+            case "inverse-base-z":
+              this.inverseService.saveBaseZ(element.value);
+              break;
+
+            case "inverse-target-x":
+              this.inverseService.saveTargetX(element.value);
+              break;
+
+            case "inverse-target-y":
+              this.inverseService.saveTargetY(element.value);
+              break;
+
+            case "inverse-target-z":
+              this.inverseService.saveTargetZ(element.value);
+              break;
+
+          }
+        });
 
     }
 
