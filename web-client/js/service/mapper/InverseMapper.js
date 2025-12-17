@@ -22,7 +22,7 @@ export class InverseMapper {
         inverseRequest.targetY = UnitsConverter.meterToMillimeter(inverse?.targetY);
         inverseRequest.targetZ = UnitsConverter.meterToMillimeter(inverse?.targetZ);
 
-        return JSON.stringify(inverseRequest);
+        return inverseRequest;
     }
 
     /**
@@ -31,15 +31,23 @@ export class InverseMapper {
      * @returns {InverseResponse}  Contains a solution to the inverse geodetic task
      */
     responseToInverseResponse(jsonResponse) {
+
         let inverseResponse = new InverseResponse();
 
-        let response = JSON.parse(jsonResponse);
+        inverseResponse.direction = UnitsConverter.secondToDms(jsonResponse?.direction);
+        inverseResponse.horDistance = UnitsConverter.millimeterToMeter(jsonResponse?.horDistance);
+        inverseResponse.inclinedDistance = UnitsConverter.millimeterToMeter(jsonResponse?.inclinedDistance);
+        inverseResponse.tiltAngle = UnitsConverter.secondToDms(jsonResponse?.tiltAngle);
+        inverseResponse.elevation = UnitsConverter.millimeterToMeter(jsonResponse?.elevation);
 
-        inverseResponse.direction = UnitsConverter.secondToDms(response?.direction);
-        inverseResponse.horDistance = UnitsConverter.millimeterToMeter(response?.horDistance);
-        inverseResponse.inclinedDistance = UnitsConverter.millimeterToMeter(response?.inclinedDistance);
-        inverseResponse.tiltAngle = UnitsConverter.secondToDms(response?.tiltAngle);
-        inverseResponse.elevation = UnitsConverter.millimeterToMeter(response?.elevation);
+
+        // let response = JSON.parse(jsonResponse);
+
+        // inverseResponse.direction = UnitsConverter.secondToDms(response?.direction);
+        // inverseResponse.horDistance = UnitsConverter.millimeterToMeter(response?.horDistance);
+        // inverseResponse.inclinedDistance = UnitsConverter.millimeterToMeter(response?.inclinedDistance);
+        // inverseResponse.tiltAngle = UnitsConverter.secondToDms(response?.tiltAngle);
+        // inverseResponse.elevation = UnitsConverter.millimeterToMeter(response?.elevation);
 
         return inverseResponse;
     }

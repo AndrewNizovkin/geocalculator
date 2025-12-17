@@ -22,9 +22,9 @@ export class InverseService {
     //  */
     solveInverseTask() {
 
-        let jsonRequest = this.inverseMapper.inverseToRequest(this.inverse);
+        let inverseRequest = this.inverseMapper.inverseToRequest(this.inverse);
 
-        let jsonResponse = this.inverseProvider.getInverseResponse(jsonRequest);
+        let jsonResponse = this.inverseProvider.getInverseResponse(inverseRequest);
 
         let inverseResponse = this.inverseMapper.responseToInverseResponse(jsonResponse);
 
