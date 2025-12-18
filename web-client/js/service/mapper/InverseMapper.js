@@ -40,15 +40,6 @@ export class InverseMapper {
         inverseResponse.tiltAngle = UnitsConverter.secondToDms(jsonResponse?.tiltAngle);
         inverseResponse.elevation = UnitsConverter.millimeterToMeter(jsonResponse?.elevation);
 
-
-        // let response = JSON.parse(jsonResponse);
-
-        // inverseResponse.direction = UnitsConverter.secondToDms(response?.direction);
-        // inverseResponse.horDistance = UnitsConverter.millimeterToMeter(response?.horDistance);
-        // inverseResponse.inclinedDistance = UnitsConverter.millimeterToMeter(response?.inclinedDistance);
-        // inverseResponse.tiltAngle = UnitsConverter.secondToDms(response?.tiltAngle);
-        // inverseResponse.elevation = UnitsConverter.millimeterToMeter(response?.elevation);
-
         return inverseResponse;
     }
 

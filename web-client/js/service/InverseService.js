@@ -20,19 +20,20 @@ export class InverseService {
      * Solves inverse geodetic task
      * 
     //  */
-    solveInverseTask() {
+    async solveInverseTask() {
 
         let inverseRequest = this.inverseMapper.inverseToRequest(this.inverse);
 
-        let jsonResponse = this.inverseProvider.getInverseResponse(inverseRequest);
-
-        let inverseResponse = this.inverseMapper.responseToInverseResponse(jsonResponse);
+        await this.inverseProvider.getInverseResponse(inverseRequest).then(response => {
+            let inverseResponse = this.inverseMapper.responseToInverseResponse(response);
 
         this.inverse.direction = inverseResponse?.direction;
         this.inverse.horDistance = inverseResponse?.horDistance;
         this.inverse.inclinedDistance = inverseResponse?.inclinedDistance;
         this.inverse.tiltAngle = inverseResponse?.tiltAngle;
         this.inverse.elevation = inverseResponse?.elevation;
+
+        });
 
     }
 

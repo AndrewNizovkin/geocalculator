@@ -107,8 +107,7 @@ export class DirectController {
               break;
 
             case "direct-run":
-              this.directService.solveDirectTask();
-              this.setResult();
+              this.directService.solveDirectTask().then(() => this.setResult());
               break;
           }
         });

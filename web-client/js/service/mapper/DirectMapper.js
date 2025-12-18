@@ -32,7 +32,7 @@ export class DirectMapper {
         directRequest.targetTiltAngle = UnitsConverter.dmsToSecond(direct?.targetTiltAngle);
         directRequest.targetHeight = UnitsConverter.meterToMillimeter(direct?.targetHeight);
 
-        return JSON.stringify(directRequest);
+        return directRequest;
     }
 
     /**
@@ -44,11 +44,11 @@ export class DirectMapper {
 
         let directResponse = new DirectResponse();
 
-        let response = JSON.parse(jsonResponse);
+        // let response = JSON.parse(jsonResponse);
 
-        directResponse.targetX = UnitsConverter.millimeterToMeter(response?.targetX);
-        directResponse.targetY = UnitsConverter.millimeterToMeter(response?.targetY);
-        directResponse.targetZ = UnitsConverter.millimeterToMeter(response?.targetZ);
+        directResponse.targetX = UnitsConverter.millimeterToMeter(jsonResponse?.targetX);
+        directResponse.targetY = UnitsConverter.millimeterToMeter(jsonResponse?.targetY);
+        directResponse.targetZ = UnitsConverter.millimeterToMeter(jsonResponse?.targetZ);
 
         return directResponse;
     }

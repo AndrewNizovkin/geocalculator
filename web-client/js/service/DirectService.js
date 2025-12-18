@@ -19,17 +19,25 @@ export class DirectService {
     /**
      * Solves direct geodetic task
      */
-    solveDirectTask() {
+    async solveDirectTask() {
 
-        let jsonRequest = this.directMapper.directToRequest(this.direct);
+        let directRequest = this.directMapper.directToRequest(this.direct);
 
-        let jsonResponse = this.directProvider.getDirectResponse(jsonRequest);
+        await this.directProvider.getDirectResponse(directRequest).then(response => {
+            let directResponse = this.directMapper.responseToDirectResponse(response);
 
-        let directResponse = this.directMapper.responseToDirectResponse(jsonResponse);
+            this.direct.targetX = directResponse?.targetX;
+            this.direct.targetY = directResponse?.targetY;
+            this.direct.targetZ = directResponse?.targetZ;            
+        });
 
-        this.direct.targetX = directResponse?.targetX;
-        this.direct.targetY = directResponse?.targetY;
-        this.direct.targetZ = directResponse?.targetZ;
+        // let jsonResponse = this.directProvider.getDirectResponse(jsonRequest);
+
+        // let directResponse = this.directMapper.responseToDirectResponse(jsonResponse);
+
+        // this.direct.targetX = directResponse?.targetX;
+        // this.direct.targetY = directResponse?.targetY;
+        // this.direct.targetZ = directResponse?.targetZ;
     }
 
     /**

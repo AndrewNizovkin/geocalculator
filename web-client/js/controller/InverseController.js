@@ -96,8 +96,7 @@ export class InverseController {
               break;
 
             case "inverse-run":
-              this.inverseService.solveInverseTask();
-              this.setResult();
+              this.inverseService.solveInverseTask().then(() => this.setResult());
               break;
           }
         });

@@ -15,6 +15,7 @@ import ru.taheoport.geocalculator_service.service.InverseTaskService;
 @RestController
 @RequestMapping("inverse")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class InverseTackController {
 
     private final InverseTaskService inverseTaskService;

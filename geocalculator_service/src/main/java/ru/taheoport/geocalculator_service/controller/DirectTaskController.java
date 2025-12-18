@@ -6,10 +6,7 @@ package ru.taheoport.geocalculator_service.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.taheoport.geocalculator_service.dto.DirectTaskFullResponse;
 import ru.taheoport.geocalculator_service.dto.DirectTaskRequest;
 import ru.taheoport.geocalculator_service.dto.DirectTaskResponse;
@@ -20,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("direct")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class DirectTaskController {
 
 

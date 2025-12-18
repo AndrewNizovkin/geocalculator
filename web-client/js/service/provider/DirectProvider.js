@@ -3,17 +3,27 @@
  */
 export class DirectProvider {
 
-    getDirectResponse(jsonRequest) {
+    async getDirectResponse(directRequest) {
 
-        // send to backend Post HTTP request and get good response
+try {
+    const response = await fetch('http://192.168.0.12:8181/direct', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(directRequest)
+    });
 
-        const response = {
-            targetX: 100000000,
-            targetY: 200000000,
-            targetZ: 300000
-        };
+    if(!response.ok) throw new Error(`Ошибка HTTP ${response.status}`);
 
-        return JSON.stringify(response);
+    return await response.json();
+} catch(error) {
+    alert(`Ошибка отправки данных: ${error.message}`);
+    // throw error;
+}
+
+
+
     }
 
 }
