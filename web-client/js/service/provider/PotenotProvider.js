@@ -1,19 +1,35 @@
+import { AppConfigurator } from '../../AppConfigurator.js';
+
 /**
  * This class executes a query to the backend 
  * to solve the Potenot task.
  */
 export class PotenotProvider {
 
-    getPotenotResponse(jsonResponse) {
+    /**
+     * Sends to backend Post HTTP request and get response
+     * @param {PotenotRequest} jsonResponse 
+     * @returns {Promise} json of potenotResponse
+     */
+    async getPotenotResponse(potenotRequests) {
 
-        // send to backend Post HTTP request and get good response
+        const urlServer = `http://${AppConfigurator.baseUrl}/${AppConfigurator.potenotEndPoint}`;
 
-        const response = {
-            pointX: 7777777111,
-            pointY: 8888888222
-        };
+        try {
+            const response = await fetch(urlServer, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(potenotRequests)
+            });
 
-        return JSON.stringify(response);
+            if(!response.ok) throw new Error(`Ошибка HTTP ${response.status}`);
+
+            return await response.json();
+        } catch(error) {
+            alert(`Ошибка отправки данных: ${error.message}`);
+            // throw error;
+        }
     }
-
 }

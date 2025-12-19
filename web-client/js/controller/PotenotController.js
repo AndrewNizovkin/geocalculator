@@ -84,8 +84,7 @@ export class PotenotController {
               break;
 
             case "potenot-run":
-              this.potenotService.solvePotenotTask();
-              this.setResult();
+              this.potenotService.solvePotenotTask().then(() => this.setResult());
               break;
           }
         });

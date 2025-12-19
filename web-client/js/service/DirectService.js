@@ -31,13 +31,6 @@ export class DirectService {
             this.direct.targetZ = directResponse?.targetZ;            
         });
 
-        // let jsonResponse = this.directProvider.getDirectResponse(jsonRequest);
-
-        // let directResponse = this.directMapper.responseToDirectResponse(jsonResponse);
-
-        // this.direct.targetX = directResponse?.targetX;
-        // this.direct.targetY = directResponse?.targetY;
-        // this.direct.targetZ = directResponse?.targetZ;
     }
 
     /**

@@ -40,16 +40,17 @@ export class PotenotService {
     /**
      * Solves potenot task
      */
-    solvePotenotTask() {
+    async solvePotenotTask() {
 
-        let jsonRequest = this.potenotMapper.potenotToPotenotRequest(this.potenot);
+        let potenotRequests = this.potenotMapper.potenotToPotenotRequest(this.potenot);
 
-        let jsonResponse = this.potenotProvider.getPotenotResponse(jsonRequest);
+        await this.potenotProvider.getPotenotResponse(potenotRequests).then(response => {
+            let potenotResponse = this.potenotMapper.responseToPotenotResponse(response);
 
-        let potenotResponse = this.potenotMapper.responseToPotenotResponse(jsonResponse);
+            this.potenot.baseX = UnitsConverter.millimeterToMeter(potenotResponse?.pointX);
+            this.potenot.baseY = UnitsConverter.millimeterToMeter(potenotResponse?.pointY);
+        });
 
-        this.potenot.baseX = UnitsConverter.millimeterToMeter(potenotResponse?.pointX);
-        this.potenot.baseY = UnitsConverter.millimeterToMeter(potenotResponse?.pointY);
     }
 
     /**

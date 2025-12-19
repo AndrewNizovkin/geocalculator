@@ -36,7 +36,7 @@ export class PotenotMapper {
         potenotRequest.direction = UnitsConverter.dmsToSecond(potenot?.thirdDirection);
         potenotRequests.push(potenotRequest);
 
-        return JSON.stringify(potenotRequests);
+        return potenotRequests;
     }
 
 
@@ -45,10 +45,10 @@ export class PotenotMapper {
      * @param {string} jsonResponse response from backend
      * @returns {PotenotResponse} Contains a solution to the potenot task
      */
-    responseToPotenotResponse(jsonResponse) {
+    responseToPotenotResponse(response) {
         let potenotResponse = new PotenotResponse();
 
-        let response = JSON.parse(jsonResponse);
+        // let response = JSON.parse(jsonResponse);
 
         potenotResponse.pointX = response?.pointX;
         potenotResponse.pointY = response?.pointY;
