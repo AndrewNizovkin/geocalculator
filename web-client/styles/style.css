@@ -50,18 +50,19 @@ body {
         list-style: none;
     }
 
-    .menu li {
-        /* display: inline; */
-    }
+    /* .menu li {
+        display: inline;
+    } */
 
     ul.menu a {
         display: block;
         width: auto;
         padding: 10px;
         background-color: #f4f4f4;
-        border: 1px dashed #333;
+        border: 1px outset #333;
+        border-radius: 5px;
         text-decoration: none;
-        color: #333;
+        color: blue;
         text-align: center;
     }
 
@@ -69,22 +70,57 @@ body {
         background-color: #333;
         color: #f4f4f4;
     }
+
+    
+
+
+
 /* endregion */
 
 
 .main {
     display: flex;
     flex-direction: column;
+    /* height: 100%; */
+}
+
+    .nav {
+        order: 3;
+    }
+
+    .content {
+        order: 2;
+    }
+
+    .sidebar {
+        order: 4;
+    }
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 .nav, .sidebar {
     flex: 1 1 auto;
 }
 
+.sidebar, 
+
 .nav .menu-item {
-    margin-top: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    /* margin-top: 10px;
+    padding-top: 10px; */
+    /* padding-bottom: 10px; */
+    padding-top: 5px;
+    padding-bottom: 5px;
+    flex: 1 1 18%;
+    justify-content: safe space-between;
+    padding-left: 2px;
+    font-size: 0.7em;
     color: blue;
     border: 1px outset #333;
     border-radius: 5px;
@@ -94,6 +130,7 @@ body {
 .content {
     display: flex;
     flex-direction: column;
+    /* height: 100vh; */
     background-color: var(--container-bg-color);
     border: 2px outset #bab6b7;
     margin: 2px;
@@ -250,6 +287,10 @@ ul.list-stations a {
     counter-reset: var(--text-color);
 }
 
+.footer, .sidebar {
+    display: none;
+}
+
 @media screen and (min-width: 768px) {
     body {
         height: 100vh;
@@ -262,15 +303,72 @@ ul.list-stations a {
         /* justify-content: safe space-between; */
     }
 
+        .footer, .sidebar {
+        display: flex;
+    }
 
     .main {
         flex-direction: row;
+        height: 100%;
         /* min-height: 100%; */
         flex: 1 1 auto;
     }
 
+
+    .nav {
+        flex-direction: column;
+        order: 1;
+    }
+
+    .content {
+        order: 2;
+    }
+
+    .sidebar {
+        order: 4;
+    }
+
+    .nav {
+        position: static;
+    }
+
+    .nav .menu-item {
+        flex: none;
+        width: auto;
+        justify-content: safe start;
+        margin-top: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 1em;
+        color: blue;
+        border: 1px outset #333;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .main-menu {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .main-menu .menu-item, .logo {
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        border: 1px outset #333;
+        border-radius: 5px;        
+    }
+
+    .logo {
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+
+
+
     .nav, .sidebar {
-    min-width: 10em;
+    min-width: 20em;
     }
 
     
@@ -333,9 +431,10 @@ ul.list-stations a {
         width: 10em;
         padding: 10px;
         background-color: #f4f4f4;
-        border: 1px dashed #333;
+        border: 1px outset #333;
+        border-radius: 5px;
         text-decoration: none;
-        color: #333;
+        color: blue;
         text-align: center;
     }
 
