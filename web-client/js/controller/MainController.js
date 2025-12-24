@@ -24,7 +24,7 @@ export class MainController {
 
     <div class="title" id="title">
       <div class="logo menu-item" id="logo">Тахеопорт</div>  
-      <div class="separator"></div>
+      <div class="separator" id="title-separator">Геодезический калькулятор</div>
       <div class="menu-item" id="icon-menu">☰</div>
     </div>
 
@@ -56,27 +56,33 @@ export class MainController {
         `;
 
         document.getElementById("nav-menu").addEventListener('click', (event) => {
+          let titleSeparator = document.getElementById("title-separator");
 
           switch(event.target.id) {
 
             case "main-page":
               this.loadMainPage();
+              titleSeparator.innerHTML = "Геодезический калькулятор";
               break;
             
             case "direct-page":
               this.directController.loadPageDirect();
+              titleSeparator.innerHTML = "Прямая геодезическая задача";
               break;
 
             case "inverse-page":
               this.inverseController.loadPageInverse();
+              titleSeparator.innerHTML = "Обратная геодезическая задача";
               break;
 
             case "potenot-page":
               this.potenotController.loadPagePotenot();
+              titleSeparator.innerHTML = "Задача Потенота";
               break;
 
             case "survey-page":
               this.surveyController.loadPageSurvey();
+              titleSeparator.innerHTML = "Тахеометрическая съёмка";
               break;
           }
 
