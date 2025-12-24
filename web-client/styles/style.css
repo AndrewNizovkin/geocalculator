@@ -38,8 +38,37 @@ body {
 
 .header {
     display: flex;
+    flex-direction: column;
+    /* justify-content: safe space-between; */
+}
+
+.title {
+    display: flex;
     flex-direction: row;
-    justify-content: safe space-between;
+    width: auto;
+    /* position: relative; */
+}
+
+.title > .menu-item {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    flex: 0 0 auto;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-style: none;
+    /* margin-right: 40px; */
+}
+
+.separator {
+    flex: 1 1 auto;
+}
+
+
+#icon-menu {
+    display: flex;
+    font-size: 1.5em;
+
 }
 
 .logo {
@@ -49,45 +78,26 @@ body {
     font-weight: bold;
     border-style: none;
     margin-right: 40px;
+    /* position: absolute;
+    left: 0px; */
 }
 
 
 .main-menu {
     display: none;
-}
-
-.mobile-menu {
-    display: flex;
-    flex-direction: row;
     flex: 1 1 auto;
-    justify-content: end;
-    font-size: 1.2em;
-    /* padding: 10px; */
-}
-
-.mobile-menu > .menu-item {
-
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    border: 1px outset #333;
-    border-radius: 10px;        
-
-}
-
-.sub-menu-icon {
-    display: none;
     flex-direction: column;
-    border: 1px outset #333;
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    z-index: 1000;
-    background-color: var(--panel-bg-color);
-    border-radius: 5px;
-    opacity: 1;    
+
 }
+
+.main-menu > .menu-item {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-right: 0px;
+}
+
 
 .open {
     display: flex;
@@ -397,7 +407,12 @@ ul.list-stations a {
         text-align: center;
     }
 
-    .mobile-menu {
+    .title {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #icon-menu {
         display: none;
     }
 
@@ -408,26 +423,11 @@ ul.list-stations a {
         justify-content: end;
     }
 
-    .sub-menu-tools {
-        display: none;
-        flex-direction: column;
-        border: 1px outset #333;
-        position: absolute;
-        top: 50px;
-        left: 50px;
-        z-index: 1000;
-        background-color: var(--panel-bg-color);
-        border-radius: 5px;
-        opacity: 1;
-    }
 
     .open {
         display: flex;
     }
 
-    .sub-menu-tools .menu-item {
-        padding: 10px;
-    }
 
     .main-menu > .menu-item {
         padding: 10px;
@@ -438,7 +438,7 @@ ul.list-stations a {
         border-radius: 10px;        
     }
 
-    .logo {
+    .title > .menu-item {
         padding: 10px;
         margin-top: 10px;
         margin-bottom: 10px;
