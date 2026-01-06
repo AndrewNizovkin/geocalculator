@@ -31,50 +31,6 @@ body {
     flex-direction: column;
 }
 
-.header {
-    display: flex;
-    flex-direction: column;
-    justify-content: safe space-between;
-}
-
-
-/* region main-menu-column */
-    ul.menu {
-        margin-left: 0em;
-        padding-left: 0em;
-        list-style: none;
-    }
-
-    .menu li {
-        /* display: inline; */
-    }
-
-    ul.menu a {
-        display: block;
-        width: auto;
-        padding: 10px;
-        background-color: #f4f4f4;
-        border: 1px dashed #333;
-        text-decoration: none;
-        color: #333;
-        text-align: center;
-    }
-
-    ul.menu a:hover {
-        background-color: #333;
-        color: #f4f4f4;
-    }
-/* endregion */
-
-
-.main {
-    display: flex;
-    flex-direction: column;
-}
-
-.nav, .sidebar {
-    flex: 1 1 auto;
-}
 
 .content {
     display: flex;
@@ -97,14 +53,6 @@ body {
     flex-direction: column;
 }
 
-/* .panel-survey {
-    display: flex;
-    flex-direction: column;
-}
-
-table > caption {
-    text-align: center;
-} */
 
 .panel-direct, .panel-direct-basis, .panel-direct-measurement, .panel-direct-result, .panel-direct-measurement {
     /* background-color: var(--container-bg-color); */
@@ -150,49 +98,12 @@ table > caption {
     flex-direction: column;
 }
 
-table caption{
-    font-size: 1.1em;
-    text-align: center;
-}
-
 .panel-title {
     font-size: 1.2em;
     text-align: center;
     padding-top: 5px;
     padding-bottom: 5px;
 }
-/* .panel-stations, .panel-measurements, .panel-basis {
-    display: flex;
-    flex-direction: column;
-} */
-
-/* .scrollpanel-stations {
-    height: 20vh;
-    flex: 1 1 auto;
-    overflow: auto;
-}
-
-ul.list-stations {
-    list-style: none;
-}
-
-ul.list-stations a {
-    display: block;
-    width: auto;
-    padding: 5px;
-    text-decoration: none;
-}
-
-.scrollpanel-measurements {
-
-    height: auto;
-    flex: 1 1 auto;
-    overflow: auto;
-}
-
-.picket {
-    width: 8em;
-} */
 
 .menu-item:hover {
     background-color: black;
@@ -226,96 +137,12 @@ ul.list-stations a {
     width: 20px;
 }
 
-/* .button.new {
-    background-image: url(/images/new.png);
-}
-
-.button.open {
-    background-image: url(/images/open.png);
-}
-
-.button.import {
-    background-image: url(/images/import.png);
-}
-
-.button.save {
-    background-image: url(/images/save.png);
-}
-
-.button.run {
-    background-image: url(/images/run.png);
-}
-
-.button.catalog {
-    background-image: url(/images/database.png);
-}
-
-.button.delete {
-    background-image: url(/images/delete_row.png);
-}
-
-.button.insert-before {
-    background-image: url(/images/insert_row.png);
-}
-
-.button.insert-after {
-    background-image: url(/images/insert_row_after.png);
-}
-
-.button.change-distance {
-    background-image: url(/images/change_distance.png);
-}
-
-.button.change-direction {
-    background-image: url(/images/change_direction.png);
-}
-
-.button.change-tilt {
-    background-image: url(/images/change_tilt.png);
-}
-
-.panel-basis {
-    display: flex;
-    flex-direction: column;
-} */
-
-.nav, .sidebar {
-    flex: 1;
-    background-color: var(--sidebar-bg-color);
-    color: var(--text-color);
-}
-
-.header, .footer {
-    flex: 0 0 5em;
-    background-color: var(--panel-bg-color);
-    color: var(--text-color);
-    counter-reset: var(--text-color);
-}
 
 @media screen and (min-width: 768px) {
     body {
         height: 100vh;
 
     }
-
-        .header {
-        display: flex;
-        flex-direction: row;
-        /* justify-content: safe space-between; */
-    }
-
-
-    .main {
-        flex-direction: row;
-        /* min-height: 100%; */
-        flex: 1 1 auto;
-    }
-
-    .nav, .sidebar {
-    min-width: 7em;
-    }
-
-    
 
     .content {
         flex-direction: column;
@@ -326,71 +153,5 @@ ul.list-stations a {
     flex-direction: row;
     height: 100%;
 }
-
-
-    /* .panel-survey {
-        flex-direction: row;
-        flex: 1 1 auto;
-    }
-
-    .panel-basis {
-        flex-direction: row;
-        width: 40%;
-        flex: 1 1 auto;
-    }
-
-    .panel-station {
-        width: 70%;
-    }
-
-    .panel-stations {
-        width: 30%;
-    }
-
-    .scrollpanel-stations {
-        height: auto;
-    }
-
-    .panel-measurements {
-        width: 60%;
-        flex: 1 1 auto;
-    }
-
-    .scrollpanel-measurements {
-    height: 80vh;
-    flex: 1 1 auto;
-    overflow: auto;
-    }
- */
-
-    ul.menu {
-        margin-left: 0em;
-        padding-left: 0em;
-        list-style: none;
-    }
-
-    .menu li {
-        display: inline;
-    }
-
-    ul.menu a {
-        display: inline-block;
-        width: 10em;
-        padding: 10px;
-        background-color: #f4f4f4;
-        border: 1px dashed #333;
-        text-decoration: none;
-        color: #333;
-        text-align: center;
-    }
-
-    #reg {
-        width: 15em;
-    }
-
-    ul.menu a:hover {
-        background-color: #333;
-        color: #f4f4f4;
-    }
 
 }

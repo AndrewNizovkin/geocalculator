@@ -37,35 +37,6 @@ body {
         justify-content: safe space-between;
     }
 
-
-/* region main-menu-column */
-    ul.menu {
-        margin-left: 0em;
-        padding-left: 0em;
-        list-style: none;
-    }
-
-    .menu li {
-        /* display: inline; */
-    }
-
-    ul.menu a {
-        display: block;
-        width: auto;
-        padding: 10px;
-        background-color: #f4f4f4;
-        border: 1px dashed #333;
-        text-decoration: none;
-        color: #333;
-        text-align: center;
-    }
-
-    ul.menu a:hover {
-        background-color: #333;
-        color: #f4f4f4;
-    }
-/* endregion */
-
 .nav, .sidebar {
     flex: 1 1 auto;
 }
@@ -142,7 +113,7 @@ ul.list-stations a {
     cursor: pointer;
 }
 
-.toolbar {
+.survey-toolbar {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -152,67 +123,67 @@ ul.list-stations a {
     border: 2px outset #bab6b7;
 }
 
-.button {
+.survey-button {
     height: 20px;
     width: 20px;
     border: 1px outset #bab6b7;
     margin-left: 5px;
 }
 
-.button:hover {
+.survey-button:hover {
     border: 1px inset red;
 }
 
-.toolbar-separator {
+.survey-toolbar-separator {
     height: 20px;
     width: 20px;
 }
 
-.button.new {
+.survey-button.new {
     background-image: url(/images/new.png);
 }
 
-.button.open {
+.survey-button.open {
     background-image: url(/images/open.png);
 }
 
-.button.import {
+.survey-button.import {
     background-image: url(/images/import.png);
 }
 
-.button.save {
+.survey-button.save {
     background-image: url(/images/save.png);
 }
 
-.button.run {
+.survey-button.run {
     background-image: url(/images/run.png);
 }
 
-.button.catalog {
+.survey-button.catalog {
     background-image: url(/images/database.png);
 }
 
-.button.delete {
+.survey-button.delete {
     background-image: url(/images/delete_row.png);
 }
 
-.button.insert-before {
+.survey-button.insert-before {
     background-image: url(/images/insert_row.png);
 }
 
-.button.insert-after {
+.survey-button.insert-after {
     background-image: url(/images/insert_row_after.png);
 }
 
-.button.change-distance {
+.survey-button.change-distance {
     background-image: url(/images/change_distance.png);
 }
 
-.button.change-direction {
+.survey-button.change-direction {
     background-image: url(/images/change_direction.png);
 }
 
-.button.change-tilt {
+.survey-button.change-tilt {
     background-image: url(/images/change_tilt.png);
 }
 

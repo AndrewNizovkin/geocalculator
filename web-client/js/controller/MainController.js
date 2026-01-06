@@ -5,6 +5,8 @@ import { SurveyController } from './SurveyController.js';
 
 /**
  * 
+ * @author Nizovkin A.V.
+ * @copyright 2025 Nizovkin A.V.
  */
 export class MainController {
     constructor() {
