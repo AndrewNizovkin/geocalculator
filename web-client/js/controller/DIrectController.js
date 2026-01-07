@@ -15,8 +15,8 @@ export class DirectController {
         let content = document.getElementById("content");
         content.innerHTML = `
       <div class="toolbar" id="direct-toolbar">
-        <div class="button clear" title="Очистить" id="direct-clear"></div>
-        <div class="button run" title="Решить задачу" id="direct-run"></div>
+        <div class="button clear" title="Очистить" id="direct-clear">Очистить</div>
+        <div class="button run" title="Решить задачу" id="direct-run">Обработать</div>
       </div>
 
       <div class="panel-direct" id="direct-panel">
@@ -88,7 +88,6 @@ export class DirectController {
         </div>
 
       </div>
-
         
         `;
 

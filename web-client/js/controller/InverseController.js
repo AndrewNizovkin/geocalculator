@@ -17,8 +17,8 @@ export class InverseController {
 
         content.innerHTML = `
       <div class="toolbar" id="inverse-toolbar">
-        <div class="button clear" id="inverse-clear" title="Очистить"></div>
-        <div class="button run" id="inverse-run" title="Решить задачу"></div>
+        <div class="button clear" id="inverse-clear" title="Очистить">Очистить</div>
+        <div class="button run" id="inverse-run" title="Решить задачу">Обработать</div>
       </div>
 
       <div class="panel-inverse" id="inverse-panel">
@@ -77,8 +77,7 @@ export class InverseController {
           </div>
 
         </div>
-      </div>
-        
+      </div>        
         `;
 
         this.setData();

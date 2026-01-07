@@ -16,8 +16,8 @@ export class PotenotController {
 
         content.innerHTML = `
       <div class="toolbar" id="potenot-toolbar">
-        <div class="button clear" id="potenot-clear" title="Очистить"></div>
-        <div class="button run" id="potenot-run" title="Решить задачу"></div>
+        <div class="button clear" id="potenot-clear" title="Очистить">Очистить</div>
+        <div class="button run" id="potenot-run" title="Решить задачу">Обработать</div>
       </div>
 
       <div class="panel-potenot" id="potenot-panel">
