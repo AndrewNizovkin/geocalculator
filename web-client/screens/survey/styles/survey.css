@@ -66,6 +66,36 @@ table > caption {
     text-align: center;
 }
 
+.panel-title {
+    font-size: 1.2em;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.frame {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.frame-label {
+    margin: 2px;
+    padding: 2px;
+    border-bottom: 1px outset #bab6b7;
+}
+
+.frame-value {
+    padding: 5px;
+}
+
+
+
 .panel-station, .panel-stations, .panel-measurements, .scrollpanel-stations, .scrollpanel-measurements, .panel-survey {
     /* background-color: var(--container-bg-color); */
     border: 2px outset #bab6b7;
@@ -74,7 +104,7 @@ table > caption {
 }
 
 .panel-stations, .panel-measurements, .panel-basis {
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     /* justify-content: start; */
 }
