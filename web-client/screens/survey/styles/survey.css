@@ -64,6 +64,8 @@ body {
 
 table > caption {
     text-align: center;
+    font-size: 1.2em;
+    color: black;    
 }
 
 .panel-title {
@@ -95,6 +97,37 @@ table > caption {
 }
 
 
+.panel-basis {
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: nowrap; */
+    width: auto;
+    
+}
+
+.panel-station {
+    /* flex: 1 1 auto; */
+    /* height: 50%; */
+    width: auto;
+}
+
+.panel-stations {
+    flex: 1 1 auto;
+    /* height: 50%; */
+    /* width: auto; */
+}
+
+
+
+.table-station {
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    border-collapse: separate;
+    border-spacing: 3px;
+    /* table-layout: fixed; */
+    width: auto;     
+}
 
 .panel-station, .panel-stations, .panel-measurements, .scrollpanel-stations, .scrollpanel-measurements, .panel-survey {
     /* background-color: var(--container-bg-color); */
@@ -103,11 +136,12 @@ table > caption {
     /* color: var(--text-color); */
 }
 
-.panel-stations, .panel-measurements, .panel-basis {
+.panel-stations, .panel-measurements {
     /* display: flex; */
     flex-direction: column;
     /* justify-content: start; */
 }
+
 
 .scrollpanel-stations {
     height: 20vh;
@@ -217,10 +251,10 @@ ul.list-stations a {
     background-image: url(/images/change_tilt.png);
 }
 
-.panel-basis {
+/* .panel-basis {
     display: flex;
     flex-direction: column;
-}
+} */
 
 .nav, .sidebar {
     flex: 1;
@@ -244,13 +278,11 @@ ul.list-stations a {
         .header {
         display: flex;
         flex-direction: row;
-        /* justify-content: safe space-between; */
     }
 
 
     .main {
         flex-direction: row;
-        /* min-height: 100%; */
         flex: 1 1 auto;
     }
 
@@ -270,32 +302,30 @@ ul.list-stations a {
     }
 
     .panel-basis {
+        display: flex;
         flex-direction: row;
         width: 40%;
         flex: 1 1 auto;
     }
 
     .panel-station {
-        /* height: 50%; */
-        width: 70%;
+        width: auto;
     }
 
     .panel-stations {
-        /* height: 50%; */
-        width: 30%;
-    }
-
-    .scrollpanel-stations {
-        height: auto;
-    }
-
-    .panel-measurements {
-        width: 60%;
         flex: 1 1 auto;
     }
 
+    .scrollpanel-stations {
+        height: 100%;
+    }
+
+    .panel-measurements {
+        width: auto;
+        flex: 0 0 auto;
+    }
+
     .scrollpanel-measurements {
-    /* background-color: red; */
     height: 80vh;
     flex: 1 1 auto;
     overflow: auto;

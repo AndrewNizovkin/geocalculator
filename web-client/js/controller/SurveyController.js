@@ -49,44 +49,46 @@ export class SurveyController {
         </div>
 
         <div class="panel-station">
+
           <table class="table-station">
-            <caption>Параметры станции</caption>
+            <!-- <caption>Параметры станции</caption> -->
             <tbody>
               <tr>
                 <td class="menu-item" title="Вставить из каталога">Станция</td>
-                <td><input type="text" name="stationName" placeholder="noname"/></td>
+                <td><input type="text" id="survey-station-name" size="12" placeholder="noname"></td>
               </tr>
               <tr>
                 <td>X:</td>
-                <td><input type="text" name="stationX" placeholder="0.000"/></td>
+                <td><input type="text" id="survey-station-x" size="12" placeholder="0.000"></td>
               </tr>
               <tr>
                 <td>Y:</td>
-                <td><input type="text" name="stationY" placeholder="0.000"/></td>
+                <td><input type="text" id="survey-station-y" size="12" placeholder="0.000"></td>
               </tr>
               <tr>
                 <td>Z:</td>
-                <td><input type="text" name="stationZ" placeholder="0.000"/></td>
+                <td><input type="text" id="survey-station-z" size="12" placeholder="0.000"></td>
               </tr>
               <tr>
                 <td>i:</td>
-                <td><input type="text" name="stationI" placeholder="0.000"/></td>
+                <td><input type="text" id="survey-station-height" size="12" placeholder="0.000"></td>
               </tr>
               <tr>
                 <td class="menu-item" title="Вставить из каталога">Ориентир</td>
-                <td><input type="text" name="orName" placeholder="noname"/></td>
+                <td><input type="text" id="survey-or-name" size="12" placeholder="noname"></td>
               </tr>
               <tr>
                 <td>X:</td>
-                <td><input type="text" name="orX" placeholder="0.000"/></td>
+                <td><input type="text" id="survey-or-x" size="12" placeholder="0.000"></td>
               </tr>
               <tr>
                 <td>Y:</td>
-                <td><input type="text" name="orY" placeholder="0.000"/></td>
+                <td><input type="text" id="survey-or-x" size="12" placeholder="0.000"></td>
               </tr>
 
             </tbody>
           </table>
+
         </div>
 
       </div>

@@ -203,15 +203,20 @@ table > caption {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-content: space-around;
+    /* padding: 10px; */
 }
 
 .main-banner {
     width: 300px;
     height: 200px;
+    flex: 0 0 auto;
+    align-content: safe space-around;
     border: 2px outset black;
     border-radius: 5px;
-    margin: 5px;
-
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
 }
 
 
