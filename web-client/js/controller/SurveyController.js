@@ -30,20 +30,10 @@ export class SurveyController {
             <div class="survey-button insert-after"></div>
           </div>
           <div class="scrollpanel-stations">
-            <ul class="list-stations">
-              <li><a class="menu-item" href="#">1301</a></li>
-              <li><a class="menu-item" href="#">100</a></li>
-              <li><a class="menu-item" href="#">101</a></li>
-              <li><a class="menu-item" href="#">102</a></li>
-              <li><a class="menu-item" href="#">103</a></li>
-              <li><a class="menu-item" href="#">104</a></li>
-              <li><a class="menu-item" href="#">105</a></li>
-              <li><a class="menu-item" href="#">106</a></li>
-              <li><a class="menu-item" href="#">107</a></li>
-              <li><a class="menu-item" href="#">108</a></li>
-              <li><a class="menu-item" href="#">109</a></li>
-              <li><a class="menu-item" href="#">1303</a></li>
-              <li><a class="menu-item" href="#">1304</a></li>
+            <ul class="list-stations" id="list-stations">
+              <li><a class="menu-item" href="#" id="stat-0">1301</a></li>
+              <li><a class="menu-item" href="#" id="stat-1">100</a></li>
+              <li><a class="menu-item" href="#" id="stat-2">101</a></li>
             </ul>
           </div>
         </div>
@@ -72,6 +62,10 @@ export class SurveyController {
               <tr>
                 <td>i:</td>
                 <td><input type="text" id="survey-station-height" size="12" placeholder="0.000"></td>
+              </tr>
+              <tr>
+                <td>Ор.Напр.</td>
+                <td><input type="text" id="survey-or-direction" size="12" value="0.0000"></td>
               </tr>
               <tr>
                 <td class="menu-item" title="Вставить из каталога">Ориентир</td>
@@ -107,315 +101,27 @@ export class SurveyController {
           <table class="table-measurements">
             <thead>
               <th>Название</th>
-              <th>Расстояние</th>
               <th>Направление</th>
+              <th>Расстояние</th>
               <th>Наклон</th>
               <th>Выс.Цели</th>
             </thead>
             <tbody>
               <!-- Демо данные -->
               <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
+                <td><input type="text" class="menu-item" id="picket-name-0" value="1302"/></td>
+                <td><input type="text" class="menu-item" id="picket-direction-0" value="359.5953"/></td>
+                <td><input type="text" class="menu-item" id="picket-distance-0" value="30.526"/></td>
+                <td><input type="text" class="menu-item" id="picket-tilt-0" value="-0.5959"/></td>
+                <td><input type="text" class="menu-item" id="picket-heigth-0" value="1302"/></td>
               </tr>
               <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
+                <td><input type="text" class="menu-item" id="picket-name-1" value="1302"/></td>
+                <td><input type="text" class="menu-item" id="picket-direction-1" value="359.5953"/></td>
+                <td><input type="text" class="menu-item" id="picket-distance-1" value="30.526"/></td>
+                <td><input type="text" class="menu-item" id="picket-tilt-1" value="-0.5959"/></td>
+                <td><input type="text" class="menu-item" id="picket-heigth-1" value="1302"/></td>
               </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1302"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item picket name" name="picketName-0" value="1303"/></td>
-                <td><input type="text" class="menu-item picket distance" name="picketDistance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item picket direction" name="picketDirection-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item picket tilt" name="picketTilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item picket heigth" name="picketHeigth-0" value="1302"/></td>
-              </tr>
-
               <!-- Демо данные -->
             </tbody>
 
@@ -424,6 +130,7 @@ export class SurveyController {
       </div>
 
     </div>
+
       
         `;
 

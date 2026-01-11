@@ -68,7 +68,7 @@ table > caption {
     color: black;    
 }
 
-.panel-title {
+/* .panel-title {
     font-size: 1.2em;
     text-align: center;
     padding-top: 5px;
@@ -95,7 +95,7 @@ table > caption {
 .frame-value {
     padding: 5px;
 }
-
+ */
 
 .panel-basis {
     display: flex;
@@ -121,8 +121,8 @@ table > caption {
 
 .table-station {
     margin: 5px;
-    border: 1px solid black;
-    border-radius: 5px;
+    /* border: 1px solid black; */
+    /* border-radius: 5px; */
     border-collapse: separate;
     border-spacing: 3px;
     /* table-layout: fixed; */
@@ -161,13 +161,12 @@ ul.list-stations a {
 }
 
 .scrollpanel-measurements {
-    /* background-color: red; */
     height: auto;
     flex: 1 1 auto;
     overflow: auto;
 }
 
-.picket {
+.table-measurements input {
     width: 8em;
 }
 
@@ -316,9 +315,9 @@ ul.list-stations a {
         flex: 1 1 auto;
     }
 
-    .scrollpanel-stations {
+    /* .scrollpanel-stations {
         height: 100%;
-    }
+    } */
 
     .panel-measurements {
         width: auto;
@@ -326,7 +325,7 @@ ul.list-stations a {
     }
 
     .scrollpanel-measurements {
-    height: 80vh;
+    /* height: 100%; */
     flex: 1 1 auto;
     overflow: auto;
     }
