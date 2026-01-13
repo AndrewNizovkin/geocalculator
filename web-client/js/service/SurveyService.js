@@ -1,20 +1,20 @@
-import {SurveyStation} from '../model/SurveyStation.js';
-import {Measurement} from '../model/Measurement.js';
+import { SurveyRepository } from "../repository/SurveyRepository.js";
+
 /**
- * This class represents collection of surveyStation, 
- * contains geodetic measurements
+ * This class provides methods for working 
+ * with the survey model.
  */
-export class SurveyRepository {
-    
+export class SurveyService {
+
     constructor() {
-        this.surveyStations = new Array();
+        this.surveyRepository = new SurveyRepository();
     }
 
     /**
-     * Clears repository
+     * Clears survey repository
      */
     clearAll() {
-        this.surveyStations = new Array();
+        this.surveyRepository.clearAll();
     }
 
     /**
@@ -22,7 +22,7 @@ export class SurveyRepository {
      * @returns {number}
      */
     size() {
-        return this.surveyStations.length;
+        return this.surveyRepository.size();
     }
 
     /**
@@ -31,19 +31,14 @@ export class SurveyRepository {
      * @returns {number}
      */
     measurementSize(indexStation) {
-        if(indexStation >= this.surveyStations.length) {
-            return null;
-        }
-        let surveyStation = this.surveyStations.at(indexStation);
-        return surveyStation.measurements.length;
+        return this.surveyRepository.measurementSize();
     }
 
     /**
      * Appends new SurveyStation to the end of repository
      */
     addNewStation () {
-        let surveyStation = new SurveyStation();
-        this.surveyStations.push(surveyStation);
+        this.surveyRepository.addNewStation();
     }
 
     /**
@@ -51,10 +46,7 @@ export class SurveyRepository {
      * @param {number} index position new element at repository
      */
     insertNewStation(indexStation) {
-        if(indexStation <= this.surveyStations.length) {
-            let surveyStation = new SurveyStation();
-            this.surveyStations.splice(indexStation, 0, surveyStation);
-        }
+        this.surveyRepository.insertNewStation(indexStation);
     }
 
     /**
@@ -62,9 +54,7 @@ export class SurveyRepository {
      * @param {number} indexStation location of the repository item being deleted
      */
     removeStation(indexStation) {
-        if(indexStation < this.surveyStations.length) {
-            this.surveyStations.splice(indexStation,1);
-        }
+        this.surveyRepository.removeStation(indexStation);
     }
 
     /**
@@ -72,11 +62,7 @@ export class SurveyRepository {
      * @param {number} indexStation the index of the station to which the new measurement is being added
      */
     addNewMeasurement(indexStation) {
-        if(indexStation < this.surveyStations.length) {
-            let measurement = new Measurement();
-            let suveyStation = this.surveyStations.at(indexStation);
-            suveyStation.measurements.push(measurement);
-        }
+        this.surveyRepository.addNewMeasurement(indexStation);
     }
 
     /**
@@ -85,13 +71,7 @@ export class SurveyRepository {
      * @param {number} indexMeasurement position of new measurement
      */
     insertNewMeasurement(indexStation, indexMeasurement) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            if(indexMeasurement <= surveyStation.measurements.length) {
-                let measurement = new Measurement();
-                surveyStation.measurements.splice(indexMeasurement, 0, measurement);
-            }
-        }
+        this.surveyRepository.insertNewMeasurement(indexStation, indexMeasurement);
     }
 
     /**
@@ -100,12 +80,7 @@ export class SurveyRepository {
      * @param {number} indexMeasurement 
      */
     removeMeasurement(indexStation, indexMeasurement) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            if(indexMeasurement < surveyStation.measurements.length) {
-                surveyStation.measurements.splice(indexMeasurement, 1);
-            }
-        }
+        this.surveyRepository.removeMeasurement(indexStation, indexMeasurement);
     }
 
     /**
@@ -114,11 +89,7 @@ export class SurveyRepository {
      * @returns {string}
      */
     getStationName(indexStation) {
-        if(indexStation >= this.surveyStations.length) {
-            return null;
-        }
-        let surveyStation = this.surveyStations.at(indexStation);
-        return surveyStation.stationName;
+        return this.surveyRepository.getStationName(indexStation);
     }
 
     /**
@@ -127,10 +98,7 @@ export class SurveyRepository {
      * @param {string} stationName 
      */
     saveStationName(indexStation, stationName) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            surveyStation.stationName = stationName;
-        }
+        this.surveyRepository.saveStationName(indexStation, stationName);
     }
 
     /**
@@ -139,11 +107,7 @@ export class SurveyRepository {
      * @returns {string}
      */
     getStationX(indexStation) {
-        if(indexStation >= this.surveyStations.length) {
-            return null;
-        }
-        let surveyStation = this.surveyStations.at(indexStation);
-        return surveyStation.stationX;
+        return this.surveyRepository.getStationX(indexStation);
     }
 
     /**
@@ -152,10 +116,7 @@ export class SurveyRepository {
      * @param {string} stationX 
      */
     saveStationX(indexStation, stationX) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            surveyStation.stationX = stationX;
-        }
+        this.surveyRepository.saveStationX(indexStation, stationX);
     }    
     
     /**
@@ -164,11 +125,7 @@ export class SurveyRepository {
      * @returns {string}
      */
     getStationY(indexStation) {
-        if(indexStation >= this.surveyStations.length) {
-            return null;
-        }
-        let surveyStation = this.surveyStations.at(indexStation);
-        return surveyStation.stationY;
+        return this.surveyRepository.stationY;
     }
 
     /**
@@ -177,10 +134,7 @@ export class SurveyRepository {
      * @param {string} stationY 
      */
     saveStationY(indexStation, stationY) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            surveyStation.stationY = stationY;
-        }
+        this.surveyRepository.saveStationY(indexStation, stationY);
     }        
 
     /**
@@ -189,11 +143,7 @@ export class SurveyRepository {
      * @returns {string}
      */
     getStationZ(indexStation) {
-        if(indexStation >= this.surveyStations.length) {
-            return null;
-        }
-        let surveyStation = this.surveyStations.at(indexStation);
-        return surveyStation.stationZ
+        return this.surveyRepository.getStationZ(indexStation);
     }
 
     /**
@@ -202,10 +152,7 @@ export class SurveyRepository {
      * @param {string} stationZ 
      */
     saveStationZ(indexStation, stationZ) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            surveyStation.stationZ = stationZ;
-        }
+        this.surveyRepository.saveStationZ(indexStation, stationZ);
     }            
 
     /**
@@ -215,11 +162,7 @@ export class SurveyRepository {
      * @returns {string}
      */
     getStationHeight(indexStation) {
-        if(indexStation >= this.surveyStations.length) {
-            return null;
-        }
-        let surveyStation = this.surveyStations.at(indexStation);
-        return surveyStation.stationHeight;
+        return this.surveyRepository.getStationHeight(indexStation);
     }
 
     /**
@@ -228,10 +171,7 @@ export class SurveyRepository {
      * @param {string} stationHeight 
      */
     saveStationHeight(indexStation, stationHeight) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            surveyStation.stationHeight = stationHeight;
-        }
+        this.surveyRepository.saveStationHeight(indexStation, stationHeight);
     }    
     
     /**
@@ -241,11 +181,7 @@ export class SurveyRepository {
      * @returns {string}
      */
     getOrDirection(indexStation) {
-        if(indexStation >= this.surveyStations.length) {
-            return null;
-        }
-        let surveyStation = this.surveyStations.at(indexStation);
-        return surveyStation.orDirection;
+        return this.surveyRepository.getOrDirection(indexStation);
     }
 
     /**
@@ -254,10 +190,7 @@ export class SurveyRepository {
      * @param {string} orDirection 
      */
     saveOrDirection(indexStation, orDirection) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            surveyStation.orDirection = orDirection;
-        }        
+        this.surveyRepository.saveOrDirection(indexStation, orDirection);
     }
 
     /**
@@ -267,11 +200,7 @@ export class SurveyRepository {
      * @returns {string}
      */
     getOrName(indexStation) {
-        if(indexStation >= this.surveyStations.length) {
-            return null;
-        }
-        let surveyStation = this.surveyStations.at(indexStation);
-        return surveyStation.orName;
+        return this.surveyRepository.getOrName(indexStation);
     }
 
 
@@ -281,10 +210,7 @@ export class SurveyRepository {
      * @param {string} orName 
      */
     saveOrName(indexStation, orName) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            surveyStation.orName = orName;
-        }        
+        this.surveyRepository.saveOrName(indexStation, orName);
     }
 
     /**
@@ -294,11 +220,7 @@ export class SurveyRepository {
      * @returns {string}
      */
     getOrX(indexStation) {
-        if(indexStation >= this.surveyStations.length) {
-            return null;
-        }
-        let surveyStation = this.surveyStations.at(indexStation);
-        return surveyStation.orX;
+        return this.surveyRepository.getOrX(indexStation);
     }
 
 
@@ -308,10 +230,7 @@ export class SurveyRepository {
      * @param {string} orX 
      */
     saveOrX(indexStation, orX) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            surveyStation.orX = orX;
-        }        
+        this.surveyRepository.saveOrX(indexStation, orX);
     }
 
     /**
@@ -321,11 +240,7 @@ export class SurveyRepository {
      * @returns {string}
      */
     getOrY(indexStation) {
-        if(indexStation >= this.surveyStations.length) {
-            return null;
-        }
-        let surveyStation = this.surveyStations.at(indexStation);
-        return surveyStation.orY;
+        return this.surveyRepository.getOrY(indexStation);
     }
 
     /**
@@ -335,10 +250,7 @@ export class SurveyRepository {
      * @param {string} orY
      */
     saveOrY(indexStation, orY) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            surveyStation.orY = orY;
-        }        
+        this.surveyRepository.saveOrY(indexStation, orY);
     }
 
     /**
@@ -349,17 +261,7 @@ export class SurveyRepository {
      * @returns {string}
      */
     getTargetName(indexStation, indexMeasurement) {
-        if(indexStation >= this.surveyStations.lenth) {
-            return null;
-        }
-
-        let surveyStation = this.surveyStations.at(indexStation);
-
-        if(indexMeasurement >= surveyStation.measurements.length) {
-            return null;
-        }
-        let measurement = surveyStation.measurements.at(indexMeasurement);
-        return measurement.targetName;
+        return this.surveyRepository.getTargetName(indexStation, indexMeasurement);
     }
 
     /**
@@ -370,13 +272,7 @@ export class SurveyRepository {
      * @param {string} targetName 
      */
     saveTargetName(indexStation, indexMeasurement, targetName) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            if(indexMeasurement < surveyStation.measurements.length) {
-                let measurement = surveyStation.measurements.at(indexMeasurement);
-                measurement.targetName = targetName;
-            }
-        }                
+        this.surveyRepository.saveTargetName(indexStation, indexMeasurement, targetName);
     }
 
     /**
@@ -387,17 +283,7 @@ export class SurveyRepository {
      * @returns {string}
      */
     getTargetDirection(indexStation, indexMeasurement) {
-        if(indexStation >= this.surveyStations.lenth) {
-            return null;
-        }
-
-        let surveyStation = this.surveyStations.at(indexStation);
-
-        if(indexMeasurement >= surveyStation.measurements.length) {
-            return null;
-        }
-        let measurement = surveyStation.measurements.at(indexMeasurement);
-        return measurement.targetDirection;
+        return this.surveyRepository.getTargetDirection(indexStation, indexMeasurement);
     }
     
     /**
@@ -408,13 +294,7 @@ export class SurveyRepository {
      * @param {string} targetDirection 
      */
     saveTargetDirection(indexStation, indexMeasurement, targetDirection) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            if(indexMeasurement < surveyStation.measurements.length) {
-                let measurement = surveyStation.measurements.at(indexMeasurement);
-                measurement.targetDirection = targetDirection;
-            }
-        }                
+        this.surveyRepository.saveTargetDirection(indexStation, indexMeasurement, targetDirection);
     }    
 
     /**
@@ -425,17 +305,7 @@ export class SurveyRepository {
      * @returns {string}
      */
     getTargetDistance(indexStation, indexMeasurement) {
-        if(indexStation >= this.surveyStations.lenth) {
-            return null;
-        }
-
-        let surveyStation = this.surveyStations.at(indexStation);
-
-        if(indexMeasurement >= surveyStation.measurements.length) {
-            return null;
-        }
-        let measurement = surveyStation.measurements.at(indexMeasurement);
-        return measurement.targetDistance;
+        return this.surveyRepository.getTargetDistance(indexStation, indexMeasurement);
     }
 
 
@@ -447,13 +317,7 @@ export class SurveyRepository {
      * @param {string} targetDistance 
      */
     saveTargetDistance(indexStation, indexMeasurement, targetDistance) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            if(indexMeasurement < surveyStation.measurements.length) {
-                let measurement = surveyStation.measurements.at(indexMeasurement);
-                measurement.targetDistance = targetDistance;
-            }
-        }                
+        this.surveyRepository.saveTargetDistance(indexStation, indexMeasurement, targetDistance);
     }    
 
     /**
@@ -464,17 +328,7 @@ export class SurveyRepository {
      * @returns {string}
      */
     getTargetTiltAngle(indexStation, indexMeasurement) {
-        if(indexStation >= this.surveyStations.lenth) {
-            return null;
-        }
-
-        let surveyStation = this.surveyStations.at(indexStation);
-
-        if(indexMeasurement >= surveyStation.measurements.length) {
-            return null;
-        }
-        let measurement = surveyStation.measurements.at(indexMeasurement);
-        return measurement.targetTiltAngle;
+        return this.surveyRepository.getTargetTiltAngle(indexStation, indexMeasurement);
     }
 
 
@@ -486,13 +340,7 @@ export class SurveyRepository {
      * @param {string} targetTiltAngle 
      */
     saveTargetTiltAngle(indexStation, indexMeasurement, targetTiltAngle) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            if(indexMeasurement < surveyStation.measurements.length) {
-                let measurement = surveyStation.measurements.at(indexMeasurement);
-                measurement.targetTiltAngle = targetTiltAngle;
-            }
-        }                
+        this.surveyRepository.saveTargetTiltAngle(indexStation, indexMeasurement, targetTiltAngle);
     }    
 
     /**
@@ -503,17 +351,7 @@ export class SurveyRepository {
      * @returns {string}
      */
     getTargetHeight(indexStation, indexMeasurement) {
-        if(indexStation >= this.surveyStations.lenth) {
-            return null;
-        }
-
-        let surveyStation = this.surveyStations.at(indexStation);
-
-        if(indexMeasurement >= surveyStation.measurements.length) {
-            return null;
-        }
-        let measurement = surveyStation.measurements.at(indexMeasurement);
-        return measurement.targetHeight;
+        return this.surveyRepository.getTargetHeight(indexStation, indexMeasurement);
     }
     
     /**
@@ -524,13 +362,7 @@ export class SurveyRepository {
      * @param {string} targetHeight 
      */
     saveTargetHeight(indexStation, indexMeasurement, targetHeight) {
-        if(indexStation < this.surveyStations.length) {
-            let surveyStation = this.surveyStations.at(indexStation);
-            if(indexMeasurement < surveyStation.measurements.length) {
-                let measurement = surveyStation.measurements.at(indexMeasurement);
-                measurement.targetHeight = targetHeight;
-            }
-        }                
+        this.surveyRepository.saveTargetHeight(indexStation, indexMeasurement, targetHeight);
     }    
 
 
