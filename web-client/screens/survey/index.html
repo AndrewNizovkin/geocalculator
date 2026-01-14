@@ -35,9 +35,9 @@
           </div>
           <div class="scrollpanel-stations">
             <ul class="list-stations" id="list-stations">
-              <li><a class="menu-item" href="#" id="stat-0">1301</a></li>
-              <li><a class="menu-item" href="#" id="stat-1">100</a></li>
-              <li><a class="menu-item" href="#" id="stat-2">101</a></li>
+              <li><a class="menu-item" href="#" data-station-id="0">1301</a></li>
+              <li><a class="menu-item" href="#" data-station-id="1">100</a></li>
+              <li><a class="menu-item" href="#" data-station-id="0">101</a></li>
             </ul>
           </div>
         </div>
@@ -81,7 +81,7 @@
               </tr>
               <tr>
                 <td>Y:</td>
-                <td><input type="text" id="survey-or-x" size="12" placeholder="0.000"></td>
+                <td><input type="text" id="survey-or-y" size="12" placeholder="0.000"></td>
               </tr>
 
             </tbody>
@@ -110,21 +110,21 @@
               <th>Наклон</th>
               <th>Выс.Цели</th>
             </thead>
-            <tbody>
+            <tbody id="list-measurements">
               <!-- Демо данные -->
               <tr>
-                <td><input type="text" class="menu-item" id="picket-name-0" value="1302"/></td>
-                <td><input type="text" class="menu-item" id="picket-direction-0" value="359.5953"/></td>
-                <td><input type="text" class="menu-item" id="picket-distance-0" value="30.526"/></td>
-                <td><input type="text" class="menu-item" id="picket-tilt-0" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item" id="picket-heigth-0" value="1302"/></td>
+                <td><input type="text" class="menu-item" data-target-name="0" value="1302"/></td>
+                <td><input type="text" class="menu-item" data-target-direction="0" value="359.5953"/></td>
+                <td><input type="text" class="menu-item" data-target-distance="0" value="30.526"/></td>
+                <td><input type="text" class="menu-item" data-target-tilt="0" value="-0.5959"/></td>
+                <td><input type="text" class="menu-item" data-target-height="0" value="1302"/></td>
               </tr>
               <tr>
-                <td><input type="text" class="menu-item" id="picket-name-1" value="1302"/></td>
-                <td><input type="text" class="menu-item" id="picket-direction-1" value="359.5953"/></td>
-                <td><input type="text" class="menu-item" id="picket-distance-1" value="30.526"/></td>
-                <td><input type="text" class="menu-item" id="picket-tilt-1" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item" id="picket-heigth-1" value="1302"/></td>
+                <td><input type="text" class="menu-item" data-target-name="1" value="1302"/></td>
+                <td><input type="text" class="menu-item" data-target-direction="1" value="359.5953"/></td>
+                <td><input type="text" class="menu-item" data-target-distance="1" value="30.526"/></td>
+                <td><input type="text" class="menu-item" data-target-tilt="1" value="-0.5959"/></td>
+                <td><input type="text" class="menu-item" data-target-height="1" value="1302"/></td>
               </tr>
               <!-- Демо данные -->
             </tbody>

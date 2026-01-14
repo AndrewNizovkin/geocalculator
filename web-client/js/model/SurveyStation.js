@@ -13,7 +13,7 @@ export class SurveyStation {
         this.orName = "noname";
         this.orX = "0.000";
         this.orY = "0.000";
-        this.measurements = new Array();
+        this.measurements = [];
 
     }
 }

@@ -31,7 +31,7 @@ export class SurveyService {
      * @returns {number}
      */
     measurementSize(indexStation) {
-        return this.surveyRepository.measurementSize();
+        return this.surveyRepository.measurementSize(indexStation);
     }
 
     /**
@@ -125,7 +125,7 @@ export class SurveyService {
      * @returns {string}
      */
     getStationY(indexStation) {
-        return this.surveyRepository.stationY;
+        return this.surveyRepository.getStationY(indexStation);
     }
 
     /**
