@@ -126,6 +126,9 @@ export class MainController {
 
         });
 
+        // Загрузка демо-съёмки
+        this.surveyController.loadDemoData();
+
         this.loadMainPage();
     }
 
