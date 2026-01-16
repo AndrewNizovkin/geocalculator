@@ -126,87 +126,118 @@ export class SurveyController {
         this.setSurveyStation();
         this.setListSurveyStations();
         this.setTableMeasurements();
+        this.addListenersMainToolbar()
+        this.addListenersPanelStations();
+        this.addListenersPanelStation();
+        this.addListenersPanelMeasurements();
 
-        document.getElementById("toolbar-survey-stations").addEventListener('click', (event) => {
-          let element = event.target;
+    }
 
-          switch(element.id) {
-            
-            case "delete-station":
-              if(this.surveyService.size() > 1) {
-                this.surveyService.removeStation(this.currentSurveyStation);
-                document.getElementById("list-stations").innerHTML = '';
-                this.setListSurveyStations();
-                if(this.currentSurveyStation == this.surveyService.size()){
-                  this.currentSurveyStation--;
-                }
-                this.setSurveyStation();
-                this.setTableMeasurements();
-              }
-              break;
-          }
+    /**
+     * Adds event listeners for main-toolbar
+     */
+    addListenersMainToolbar() {
 
-          // TO DO
-        });
+    }
 
-        document.getElementById("list-stations").addEventListener('click', (event) => {
-          let element = event.target;
+    /**
+     * Adds event listeners for panel-stations
+     */
+    addListenersPanelStations() {
 
-          if(element.hasAttribute('data-station-id')) {
-            this.currentSurveyStation = element.dataset.stationId;
-            document.getElementById("list-measurements").innerHTML = '';
-            this.setSurveyStation();
-            this.setTableMeasurements();
-          }
+      document.getElementById("list-stations").addEventListener('click', (event) => {
+        let element = event.target;
 
-        });
+        if(element.hasAttribute('data-station-id')) {
+          this.currentSurveyStation = element.dataset.stationId;
+          document.getElementById("list-measurements").innerHTML = '';
+          this.setSurveyStation();
+          this.setTableMeasurements();
+        }
 
-        document.getElementById("survey-table-station").addEventListener('input', (event) => {
-          let element = event.target;
+      });
 
-          switch(element.id) {
 
-            case "survey-station-name":
-              this.surveyService.saveStationName(this.currentSurveyStation, element.value);
+      document.getElementById("toolbar-survey-stations").addEventListener('click', (event) => {
+        let element = event.target;
+
+        switch(element.id) {
+          
+          case "delete-station":
+            if(this.surveyService.size() > 1) {
+              this.surveyService.removeStation(this.currentSurveyStation);
               document.getElementById("list-stations").innerHTML = '';
               this.setListSurveyStations();
-              break;
+              if(this.currentSurveyStation == this.surveyService.size()){
+                this.currentSurveyStation--;
+              }
+              this.setSurveyStation();
+              this.setTableMeasurements();
+            }
+            break;
+        }
 
-            case "survey-station-x":
-              this.surveyService.saveStationX(this.currentSurveyStation, element.value);
-              break;
+        // TO DO
+      });
 
-            case "survey-station-y":
-              this.surveyService.saveStationY(this.currentSurveyStation, element.value);
-              break;
-              
-            case "survey-station-z":
-              this.surveyService.saveStationZ(this.currentSurveyStation, element.value);
-              break;
+    }
 
-            case "survey-station-height":
-              this.surveyService.saveStationHeight(this.currentSurveyStation, element.value);
-              break;
+    /**
+     * Adds event listeners for panel-station
+     */
+    addListenersPanelStation() {
+      document.getElementById("survey-table-station").addEventListener('input', (event) => {
+        let element = event.target;
 
-            case "survey-or-direction":
-              this.surveyService.saveOrDirection(this.currentSurveyStation, element.value);
-              break;
+        switch(element.id) {
 
-            case "survey-or-name":
-              this.surveyService.saveOrName(this.currentSurveyStation, element.value);
-              break;
+          case "survey-station-name":
+            this.surveyService.saveStationName(this.currentSurveyStation, element.value);
+            document.getElementById("list-stations").innerHTML = '';
+            this.setListSurveyStations();
+            break;
 
-            case "survey-or-x":
-              this.surveyService.saveOrX(this.currentSurveyStation, element.value);
-              break;
+          case "survey-station-x":
+            this.surveyService.saveStationX(this.currentSurveyStation, element.value);
+            break;
 
-            case "survey-or-y":
-              this.surveyService.saveOrY(this.currentSurveyStation, element.value);
-              break;
+          case "survey-station-y":
+            this.surveyService.saveStationY(this.currentSurveyStation, element.value);
+            break;
+            
+          case "survey-station-z":
+            this.surveyService.saveStationZ(this.currentSurveyStation, element.value);
+            break;
 
-          }
-        });
+          case "survey-station-height":
+            this.surveyService.saveStationHeight(this.currentSurveyStation, element.value);
+            break;
 
+          case "survey-or-direction":
+            this.surveyService.saveOrDirection(this.currentSurveyStation, element.value);
+            break;
+
+          case "survey-or-name":
+            this.surveyService.saveOrName(this.currentSurveyStation, element.value);
+            break;
+
+          case "survey-or-x":
+            this.surveyService.saveOrX(this.currentSurveyStation, element.value);
+            break;
+
+          case "survey-or-y":
+            this.surveyService.saveOrY(this.currentSurveyStation, element.value);
+            break;
+
+        }
+      });
+
+    }
+
+    /**
+     * Adds event listeners for panel-measurement
+     */
+    addListenersPanelMeasurements() {
         document.getElementById("list-measurements").addEventListener('input', (event) => {
           let element = event.target;
 
@@ -248,6 +279,9 @@ export class SurveyController {
         });
 
     }
+
+
+
 
     /**
      * Sets the values of DOM elements for a station 
