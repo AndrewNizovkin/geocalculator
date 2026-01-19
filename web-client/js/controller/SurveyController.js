@@ -18,8 +18,8 @@ export class SurveyController {
         let content = document.getElementById("content");
 
         content.innerHTML = `
-    <div class="survey-toolbar">
-      <div class="survey-button new" id="survey-new" title="Создать"></div>
+    <div class="survey-toolbar" id="toolbar-survey">
+      <div class="survey-button new" id="survey-new" title="Новая съёмка"></div>
       <div class="survey-button open" id="survey-open" title="Открыть"></div>
       <div class="survey-button import" id="survey-import" title="Импорт из файла"></div>
       <div class="survey-button save" id="survey-save" title="Сохранить"></div>
@@ -93,7 +93,7 @@ export class SurveyController {
       </div>
 
       <div class="panel-measurements">
-        <div class="survey-toolbar">
+        <div class="survey-toolbar" id="toolbar-survey-measurements">
           <div class="survey-button delete" id="delete-measurement" title="Удалить выбранную"></div>
           <div class="survey-button insert-before" id="before-measurement" title="Вставить перед выбранной"></div>
           <div class="survey-button insert-after" id="after-measurement" title="Вставить после выбранной"></div>
@@ -138,6 +138,40 @@ export class SurveyController {
      */
     addListenersMainToolbar() {
 
+      document.getElementById("toolbar-survey").addEventListener('click', (event) => {
+        let element = event.target;
+
+        switch(element.id) {
+
+          case "survey-new":
+            this.surveyService.clearAll();
+            this.surveyService.addNewStation();
+            this.surveyService.addNewMeasurement(0);
+            this.currentSurveyStation = 0;
+            this.currentMeasurement = 0;
+            this.setListSurveyStations();
+            this.setSurveyStation();
+            this.setTableMeasurements();
+            break;
+
+          case "survey-open":
+            break;
+
+          case "survey-import":
+            break;
+
+          case "survey-save":
+            break;
+
+          case "survey-run":
+            break;
+
+          case "survey-catalog":
+            break;
+
+        }
+      });
+
     }
 
     /**
@@ -149,8 +183,8 @@ export class SurveyController {
         let element = event.target;
 
         if(element.hasAttribute('data-station-id')) {
-          this.currentSurveyStation = element.dataset.stationId;
-          document.getElementById("list-measurements").innerHTML = '';
+          this.currentSurveyStation = +element.dataset.stationId;
+          this.currentMeasurement = 0;
           this.setSurveyStation();
           this.setTableMeasurements();
         }
@@ -166,7 +200,7 @@ export class SurveyController {
           case "delete-station":
             if(this.surveyService.size() > 1) {
               this.surveyService.removeStation(this.currentSurveyStation);
-              document.getElementById("list-stations").innerHTML = '';
+              // document.getElementById("list-stations").innerHTML = '';
               this.setListSurveyStations();
               if(this.currentSurveyStation == this.surveyService.size()){
                 this.currentSurveyStation--;
@@ -175,9 +209,24 @@ export class SurveyController {
               this.setTableMeasurements();
             }
             break;
-        }
+          
+          case "before-station":
+            this.surveyService.insertNewStation(this.currentSurveyStation);
+            this.surveyService.addNewMeasurement(this.currentSurveyStation);
+            this.setListSurveyStations();
+            this.setSurveyStation();
+            this.setTableMeasurements();
+            break;
 
-        // TO DO
+          case "after-station":
+            this.currentSurveyStation++;
+            this.surveyService.insertNewStation(this.currentSurveyStation);
+            this.surveyService.addNewMeasurement(this.currentSurveyStation);
+            this.setListSurveyStations();
+            this.setSurveyStation();
+            this.setTableMeasurements();
+            break;
+        }
       });
 
     }
@@ -238,45 +287,86 @@ export class SurveyController {
      * Adds event listeners for panel-measurement
      */
     addListenersPanelMeasurements() {
-        document.getElementById("list-measurements").addEventListener('input', (event) => {
-          let element = event.target;
 
-          if(element.hasAttribute("data-target-name")) {
-            this.surveyService.saveTargetName(
-              this.currentSurveyStation, 
-              element.dataset.targetName, 
-              element.value);
-          }
+      document.getElementById("toolbar-survey-measurements").addEventListener('click', (event) => {
+        let element = event.target;
 
-          if(element.hasAttribute("data-target-direction")) {
-            this.surveyService.saveTargetDirection(
-              this.currentSurveyStation, 
-              element.dataset.targetDirection, 
-              element.value);
-          }
+        switch(element.id) {
 
-          if(element.hasAttribute("data-target-distance")) {
-            this.surveyService.saveTargetDistance(
-              this.currentSurveyStation, 
-              element.dataset.targetDistance, 
-              element.value);
-          }
+          case "delete-measurement":
+            if(this.surveyService.measurementSize() > 1) {
+              this.surveyService.removeMeasurement(this.currentSurveyStation, this.currentMeasurement);
+              this.setTableMeasurements();
+              if(this.currentMeasurement == this.surveyService.measurementSize(this.currentSurveyStation)) {
+                this.currentMeasurement--;
+              }
+            }
+            break;
 
-          if(element.hasAttribute("data-target-tilt")) {
-            this.surveyService.saveTargetTiltAngle(
-              this.currentSurveyStation, 
-              element.dataset.targetTilt, 
-              element.value);
-          }
-          
-          if(element.hasAttribute("data-target-height")) {
-            this.surveyService.saveTargetHeight(
-              this.currentSurveyStation, 
-              element.dataset.targetHeight, 
-              element.value);
-          }
+          case "before-measurement":
+            this.surveyService.insertNewMeasurement(this.currentSurveyStation, this.currentMeasurement);
+            this.setTableMeasurements();
+            break;
 
-        });
+          case "after-measurement":
+            this.currentMeasurement++;
+            this.surveyService.insertNewMeasurement(this.currentSurveyStation, this.currentMeasurement);
+            this.setTableMeasurements();
+            break;
+        }
+      });
+
+      document.getElementById("list-measurements").addEventListener('click', (event) => {
+        let element = event.target;
+
+        if(element.hasAttribute("data-measurement-id")) {
+          this.currentMeasurement = +element.dataset.measurementId;
+        }
+      });
+
+      document.getElementById("list-measurements").addEventListener('input', (event) => {
+        let element = event.target;
+
+        if(element.hasAttribute('data-measurement-id')) {
+          switch(element.dataset.target) {
+
+            case "name":
+              this.surveyService.saveTargetName(
+                this.currentSurveyStation, 
+                +element.dataset.measurementId, 
+                element.value);              
+              break;
+
+            case "direction":
+              this.surveyService.saveTargetDirection(
+                this.currentSurveyStation, 
+                +element.dataset.measurementId, 
+                element.value);
+              break;
+
+            case "distance":
+              this.surveyService.saveTargetDistance(
+                this.currentSurveyStation, 
+                +element.dataset.measurementId, 
+                element.value);
+              break;
+
+            case "tilt":
+              this.surveyService.saveTargetTiltAngle(
+                this.currentSurveyStation, 
+                +element.dataset.measurementId, 
+                element.value);
+              break;
+
+            case "height":
+              this.surveyService.saveTargetHeight(
+                this.currentSurveyStation, 
+                +element.dataset.measurementId, 
+                element.value);
+              break;
+          }
+        }
+      });
 
     }
 
@@ -309,15 +399,10 @@ export class SurveyController {
     setListSurveyStations() {
       if(this.surveyService.size() > 0) {
         let listSurveyStations = document.getElementById("list-stations");
-        // listSurveyStations.innerHTML = '';
+        listSurveyStations.innerHTML = '';
+
         for(let i = 0; i < this.surveyService.size(); i++) {
           let station = this.getElementSurveyStation(i);
-          // let menuItem = document.createElement('a');
-          // menuItem.className = "menu-item";
-          // menuItem.href = "#";
-          // menuItem.setAttribute('data-station-id', i);
-          // menuItem.innerHTML = this.surveyService.getStationName(i);
-          // station.append(menuItem);
           listSurveyStations.append(station);
         }
       }
@@ -371,7 +456,8 @@ export class SurveyController {
           let item = document.createElement('input');
           item.type = "text";
           item.className = "menu-item";
-          item.setAttribute('data-target-name', indexMeasurement);
+          item.setAttribute('data-target', 'name');
+          item.setAttribute('data-measurement-id', indexMeasurement);
           item.value = this.surveyService.getTargetName(indexStation, indexMeasurement);
           sell.append(item);
           row.append(sell);
@@ -380,7 +466,8 @@ export class SurveyController {
           item = document.createElement('input');
           item.type = "text";
           item.className = "menu-item";
-          item.setAttribute('data-target-direction', indexMeasurement);
+          item.setAttribute('data-target', 'direction');
+          item.setAttribute('data-measurement-id', indexMeasurement);
           item.value = this.surveyService.getTargetDirection(indexStation, indexMeasurement);
           sell.append(item);
           row.append(sell);
@@ -389,7 +476,8 @@ export class SurveyController {
           item = document.createElement('input');
           item.type = "text";
           item.className = "menu-item";
-          item.setAttribute('data-target-distance', indexMeasurement);
+          item.setAttribute('data-target', 'distance');
+          item.setAttribute('data-measurement-id', indexMeasurement);
           item.value = this.surveyService.getTargetDistance(indexStation, indexMeasurement);
           sell.append(item);
           row.append(sell);
@@ -398,7 +486,8 @@ export class SurveyController {
           item = document.createElement('input');
           item.type = "text";
           item.className = "menu-item";
-          item.setAttribute('data-target-tilt', indexMeasurement);
+          item.setAttribute('data-target', 'tilt');
+          item.setAttribute('data-measurement-id', indexMeasurement);
           item.value = this.surveyService.getTargetTiltAngle(indexStation, indexMeasurement);
           sell.append(item);
           row.append(sell);
@@ -407,7 +496,8 @@ export class SurveyController {
           item = document.createElement('input');
           item.type = "text";
           item.className = "menu-item";
-          item.setAttribute('data-target-height', indexMeasurement);
+          item.setAttribute('data-target', 'height');
+          item.setAttribute('data-measurement-id', indexMeasurement);
           item.value = this.surveyService.getTargetHeight(indexStation, indexMeasurement);
           sell.append(item);
           row.append(sell);
