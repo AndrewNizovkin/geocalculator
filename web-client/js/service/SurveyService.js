@@ -1,4 +1,5 @@
 import { SurveyRepository } from "../repository/SurveyRepository.js";
+import { SurveyMapper } from "../service/mapper/SurveyMapper.js";
 
 /**
  * This class provides methods for working 
@@ -32,6 +33,23 @@ export class SurveyService {
      */
     measurementSize(indexStation) {
         return this.surveyRepository.measurementSize(indexStation);
+    }
+
+    /**
+     * Fills in the survey stations repository from a text file in the "tah" format
+     * @param {string} pathToTahFile 
+     */
+    readFromDevice(pathToTahFile) {
+
+    }
+
+    /**
+     * Saves the current surveyStationRepository on the device 
+     * in a text file in the 'tah' format
+     * @param {string} pathToTahFile 
+     */
+    saveToDevice(pathToTahFile) {
+
     }
 
     /**

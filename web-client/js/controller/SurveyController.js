@@ -155,6 +155,9 @@ export class SurveyController {
             break;
 
           case "survey-open":
+            let newWin = window.open("about:blank", "hello", "width=200,height=200");
+
+            newWin.document.write("Hello, world!");            
             break;
 
           case "survey-import":
@@ -167,7 +170,11 @@ export class SurveyController {
             break;
 
           case "survey-catalog":
-            break;
+            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+            width=600,height=300,left=100,top=100`;
+
+            open('../../screens/inverse-task/', 'test', params);            
+          break;
 
         }
       });
