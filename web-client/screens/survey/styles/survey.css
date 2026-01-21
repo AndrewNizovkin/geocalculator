@@ -144,7 +144,7 @@ table > caption {
 
 
 .scrollpanel-stations {
-    height: 20vh;
+    height: 25vh;
     flex: 1 1 auto;
     overflow: auto;
 }
@@ -161,7 +161,7 @@ ul.list-stations a {
 }
 
 .scrollpanel-measurements {
-    height: auto;
+    height: 40em;
     flex: 1 1 auto;
     overflow: auto;
 }
@@ -315,17 +315,18 @@ ul.list-stations a {
         flex: 1 1 auto;
     }
 
-    /* .scrollpanel-stations {
+    .scrollpanel-stations {
         height: 100%;
-    } */
+    }
 
     .panel-measurements {
+        height: 100%;
         width: auto;
         flex: 0 0 auto;
     }
 
     .scrollpanel-measurements {
-    /* height: 100%; */
+    height: 60em;
     flex: 1 1 auto;
     overflow: auto;
     }

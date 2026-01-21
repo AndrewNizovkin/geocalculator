@@ -20,12 +20,12 @@ export class SurveyController {
         content.innerHTML = `
     <div class="survey-toolbar" id="toolbar-survey">
       <div class="survey-button new" id="survey-new" title="Новая съёмка"></div>
-      <div class="survey-button open" id="survey-open" title="Открыть"></div>
       <div class="survey-button import" id="survey-import" title="Импорт из файла"></div>
       <div class="survey-button save" id="survey-save" title="Сохранить"></div>
       <div class="survey-toolbar-separator"></div>
       <div class="survey-button run" id="survey-run" title="Обработать"></div>
       <div class="survey-button catalog" id="survey-catalog" title="Установить каталог"></div>
+      <input type="file" id="survey-open" name="file" accept=".tah">
     </div>
 
     <div class="panel-survey">
@@ -112,6 +112,7 @@ export class SurveyController {
               <th>Выс.Цели</th>
             </thead>
             <tbody id="list-measurements">
+
             </tbody>
 
           </table>
@@ -134,9 +135,93 @@ export class SurveyController {
     }
 
     /**
+     * Reads the transferred file and displays 
+     * the new contents of the surveyStationRepository
+     * @param {File} fileTah 
+     */
+    loadFromTahFile(fileTah) {
+      if(fileTah instanceof File) {
+
+            // this.surveyService.clearAll();
+            // this.surveyService.addNewStation();
+            // this.surveyService.addNewMeasurement(0);
+
+            // this.setListSurveyStations();
+            // this.setSurveyStation();
+            // this.setTableMeasurements();
+            // this.currentSurveyStation = 0;
+            // this.currentMeasurement = 0;
+
+
+        let reader = new FileReader();
+
+        try {
+            reader.readAsText(fileTah);
+
+            reader.onload = () => {
+              let arrayDto = [];
+              let stringTah = reader.result;
+              let linesArray = stringTah.split('\n');
+              linesArray.forEach((elem) => {
+                arrayDto.push(elem);
+              });
+
+              this.surveyService.readFromDevice(arrayDto);
+            // this.surveyService.clearAll();
+            // this.surveyService.addNewStation();
+            // this.surveyService.addNewMeasurement(0);
+
+              this.setListSurveyStations();
+              this.setSurveyStation();
+              this.setTableMeasurements();
+              this.currentSurveyStation = 0;
+              this.currentMeasurement = 0;
+
+
+            };
+
+        } catch {
+            alert('Ошибка чтения файла');
+
+        }
+
+
+
+
+
+
+
+
+        // this.surveyService.readFromDevice(fileTah).then(() => {
+        
+        //   this.setListSurveyStations();
+        //   this.setSurveyStation();
+        //   this.setTableMeasurements();
+        //   this.currentSurveyStation = 0;
+        //   this.currentMeasurement = 0;
+        // });
+      }
+
+    }
+
+    /**
      * Adds event listeners for main-toolbar
      */
     addListenersMainToolbar() {
+
+      document.getElementById("toolbar-survey").addEventListener('change', event => {
+        let element = event.target;
+
+        switch(element.id) {
+
+          case "survey-open":
+            let file = element.files[0];
+            this.loadFromTahFile(file);
+            break;
+        }
+
+        
+      });
 
       document.getElementById("toolbar-survey").addEventListener('click', (event) => {
         let element = event.target;
@@ -155,9 +240,6 @@ export class SurveyController {
             break;
 
           case "survey-open":
-            let newWin = window.open("about:blank", "hello", "width=200,height=200");
-
-            newWin.document.write("Hello, world!");            
             break;
 
           case "survey-import":
@@ -170,10 +252,6 @@ export class SurveyController {
             break;
 
           case "survey-catalog":
-            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-            width=600,height=300,left=100,top=100`;
-
-            open('../../screens/inverse-task/', 'test', params);            
           break;
 
         }

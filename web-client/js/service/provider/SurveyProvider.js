@@ -7,12 +7,26 @@ export class SurveyProvider {
     /**
      * Reads the lines of a text file into
      *  an array of strings
-     * @param {string} pathToFile 
+     * @param {File} pathToFile 
      * @returns {string[]}
      */
-    getStringArrayFromDevice(pathToFile) {
-        stringArray = [];
-        return stringArray;
+    async getStringArrayFromDevice(fileTah) {
+        let reader = new FileReader();
+
+        try {
+            reader.readAsText(fileTah);
+            reader.onload =  async function (event) {
+                let linesArray = await event.target.result.split('\n');
+                alert(linesArray.lenth)
+                return linesArray;
+                
+            }
+
+        } catch {
+            alert('Ошибка чтения файла');
+
+        }
+
     }
 
     /**
