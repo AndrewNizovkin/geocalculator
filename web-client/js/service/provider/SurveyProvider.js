@@ -11,21 +11,23 @@ export class SurveyProvider {
      * @returns {string[]}
      */
     async getStringArrayFromDevice(fileTah) {
-        let reader = new FileReader();
 
-        try {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            
+            reader.onload = function() {
+                const content = this.result.trim();
+                const lines = content.split(/\r\n|\r|\n/);
+
+                resolve(lines);
+            };
+
+            reader.onerror = function(event) {
+                reject(new Error(`Ошибка при чтении файла: ${event.target.error}`));
+            };
+
             reader.readAsText(fileTah);
-            reader.onload =  async function (event) {
-                let linesArray = await event.target.result.split('\n');
-                alert(linesArray.lenth)
-                return linesArray;
-                
-            }
-
-        } catch {
-            alert('Ошибка чтения файла');
-
-        }
+        });        
 
     }
 

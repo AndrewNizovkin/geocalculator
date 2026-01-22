@@ -135,76 +135,6 @@ export class SurveyController {
     }
 
     /**
-     * Reads the transferred file and displays 
-     * the new contents of the surveyStationRepository
-     * @param {File} fileTah 
-     */
-    loadFromTahFile(fileTah) {
-      if(fileTah instanceof File) {
-
-            // this.surveyService.clearAll();
-            // this.surveyService.addNewStation();
-            // this.surveyService.addNewMeasurement(0);
-
-            // this.setListSurveyStations();
-            // this.setSurveyStation();
-            // this.setTableMeasurements();
-            // this.currentSurveyStation = 0;
-            // this.currentMeasurement = 0;
-
-
-        let reader = new FileReader();
-
-        try {
-            reader.readAsText(fileTah);
-
-            reader.onload = () => {
-              let arrayDto = [];
-              let stringTah = reader.result;
-              let linesArray = stringTah.split('\n');
-              linesArray.forEach((elem) => {
-                arrayDto.push(elem);
-              });
-
-              this.surveyService.readFromDevice(arrayDto);
-            // this.surveyService.clearAll();
-            // this.surveyService.addNewStation();
-            // this.surveyService.addNewMeasurement(0);
-
-              this.setListSurveyStations();
-              this.setSurveyStation();
-              this.setTableMeasurements();
-              this.currentSurveyStation = 0;
-              this.currentMeasurement = 0;
-
-
-            };
-
-        } catch {
-            alert('Ошибка чтения файла');
-
-        }
-
-
-
-
-
-
-
-
-        // this.surveyService.readFromDevice(fileTah).then(() => {
-        
-        //   this.setListSurveyStations();
-        //   this.setSurveyStation();
-        //   this.setTableMeasurements();
-        //   this.currentSurveyStation = 0;
-        //   this.currentMeasurement = 0;
-        // });
-      }
-
-    }
-
-    /**
      * Adds event listeners for main-toolbar
      */
     addListenersMainToolbar() {
@@ -215,8 +145,19 @@ export class SurveyController {
         switch(element.id) {
 
           case "survey-open":
-            let file = element.files[0];
-            this.loadFromTahFile(file);
+            try {
+              let file = element.files[0];
+              if (!file) throw new Error("Select a file!");
+              this.surveyService.readFromDevice(file).then(() => {
+                this.setListSurveyStations();
+                this.setSurveyStation();
+                this.setTableMeasurements();
+                this.currentSurveyStation = 0;
+                this.currentMeasurement = 0;
+                });
+             } catch (error) {
+              console.error(error.message);
+            }
             break;
         }
 
@@ -246,6 +187,7 @@ export class SurveyController {
             break;
 
           case "survey-save":
+            this.surveyService.writeToDevice("hello");            
             break;
 
           case "survey-run":

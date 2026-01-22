@@ -19,10 +19,10 @@ let surveyService = new SurveyService();
 createDemoSurveyService();
 
 showSurveyService("Начальное содержание демо-съёмки")
- 
-surveyService.removeMeasurement(3, 3);
 
-showSurveyService("Удаляем измерение")
+// surveyService.removeMeasurement(3, 3);
+
+// showSurveyService("Удаляем измерение")
 
 /**
  * Создаёт тестовый репозиторий
@@ -286,4 +286,27 @@ function showSurveyService(message) {
 
 
     }
+}
+
+/**
+ * Displays string array
+ * @param {string} message 
+ * @param {string[]} linesArray 
+ */
+function showLinesAray(message, linesArray) {
+
+    let newElem = document.createElement('div');
+    newElem.innerHTML = `<br>------${message}-----<br>`
+    content.append(newElem);
+
+    linesArray.forEach((elem) => {
+        let newElem = document.createElement('div');        
+        newElem.innerHTML = `${elem}`;
+        content.append(newElem);
+
+    });
+
+
+
+
 }

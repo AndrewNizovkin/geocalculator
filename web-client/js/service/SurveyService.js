@@ -40,74 +40,17 @@ export class SurveyService {
 
     /**
      * Fills in the survey stations repository from a text file in the "tah" format
-     * @param {string[]} 
+     * @param {File} 
      */
-    readFromDevice(object) {
-
-        let linesArray = [];
-        object.forEach(element => {
-            linesArray.push(element);
-        });
-
-        // this.surveyRepository.clearAll();
-        // this.surveyRepository.addNewStation();
-        // this.surveyRepository.addNewMeasurement(0);
-
-        console.log(linesArray.length);
-        for(let i = 0; i < linesArray.length; i++) {
-            if(linesArray[i] == "//") {
-                let str = `stroka ${i} = ${linesArray[i]}`;
-                console.log(str);
-            }
+    async readFromDevice(fileTah) {
+        try {
+            await this.surveyProvider.getStringArrayFromDevice(fileTah).then((object) => {
+                this.surveyRepository.clearAll();
+                this.surveyRepository = this.surveyMapper.arrayToSurveyRepository(object);
+            });
+        } catch (err) {
+            console.error(err.message);
         }
-
-
-        if(linesArray.length > 0) {
-            this.surveyRepository.clearAll();
-            let line = linesArray.shift();
-            let itemsArray = [];
-            let currentSurveyStation = 0;
-            while(line != "//" && linesArray.length > 1) {
-                itemsArray = line.split(" ");
-                if(itemsArray.length == 8) {
-                    this.surveyRepository.addNewStation();
-
-                    this.surveyRepository.saveStationName(-1, itemsArray[0]);
-                    this.surveyRepository.saveStationX(-1, itemsArray[1]);
-                    this.surveyRepository.saveStationY(-1, itemsArray[2]);
-                    this.surveyRepository.saveStationZ(-1, itemsArray[3]);
-                    this.surveyRepository.saveStationHeight(-1, itemsArray[4]);
-                    this.surveyRepository.saveOrName(-1, itemsArray[5]);
-                    this.surveyRepository.saveOrX(-1, itemsArray[6]);
-                    this.surveyRepository.saveOrY(-1, itemsArray[7]);
-                }
-                
-                line = linesArray.shift();
-            }
-
-            line = linesArray.shift();
-            while(linesArray.length > 0) {
-                while(line == "//") {
-                    line = linesArray.shift();
-                }
-
-                itemsArray = line.split(" ");
-                if(itemsArray.length == 6) {
-                    currentSurveyStation = +itemsArray[5];
-                    this.surveyRepository.addNewMeasurement(currentSurveyStation);
-                    this.surveyRepository.saveTargetName(currentSurveyStation, -1, itemsArray[0]);
-                    this.surveyRepository.saveTargetDistance(currentSurveyStation, -1, itemsArray[1]);
-                    this.surveyRepository.saveTargetDirection(currentSurveyStation, -1, itemsArray[2]);
-                    this.surveyRepository.saveTargetTiltAngle(currentSurveyStation, -1, itemsArray[3]);
-                    this.surveyRepository.saveTargetHeight(currentSurveyStation, -1, itemsArray[4]);
-                }
-                
-                line = linesArray.shift();
-            }
-        }
-
-    
-
     }
 
     /**
@@ -115,7 +58,9 @@ export class SurveyService {
      * in a text file in the 'tah' format
      * @param {string} pathToTahFile 
      */
-    saveToDevice(pathToTahFile) {
+    writeToDevice(pathToTahFile) {
+        let linesArray = this.surveyMapper.surveyRepositoryToArray(this.surveyRepository);
+        return linesArray;
 
     }
 

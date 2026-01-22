@@ -8,35 +8,34 @@ export class SurveyMapper {
     /**
      * converts an array of strings in the 'tah' format to 
      * an instance of the 'SurveyRepository' object
-     * @param {string[]} linesArray array of strings in the 'tah' format
+     * @param {string[]} object array of strings in the 'tah' format
      * @returns {SurveyRepository}
      */ 
-    arrayToSurveyRepository(linesArray) {
-        
-        for(let i = 0; i < linesArray.length; i++) {
-            console.log(linesArray[i]);
-        }
-
+    arrayToSurveyRepository(object) {
         let surveyRepository = new SurveyRepository();
-        alert('Тип репозитория' + typeof(surveyRepository));
+
+        let linesArray = [];
+        object.forEach(element => {
+            linesArray.push(element);
+        });
 
         if(linesArray.length > 0) {
             let line = linesArray.shift();
             let itemsArray = [];
             let currentSurveyStation = 0;
-            while(line != "//" && linesArray > 1) {
+            while(line != "//" && linesArray.length > 1) {
                 itemsArray = line.split(" ");
                 if(itemsArray.length == 8) {
                     surveyRepository.addNewStation();
 
-                    surveyRepository.saveStationName(itemsArray[0]);
-                    surveyRepository.saveStationX(itemsArray[1]);
-                    surveyRepository.saveStationY(itemsArray[2]);
-                    surveyRepository.saveStationZ(itemsArray[3]);
-                    surveyRepository.saveStationHeight(itemsArray[4]);
-                    surveyRepository.saveOrName(itemsArray[5]);
-                    surveyRepository.saveOrX(itemsArray[6]);
-                    surveyRepository.saveOrY(itemsArray[7]);
+                    surveyRepository.saveStationName(-1, itemsArray[0]);
+                    surveyRepository.saveStationX(-1, itemsArray[1]);
+                    surveyRepository.saveStationY(-1, itemsArray[2]);
+                    surveyRepository.saveStationZ(-1, itemsArray[3]);
+                    surveyRepository.saveStationHeight(-1, itemsArray[4]);
+                    surveyRepository.saveOrName(-1, itemsArray[5]);
+                    surveyRepository.saveOrX(-1, itemsArray[6]);
+                    surveyRepository.saveOrY(-1, itemsArray[7]);
                 }
                 
                 line = linesArray.shift();
@@ -62,8 +61,9 @@ export class SurveyMapper {
                 line = linesArray.shift();
             }
         }
-        
+
         return surveyRepository;
+ 
     }
 
     /**
@@ -74,6 +74,36 @@ export class SurveyMapper {
      */
     surveyRepositoryToArray(surveyRepository) {
         let arrayTah = [];
+        let line = '';
+
+        for (let i = 0; i < surveyRepository.size(); i++) {
+            line = '';
+            line += `${surveyRepository.getStationName(i)} `;
+            line += `${surveyRepository.getStationX(i)} `;
+            line += `${surveyRepository.getStationY(i)} `;
+            line += `${surveyRepository.getStationZ(i)} `;
+            line += `${surveyRepository.getStationHeight(i)} `;
+            line += `${surveyRepository.getOrName(i)} `;
+            line += `${surveyRepository.getOrX(i)} `;
+            line += `${surveyRepository.getOrY(i)}`;
+            arrayTah.push(line);
+        }
+
+        arrayTah.push("//");
+
+        for (let i = 0; i < surveyRepository.size(); i++) {
+            for (let j = 0; j < surveyRepository.measurementSize(i); j++) {
+                line = '';
+                line += `${surveyRepository.getTargetName(i, j)} `;
+                line += `${surveyRepository.getTargetDistance(i, j)} `;
+                line += `${surveyRepository.getTargetDirection(i, j)} `;
+                line += `${surveyRepository.getTargetTiltAngle(i, j)} `;
+                line += `${surveyRepository.getTargetHeight(i, j)} `;
+                line += `${i}`;
+                arrayTah.push(line);
+            }
+            arrayTah.push("//");
+        }
 
         return arrayTah;
     }

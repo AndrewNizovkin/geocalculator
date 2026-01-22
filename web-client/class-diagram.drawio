@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.3.3">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.3.4">
   <diagram name="Страница-1" id="o-5GadF2C5qq2WKj6GCM">
-    <mxGraphModel dx="3020" dy="1936" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2965" dy="1905" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -870,7 +870,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="pfKzSil67kj_inZJn3mC-2" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="SurveyController" vertex="1">
-          <mxGeometry height="406" width="360" x="1510" y="2980" as="geometry" />
+          <mxGeometry height="380" width="360" x="1510" y="2980" as="geometry" />
         </mxCell>
         <mxCell id="pfKzSil67kj_inZJn3mC-3" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ surveyService: SurveyService" vertex="1">
           <mxGeometry height="26" width="360" y="26" as="geometry" />
@@ -887,35 +887,32 @@
         <mxCell id="pfKzSil67kj_inZJn3mC-5" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ loadPageSurvey(): void" vertex="1">
           <mxGeometry height="26" width="360" y="112" as="geometry" />
         </mxCell>
-        <mxCell id="9GQx0SSn3p5C1zTO-8x_-1" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ loadFromTahFile(File): void" vertex="1">
+        <mxCell id="IT3rM0XlFOcqQ3E7NNoe-1" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- addListenersMainToolbar(): void" vertex="1">
           <mxGeometry height="26" width="360" y="138" as="geometry" />
         </mxCell>
-        <mxCell id="IT3rM0XlFOcqQ3E7NNoe-1" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- addListenersMainToolbar(): void" vertex="1">
+        <mxCell id="IT3rM0XlFOcqQ3E7NNoe-3" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- addListenersPanelStations(): void" vertex="1">
           <mxGeometry height="26" width="360" y="164" as="geometry" />
         </mxCell>
-        <mxCell id="IT3rM0XlFOcqQ3E7NNoe-3" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- addListenersPanelStations(): void" vertex="1">
+        <mxCell id="IT3rM0XlFOcqQ3E7NNoe-2" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- addListenersPanelStation(): void" vertex="1">
           <mxGeometry height="26" width="360" y="190" as="geometry" />
         </mxCell>
-        <mxCell id="IT3rM0XlFOcqQ3E7NNoe-2" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- addListenersPanelStation(): void" vertex="1">
+        <mxCell id="IT3rM0XlFOcqQ3E7NNoe-4" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- addListenersPanelMeasurements(): void" vertex="1">
           <mxGeometry height="26" width="360" y="216" as="geometry" />
         </mxCell>
-        <mxCell id="IT3rM0XlFOcqQ3E7NNoe-4" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- addListenersPanelMeasurements(): void" vertex="1">
+        <mxCell id="HCBxtNiChV1l_y6cP0zw-1" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- setSurveyStation(): void" vertex="1">
           <mxGeometry height="26" width="360" y="242" as="geometry" />
         </mxCell>
-        <mxCell id="HCBxtNiChV1l_y6cP0zw-1" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- setSurveyStation(): void" vertex="1">
-          <mxGeometry height="26" width="360" y="268" as="geometry" />
-        </mxCell>
         <mxCell id="HCBxtNiChV1l_y6cP0zw-2" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- setListSurveyStations(): void" vertex="1">
-          <mxGeometry height="30" width="360" y="294" as="geometry" />
+          <mxGeometry height="30" width="360" y="268" as="geometry" />
         </mxCell>
         <mxCell id="HCBxtNiChV1l_y6cP0zw-3" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- setTableMeasurements(): void" vertex="1">
-          <mxGeometry height="30" width="360" y="324" as="geometry" />
+          <mxGeometry height="30" width="360" y="298" as="geometry" />
         </mxCell>
         <mxCell id="Mw_HVcX160hyxr-TmW9x-10" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- getElementSurveyStation(number): HtmlElement" vertex="1">
-          <mxGeometry height="26" width="360" y="354" as="geometry" />
+          <mxGeometry height="26" width="360" y="328" as="geometry" />
         </mxCell>
         <mxCell id="Mw_HVcX160hyxr-TmW9x-11" parent="pfKzSil67kj_inZJn3mC-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- getElementMeasurement(number, number): HtmlElement" vertex="1">
-          <mxGeometry height="26" width="360" y="380" as="geometry" />
+          <mxGeometry height="26" width="360" y="354" as="geometry" />
         </mxCell>
         <mxCell id="pfKzSil67kj_inZJn3mC-6" edge="1" parent="1" source="pfKzSil67kj_inZJn3mC-2" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;exitX=1.009;exitY=0.12;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitPerimeter=0;" target="pfKzSil67kj_inZJn3mC-1" value="">
           <mxGeometry relative="1" width="160" as="geometry">
@@ -1207,7 +1204,7 @@
         <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-90" parent="onQILtjeM1GslLBcbhnt-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ readFromDevice(FIle): void" vertex="1">
           <mxGeometry height="26" width="250" y="190" as="geometry" />
         </mxCell>
-        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-91" parent="onQILtjeM1GslLBcbhnt-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ saveToDevice(string): void" vertex="1">
+        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-91" parent="onQILtjeM1GslLBcbhnt-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ writeToDevice(string): void" vertex="1">
           <mxGeometry height="26" width="250" y="216" as="geometry" />
         </mxCell>
         <mxCell id="onQILtjeM1GslLBcbhnt-7" parent="onQILtjeM1GslLBcbhnt-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ addNewStation(): void" vertex="1">
