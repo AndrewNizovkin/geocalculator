@@ -60,7 +60,7 @@ export class SurveyService {
      */
     writeToDevice(pathToTahFile) {
         let linesArray = this.surveyMapper.surveyRepositoryToArray(this.surveyRepository);
-        return linesArray;
+        // return linesArray;
 
     }
 

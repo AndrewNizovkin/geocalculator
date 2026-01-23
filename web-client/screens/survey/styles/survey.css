@@ -207,7 +207,17 @@ ul.list-stations a {
 }
 
 .survey-button.open {
+    position: relative;
     background-image: url(/images/open.png);
+}
+
+.survey-button.open input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0.0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;    
 }
 
 .survey-button.import {

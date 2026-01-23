@@ -20,12 +20,15 @@ export class SurveyController {
         content.innerHTML = `
     <div class="survey-toolbar" id="toolbar-survey">
       <div class="survey-button new" id="survey-new" title="Новая съёмка"></div>
+      <div class="survey-button open" id="survey-open" title="Открыть">
+        <input type="file" id="survey-open-input" name="file" accept=".tah">
+      </div>
       <div class="survey-button import" id="survey-import" title="Импорт из файла"></div>
       <div class="survey-button save" id="survey-save" title="Сохранить"></div>
+      <!-- <input type="file" id="survey-open" name="file" accept=".tah"> -->
       <div class="survey-toolbar-separator"></div>
       <div class="survey-button run" id="survey-run" title="Обработать"></div>
       <div class="survey-button catalog" id="survey-catalog" title="Установить каталог"></div>
-      <input type="file" id="survey-open" name="file" accept=".tah">
     </div>
 
     <div class="panel-survey">
@@ -39,6 +42,9 @@ export class SurveyController {
           </div>
           <div class="scrollpanel-stations">
             <ul class="list-stations" id="list-stations">
+              <li><a class="menu-item" href="#" data-station-id="0">1301</a></li>
+              <li><a class="menu-item" href="#" data-station-id="1">100</a></li>
+              <li><a class="menu-item" href="#" data-station-id="0">101</a></li>
             </ul>
           </div>
         </div>
@@ -112,7 +118,22 @@ export class SurveyController {
               <th>Выс.Цели</th>
             </thead>
             <tbody id="list-measurements">
-
+              <!-- Демо данные -->
+              <tr>
+                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="name" value="1302"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="direction" value="359.5953"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="distance" value="30.526"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="tilt" value="-0.5959"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="height" value="1302"/></td>
+              </tr>
+              <tr>
+                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="name" value="1302"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="direction" value="359.5953"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="distance" value="30.526"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="tilt" value="-0.5959"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="height" value="1302"/></td>
+              </tr>
+              <!-- Демо данные -->
             </tbody>
 
           </table>
@@ -120,6 +141,7 @@ export class SurveyController {
       </div>
 
     </div>
+
 
       
         `;
@@ -144,7 +166,7 @@ export class SurveyController {
 
         switch(element.id) {
 
-          case "survey-open":
+          case "survey-open-input":
             try {
               let file = element.files[0];
               if (!file) throw new Error("Select a file!");
@@ -181,14 +203,15 @@ export class SurveyController {
             break;
 
           case "survey-open":
+            document.getElementById("survey-open-input").click();
             break;
 
           case "survey-import":
             break;
 
-          case "survey-save":
-            this.surveyService.writeToDevice("hello");            
-            break;
+          // case "survey-save":
+            // this.surveyService.writeToDevice("hello");            
+            // break;
 
           case "survey-run":
             break;
@@ -200,6 +223,8 @@ export class SurveyController {
       });
 
     }
+
+    
 
     /**
      * Adds event listeners for panel-stations

@@ -1,3 +1,5 @@
+import { TextFileReaderWriter } from "./TextFileReaderWriter.js";
+
 /**
  * This class provides methods 
  * for getting data from external sources.
@@ -11,24 +13,7 @@ export class SurveyProvider {
      * @returns {string[]}
      */
     async getStringArrayFromDevice(fileTah) {
-
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            
-            reader.onload = function() {
-                const content = this.result.trim();
-                const lines = content.split(/\r\n|\r|\n/);
-
-                resolve(lines);
-            };
-
-            reader.onerror = function(event) {
-                reject(new Error(`Ошибка при чтении файла: ${event.target.error}`));
-            };
-
-            reader.readAsText(fileTah);
-        });        
-
+        return TextFileReaderWriter.readFromTextFile(fileTah);
     }
 
     /**
