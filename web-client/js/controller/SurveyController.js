@@ -24,11 +24,10 @@ export class SurveyController {
         <input type="file" id="survey-open-input" name="file" accept=".tah">
       </div>
       <div class="survey-button import" id="survey-import" title="Импорт из файла"></div>
-      <div class="survey-button save" id="survey-save" title="Сохранить"></div>
-      <!-- <input type="file" id="survey-open" name="file" accept=".tah"> -->
       <div class="survey-toolbar-separator"></div>
+      <div class="survey-button catalog" id="survey-catalog" title="Показать каталог"></div>
       <div class="survey-button run" id="survey-run" title="Обработать"></div>
-      <div class="survey-button catalog" id="survey-catalog" title="Установить каталог"></div>
+      <div class="survey-button view" id="survey-view" title="Просмотр результатов"></div>
     </div>
 
     <div class="panel-survey">
@@ -103,10 +102,6 @@ export class SurveyController {
           <div class="survey-button delete" id="delete-measurement" title="Удалить выбранную"></div>
           <div class="survey-button insert-before" id="before-measurement" title="Вставить перед выбранной"></div>
           <div class="survey-button insert-after" id="after-measurement" title="Вставить после выбранной"></div>
-          <div class="survey-toolbar-separator"></div>
-          <div class="survey-button change-distance"></div>
-          <div class="survey-button change-direction"></div>
-          <div class="survey-button change-tilt"></div>
         </div>
         <div class="scrollpanel-measurements">
           <table class="table-measurements">

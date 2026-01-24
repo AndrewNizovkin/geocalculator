@@ -20,7 +20,11 @@ createDemoSurveyService();
 
 showSurveyService("Начальное содержание демо-съёмки")
 
-// surveyService.removeMeasurement(3, 3);
+let lines = surveyService.getTahArray();
+
+showLinesAray("tahfile:", lines);
+
+// surveyService.removeMeasurement(0, 0);
 
 // showSurveyService("Удаляем измерение")
 

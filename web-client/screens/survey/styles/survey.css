@@ -228,6 +228,10 @@ ul.list-stations a {
     background-image: url(/images/save.png);
 }
 
+.survey-button.view {
+    background-image: url(/images/view.png);
+}
+
 .survey-button.run {
     background-image: url(/images/run.png);
 }

@@ -1,4 +1,4 @@
-import { TextFileReaderWriter } from "./TextFileReaderWriter.js";
+import { TextFileReader } from "./TextFileReader.js";
 
 /**
  * This class provides methods 
@@ -13,7 +13,7 @@ export class SurveyProvider {
      * @returns {string[]}
      */
     async getStringArrayFromDevice(fileTah) {
-        return TextFileReaderWriter.readFromTextFile(fileTah);
+        return TextFileReader.readFromTextFile(fileTah);
     }
 
     /**

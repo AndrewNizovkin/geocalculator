@@ -54,13 +54,12 @@ export class SurveyService {
     }
 
     /**
-     * Saves the current surveyStationRepository on the device 
-     * in a text file in the 'tah' format
-     * @param {string} pathToTahFile 
+     * Returns an array of strings in the 'tah' format
+     * @returns {string[]}
      */
-    writeToDevice(pathToTahFile) {
+    getTahArray() {
         let linesArray = this.surveyMapper.surveyRepositoryToArray(this.surveyRepository);
-        // return linesArray;
+        return linesArray;
 
     }
 
