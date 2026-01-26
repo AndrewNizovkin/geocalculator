@@ -46,7 +46,7 @@ export class SurveyService {
         try {
             await this.surveyProvider.getStringArrayFromDevice(fileTah).then((object) => {
                 this.surveyRepository.clearAll();
-                this.surveyRepository = this.surveyMapper.arrayToSurveyRepository(object);
+                this.surveyRepository = this.surveyMapper.arrayToSurveyRepository(object, this.surveyRepository);
             });
         } catch (err) {
             console.error(err.message);

@@ -1,8 +1,7 @@
 import {SurveyStation} from '../model/SurveyStation.js';
 import {Measurement} from '../model/Measurement.js';
 /**
- * This class represents collection of surveyStation, 
- * contains geodetic measurements
+ * Provides methods for working with a collection of survey stations
  */
 export class SurveyRepository {
     

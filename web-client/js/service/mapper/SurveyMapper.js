@@ -1,4 +1,4 @@
-import { SurveyRepository } from "../../repository/SurveyRepository.js";
+// import { SurveyRepository } from "../../repository/SurveyRepository.js";
 
 /**
  * This class provides methods for converting models and dto objects.
@@ -11,8 +11,8 @@ export class SurveyMapper {
      * @param {string[]} object array of strings in the 'tah' format
      * @returns {SurveyRepository}
      */ 
-    arrayToSurveyRepository(object) {
-        let surveyRepository = new SurveyRepository();
+    arrayToSurveyRepository(object, surveyRepository) {
+        // let surveyRepository = new SurveyRepository();
 
         let linesArray = [];
         object.forEach(element => {
