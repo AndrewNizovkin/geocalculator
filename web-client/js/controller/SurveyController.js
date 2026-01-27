@@ -7,6 +7,8 @@ export class SurveyController {
 
   constructor() {
     this.surveyService = new SurveyService();
+    this.surveyService.addNewStation();
+    this.surveyService.addNewMeasurement(0);
     this.currentSurveyStation = 0;
     this.currentMeasurement = 0;
   }
@@ -550,105 +552,6 @@ export class SurveyController {
           row.append(sell);
 
           return row;
-    }
-
-    /**
-     * Loades demo survey
-     */
-    loadDemoData() {
-    this.surveyService.addNewStation();
-    this.surveyService.saveStationName(0, "1301");
-    this.surveyService.saveStationX(0, "478676.113");
-    this.surveyService.saveStationY(0, "2296967.264");
-    this.surveyService.saveStationZ(0, "11.220");
-    this.surveyService.saveStationHeight(0, "1.538");
-    this.surveyService.saveOrDirection(0, "0.0000");
-    this.surveyService.saveOrName(0, "1302");
-    this.surveyService.saveOrX(0, "478685.352");
-    this.surveyService.saveOrY(0, "2296938.168");
-
-    this.surveyService.addNewMeasurement(0);
-    this.surveyService.saveTargetName(0, 0, "1302");
-    this.surveyService.saveTargetDirection(0, 0, "359.5953");
-    this.surveyService.saveTargetDistance(0, 0, "30.562");
-    this.surveyService.saveTargetTiltAngle(0, 0, "0.3009");
-    this.surveyService.saveTargetHeight(0, 0, "1.600");
-
-    this.surveyService.addNewMeasurement(0);
-    this.surveyService.saveTargetName(0, 1, "T100");
-    this.surveyService.saveTargetDirection(0, 1, "185.4548");
-    this.surveyService.saveTargetDistance(0, 1, "39.878");
-    this.surveyService.saveTargetTiltAngle(0, 1, "0.0646");
-    this.surveyService.saveTargetHeight(0, 1, "1.600");
-
-    this.surveyService.addNewMeasurement(0);
-    this.surveyService.saveTargetName(0, 2, "T101");
-    this.surveyService.saveTargetDirection(0, 2, "164.3757");
-    this.surveyService.saveTargetDistance(0, 2, "68.564");
-    this.surveyService.saveTargetTiltAngle(0, 2, "-0.1338");
-    this.surveyService.saveTargetHeight(0, 2, "1.600");
-
-
-
-    // add station
-    this.surveyService.addNewStation();
-    this.surveyService.saveStationName(1, "100");
-    this.surveyService.saveStationX(1, "478660.283");
-    this.surveyService.saveStationY(1, "2297003.862");
-    this.surveyService.saveStationZ(1, "11.231");
-    this.surveyService.saveStationHeight(1, "1.58");
-    this.surveyService.saveOrDirection(1, "0.0100");
-    this.surveyService.saveOrName(1, "1301");
-    this.surveyService.saveOrX(1, "478676.113");
-    this.surveyService.saveOrY(1, "2296967.264");
-
-    this.surveyService.addNewMeasurement(1);
-    this.surveyService.saveTargetName(1, 0, "1301");
-    this.surveyService.saveTargetDirection(1, 0, "359.5955");
-    this.surveyService.saveTargetDistance(1, 0, "39.884");
-    this.surveyService.saveTargetTiltAngle(1, 0, "0.0054");
-    this.surveyService.saveTargetHeight(1, 0, "1.600");
-
-    this.surveyService.addNewMeasurement(1);
-    this.surveyService.saveTargetName(1, 1, "T101");
-    this.surveyService.saveTargetDirection(1, 1, "164.3757");
-    this.surveyService.saveTargetDistance(1, 1, "68.564");
-    this.surveyService.saveTargetTiltAngle(1, 1, "-0.1338");
-    this.surveyService.saveTargetHeight(1, 1, "1.600");
-
-    this.surveyService.addNewMeasurement(1);
-    this.surveyService.saveTargetName(1, 2, "74");
-    this.surveyService.saveTargetDirection(1, 2, "161.2650");
-    this.surveyService.saveTargetDistance(1, 2, "43.653");
-    this.surveyService.saveTargetTiltAngle(1, 2, "0.0041");
-    this.surveyService.saveTargetHeight(1, 2, "1.600");
-
-    // add station
-    this.surveyService.addNewStation();
-    this.surveyService.saveStationName(2, "101");
-    this.surveyService.saveStationX(2, "478650.714");
-    this.surveyService.saveStationY(2, "2297071.740");
-    this.surveyService.saveStationZ(2, "10.930");
-    this.surveyService.saveStationHeight(2, "1.58");
-    this.surveyService.saveOrDirection(2, "0.0100");
-    this.surveyService.saveOrName(2, "100");
-    this.surveyService.saveOrX(2, "478660.283");
-    this.surveyService.saveOrY(2, "2297003.862");
-
-    this.surveyService.addNewMeasurement(2);
-    this.surveyService.saveTargetName(2, 0, "T100");
-    this.surveyService.saveTargetDirection(2, 0, "359.5954");
-    this.surveyService.saveTargetDistance(2, 0, "68.557");
-    this.surveyService.saveTargetTiltAngle(2, 0, "0.1741");
-    this.surveyService.saveTargetHeight(2, 0, "0.000");
-
-    this.surveyService.addNewMeasurement(2);
-    this.surveyService.saveTargetName(2, 1, "T102");
-    this.surveyService.saveTargetDirection(2, 1, "141.4810");
-    this.surveyService.saveTargetDistance(2, 1, "49.147");
-    this.surveyService.saveTargetTiltAngle(2, 1, "-0.0948");
-    this.surveyService.saveTargetHeight(2, 1, "1.600");
-
     }
 
 }

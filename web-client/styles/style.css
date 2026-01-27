@@ -1,7 +1,8 @@
-@import '../screens/direct-task/styles/direct.css';
-@import '../screens/inverse-task/styles/inverse.css';
-@import '../screens/potenot-task/styles/potenot.css';
-@import '../screens/survey/styles/survey.css';
+@import './direct.css';
+@import './inverse.css';
+@import './potenot.css';
+@import './survey.css';
+@import './points.css';
 
 * {
     box-sizing: border-box;

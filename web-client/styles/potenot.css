@@ -33,6 +33,7 @@ body {
 
 .content {
     display: flex;
+    height: 100%;
     flex-direction: column;
     background-color: var(--container-bg-color);
     border: 2px outset #bab6b7;

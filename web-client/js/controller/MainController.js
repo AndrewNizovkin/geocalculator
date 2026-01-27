@@ -2,6 +2,7 @@ import {DirectController} from './DIrectController.js';
 import {InverseController} from './InverseController.js';
 import {PotenotController} from './PotenotController.js';
 import { SurveyController } from './SurveyController.js';
+import { BasePointController } from './BasePointController.js';
 
 /**
  * 
@@ -14,6 +15,7 @@ export class MainController {
         this.inverseController = new InverseController();
         this.potenotController = new PotenotController();
         this.surveyController = new SurveyController();
+        this.basePointController = new BasePointController();
     }
 
     /**
@@ -47,89 +49,38 @@ export class MainController {
       <div class="menu-item" id="inverse-page">Обратная задача</div>
       <div class="menu-item" id="potenot-page">Задача Потенота</div>
       <div class="menu-item" id="survey-page">Съёмка</div>
+      <div class="menu-item" id="points-page">Каталог</div>
     </div>
-    <div class="content" id="content"></div>
+    <div class="content" id="content">
+      
+      <div class="main-title">
+        <h3>Задачи</h3><br>
+        Геодезический калькулятор Тахеопорт предназначен для решения прикладных 
+        задач, встречающихся в практике топографов, геодезистов и смежных с ними профессий.
+      </div>
+
+      <div class="panel-main">
+
+        <div class="main-banner"></div>
+        <div class="main-banner"></div>
+        <div class="main-banner"></div>
+        <div class="main-banner"></div>
+
+      </div>
+
+
+    </div>
 
     <div class="sidebar">Sidebar</div>
   </div>
   <div class="footer">Footer</div>
 
 
+
         `;
-
-        document.getElementById("nav-menu").addEventListener('click', (event) => {
-          let titleSeparator = document.getElementById("title-separator");
-
-          switch(event.target.id) {
-
-            case "main-page":
-              this.loadMainPage();
-              titleSeparator.innerHTML = "Геодезический калькулятор";
-              break;
-            
-            case "direct-page":
-              this.directController.loadPageDirect();
-              titleSeparator.innerHTML = "Прямая геодезическая задача";
-              break;
-
-            case "inverse-page":
-              this.inverseController.loadPageInverse();
-              titleSeparator.innerHTML = "Обратная геодезическая задача";
-              break;
-
-            case "potenot-page":
-              this.potenotController.loadPagePotenot();
-              titleSeparator.innerHTML = "Задача Потенота";
-              break;
-
-            case "survey-page":
-              this.surveyController.loadPageSurvey();
-              titleSeparator.innerHTML = "Тахеометрическая съёмка";
-              break;
-          }
-
-        });
-
-
-        document.getElementById('header').addEventListener('click', (event) => {
-
-          switch(event.target.id) {
-
-            case "icon-menu":
-              document.getElementById("main-menu").classList.toggle("open");
-              break;
-
-            case "logo":
-              this.loadMainPage();
-              break;
-
-            case "main-direct":
-              this.directController.loadPageDirect();
-              subMenuTools.classList.toggle("open");
-              break;
-
-            case "main-inverse":
-              this.inverseController.loadPageInverse();
-              subMenuTools.classList.toggle("open");
-              break;
-
-            case "main-potenot":
-              this.potenotController.loadPagePotenot();
-              subMenuTools.classList.toggle("open");
-              break;
-
-            case "main-survey":
-              this.surveyController.loadPageSurvey();
-              subMenuTools.classList.toggle("open");
-              break;              
-          }
-
-        });
-
-        // Загрузка демо-съёмки
-        this.surveyController.loadDemoData();
-
         this.loadMainPage();
+        this.addListenersMainMenu();
+        this.addListenersNavMenu();
     }
 
     /**
@@ -155,6 +106,91 @@ export class MainController {
       </div>
 
         `;
+
+    }
+
+    /**
+     * Adds listeners to main menu
+     */
+    addListenersMainMenu() {
+      document.getElementById('header').addEventListener('click', (event) => {
+
+        switch(event.target.id) {
+
+          case "icon-menu":
+            document.getElementById("main-menu").classList.toggle("open");
+            break;
+
+          case "logo":
+            this.loadMainPage();
+            break;
+
+          case "main-direct":
+            this.directController.loadPageDirect();
+            subMenuTools.classList.toggle("open");
+            break;
+
+          case "main-inverse":
+            this.inverseController.loadPageInverse();
+            subMenuTools.classList.toggle("open");
+            break;
+
+          case "main-potenot":
+            this.potenotController.loadPagePotenot();
+            subMenuTools.classList.toggle("open");
+            break;
+
+          case "main-survey":
+            this.surveyController.loadPageSurvey();
+            subMenuTools.classList.toggle("open");
+            break;              
+        }
+
+      });
+
+    }
+
+    /**
+     * Adds listeners to nav menu
+     */
+    addListenersNavMenu() {
+      document.getElementById("nav-menu").addEventListener('click', (event) => {
+        let titleSeparator = document.getElementById("title-separator");
+
+        switch(event.target.id) {
+
+          case "main-page":
+            this.loadMainPage();
+            titleSeparator.innerHTML = "Геодезический калькулятор";
+            break;
+          
+          case "direct-page":
+            this.directController.loadPageDirect();
+            titleSeparator.innerHTML = "Прямая геодезическая задача";
+            break;
+
+          case "inverse-page":
+            this.inverseController.loadPageInverse();
+            titleSeparator.innerHTML = "Обратная геодезическая задача";
+            break;
+
+          case "potenot-page":
+            this.potenotController.loadPagePotenot();
+            titleSeparator.innerHTML = "Задача Потенота";
+            break;
+
+          case "survey-page":
+            this.surveyController.loadPageSurvey();
+            titleSeparator.innerHTML = "Тахеометрическая съёмка";
+            break;
+
+          case "points-page":
+            this.basePointController.loadPageBasePoints();
+            titleSeparator.innerHTML = "Каталог координат";
+            break;
+        }
+
+      });
 
     }
 

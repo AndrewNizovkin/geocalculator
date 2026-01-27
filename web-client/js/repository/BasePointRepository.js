@@ -46,8 +46,8 @@ export class BasePointRepository {
      */
     sortByName() {
         this.basePoints.sort((a, b) => {
-            if (a.poinName > b.poinName) return 1;
-            if (a.poinName < b.poinName) return -1;
+            if (a.pointName > b.pointName) return 1;
+            if (a.pointName < b.pointName) return -1;
             return 0;
         });
     }

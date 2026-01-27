@@ -309,8 +309,4 @@ function showLinesAray(message, linesArray) {
         content.append(newElem);
 
     });
-
-
-
-
 }
