@@ -23,8 +23,8 @@ export class SurveyMapper {
             let line = linesArray.shift();
             let itemsArray = [];
             let currentSurveyStation = 0;
-            while(line != "//" && linesArray.length > 1) {
-                itemsArray = line.split(" ");
+            while(line.trim() != "//" && linesArray.length > 1) {
+                itemsArray = line.trim().split(/\s+/);
                 if(itemsArray.length == 8) {
                     surveyRepository.addNewStation();
 
@@ -43,11 +43,11 @@ export class SurveyMapper {
 
             line = linesArray.shift();
             while(linesArray.length > 0) {
-                while(line == "//") {
+                while(line.trim() == "//") {
                     line = linesArray.shift();
                 }
 
-                itemsArray = line.split(" ");
+                itemsArray = line.trim().split(/\s+/);
                 if(itemsArray.length == 6) {
                     currentSurveyStation = +itemsArray[5];
                     surveyRepository.addNewMeasurement(currentSurveyStation);

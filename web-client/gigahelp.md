@@ -55,3 +55,33 @@ class FileWriter {
 - Пользователь должен подтвердить сохранение файла вручную, иначе ничего не произойдет.
 
 Этот метод удобен для интерактивных приложений, работающих непосредственно с устройством клиента.
+
+```css
+.hidden { /* Скрываем модальное окно */
+    display: none;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачность */
+    z-index: 1000;
+    display: none; /* Изначально скрытый */
+}
+
+#modal-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центр экрана */
+    background-color: white;
+    padding: 20px;
+    max-width: 500px;
+    min-width: 300px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    z-index: 1001; /* Модальное окно поверх оверлея */
+}```
