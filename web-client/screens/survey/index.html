@@ -45,12 +45,27 @@
         </div>
 
         <div class="panel-station">
+          <div class="pop-up" id="list-station-names">
+            <div class="menu-item" data-station-name-id="0">1201</div>
+            <div class="menu-item" data-station-name-id="1">1202</div>
+            <div class="menu-item" data-station-name-id="2">1202</div>
+            <div class="menu-item" data-station-name-id="3">1202</div>
+          </div>
+
+          <div class="pop-up" id="list-or-names">
+            <div class="menu-item" data-or-name-id="0">1201</div>
+            <div class="menu-item" data-or-name-id="1">1202</div>
+            <div class="menu-item" data-or-name-id="2">1202</div>
+            <div class="menu-item" data-or-name-id="3">1202</div>
+          </div>
+
 
           <table class="table-station" id="survey-table-station">
             <!-- <caption>Параметры станции</caption> -->
             <tbody>
               <tr>
-                <td class="menu-item" title="Вставить из каталога">Станция</td>
+                <td class="toggle menu-item" id="button-station-name" title="Вставить из каталога">Станция</td>
+
                 <td><input type="text" id="survey-station-name" size="12" placeholder="noname"></td>
               </tr>
               <tr>
@@ -74,7 +89,7 @@
                 <td><input type="text" id="survey-or-direction" size="12" value="0.0000"></td>
               </tr>
               <tr>
-                <td class="menu-item" title="Вставить из каталога">Ориентир</td>
+                <td class="toggle menu-item" id="button-or-name" title="Вставить из каталога">Ориентир</td>
                 <td><input type="text" id="survey-or-name" size="12" placeholder="noname"></td>
               </tr>
               <tr>

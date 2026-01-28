@@ -1,3 +1,5 @@
+// import { BasePointRepository } from "../../repository/BasePointRepository";
+
 /**
  * This class provides methods for converting 
  * models and dto objects for BasePoint domen.
@@ -24,6 +26,30 @@ export class BasePointMapper {
             } 
         }
         return linesArray;
+    }
+
+    /**
+     * converts an array of strings in the 'kat' format to 
+     * an instance of the 'BasePointRepository' object
+     * @param {string[]} arrayKat 
+     * @param {BasePointRepository} basePointRepository 
+     * @returns 
+     */
+    arrayToBasePointRepository(arrayKat, basePointRepository) {
+
+        arrayKat.forEach((line) => {
+            let arrayItem = line.split(" ");
+            if (arrayItem.length == 4) {
+                basePointRepository.addNewBasePoint();
+                basePointRepository.saveBasePointName(-1, arrayItem.at(0));
+                basePointRepository.saveBasePointX(-1, arrayItem.at(1));
+                basePointRepository.saveBasePointY(-1, arrayItem.at(2));
+                basePointRepository.saveBasePointZ(-1, arrayItem.at(3));
+            }
+        });
+
+        return basePointRepository;
+
     }
 
 }

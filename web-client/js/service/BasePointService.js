@@ -1,5 +1,6 @@
 import { BasePointRepository } from "../repository/BasePointRepository.js";
 import { BasePointMapper } from "./mapper/BasePointMapper.js";
+import { BasePointProvider } from "./provider/BasePointProvider.js";
 
 /**
  * Provides methods for working with a basepoints repository
@@ -8,37 +9,7 @@ export class BasePointService {
     constructor() {
         this.basePointRepository = new BasePointRepository();
         this.basePointMapper = new BasePointMapper();
-    }
-
-    /**
-     * Fills demo repository
-     */
-    loadDemoRepository() {
-    this.basePointRepository.addNewBasePoint();
-    this.basePointRepository.saveBasePointName(-1, "1304");
-    this.basePointRepository.saveBasePointX(-1, "478959.197");
-    this.basePointRepository.saveBasePointY(-1, "2297237.990");
-    this.basePointRepository.saveBasePointZ(-1, "12.603");
-
-
-    this.basePointRepository.addNewBasePoint();
-    this.basePointRepository.saveBasePointName(-1, "1301");
-    this.basePointRepository.saveBasePointX(-1, "478676.113");
-    this.basePointRepository.saveBasePointY(-1, "2296967.264");
-    this.basePointRepository.saveBasePointZ(-1, "11.220");
-
-    this.basePointRepository.addNewBasePoint();
-    this.basePointRepository.saveBasePointName(-1, "1303");
-    this.basePointRepository.saveBasePointX(-1, "478892.696");
-    this.basePointRepository.saveBasePointY(-1, "2297239.168");
-    this.basePointRepository.saveBasePointZ(-1, "10.926");
-
-    this.basePointRepository.addNewBasePoint();
-    this.basePointRepository.saveBasePointName(-1, "1302");
-    this.basePointRepository.saveBasePointX(-1, "478685.352");
-    this.basePointRepository.saveBasePointY(-1, "2296938.168");
-    this.basePointRepository.saveBasePointZ(-1, "11.426");
-
+        this.basePointProvider = new BasePointProvider();
     }
 
     /**
@@ -65,6 +36,22 @@ export class BasePointService {
         let linesArray = this.basePointMapper.basePointRepositoryToArray(this.basePointRepository);
 
         return linesArray;
+
+    }
+
+    /**
+     * Fills in the base point repository from a text file in the "kat" format
+     * @param {File} fileKat 
+     */
+    async addFromTextFile(fileKat) {
+        try {
+            await this.basePointProvider.getStringArrayFromDevice(fileKat).then((arrayKat) => {
+                // this.basePointRepository.clearAll();
+                this.surveyRepository = this.basePointMapper.arrayToBasePointRepository(arrayKat, this.basePointRepository);
+            });
+        } catch (err) {
+            console.error(err.message);
+        }
 
     }
 

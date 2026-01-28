@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.3.4">
   <diagram name="Страница-1" id="o-5GadF2C5qq2WKj6GCM">
-    <mxGraphModel dx="9849" dy="5769" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3020" dy="1936" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1389,7 +1389,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-59" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="BasePointService" vertex="1">
-          <mxGeometry height="476" width="250" x="510" y="4360" as="geometry" />
+          <mxGeometry height="502" width="250" x="510" y="4360" as="geometry" />
         </mxCell>
         <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-60" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- basePointRepository: BasePointRepository" vertex="1">
           <mxGeometry height="26" width="250" y="26" as="geometry" />
@@ -1412,38 +1412,41 @@
         <mxCell id="RTwmSPJKoOyk4vKY9Gy8-13" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getLilnesArray(): string[]" vertex="1">
           <mxGeometry height="26" width="250" y="164" as="geometry" />
         </mxCell>
-        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-64" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ addNewBasePoint(): void" vertex="1">
+        <mxCell id="Q0T9PZepOiWVDYK23iWf-1" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ addFromTextFile(FIle): void" vertex="1">
           <mxGeometry height="26" width="250" y="190" as="geometry" />
         </mxCell>
-        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-65" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ removeBasePoint(number): void" vertex="1">
+        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-64" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ addNewBasePoint(): void" vertex="1">
           <mxGeometry height="26" width="250" y="216" as="geometry" />
         </mxCell>
-        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-66" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ sortBasePoints(): void" vertex="1">
+        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-65" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ removeBasePoint(number): void" vertex="1">
           <mxGeometry height="26" width="250" y="242" as="geometry" />
         </mxCell>
-        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-67" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getBasePointName(number): string" vertex="1">
+        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-66" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ sortBasePoints(): void" vertex="1">
           <mxGeometry height="26" width="250" y="268" as="geometry" />
         </mxCell>
-        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-68" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ saveBasePointName(string): void" vertex="1">
+        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-67" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getBasePointName(number): string" vertex="1">
           <mxGeometry height="26" width="250" y="294" as="geometry" />
         </mxCell>
-        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-69" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getBasePointX(number): string" vertex="1">
+        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-68" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ saveBasePointName(string): void" vertex="1">
           <mxGeometry height="26" width="250" y="320" as="geometry" />
         </mxCell>
-        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-70" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ saveBasePoinX(string): void" vertex="1">
+        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-69" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getBasePointX(number): string" vertex="1">
           <mxGeometry height="26" width="250" y="346" as="geometry" />
         </mxCell>
-        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-71" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getBasePointY(number): string" vertex="1">
+        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-70" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ saveBasePoinX(string): void" vertex="1">
           <mxGeometry height="26" width="250" y="372" as="geometry" />
         </mxCell>
-        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-72" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ saveBasePoinY(string): void" vertex="1">
+        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-71" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getBasePointY(number): string" vertex="1">
           <mxGeometry height="26" width="250" y="398" as="geometry" />
         </mxCell>
-        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-73" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getBasePointZ(number): string" vertex="1">
+        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-72" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ saveBasePoinY(string): void" vertex="1">
           <mxGeometry height="26" width="250" y="424" as="geometry" />
         </mxCell>
-        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-74" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ saveBasePoinZ(string): void" vertex="1">
+        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-73" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getBasePointZ(number): string" vertex="1">
           <mxGeometry height="26" width="250" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-74" parent="O2Zj-aqmNSMAiB4W9Wcg-59" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ saveBasePoinZ(string): void" vertex="1">
+          <mxGeometry height="26" width="250" y="476" as="geometry" />
         </mxCell>
         <mxCell id="O2Zj-aqmNSMAiB4W9Wcg-75" edge="1" parent="1" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;entryX=-0.011;entryY=0.037;entryDx=0;entryDy=0;entryPerimeter=0;" value="">
           <mxGeometry relative="1" width="160" x="-0.7889" y="10" as="geometry">

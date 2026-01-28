@@ -7,6 +7,7 @@ import {BasePointService} from "../service/BasePointService.js";
 export class BasePointController {
     constructor() {
         this.basePointService = new BasePointService();
+        this.basePointService.addNewBasePoint();
         this.currentBasePoint = 0;
     }
 
@@ -21,7 +22,10 @@ export class BasePointController {
         <div class="button-points" id="points-clear" title="Удалить все точки">Удалить все</div>
         <div class="button-points" id="points-remove" title="Удалить все точки">Удалить выбранную</div>
         <div class="button-points" id="points-add" title="Добавить новую точку">Добавить новую</div>
-        <div class="button-points" id="points-file" title="Добавить из файла">Добавить из файла</div>
+        <div class="button-points" id="points-file" title="Добавить из файла">
+          <input type="file" id="points-open-input" accept=".kat">
+          Добавить из файла
+        </div>
       </div>
 
       <div class="panel-points" id="panel-points">
@@ -34,35 +38,6 @@ export class BasePointController {
               <th class="menu-item">Z</th>
             </thead>
             <tbody id="list-points">
-              <!-- Демо данные -->
-              <tr>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-name" size="12" value="1304"/></td>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-x" size="12" value="478959.197"/></td>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-y" size="12" value="2296938.168"/></td>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-z" size="12" value="11.426"/></td>
-              </tr>
-
-              <tr>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-name" size="12" value="1303"/></td>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-x" size="12" value="478959.197"/></td>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-y" size="12" value="2296938.168"/></td>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-z" size="12" value="11.426"/></td>
-              </tr>
-
-              <tr>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-name" size="12" value="1302"/></td>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-x" size="12" value="478685.352"/></td>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-y" size="12" value="2296938.168"/></td>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-z" size="12" value="11.426"/></td>
-              </tr>
-
-              <tr>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-name" size="12" value="1301"/></td>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-x" size="12" value="478676.113"/></td>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-y" size="12" value="2296967.264"/></td>
-                <td><input type="text" class="menu-item" data-point-id="0" data-target="point-z" size="12" value="11.220"/></td>
-              </tr>
-              <!-- Демо данные -->
             </tbody>
 
           </table>            
@@ -70,9 +45,198 @@ export class BasePointController {
 
 
       </div>
+
         
         `;
 
+        this.setTableBasePoints();
+        this.addListenersTablePoints();
+        this.addListenersToolbarPoints();
+
+    }
+
+    /**
+     * Displays the contents of the base point repository in the DOM
+     */
+    setTableBasePoints() {
+      if (this.basePointService.size() > 0) {
+        let tableBasePoints = document.getElementById("list-points");
+        tableBasePoints.innerHTML = '';
+        
+        for (let i = 0; i < this.basePointService.size(); i++) {
+          let row = this.getElementBasePoint(i);
+          tableBasePoints.append(row);
+        }
+      }
+      
+    }
+
+    /**
+     * Adds evert listeners to panel-points
+     */
+    addListenersTablePoints() {
+      const panelPoints = document.getElementById("panel-points");
+
+      panelPoints.addEventListener('click', (event) => {
+        let element = event.target;
+
+        if (element.hasAttribute("data-point-id")) {
+          this.currentBasePoint = +element.dataset.pointId;
+        }
+      });
+
+      panelPoints.addEventListener('input', (event) => {
+        let element = event.target;
+
+        if (element.hasAttribute("data-target")) {
+          switch (element.dataset.target) {
+
+            case "point-name":
+              this.basePointService.saveBasePointName(
+                +element.dataset.pointId, 
+                element.value)
+              break;
+
+            case "point-x":
+              this.basePointService.saveBasePointX(
+                +element.dataset.pointId, 
+                element.value)
+              break;
+
+            case "point-y":
+              this.basePointService.saveBasePointY(
+                +element.dataset.pointId, 
+                element.value)
+              break;
+
+            case "point-z":
+              this.basePointService.saveBasePointZ(
+                +element.dataset.pointId, 
+                element.value)
+              break;
+
+            }
+        }
+
+      });
+    }
+
+    /**
+     * Adds event listeners to points toolbar
+     */
+    addListenersToolbarPoints() {
+      const tolbarPoints = document.getElementById("points-toolbar");
+
+      tolbarPoints.addEventListener('click', (event) => {
+        let element = event.target;
+
+        switch (element.id) {
+
+          case "points-clear":
+            this.basePointService.clearAll();
+            this.basePointService.addNewBasePoint();
+            this.currentBasePoint = 0;
+            this.setTableBasePoints();
+            break;
+
+          case "points-remove":
+            if (this.basePointService.size() > 1) {
+              this.basePointService.removeBasePoint(this.currentBasePoint);
+              if (this.currentBasePoint == this.basePointService.size()) {
+                this.currentBasePoint--;
+              }
+              this.setTableBasePoints();
+            }
+            break;
+
+          case "points-add":
+            this.basePointService.addNewBasePoint();
+            this.currentBasePoint = this.basePointService.size() - 1;
+            this.setTableBasePoints();
+            break;
+
+          case "points-file":
+            document.getElementById("points-open-input").click();
+            break;
+        }
+      });
+
+      tolbarPoints.addEventListener('change', (event) => {
+        let element = event.target;
+
+        switch (element.id) {
+
+          case "points-open-input":
+            try {
+              let file = element.files[0];
+              if (!file) throw new Error("Select a file!");
+              this.basePointService.addFromTextFile(file).then(() => {
+                this.setTableBasePoints();
+                this.currentBasePoint = 0;
+                });
+             } catch (error) {
+              console.error(error.message);
+            }
+            break;
+
+        }
+      });
+      
+    }
+
+    /**
+     * Gets row of the base station table
+     * @param {number} pointIndex 
+     * @returns {HTMLElement}
+     */
+    getElementBasePoint(pointIndex) {
+      let row = document.createElement('tr');
+
+      let cell = document.createElement('td');
+      let item = document.createElement('input');
+      item.type = "text";
+      item.className = "menu-item";
+      item.setAttribute("data-point-id", pointIndex);
+      item.setAttribute("data-target", "point-name");
+      item.size = "12";
+      item.value = this.basePointService.getBasePointName(pointIndex);
+      cell.append(item);
+      row.append(cell);
+
+      cell = document.createElement('td');
+      item = document.createElement('input');
+      item.type = "text";
+      item.className = "menu-item";
+      item.setAttribute("data-point-id", pointIndex);
+      item.setAttribute("data-target", "point-x");
+      item.size = "12";
+      item.value = this.basePointService.getBasePointX(pointIndex);
+      cell.append(item);
+      row.append(cell);
+
+      cell = document.createElement('td');
+      item = document.createElement('input');
+      item.type = "text";
+      item.className = "menu-item";
+      item.setAttribute("data-point-id", pointIndex);
+      item.setAttribute("data-target", "point-y");
+      item.size = "12";
+      item.value = this.basePointService.getBasePointY(pointIndex);
+      cell.append(item);
+      row.append(cell);
+
+      cell = document.createElement('td');
+      item = document.createElement('input');
+      item.type = "text";
+      item.className = "menu-item";
+      item.setAttribute("data-point-id", pointIndex);
+      item.setAttribute("data-target", "point-z");
+      item.size = "12";
+      item.value = this.basePointService.getBasePointZ(pointIndex);
+      cell.append(item);
+      row.append(cell);
+
+      return row;
     }
 
 }

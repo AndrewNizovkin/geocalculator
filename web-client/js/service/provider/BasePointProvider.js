@@ -1,10 +1,9 @@
 import { TextFileReader } from "./TextFileReader.js";
-
 /**
  * This class provides methods 
  * for getting data from external sources.
  */
-export class SurveyProvider {
+export class BasePointProvider {
 
     /**
      * Reads the lines of a text file into

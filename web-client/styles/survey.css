@@ -68,6 +68,44 @@ table > caption {
     color: black;    
 }
 
+.panel-basis {
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: nowrap; */
+    width: auto;
+    
+}
+
+.panel-station {
+    /* flex: 1 1 auto; */
+    /* height: 50%; */
+    width: auto;
+}
+
+.open {
+    display: flex;
+}
+
+.toggle {
+    position: relative;
+}
+
+.pop-up {
+    display: none;
+    flex-direction: column;
+    width: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 5px;
+    background-color: var(--container-bg-color);
+    border: 2px outset #bab6b7;
+
+
+}
+
+
 /* .panel-title {
     font-size: 1.2em;
     text-align: center;
@@ -96,21 +134,6 @@ table > caption {
     padding: 5px;
 }
  */
-
-.panel-basis {
-    display: flex;
-    flex-direction: row;
-    /* flex-wrap: nowrap; */
-    width: auto;
-    
-}
-
-.panel-station {
-    /* flex: 1 1 auto; */
-    /* height: 50%; */
-    width: auto;
-}
-
 .panel-stations {
     flex: 1 1 auto;
     /* height: 50%; */

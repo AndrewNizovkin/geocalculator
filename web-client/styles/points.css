@@ -32,11 +32,23 @@
     justify-content: safe center;
 }
 
+.button-points input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0.0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;    
+}
+
+
 .panel-points table {
     border: 2px outset #bab6b7;
     flex: 0 0 auto;
+}
 
-    
+.table-points th {
+    text-align: center;
 }
 
 .scrollpanel-points {

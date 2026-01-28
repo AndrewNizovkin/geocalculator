@@ -43,20 +43,32 @@ export class SurveyController {
           </div>
           <div class="scrollpanel-stations">
             <ul class="list-stations" id="list-stations">
-              <li><a class="menu-item" href="#" data-station-id="0">1301</a></li>
-              <li><a class="menu-item" href="#" data-station-id="1">100</a></li>
-              <li><a class="menu-item" href="#" data-station-id="0">101</a></li>
             </ul>
           </div>
         </div>
 
         <div class="panel-station">
+          <div class="pop-up" id="list-station-names">
+            <div class="menu-item" data-station-name-id="0">1201</div>
+            <div class="menu-item" data-station-name-id="1">1202</div>
+            <div class="menu-item" data-station-name-id="2">1202</div>
+            <div class="menu-item" data-station-name-id="3">1202</div>
+          </div>
+
+          <div class="pop-up" id="list-or-names">
+            <div class="menu-item" data-or-name-id="0">1201</div>
+            <div class="menu-item" data-or-name-id="1">1202</div>
+            <div class="menu-item" data-or-name-id="2">1202</div>
+            <div class="menu-item" data-or-name-id="3">1202</div>
+          </div>
+
 
           <table class="table-station" id="survey-table-station">
             <!-- <caption>Параметры станции</caption> -->
             <tbody>
               <tr>
-                <td class="menu-item" title="Вставить из каталога">Станция</td>
+                <td class="toggle menu-item" id="button-station-name" title="Вставить из каталога">Станция</td>
+
                 <td><input type="text" id="survey-station-name" size="12" placeholder="noname"></td>
               </tr>
               <tr>
@@ -80,7 +92,7 @@ export class SurveyController {
                 <td><input type="text" id="survey-or-direction" size="12" value="0.0000"></td>
               </tr>
               <tr>
-                <td class="menu-item" title="Вставить из каталога">Ориентир</td>
+                <td class="toggle menu-item" id="button-or-name" title="Вставить из каталога">Ориентир</td>
                 <td><input type="text" id="survey-or-name" size="12" placeholder="noname"></td>
               </tr>
               <tr>
@@ -115,22 +127,6 @@ export class SurveyController {
               <th>Выс.Цели</th>
             </thead>
             <tbody id="list-measurements">
-              <!-- Демо данные -->
-              <tr>
-                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="name" value="1302"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="direction" value="359.5953"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="distance" value="30.526"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="tilt" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="height" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="name" value="1302"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="direction" value="359.5953"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="distance" value="30.526"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="tilt" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="height" value="1302"/></td>
-              </tr>
-              <!-- Демо данные -->
             </tbody>
 
           </table>
@@ -284,7 +280,34 @@ export class SurveyController {
      * Adds event listeners for panel-station
      */
     addListenersPanelStation() {
-      document.getElementById("survey-table-station").addEventListener('input', (event) => {
+      let surveyTableStation = document.getElementById("survey-table-station");
+
+      surveyTableStation.addEventListener('click', (event) => {
+        let element = event.target;
+        let toggleRect = element.getBoundingClientRect();        
+
+        switch (element.id) {
+
+          case "button-station-name":
+
+            let listStationNames = document.getElementById("list-station-names");
+            listStationNames.style.top = `${toggleRect.bottom + window.scrollY}px`;
+            listStationNames.style.left = `${toggleRect.left + window.scrollX}px`;
+            listStationNames.classList.toggle("open");
+            break;
+
+          case "button-or-name":
+            // toggleRect = element.getBoundingClientRect();
+            let listOrNames = document.getElementById("list-or-names");
+            listOrNames.style.top = `${toggleRect.bottom + window.scrollY}px`;
+            listOrNames.style.left = `${toggleRect.left + window.scrollX}px`;
+            listOrNames.classList.toggle("open");
+            break;
+
+        }
+      });
+
+      surveyTableStation.addEventListener('input', (event) => {
         let element = event.target;
 
         switch(element.id) {
@@ -505,6 +528,7 @@ export class SurveyController {
           let item = document.createElement('input');
           item.type = "text";
           item.className = "menu-item";
+          item.size = "10";
           item.setAttribute('data-target', 'name');
           item.setAttribute('data-measurement-id', indexMeasurement);
           item.value = this.surveyService.getTargetName(indexStation, indexMeasurement);
@@ -515,6 +539,7 @@ export class SurveyController {
           item = document.createElement('input');
           item.type = "text";
           item.className = "menu-item";
+          item.size = "10";
           item.setAttribute('data-target', 'direction');
           item.setAttribute('data-measurement-id', indexMeasurement);
           item.value = this.surveyService.getTargetDirection(indexStation, indexMeasurement);
@@ -525,6 +550,7 @@ export class SurveyController {
           item = document.createElement('input');
           item.type = "text";
           item.className = "menu-item";
+          item.size = "10";
           item.setAttribute('data-target', 'distance');
           item.setAttribute('data-measurement-id', indexMeasurement);
           item.value = this.surveyService.getTargetDistance(indexStation, indexMeasurement);
@@ -535,6 +561,7 @@ export class SurveyController {
           item = document.createElement('input');
           item.type = "text";
           item.className = "menu-item";
+          item.size = "10";
           item.setAttribute('data-target', 'tilt');
           item.setAttribute('data-measurement-id', indexMeasurement);
           item.value = this.surveyService.getTargetTiltAngle(indexStation, indexMeasurement);
@@ -545,6 +572,7 @@ export class SurveyController {
           item = document.createElement('input');
           item.type = "text";
           item.className = "menu-item";
+          item.size = "10";
           item.setAttribute('data-target', 'height');
           item.setAttribute('data-measurement-id', indexMeasurement);
           item.value = this.surveyService.getTargetHeight(indexStation, indexMeasurement);
