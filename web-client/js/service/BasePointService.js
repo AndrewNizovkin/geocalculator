@@ -46,7 +46,7 @@ export class BasePointService {
     async addFromTextFile(fileKat) {
         try {
             await this.basePointProvider.getStringArrayFromDevice(fileKat).then((arrayKat) => {
-                // this.basePointRepository.clearAll();
+                this.basePointRepository.clearAll();
                 this.surveyRepository = this.basePointMapper.arrayToBasePointRepository(arrayKat, this.basePointRepository);
             });
         } catch (err) {

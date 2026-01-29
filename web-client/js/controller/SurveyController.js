@@ -5,12 +5,15 @@ import {SurveyService} from "../service/SurveyService.js";
  */
 export class SurveyController {
 
-  constructor() {
+  constructor(basePointService) {
+    this.basePointService = basePointService;
     this.surveyService = new SurveyService();
     this.surveyService.addNewStation();
     this.surveyService.addNewMeasurement(0);
     this.currentSurveyStation = 0;
     this.currentMeasurement = 0;
+    this.currentBasePoint = 0;
+    this.insertBasePointToStation = true;
   }
 
     /**
@@ -20,6 +23,7 @@ export class SurveyController {
         let content = document.getElementById("content");
 
         content.innerHTML = `
+        <div class="overlay" id="overlay"></div>
     <div class="survey-toolbar" id="toolbar-survey">
       <div class="survey-button new" id="survey-new" title="Новая съёмка"></div>
       <div class="survey-button open" id="survey-open" title="Открыть">
@@ -43,26 +47,17 @@ export class SurveyController {
           </div>
           <div class="scrollpanel-stations">
             <ul class="list-stations" id="list-stations">
+              <li><a class="menu-item" href="#" data-station-id="0">1301</a></li>
+              <li><a class="menu-item" href="#" data-station-id="1">100</a></li>
+              <li><a class="menu-item" href="#" data-station-id="0">101</a></li>
             </ul>
           </div>
         </div>
 
-        <div class="panel-station">
-          <div class="pop-up" id="list-station-names">
-            <div class="menu-item" data-station-name-id="0">1201</div>
-            <div class="menu-item" data-station-name-id="1">1202</div>
-            <div class="menu-item" data-station-name-id="2">1202</div>
-            <div class="menu-item" data-station-name-id="3">1202</div>
-          </div>
-
-          <div class="pop-up" id="list-or-names">
-            <div class="menu-item" data-or-name-id="0">1201</div>
-            <div class="menu-item" data-or-name-id="1">1202</div>
-            <div class="menu-item" data-or-name-id="2">1202</div>
-            <div class="menu-item" data-or-name-id="3">1202</div>
-          </div>
-
-
+        <div class="panel-station" id="panel-station">
+        
+        
+        
           <table class="table-station" id="survey-table-station">
             <!-- <caption>Параметры станции</caption> -->
             <tbody>
@@ -127,6 +122,22 @@ export class SurveyController {
               <th>Выс.Цели</th>
             </thead>
             <tbody id="list-measurements">
+              <!-- Демо данные -->
+              <tr>
+                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="name" value="1302"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="direction" value="359.5953"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="distance" value="30.526"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="tilt" value="-0.5959"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="height" value="1302"/></td>
+              </tr>
+              <tr>
+                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="name" value="1302"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="direction" value="359.5953"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="distance" value="30.526"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="tilt" value="-0.5959"/></td>
+                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="height" value="1302"/></td>
+              </tr>
+              <!-- Демо данные -->
             </tbody>
 
           </table>
@@ -136,12 +147,14 @@ export class SurveyController {
     </div>
 
 
+
       
         `;
         
         this.setSurveyStation();
         this.setListSurveyStations();
         this.setTableMeasurements();
+        this.setListBaseStations();
         this.addListenersMainToolbar()
         this.addListenersPanelStations();
         this.addListenersPanelStation();
@@ -281,27 +294,29 @@ export class SurveyController {
      */
     addListenersPanelStation() {
       let surveyTableStation = document.getElementById("survey-table-station");
+      let overlay = document.getElementById("overlay");
 
       surveyTableStation.addEventListener('click', (event) => {
         let element = event.target;
-        let toggleRect = element.getBoundingClientRect();        
-
+        let toggleRect = element.getBoundingClientRect(); 
+        let listBasePoints = document.getElementById("list-base-point");      
+        
         switch (element.id) {
 
           case "button-station-name":
-
-            let listStationNames = document.getElementById("list-station-names");
-            listStationNames.style.top = `${toggleRect.bottom + window.scrollY}px`;
-            listStationNames.style.left = `${toggleRect.left + window.scrollX}px`;
-            listStationNames.classList.toggle("open");
+            listBasePoints.style.top = `${toggleRect.bottom + window.scrollY}px`;
+            listBasePoints.style.left = `${toggleRect.left + window.scrollX}px`;
+            listBasePoints.classList.toggle("open");
+            overlay.classList.toggle("open");
+            this.insertBasePointToStation = true;
             break;
 
           case "button-or-name":
-            // toggleRect = element.getBoundingClientRect();
-            let listOrNames = document.getElementById("list-or-names");
-            listOrNames.style.top = `${toggleRect.bottom + window.scrollY}px`;
-            listOrNames.style.left = `${toggleRect.left + window.scrollX}px`;
-            listOrNames.classList.toggle("open");
+            listBasePoints.style.top = `${toggleRect.bottom + window.scrollY}px`;
+            listBasePoints.style.left = `${toggleRect.left + window.scrollX}px`;
+            listBasePoints.classList.toggle("open");
+            overlay.classList.toggle("open");
+            this.insertBasePointToStation = false;
             break;
 
         }
@@ -580,6 +595,68 @@ export class SurveyController {
           row.append(sell);
 
           return row;
+    }
+
+    /**
+     * Creates and adds a list of base stations to the DOM
+     */
+    setListBaseStations() {
+      const panelStation = document.getElementById("panel-station");
+      const listBasePoints = document.createElement('div');
+      listBasePoints.className = "pop-up";
+      listBasePoints.id = "list-base-point";
+
+      if (this.basePointService.size() > 0) {
+        for (let i = 0; i < this.basePointService.size(); i++) {
+          let row = document.createElement('div');
+          row.className = "menu-item";
+          row.setAttribute("data-base-point-id", i);
+          row.addEventListener('click', (event) => {
+            document.getElementById("list-base-point").classList.toggle("open");
+            document.getElementById("overlay").classList.toggle("open");
+
+            if (this.insertBasePointToStation) {
+              this.surveyService.saveStationName(
+                this.currentSurveyStation, 
+                this.basePointService.getBasePointName(i));
+              this.surveyService.saveStationX(
+                this.currentSurveyStation, 
+                this.basePointService.getBasePointX(i)
+              );
+              this.surveyService.saveStationY(
+                this.currentSurveyStation, 
+                this.basePointService.getBasePointY(i)
+              );
+              this.surveyService.saveStationZ(
+                this.currentSurveyStation, 
+                this.basePointService.getBasePointZ(i)
+              );
+            } else {
+              this.surveyService.saveOrName(
+                this.currentSurveyStation, 
+                this.basePointService.getBasePointName(i)
+              );
+              this.surveyService.saveOrX(
+                this.currentSurveyStation, 
+                this.basePointService.getBasePointX(i)
+              );
+              this.surveyService.saveOrY(
+                this.currentSurveyStation, 
+                this.basePointService.getBasePointY(i)
+              );
+
+            }
+
+            this.setListSurveyStations();
+            this.setSurveyStation();
+
+          });
+          row.innerHTML = this.basePointService.getBasePointName(i);
+          listBasePoints.append(row);
+        }
+      }
+      panelStation.append(listBasePoints);
+      
     }
 
 }

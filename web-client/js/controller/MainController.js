@@ -11,11 +11,12 @@ import { BasePointController } from './BasePointController.js';
  */
 export class MainController {
     constructor() {
-        this.directController = new DirectController();
-        this.inverseController = new InverseController();
-        this.potenotController = new PotenotController();
-        this.surveyController = new SurveyController();
-        this.basePointController = new BasePointController();
+      this.basePointController = new BasePointController();
+      this.directController = new DirectController();
+      this.inverseController = new InverseController();
+      this.potenotController = new PotenotController();
+      this.surveyController = new SurveyController(this.basePointController.getBasePointService());
+        
     }
 
     /**

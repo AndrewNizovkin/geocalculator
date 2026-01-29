@@ -19,12 +19,12 @@ export class BasePointController {
 
         content.innerHTML = `
       <div class="toolbar" id="points-toolbar">
-        <div class="button-points" id="points-clear" title="Удалить все точки">Удалить все</div>
-        <div class="button-points" id="points-remove" title="Удалить все точки">Удалить выбранную</div>
-        <div class="button-points" id="points-add" title="Добавить новую точку">Добавить новую</div>
-        <div class="button-points" id="points-file" title="Добавить из файла">
+        <div class="button" id="points-clear" title="Удалить все точки">Очистить</div>
+        <div class="button" id="points-remove" title="Удалить все точки">Удалить</div>
+        <div class="button" id="points-add" title="Добавить новую точку">Добавить</div>
+        <div class="button" id="points-file" title="Добавить из файла">
           <input type="file" id="points-open-input" accept=".kat">
-          Добавить из файла
+          Открыть
         </div>
       </div>
 
@@ -237,6 +237,14 @@ export class BasePointController {
       row.append(cell);
 
       return row;
+    }
+
+    /**
+     * Provides a link to the base point repository
+     * @returns {BasePointService}
+     */
+    getBasePointService() {
+      return this.basePointService;
     }
 
 }

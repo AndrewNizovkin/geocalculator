@@ -13,7 +13,8 @@
 <body>
 
   <div class="content"  id="content">
-
+    
+    <div class="overlay" id="overlay"></div>
     <div class="survey-toolbar" id="toolbar-survey">
       <div class="survey-button new" id="survey-new" title="Новая съёмка"></div>
       <div class="survey-button open" id="survey-open" title="Открыть">
@@ -44,21 +45,15 @@
           </div>
         </div>
 
-        <div class="panel-station">
-          <div class="pop-up" id="list-station-names">
-            <div class="menu-item" data-station-name-id="0">1201</div>
-            <div class="menu-item" data-station-name-id="1">1202</div>
-            <div class="menu-item" data-station-name-id="2">1202</div>
-            <div class="menu-item" data-station-name-id="3">1202</div>
+        <div class="panel-station" id="panel-station">
+          <!--   pop-up-panel     -->
+          <div class="pop-up" id="list-base-point">
+            <div class="menu-item" data-base-point-id="0">1201</div>
+            <div class="menu-item" data-base-point-id="1">1202</div>
+            <div class="menu-item" data-base-point-id="2">1202</div>
+            <div class="menu-item" data-base-point-id="3">1202</div>
           </div>
-
-          <div class="pop-up" id="list-or-names">
-            <div class="menu-item" data-or-name-id="0">1201</div>
-            <div class="menu-item" data-or-name-id="1">1202</div>
-            <div class="menu-item" data-or-name-id="2">1202</div>
-            <div class="menu-item" data-or-name-id="3">1202</div>
-          </div>
-
+          <!--   pop-up-panel     -->
 
           <table class="table-station" id="survey-table-station">
             <!-- <caption>Параметры станции</caption> -->

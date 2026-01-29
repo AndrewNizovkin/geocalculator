@@ -32,7 +32,7 @@
     justify-content: safe center;
 }
 
-.button-points input[type="file"] {
+.button input[type="file"] {
     width: 0.1px;
     height: 0.1px;
     opacity: 0.0;

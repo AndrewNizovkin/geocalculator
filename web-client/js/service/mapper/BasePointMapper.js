@@ -38,7 +38,7 @@ export class BasePointMapper {
     arrayToBasePointRepository(arrayKat, basePointRepository) {
 
         arrayKat.forEach((line) => {
-            let arrayItem = line.split(" ");
+            let arrayItem = line.trim().split(/\s+/);
             if (arrayItem.length == 4) {
                 basePointRepository.addNewBasePoint();
                 basePointRepository.saveBasePointName(-1, arrayItem.at(0));
