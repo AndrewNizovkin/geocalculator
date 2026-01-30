@@ -293,14 +293,55 @@ export class SurveyController {
      * Adds event listeners for panel-station
      */
     addListenersPanelStation() {
-      let surveyTableStation = document.getElementById("survey-table-station");
+      let surveyPanelStation = document.getElementById("panel-station");
       let overlay = document.getElementById("overlay");
 
-      surveyTableStation.addEventListener('click', (event) => {
+      surveyPanelStation.addEventListener('click', (event) => {
         let element = event.target;
         let toggleRect = element.getBoundingClientRect(); 
         let panelStationRect = document.getElementById("panel-station").getBoundingClientRect();
         let listBasePoints = document.getElementById("list-base-point");      
+
+        if (element.hasAttribute("data-base-point-id")) {
+
+            document.getElementById("list-base-point").classList.toggle("open");
+            document.getElementById("overlay").classList.toggle("open");
+            let i = +element.dataset.basePointId;
+
+            if (this.insertBasePointToStation) {
+              this.surveyService.saveStationName(
+                this.currentSurveyStation, 
+                this.basePointService.getBasePointName(i));
+              this.surveyService.saveStationX(
+                this.currentSurveyStation, 
+                this.basePointService.getBasePointX(i)
+              );
+              this.surveyService.saveStationY(
+                this.currentSurveyStation, 
+                this.basePointService.getBasePointY(i)
+              );
+              this.surveyService.saveStationZ(
+                this.currentSurveyStation, 
+                this.basePointService.getBasePointZ(i)
+              );
+            } else {
+              this.surveyService.saveOrName(
+                this.currentSurveyStation, 
+                this.basePointService.getBasePointName(i)
+              );
+              this.surveyService.saveOrX(
+                this.currentSurveyStation, 
+                this.basePointService.getBasePointX(i)
+              );
+              this.surveyService.saveOrY(
+                this.currentSurveyStation, 
+                this.basePointService.getBasePointY(i)
+              );
+
+            }
+            this.setListSurveyStations();
+            this.setSurveyStation();
+        }
         
         switch (element.id) {
 
@@ -323,7 +364,7 @@ export class SurveyController {
         }
       });
 
-      surveyTableStation.addEventListener('input', (event) => {
+      surveyPanelStation.addEventListener('input', (event) => {
         let element = event.target;
 
         switch(element.id) {
@@ -616,46 +657,47 @@ export class SurveyController {
           let row = document.createElement('div');
           row.className = "menu-item";
           row.setAttribute("data-base-point-id", i);
-          row.addEventListener('click', (event) => {
-            document.getElementById("list-base-point").classList.toggle("open");
-            document.getElementById("overlay").classList.toggle("open");
+          
+          // row.addEventListener('click', (event) => {
+          //   document.getElementById("list-base-point").classList.toggle("open");
+          //   document.getElementById("overlay").classList.toggle("open");
 
-            if (this.insertBasePointToStation) {
-              this.surveyService.saveStationName(
-                this.currentSurveyStation, 
-                this.basePointService.getBasePointName(i));
-              this.surveyService.saveStationX(
-                this.currentSurveyStation, 
-                this.basePointService.getBasePointX(i)
-              );
-              this.surveyService.saveStationY(
-                this.currentSurveyStation, 
-                this.basePointService.getBasePointY(i)
-              );
-              this.surveyService.saveStationZ(
-                this.currentSurveyStation, 
-                this.basePointService.getBasePointZ(i)
-              );
-            } else {
-              this.surveyService.saveOrName(
-                this.currentSurveyStation, 
-                this.basePointService.getBasePointName(i)
-              );
-              this.surveyService.saveOrX(
-                this.currentSurveyStation, 
-                this.basePointService.getBasePointX(i)
-              );
-              this.surveyService.saveOrY(
-                this.currentSurveyStation, 
-                this.basePointService.getBasePointY(i)
-              );
+          //   if (this.insertBasePointToStation) {
+          //     this.surveyService.saveStationName(
+          //       this.currentSurveyStation, 
+          //       this.basePointService.getBasePointName(i));
+          //     this.surveyService.saveStationX(
+          //       this.currentSurveyStation, 
+          //       this.basePointService.getBasePointX(i)
+          //     );
+          //     this.surveyService.saveStationY(
+          //       this.currentSurveyStation, 
+          //       this.basePointService.getBasePointY(i)
+          //     );
+          //     this.surveyService.saveStationZ(
+          //       this.currentSurveyStation, 
+          //       this.basePointService.getBasePointZ(i)
+          //     );
+          //   } else {
+          //     this.surveyService.saveOrName(
+          //       this.currentSurveyStation, 
+          //       this.basePointService.getBasePointName(i)
+          //     );
+          //     this.surveyService.saveOrX(
+          //       this.currentSurveyStation, 
+          //       this.basePointService.getBasePointX(i)
+          //     );
+          //     this.surveyService.saveOrY(
+          //       this.currentSurveyStation, 
+          //       this.basePointService.getBasePointY(i)
+          //     );
 
-            }
+          //   }
 
-            this.setListSurveyStations();
-            this.setSurveyStation();
+          //   this.setListSurveyStations();
+          //   this.setSurveyStation();
 
-          });
+          // });
           row.innerHTML = this.basePointService.getBasePointName(i);
           listBasePoints.append(row);
         }
