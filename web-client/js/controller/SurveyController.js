@@ -62,7 +62,7 @@ export class SurveyController {
             <!-- <caption>Параметры станции</caption> -->
             <tbody>
               <tr>
-                <td class="toggle menu-item" id="button-station-name" title="Вставить из каталога">Станция</td>
+                <td class="toggle menu-item" tabindex="0" id="button-station-name" title="Вставить из каталога">Станция</td>
 
                 <td><input type="text" id="survey-station-name" size="12" placeholder="noname"></td>
               </tr>
@@ -299,21 +299,22 @@ export class SurveyController {
       surveyTableStation.addEventListener('click', (event) => {
         let element = event.target;
         let toggleRect = element.getBoundingClientRect(); 
+        let panelStationRect = document.getElementById("panel-station").getBoundingClientRect();
         let listBasePoints = document.getElementById("list-base-point");      
         
         switch (element.id) {
 
           case "button-station-name":
-            listBasePoints.style.top = `${toggleRect.bottom + window.scrollY}px`;
-            listBasePoints.style.left = `${toggleRect.left + window.scrollX}px`;
+            listBasePoints.style.top = `${toggleRect.top - panelStationRect.top +toggleRect.height + window.scrollY}px`;
+            listBasePoints.style.left = `${toggleRect.left - panelStationRect.left + window.scrollX}px`;
             listBasePoints.classList.toggle("open");
             overlay.classList.toggle("open");
             this.insertBasePointToStation = true;
             break;
 
           case "button-or-name":
-            listBasePoints.style.top = `${toggleRect.bottom + window.scrollY}px`;
-            listBasePoints.style.left = `${toggleRect.left + window.scrollX}px`;
+            listBasePoints.style.top = `${toggleRect.top - panelStationRect.top +toggleRect.height + window.scrollY}px`;
+            listBasePoints.style.left = `${toggleRect.left - panelStationRect.left + window.scrollX}px`;
             listBasePoints.classList.toggle("open");
             overlay.classList.toggle("open");
             this.insertBasePointToStation = false;
@@ -603,6 +604,10 @@ export class SurveyController {
     setListBaseStations() {
       const panelStation = document.getElementById("panel-station");
       const listBasePoints = document.createElement('div');
+      // listBasePoints.tabIndex = "0";
+      // listBasePoints.addEventListener("blur", () => {
+      //   document.getElementById("list-base-point").classList.toggle("open");
+      // });
       listBasePoints.className = "pop-up";
       listBasePoints.id = "list-base-point";
 
@@ -656,7 +661,6 @@ export class SurveyController {
         }
       }
       panelStation.append(listBasePoints);
-      
     }
 
 }
