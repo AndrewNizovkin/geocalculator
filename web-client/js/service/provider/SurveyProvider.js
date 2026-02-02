@@ -16,4 +16,31 @@ export class SurveyProvider {
         return TextFileReader.readFromTextFile(fileTah);
     }
 
+    /**
+     * Sends to backend Post HTTP request and get response
+     * @param {string[]} lineArray 
+     * @returns {string[]}
+     */
+    async importTah(importRequest) {
+        const urlServer = `http://${AppConfigurator.baseUrl}/${AppConfigurator.directEndPoint}`;
+
+        try {
+            const response = await fetch('http://192.168.0.12:8181/import', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(importRequest)
+            });
+
+            if(!response.ok) throw new Error(`Ошибка HTTP ${response.status}`);
+
+            return await response.json();
+        } catch(error) {
+            alert(`Ошибка отправки данных: ${error.message}`);
+            // throw error;
+        }
+
+    }
+
 }

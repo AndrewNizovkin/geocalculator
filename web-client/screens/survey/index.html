@@ -23,9 +23,9 @@
       </div>
       <div class="survey-button import" id="survey-import" title="Импорт из файла"></div>
       <div class="survey-toolbar-separator"></div>
-      <div class="survey-button catalog" id="survey-catalog" title="Показать каталог"></div>
       <div class="survey-button run" id="survey-run" title="Обработать"></div>
       <div class="survey-button view" id="survey-view" title="Просмотр результатов"></div>
+      <input type="file" id="survey-import-input" accept=".txt">
     </div>
 
     <div class="panel-survey">
@@ -55,50 +55,42 @@
             <div class="menu-item" data-base-point-id="3">1202</div>
           </div>
           <!--   pop-up-panel     -->
-
-          <table class="table-station" id="survey-table-station">
-            <!-- <caption>Параметры станции</caption> -->
-            <tbody>
-              <tr>
-                <td class="toggle menu-item" id="button-station-name" title="Вставить из каталога">Станция</td>
-
-                <td><input type="text" id="survey-station-name" size="12" placeholder="noname"></td>
-              </tr>
-              <tr>
-                <td>X:</td>
-                <td><input type="text" id="survey-station-x" size="12" placeholder="0.000"></td>
-              </tr>
-              <tr>
-                <td>Y:</td>
-                <td><input type="text" id="survey-station-y" size="12" placeholder="0.000"></td>
-              </tr>
-              <tr>
-                <td>Z:</td>
-                <td><input type="text" id="survey-station-z" size="12" placeholder="0.000"></td>
-              </tr>
-              <tr>
-                <td>i:</td>
-                <td><input type="text" id="survey-station-height" size="12" placeholder="0.000"></td>
-              </tr>
-              <tr>
-                <td>Ор.Напр.</td>
-                <td><input type="text" id="survey-or-direction" size="12" value="0.0000"></td>
-              </tr>
-              <tr>
-                <td class="toggle menu-item" id="button-or-name" title="Вставить из каталога">Ориентир</td>
-                <td><input type="text" id="survey-or-name" size="12" placeholder="noname"></td>
-              </tr>
-              <tr>
-                <td>X:</td>
-                <td><input type="text" id="survey-or-x" size="12" placeholder="0.000"></td>
-              </tr>
-              <tr>
-                <td>Y:</td>
-                <td><input type="text" id="survey-or-y" size="12" placeholder="0.000"></td>
-              </tr>
-
-            </tbody>
-          </table>
+          <div class="station-row">
+            <div class="toggle menu-item" id="button-station-name" title="Вставить из каталога"class="">Станция</div>
+            <input type="text" id="survey-station-name" size="12" placeholder="noname">
+          </div>
+          <div class="station-row">
+            <div>X:</div>
+            <input type="text" id="survey-station-x" size="12" placeholder="0.000">
+          </div>
+          <div class="station-row">
+            <div>Y:</div>
+            <input type="text" id="survey-station-y" size="12" placeholder="0.000">
+          </div>
+          <div class="station-row">
+            <div>Z:</div>
+            <input type="text" id="survey-station-z" size="12" placeholder="0.000">
+          </div>
+          <div class="station-row">
+            <div>i:</div>
+            <input type="text" id="survey-station-height" size="12" placeholder="0.000">
+          </div>
+          <div class="station-row">
+            <div>Ор.Напр.</div>
+            <input type="text" id="survey-or-direction" size="12" value="0.0000">
+          </div>
+          <div class="station-row">
+            <div class="toggle menu-item" id="button-or-name" title="Вставить из каталога">Ориентир</div>
+            <input type="text" id="survey-or-name" size="12" placeholder="noname">
+          </div>
+          <div class="station-row">
+            <div>X:</div>
+            <input type="text" id="survey-or-x" size="12" placeholder="0.000">
+          </div>
+          <div class="station-row">
+            <div>Y:</div>
+            <input type="text" id="survey-or-y" size="12" placeholder="0.000">
+          </div>          
 
         </div>
 

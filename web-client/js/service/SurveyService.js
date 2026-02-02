@@ -54,6 +54,32 @@ export class SurveyService {
     }
 
     /**
+     * Imports data from various total stations
+     * @param {File} fileImport 
+     * @param {string} typeImport 
+     */
+    async importFromTotalStation(fileImport, typeImport) {
+        try {
+            await this.surveyProvider.getStringArrayFromDevice(fileImport).then((linesArray) => {
+                linesArray.unshift(typeImport);
+                for (let line of linesArray) {
+                    console.log(line);
+                }
+
+                // let fileTah = this.surveyProvider.importTah(linesArray);
+
+                this.surveyRepository.clearAll();
+                this.surveyRepository.addNewStation();
+                this.surveyRepository.addNewMeasurement(0);
+
+                // this.surveyRepository = this.surveyMapper.arrayToSurveyRepository(fileTah, this.surveyRepository);
+            });
+        } catch (err) {
+            console.error(err.message);
+        }        
+    }
+
+    /**
      * Returns an array of strings in the 'tah' format
      * @returns {string[]}
      */

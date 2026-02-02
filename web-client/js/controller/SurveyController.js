@@ -14,6 +14,7 @@ export class SurveyController {
     this.currentMeasurement = 0;
     this.currentBasePoint = 0;
     this.insertBasePointToStation = true;
+    this.surveyImportType = "leica";
   }
 
     /**
@@ -23,7 +24,8 @@ export class SurveyController {
         let content = document.getElementById("content");
 
         content.innerHTML = `
-        <div class="overlay" id="overlay"></div>
+    <div class="overlay" id="overlay"></div>
+    
     <div class="survey-toolbar" id="toolbar-survey">
       <div class="survey-button new" id="survey-new" title="Новая съёмка"></div>
       <div class="survey-button open" id="survey-open" title="Открыть">
@@ -31,9 +33,9 @@ export class SurveyController {
       </div>
       <div class="survey-button import" id="survey-import" title="Импорт из файла"></div>
       <div class="survey-toolbar-separator"></div>
-      <div class="survey-button catalog" id="survey-catalog" title="Показать каталог"></div>
       <div class="survey-button run" id="survey-run" title="Обработать"></div>
       <div class="survey-button view" id="survey-view" title="Просмотр результатов"></div>
+      <input type="file" id="survey-import-input" accept=".txt">
     </div>
 
     <div class="panel-survey">
@@ -47,60 +49,48 @@ export class SurveyController {
           </div>
           <div class="scrollpanel-stations">
             <ul class="list-stations" id="list-stations">
-              <li><a class="menu-item" href="#" data-station-id="0">1301</a></li>
-              <li><a class="menu-item" href="#" data-station-id="1">100</a></li>
-              <li><a class="menu-item" href="#" data-station-id="0">101</a></li>
             </ul>
           </div>
         </div>
 
         <div class="panel-station" id="panel-station">
-        
-        
-        
-          <table class="table-station" id="survey-table-station">
-            <!-- <caption>Параметры станции</caption> -->
-            <tbody>
-              <tr>
-                <td class="toggle menu-item" tabindex="0" id="button-station-name" title="Вставить из каталога">Станция</td>
 
-                <td><input type="text" id="survey-station-name" size="12" placeholder="noname"></td>
-              </tr>
-              <tr>
-                <td>X:</td>
-                <td><input type="text" id="survey-station-x" size="12" placeholder="0.000"></td>
-              </tr>
-              <tr>
-                <td>Y:</td>
-                <td><input type="text" id="survey-station-y" size="12" placeholder="0.000"></td>
-              </tr>
-              <tr>
-                <td>Z:</td>
-                <td><input type="text" id="survey-station-z" size="12" placeholder="0.000"></td>
-              </tr>
-              <tr>
-                <td>i:</td>
-                <td><input type="text" id="survey-station-height" size="12" placeholder="0.000"></td>
-              </tr>
-              <tr>
-                <td>Ор.Напр.</td>
-                <td><input type="text" id="survey-or-direction" size="12" value="0.0000"></td>
-              </tr>
-              <tr>
-                <td class="toggle menu-item" id="button-or-name" title="Вставить из каталога">Ориентир</td>
-                <td><input type="text" id="survey-or-name" size="12" placeholder="noname"></td>
-              </tr>
-              <tr>
-                <td>X:</td>
-                <td><input type="text" id="survey-or-x" size="12" placeholder="0.000"></td>
-              </tr>
-              <tr>
-                <td>Y:</td>
-                <td><input type="text" id="survey-or-y" size="12" placeholder="0.000"></td>
-              </tr>
-
-            </tbody>
-          </table>
+          <div class="station-row">
+            <div class="toggle menu-item" id="button-station-name" title="Вставить из каталога"class="">Станция</div>
+            <input type="text" id="survey-station-name" size="12" placeholder="noname">
+          </div>
+          <div class="station-row">
+            <div>X:</div>
+            <input type="text" id="survey-station-x" size="12" placeholder="0.000">
+          </div>
+          <div class="station-row">
+            <div>Y:</div>
+            <input type="text" id="survey-station-y" size="12" placeholder="0.000">
+          </div>
+          <div class="station-row">
+            <div>Z:</div>
+            <input type="text" id="survey-station-z" size="12" placeholder="0.000">
+          </div>
+          <div class="station-row">
+            <div>i:</div>
+            <input type="text" id="survey-station-height" size="12" placeholder="0.000">
+          </div>
+          <div class="station-row">
+            <div>Ор.Напр.</div>
+            <input type="text" id="survey-or-direction" size="12" value="0.0000">
+          </div>
+          <div class="station-row">
+            <div class="toggle menu-item" id="button-or-name" title="Вставить из каталога">Ориентир</div>
+            <input type="text" id="survey-or-name" size="12" placeholder="noname">
+          </div>
+          <div class="station-row">
+            <div>X:</div>
+            <input type="text" id="survey-or-x" size="12" placeholder="0.000">
+          </div>
+          <div class="station-row">
+            <div>Y:</div>
+            <input type="text" id="survey-or-y" size="12" placeholder="0.000">
+          </div>          
 
         </div>
 
@@ -122,22 +112,6 @@ export class SurveyController {
               <th>Выс.Цели</th>
             </thead>
             <tbody id="list-measurements">
-              <!-- Демо данные -->
-              <tr>
-                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="name" value="1302"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="direction" value="359.5953"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="distance" value="30.526"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="tilt" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="0" data-target="height" value="1302"/></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="name" value="1302"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="direction" value="359.5953"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="distance" value="30.526"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="tilt" value="-0.5959"/></td>
-                <td><input type="text" class="menu-item" data-measurement-id="1" data-target="height" value="1302"/></td>
-              </tr>
-              <!-- Демо данные -->
             </tbody>
 
           </table>
@@ -148,13 +122,15 @@ export class SurveyController {
 
 
 
+
       
         `;
         
         this.setSurveyStation();
         this.setListSurveyStations();
         this.setTableMeasurements();
-        this.setListBaseStations();
+        this.setListBasePoints();
+        this.setMenuImport();
         this.addListenersMainToolbar()
         this.addListenersPanelStations();
         this.addListenersPanelStation();
@@ -177,15 +153,27 @@ export class SurveyController {
               let file = element.files[0];
               if (!file) throw new Error("Select a file!");
               this.surveyService.readFromDevice(file).then(() => {
+                this.currentSurveyStation = 0;
+                this.currentMeasurement = 0;
                 this.setListSurveyStations();
                 this.setSurveyStation();
                 this.setTableMeasurements();
-                this.currentSurveyStation = 0;
-                this.currentMeasurement = 0;
                 });
              } catch (error) {
               console.error(error.message);
             }
+            break;
+
+          case "survey-import-input":
+            let file = element.files[0];
+            if (!file) throw new Error("Select a file!");
+            this.surveyService.importFromTotalStation(file, this.surveyImportType).then(() => {
+                this.currentSurveyStation = 0;
+                this.currentMeasurement = 0;              
+                this.setListSurveyStations();
+                this.setSurveyStation();
+                this.setTableMeasurements();
+            });
             break;
         }
 
@@ -194,6 +182,10 @@ export class SurveyController {
 
       document.getElementById("toolbar-survey").addEventListener('click', (event) => {
         let element = event.target;
+        let importFileInput = document.getElementById("survey-import-input");
+        let surveyOpenInput = document.getElementById("survey-open-input");
+        let overlay = document.getElementById("overlay");
+        let menuImport = document.getElementById("menu-import");        
 
         switch(element.id) {
 
@@ -209,21 +201,49 @@ export class SurveyController {
             break;
 
           case "survey-open":
-            document.getElementById("survey-open-input").click();
+            surveyOpenInput.click();
             break;
 
           case "survey-import":
+            let toggleRect = element.getBoundingClientRect(); 
+            let toolbarSurvey = document.getElementById("toolbar-survey").getBoundingClientRect();
+            // let menuImport = document.getElementById("menu-import");
+
+            menuImport.style.top = `${toggleRect.top - toolbarSurvey.top + toggleRect.height + window.scrollY}px`;
+            menuImport.style.left = `${toggleRect.left - toolbarSurvey.left + window.scrollX}px`;
+            menuImport.classList.toggle("open");
+            overlay.classList.toggle("open");
+
+          break;
+
+          case "import-leica":
+            this.surveyImportType = element.id;
+            menuImport.classList.toggle("open");
+            overlay.classList.toggle("open");
+            importFileInput.setAttribute("accept", ".gsi");
+            importFileInput.click();
             break;
 
-          // case "survey-save":
-            // this.surveyService.writeToDevice("hello");            
-            // break;
+          case "import-nikon":
+            this.surveyImportType = element.id;
+            menuImport.classList.toggle("open");
+            overlay.classList.toggle("open");
+            importFileInput.setAttribute("accept", ".raw");
+            importFileInput.click();
+            break;
+
+          case "import-topcon":
+            this.surveyImportType = element.id;
+            menuImport.classList.toggle("open");
+            overlay.classList.toggle("open");
+            importFileInput.setAttribute("accept", ".txt");
+            importFileInput.click();
+            break;
+
 
           case "survey-run":
             break;
 
-          case "survey-catalog":
-          break;
 
         }
       });
@@ -642,13 +662,10 @@ export class SurveyController {
     /**
      * Creates and adds a list of base stations to the DOM
      */
-    setListBaseStations() {
+    setListBasePoints() {
       const panelStation = document.getElementById("panel-station");
       const listBasePoints = document.createElement('div');
-      // listBasePoints.tabIndex = "0";
-      // listBasePoints.addEventListener("blur", () => {
-      //   document.getElementById("list-base-point").classList.toggle("open");
-      // });
+
       listBasePoints.className = "pop-up";
       listBasePoints.id = "list-base-point";
 
@@ -657,52 +674,41 @@ export class SurveyController {
           let row = document.createElement('div');
           row.className = "menu-item";
           row.setAttribute("data-base-point-id", i);
-          
-          // row.addEventListener('click', (event) => {
-          //   document.getElementById("list-base-point").classList.toggle("open");
-          //   document.getElementById("overlay").classList.toggle("open");
-
-          //   if (this.insertBasePointToStation) {
-          //     this.surveyService.saveStationName(
-          //       this.currentSurveyStation, 
-          //       this.basePointService.getBasePointName(i));
-          //     this.surveyService.saveStationX(
-          //       this.currentSurveyStation, 
-          //       this.basePointService.getBasePointX(i)
-          //     );
-          //     this.surveyService.saveStationY(
-          //       this.currentSurveyStation, 
-          //       this.basePointService.getBasePointY(i)
-          //     );
-          //     this.surveyService.saveStationZ(
-          //       this.currentSurveyStation, 
-          //       this.basePointService.getBasePointZ(i)
-          //     );
-          //   } else {
-          //     this.surveyService.saveOrName(
-          //       this.currentSurveyStation, 
-          //       this.basePointService.getBasePointName(i)
-          //     );
-          //     this.surveyService.saveOrX(
-          //       this.currentSurveyStation, 
-          //       this.basePointService.getBasePointX(i)
-          //     );
-          //     this.surveyService.saveOrY(
-          //       this.currentSurveyStation, 
-          //       this.basePointService.getBasePointY(i)
-          //     );
-
-          //   }
-
-          //   this.setListSurveyStations();
-          //   this.setSurveyStation();
-
-          // });
           row.innerHTML = this.basePointService.getBasePointName(i);
           listBasePoints.append(row);
         }
       }
       panelStation.append(listBasePoints);
+    }
+
+    /**
+     * Creates and adds pop-up 'menu import' to the DOM
+     */
+    setMenuImport() {
+      const menuImport = document.createElement('div');
+      menuImport.id = "menu-import";
+      menuImport.className = "menu-import";
+
+      let menuItem = document.createElement('div');
+      menuItem.id = "import-leica";
+      menuItem.className = "menu-item";
+      menuItem.innerHTML = "Leica";
+      menuImport.append(menuItem);
+
+      menuItem = document.createElement('div');
+      menuItem.id = "import-nikon";
+      menuItem.className = "menu-item";
+      menuItem.innerHTML = "Nikon";
+      menuImport.append(menuItem);
+
+      menuItem = document.createElement('div');
+      menuItem.id = "import-topcon";
+      menuItem.className = "menu-item";
+      menuItem.innerHTML = "Topcon";
+      menuImport.append(menuItem);
+
+      document.getElementById("toolbar-survey").append(menuImport);
+
     }
 
 }
