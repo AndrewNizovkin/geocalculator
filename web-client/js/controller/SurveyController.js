@@ -24,7 +24,7 @@ export class SurveyController {
         let content = document.getElementById("content");
 
         content.innerHTML = `
-    <div class="overlay" id="overlay"></div>
+
     
     <div class="survey-toolbar" id="toolbar-survey">
       <div class="survey-button new" id="survey-new" title="Новая съёмка"></div>
@@ -207,7 +207,6 @@ export class SurveyController {
           case "survey-import":
             let toggleRect = element.getBoundingClientRect(); 
             let toolbarSurvey = document.getElementById("toolbar-survey").getBoundingClientRect();
-            // let menuImport = document.getElementById("menu-import");
 
             menuImport.style.top = `${toggleRect.top - toolbarSurvey.top + toggleRect.height + window.scrollY}px`;
             menuImport.style.left = `${toggleRect.left - toolbarSurvey.left + window.scrollX}px`;

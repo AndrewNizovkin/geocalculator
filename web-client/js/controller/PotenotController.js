@@ -4,8 +4,10 @@ import {PotenotService} from '../service/PotenotService.js';
  * 
  */
 export class PotenotController {
-    constructor() {
+    constructor(basePointService) {
         this.potenotService = new PotenotService();
+        this.basePointService = basePointService;
+        this.insertCoordinatesTarget = "first";
     }
 
     /**
@@ -27,7 +29,7 @@ export class PotenotController {
           <div class="panel-title">Исходные данные</div>
 
           <div class="frame">
-            <div class="frame-label">Координаты точки</div>
+            <div class="frame-label toggle menu-item" id="potenot-first-button" title="Вставить из каталога">Координаты точки</div>
             <div class="frame-value"><span>X: </span><input type="text" class="menu-item" id="potenot-first-x" value="2333444.555"/></div>
             <div class="frame-value"><span>Y: </span><input type="text" class="menu-item" id="potenot-first-y" value="2333444.555"/></div>
             <div class="frame-label">Направление на точку</div>
@@ -35,7 +37,7 @@ export class PotenotController {
           </div>
 
           <div class="frame">
-            <div class="frame-label">Координаты точки</div>
+            <div class="frame-label toggle menu-item" id="potenot-second-button" title="Вставить из каталога">Координаты точки</div>
             <div class="frame-value"><span>X: </span><input type="text" class="menu-item" id="potenot-second-x" value="2333444.555"/></div>
             <div class="frame-value"><span>Y: </span><input type="text" class="menu-item" id="potenot-second-y" value="2333444.555"/></div>
             <div class="frame-label">Направление на точку</div>
@@ -43,7 +45,7 @@ export class PotenotController {
           </div>
 
           <div class="frame">
-            <div class="frame-label">Координаты точки</div>
+            <div class="frame-label toggle menu-item" id="potenot-third-button" title="Вставить из каталога">Координаты точки</div>
             <div class="frame-value"><span>X: </span><input type="text" class="menu-item" id="potenot-third-x" value="2333444.555"/></div>
             <div class="frame-value"><span>Y: </span><input type="text" class="menu-item" id="potenot-third-y" value="2333444.555"/></div>
             <div class="frame-label">Направление на точку</div>
@@ -70,69 +72,13 @@ export class PotenotController {
         `;
         
         this.setData();
-
         this.setResult();
+        this.setListBasePoints();
 
-        document.addEventListener('click', (event) => {
-
-          switch(event.target.id) {
-
-            case "potenot-clear":
-              this.potenotService.clearAll();
-              this.setData();
-              this.setResult();              
-              break;
-
-            case "potenot-run":
-              this.potenotService.solvePotenotTask().then(() => this.setResult());
-              break;
-          }
-        });
-
-        document.getElementById("potenot-panel").addEventListener('input', (event) => {
-          let element = event.target;
-
-          switch(element.id) {
-
-            case "potenot-first-x":
-              this.potenotService.saveFirstX(element.value);
-              break;
-
-            case "potenot-first-y":
-              this.potenotService.saveFirstY(element.value);
-              break;
-
-            case "potenot-first-direction":
-              this.potenotService.saveFirstDirection(element.value);
-              break;
-
-            case "potenot-second-x":
-              this.potenotService.saveSecondX(element.value);
-              break;
-
-            case "potenot-second-y":
-              this.potenotService.saveSecondY(element.value);
-              break;
-
-            case "potenot-second-direction":
-              this.potenotService.saveSecondDirection(element.value);
-              break;
-
-            case "potenot-third-x":
-              this.potenotService.saveThirdX(element.value);
-              break;
-
-            case "potenot-third-y":
-              this.potenotService.saveThirdY(element.value);
-              break;
-
-            case "potenot-third-direction":
-              this.potenotService.saveThirdDirection(element.value);
-              break;
+        this.addListenersToolbarPotenot();
+        this.addListenersPanelPotenot();
 
 
-          }
-        });
 
     }
 
@@ -168,6 +114,167 @@ export class PotenotController {
       document.getElementById("potenot-base-x").innerHTML = `X: ${this.potenotService.getBaseX()}`;
 
       document.getElementById("potenot-base-y").innerHTML = `X: ${this.potenotService.getBaseY()}`;
+
+    }
+
+    /**
+     * Creates and adds a list of base stations to the DOM
+     */
+    setListBasePoints() {
+      const listBasePoints = document.createElement('div');
+
+      listBasePoints.className = "pop-up";
+      listBasePoints.id = "list-base-point";
+
+      if (this.basePointService.size() > 0) {
+        for (let i = 0; i < this.basePointService.size(); i++) {
+          let row = document.createElement('div');
+          row.className = "menu-item";
+          row.setAttribute("data-base-point-id", i);
+          row.innerHTML = this.basePointService.getBasePointName(i);
+          listBasePoints.append(row);
+        }
+      }
+      document.getElementById("potenot-panel").append(listBasePoints);
+    }
+
+
+    /**
+     * Adds event listeners for potenot-toolbar
+     */
+    addListenersToolbarPotenot() {
+        document.getElementById("potenot-toolbar").addEventListener('click', (event) => {
+
+          switch(event.target.id) {
+
+            case "potenot-clear":
+              this.potenotService.clearAll();
+              this.setData();
+              this.setResult();              
+              break;
+
+            case "potenot-run":
+              this.potenotService.solvePotenotTask().then(() => this.setResult());
+              break;
+          }
+        });
+
+    }
+
+    /**
+     * Adds event listeners for potenot-panel
+     */
+    addListenersPanelPotenot() {
+      const panelPotenot = document.getElementById("potenot-panel");
+
+      panelPotenot.addEventListener('click', (event) => {
+        const element = event.target;
+        let toggleRect = element.getBoundingClientRect(); 
+        let panelPotenotRect = panelPotenot.getBoundingClientRect();
+        let listBasePoints = document.getElementById("list-base-point");      
+        let overlay = document.getElementById("overlay");
+
+        if (element.hasAttribute("data-base-point-id")) {
+
+          listBasePoints.classList.toggle("open");
+          overlay.classList.toggle("open");
+
+          let basePointId = +element.dataset.basePointId;
+
+          switch (this.insertCoordinatesTarget) {
+
+            case "first":
+              this.potenotService.saveFirstX(this.basePointService.getBasePointX(basePointId));
+              this.potenotService.saveFirstY(this.basePointService.getBasePointY(basePointId));
+              break;
+
+            case "second":
+              this.potenotService.saveSecondX(this.basePointService.getBasePointX(basePointId));
+              this.potenotService.saveSecondY(this.basePointService.getBasePointY(basePointId));
+              break;
+
+            case "third":
+              this.potenotService.saveThirdX(this.basePointService.getBasePointX(basePointId));
+              this.potenotService.saveThirdY(this.basePointService.getBasePointY(basePointId));
+              break;
+          }
+
+          this.setData();
+
+        }
+
+
+        switch (element.id) {
+
+          case "potenot-first-button":
+            listBasePoints.style.top = `${toggleRect.top - panelPotenotRect.top +toggleRect.height + window.scrollY}px`;
+            listBasePoints.style.left = `${toggleRect.left - panelPotenotRect.left + window.scrollX}px`;
+            listBasePoints.classList.toggle("open");
+            overlay.classList.toggle("open");
+            this.insertCoordinatesTarget = "first";
+            break;
+
+          case "potenot-second-button":
+            listBasePoints.style.top = `${toggleRect.top - panelPotenotRect.top +toggleRect.height + window.scrollY}px`;
+            listBasePoints.style.left = `${toggleRect.left - panelPotenotRect.left + window.scrollX}px`;
+            listBasePoints.classList.toggle("open");
+            overlay.classList.toggle("open");
+            this.insertCoordinatesTarget = "second";
+            break;
+
+          case "potenot-third-button":
+            listBasePoints.style.top = `${toggleRect.top - panelPotenotRect.top +toggleRect.height + window.scrollY}px`;
+            listBasePoints.style.left = `${toggleRect.left - panelPotenotRect.left + window.scrollX}px`;
+            listBasePoints.classList.toggle("open");
+            overlay.classList.toggle("open");
+            this.insertCoordinatesTarget = "third";
+            break;
+          }
+      });
+
+      panelPotenot.addEventListener('input', (event) => {
+        let element = event.target;
+
+        switch(element.id) {
+
+          case "potenot-first-x":
+            this.potenotService.saveFirstX(element.value);
+            break;
+
+          case "potenot-first-y":
+            this.potenotService.saveFirstY(element.value);
+            break;
+
+          case "potenot-first-direction":
+            this.potenotService.saveFirstDirection(element.value);
+            break;
+
+          case "potenot-second-x":
+            this.potenotService.saveSecondX(element.value);
+            break;
+
+          case "potenot-second-y":
+            this.potenotService.saveSecondY(element.value);
+            break;
+
+          case "potenot-second-direction":
+            this.potenotService.saveSecondDirection(element.value);
+            break;
+
+          case "potenot-third-x":
+            this.potenotService.saveThirdX(element.value);
+            break;
+
+          case "potenot-third-y":
+            this.potenotService.saveThirdY(element.value);
+            break;
+
+          case "potenot-third-direction":
+            this.potenotService.saveThirdDirection(element.value);
+            break;
+
+        }
+      });
 
     }
 

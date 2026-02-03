@@ -4,8 +4,10 @@ import {DirectService} from '../service/DirectService.js';
  * 
  */
 export class DirectController {
-    constructor() {
+    constructor(basePointService) {
         this.directService = new DirectService();
+        this.basePointService = basePointService;
+        this.insertCoordinateToBase = true;
     }
 
     /**
@@ -26,14 +28,14 @@ export class DirectController {
           <div class="panel-title">Параметры базиса</div>
 
           <div class="frame">
-            <div class="frame-label">Координаты базы</div>
+            <div class="frame-label menu-item toggle" id="direct-base-button">Координаты базы</div>
             <div class="frame-value"><span>X: </span><input type="text" class="menu-item" id="direct-base-x" value="2333444.555"/></div>
             <div class="frame-value"><span>Y: </span><input type="text" class="menu-item" id="direct-base-y" value="2333444.555"/></div>
             <div class="frame-value"><span>Z: </span><input type="text" class="menu-item" id="direct-base-z" value="2333444.555"/></div>
           </div>
 
           <div class="frame">
-            <div class="frame-label">Координаты ориентира</div>
+            <div class="frame-label menu-item toggle" id="direct-landmark-button">Координаты ориентира</div>
             <div class="frame-value"><span>X: </span><input type="text" class="menu-item" id="direct-landmark-x" value="2333444.555"/></div>
             <div class="frame-value"><span>Y: </span><input type="text" class="menu-item" id="direct-landmark-y" value="2333444.555"/></div>
           </div>
@@ -92,9 +94,18 @@ export class DirectController {
         `;
 
         this.setData();
-
         this.setResult();
+        this.setListBasePoints();
+        this.addToolbarListeners();
+        this.addDirectPanelListeners();
+        
+       
+    }
 
+    /**
+     * Adds event listeners for direct-toolbar
+     */
+    addToolbarListeners() {
         document.getElementById("direct-toolbar").addEventListener('click', (event) => {
 
           switch(event.target.id) {
@@ -111,57 +122,114 @@ export class DirectController {
           }
         });
 
-        document.getElementById("direct-panel").addEventListener('input', (event) => {
-          let element = event.target;
+    }
 
-          switch(element.id) {
+    /**
+     * Adds event listeners for direct-panel
+     */
+    addDirectPanelListeners() {
+      let panelDirect = document.getElementById("direct-panel");
 
-            case "direct-base-x":
-              this.directService.saveBaseX(element.value);
-              break;
+      panelDirect.addEventListener('click', (event) => {
+        let element = event.target;
+        let toggleRect = element.getBoundingClientRect(); 
+        let panelDirectRect = panelDirect.getBoundingClientRect();
+        let listBasePoints = document.getElementById("list-base-point");      
+        let overlay = document.getElementById("overlay");
 
-            case "direct-base-y":
-              this.directService.saveBaseY(element.value);
-              break;
+        if (element.hasAttribute("data-base-point-id")) {
 
-            case "direct-base-z":
-              this.directService.saveBaseZ(element.value);
-              break;
+          listBasePoints.classList.toggle("open");
+          overlay.classList.toggle("open");
 
-            case "direct-landmark-x":
-              this.directService.saveLandmarkX(element.value);
-              break;
+          let basePointId = +element.dataset.basePointId;
 
-            case "direct-landmark-y":
-              this.directService.saveLandmarkY(element.value);
-              break;
-
-            case "direct-landmark-direction":
-              this.directService.saveLandmarkDirection(element.value);
-              break;
-
-            case "direct-base-height":
-              this.directService.saveBaseHeight(element.value);
-              break;
-
-            case "direct-target-direction":
-              this.directService.saveTargetDirection(element.value);
-              break;
-
-            case "direct-target-distance":
-              this.directService.saveTargetInclindeDistance(element.value);
-              break;
-
-            case "direct-target-tilt":
-              this.directService.saveTargetTiltAngle(element.value);
-              break;
-
-            case "direct-target-height":
-              this.directService.saveTargetHeight(element.value);
-              break;
+          if (this.insertCoordinateToBase) {
+            this.directService.saveBaseX(this.basePointService.getBasePointX(basePointId));
+            this.directService.saveBaseY(this.basePointService.getBasePointY(basePointId));
+            this.directService.saveBaseZ(this.basePointService.getBasePointZ(basePointId));
+          } else {
+            this.directService.saveLandmarkX(this.basePointService.getBasePointX(basePointId));
+            this.directService.saveLandmarkY(this.basePointService.getBasePointY(basePointId));
           }
-        });
+
+          this.setData();
+
+      }
         
+
+        switch (element.id) {
+
+          case "direct-base-button":
+            listBasePoints.style.top = `${toggleRect.top - panelDirectRect.top +toggleRect.height + window.scrollY}px`;
+            listBasePoints.style.left = `${toggleRect.left - panelDirectRect.left + window.scrollX}px`;
+            listBasePoints.classList.toggle("open");
+            overlay.classList.toggle("open");
+            this.insertCoordinateToBase = true;
+            break;
+
+          case "direct-landmark-button":
+            listBasePoints.style.top = `${toggleRect.top - panelDirectRect.top +toggleRect.height + window.scrollY}px`;
+            listBasePoints.style.left = `${toggleRect.left - panelDirectRect.left + window.scrollX}px`;
+            listBasePoints.classList.toggle("open");
+            overlay.classList.toggle("open");
+            this.insertCoordinateToBase = false;
+            break;
+        }
+        
+      });        
+
+      panelDirect.addEventListener('input', (event) => {
+        let element = event.target;
+
+        switch(element.id) {
+
+          case "direct-base-x":
+            this.directService.saveBaseX(element.value);
+            break;
+
+          case "direct-base-y":
+            this.directService.saveBaseY(element.value);
+            break;
+
+          case "direct-base-z":
+            this.directService.saveBaseZ(element.value);
+            break;
+
+          case "direct-landmark-x":
+            this.directService.saveLandmarkX(element.value);
+            break;
+
+          case "direct-landmark-y":
+            this.directService.saveLandmarkY(element.value);
+            break;
+
+          case "direct-landmark-direction":
+            this.directService.saveLandmarkDirection(element.value);
+            break;
+
+          case "direct-base-height":
+            this.directService.saveBaseHeight(element.value);
+            break;
+
+          case "direct-target-direction":
+            this.directService.saveTargetDirection(element.value);
+            break;
+
+          case "direct-target-distance":
+            this.directService.saveTargetInclindeDistance(element.value);
+            break;
+
+          case "direct-target-tilt":
+            this.directService.saveTargetTiltAngle(element.value);
+            break;
+
+          case "direct-target-height":
+            this.directService.saveTargetHeight(element.value);
+            break;
+        }
+      });
+
     }
 
     /**
@@ -205,4 +273,27 @@ export class DirectController {
       document.getElementById("direct-target-z").innerHTML = `Z: ${this.directService.getTargetZ()}`;
 
     }
+
+    /**
+     * Creates and adds a list of base stations to the DOM
+     */
+    setListBasePoints() {
+      const panelDirect = document.getElementById("direct-panel");
+      const listBasePoints = document.createElement('div');
+
+      listBasePoints.className = "pop-up";
+      listBasePoints.id = "list-base-point";
+
+      if (this.basePointService.size() > 0) {
+        for (let i = 0; i < this.basePointService.size(); i++) {
+          let row = document.createElement('div');
+          row.className = "menu-item";
+          row.setAttribute("data-base-point-id", i);
+          row.innerHTML = this.basePointService.getBasePointName(i);
+          listBasePoints.append(row);
+        }
+      }
+      panelDirect.append(listBasePoints);
+    }
+
 }

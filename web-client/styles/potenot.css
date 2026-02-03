@@ -46,7 +46,33 @@ body {
 .panel-potenot {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
+
+.open {
+    display: flex;
+}
+
+.toggle {
+    z-index: 1000;
+}
+
+.pop-up {
+    display: none;
+    flex-direction: column;
+    min-width: 90px;
+    width: auto;
+    height: 150px;
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+    padding: 10px;
+    background-color: var(--container-bg-color);
+    border: 2px outset #bab6b7;
+}
+
 
 .panel-potenot-basis, .panel-potenot-result {
     display: flex;

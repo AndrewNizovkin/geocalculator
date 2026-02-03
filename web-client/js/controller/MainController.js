@@ -12,9 +12,9 @@ import { BasePointController } from './BasePointController.js';
 export class MainController {
     constructor() {
       this.basePointController = new BasePointController();
-      this.directController = new DirectController();
-      this.inverseController = new InverseController();
-      this.potenotController = new PotenotController();
+      this.directController = new DirectController(this.basePointController.getBasePointService());
+      this.inverseController = new InverseController(this.basePointController.getBasePointService());
+      this.potenotController = new PotenotController(this.basePointController.getBasePointService());
       this.surveyController = new SurveyController(this.basePointController.getBasePointService());
         
     }
@@ -25,6 +25,8 @@ export class MainController {
     start() {
 
         document.body.innerHTML = `
+  <div class="overlay" id="overlay"></div>        
+
   <div class="header" id="header">
 
     <div class="title" id="title">
@@ -46,11 +48,13 @@ export class MainController {
   <div class="main">
     <div class="nav"  id="nav-menu">
       <div class="menu-item" id="main-page">Главная</div>
-      <div class="menu-item" id="direct-page">Прямая задача</div>
-      <div class="menu-item" id="inverse-page">Обратная задача</div>
-      <div class="menu-item" id="potenot-page">Задача Потенота</div>
-      <div class="menu-item" id="survey-page">Съёмка</div>
       <div class="menu-item" id="points-page">Каталог</div>
+      <div class="menu-item" id="survey-page">Съёмка</div>
+      <div class="menu-item" id="poligon-page">Полигон</div>      
+      <div class="menu-item" id="direct-page">Прямая</div>
+      <div class="menu-item" id="inverse-page">Обратная</div>
+      <div class="menu-item" id="potenot-page">Потенота</div>
+
     </div>
     <div class="content" id="content">
       
