@@ -1,0 +1,131 @@
+@import './survey.css';
+
+.panel-polygon {
+    /* background-color: yellow; */
+    /* display: flex; */
+    /* flex-direction: column; */
+    justify-content: safe center;
+    height: auto;
+}
+
+.scrollpanel-polygon {
+    /* background-color: aqua; */
+    /* display: flex; */
+    height: 20em;
+    /* flex: 1 1 auto; */
+    overflow: auto;
+    /* justify-content: safe center; */
+}
+
+.table-polygon {
+    border: 2px outset #bab6b7;
+}
+
+.table-polygon th {
+    text-align: center;
+}
+
+.table-cell {
+    display: flex;
+    width: 100px;
+    justify-content: center;
+}
+
+.panel-polygon-processing {
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    height: 60em;
+    flex: 1 1 auto;
+    padding: 10px;
+}
+
+.panel-title {
+    font-size: 1.2em;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.panel-polygon-residuals {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 40%;
+    overflow: auto;
+}
+
+.row-residual {
+    display: flex;
+    flex-direction: row;
+}
+
+.row-residual :first-child {
+    font-size: 1.2em;
+    padding: 5px;
+    width: 60%;
+    text-align: right;
+    flex: 1 1 auto;
+}
+
+.row-residual :last-child {
+    font-size: 1.2em;
+    padding: 5px;
+    padding-left: 20px;
+    width: 40%;
+    text-align: left;
+    flex: 1 1 auto;
+}
+
+.panel-polygon-plan {
+    /* background-color: green; */
+    display: flex;
+    width: auto;
+    height: 60%;
+}
+
+.panel-polygon, .panel-polygon-plan, .panel-polygon-processing, .panel-polygon-residuals, .scrollpanel-polygon {
+    /* background-color: var(--container-bg-color); */
+    border: 2px outset #bab6b7;
+    margin: 2px;
+    /* color: var(--text-color); */
+}
+
+
+@media screen and (min-width: 768px) {
+
+    .panel-polygon {
+        display: flex;
+        width: 100%;
+        height: 30em;
+        flex: 0 0 auto;
+    }
+
+    .scrollpanel-polygon {
+        /* display: flex; */
+        height: auto;
+        overflow: auto;
+    }
+
+    .panel-polygon-processing {
+        display: flex;
+        flex-direction: row;
+        height: auto;
+        flex: 1 1 auto;        
+    }
+
+    .panel-polygon-residuals {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        height: auto;
+    }
+
+    .panel-polygon-plan {
+        display: flex;
+        width: 70%;
+        height: auto;
+    }
+    
+}

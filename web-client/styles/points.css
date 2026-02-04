@@ -53,7 +53,7 @@
 
 .scrollpanel-points {
     /* display: flex; */
-    justify-content: safe center;
+    /* justify-content: safe center; */
     height: 80vh;
     /* flex: 0 0 auto; */
     overflow: auto;

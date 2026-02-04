@@ -3,6 +3,7 @@ import {InverseController} from './InverseController.js';
 import {PotenotController} from './PotenotController.js';
 import { SurveyController } from './SurveyController.js';
 import { BasePointController } from './BasePointController.js';
+import { PolygonContoller } from './PolygonController.js';
 
 /**
  * 
@@ -16,6 +17,7 @@ export class MainController {
       this.inverseController = new InverseController(this.basePointController.getBasePointService());
       this.potenotController = new PotenotController(this.basePointController.getBasePointService());
       this.surveyController = new SurveyController(this.basePointController.getBasePointService());
+      this.polygonController = new PolygonContoller();
         
     }
 
@@ -192,6 +194,11 @@ export class MainController {
           case "points-page":
             this.basePointController.loadPageBasePoints();
             titleSeparator.innerHTML = "Каталог координат";
+            break;
+
+          case "poligon-page":
+            this.polygonController.loadPagePolygon();
+            titleSeparator.innerHTML = "Уравнивание тахеометрического хода";
             break;
         }
 

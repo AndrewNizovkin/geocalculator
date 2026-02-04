@@ -3,6 +3,7 @@
 @import './potenot.css';
 @import './survey.css';
 @import './points.css';
+@import './polygon.css';
 
 * {
     box-sizing: border-box;
