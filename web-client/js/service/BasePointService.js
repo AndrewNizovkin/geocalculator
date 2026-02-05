@@ -43,7 +43,7 @@ export class BasePointService {
      * Fills in the base point repository from a text file in the "kat" format
      * @param {File} fileKat 
      */
-    async addFromTextFile(fileKat) {
+    async readFromTextFile(fileKat) {
         try {
             await this.basePointProvider.getStringArrayFromDevice(fileKat).then((arrayKat) => {
                 this.basePointRepository.clearAll();

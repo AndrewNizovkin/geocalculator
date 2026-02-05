@@ -29,15 +29,15 @@ export class DirectController {
 
           <div class="frame">
             <div class="frame-label menu-item toggle" id="direct-base-button">Координаты базы</div>
-            <div class="frame-value"><span>X: </span><input type="text" class="menu-item" id="direct-base-x" value="2333444.555"/></div>
-            <div class="frame-value"><span>Y: </span><input type="text" class="menu-item" id="direct-base-y" value="2333444.555"/></div>
-            <div class="frame-value"><span>Z: </span><input type="text" class="menu-item" id="direct-base-z" value="2333444.555"/></div>
+            <div class="frame-value"><span>X: </span><input type="text" id="direct-base-x"></div>
+            <div class="frame-value"><span>Y: </span><input type="text" id="direct-base-y"></div>
+            <div class="frame-value"><span>Z: </span><input type="text" id="direct-base-z"></div>
           </div>
 
           <div class="frame">
             <div class="frame-label menu-item toggle" id="direct-landmark-button">Координаты ориентира</div>
-            <div class="frame-value"><span>X: </span><input type="text" class="menu-item" id="direct-landmark-x" value="2333444.555"/></div>
-            <div class="frame-value"><span>Y: </span><input type="text" class="menu-item" id="direct-landmark-y" value="2333444.555"/></div>
+            <div class="frame-value"><span>X: </span><input type="text" id="direct-landmark-x"></div>
+            <div class="frame-value"><span>Y: </span><input type="text" id="direct-landmark-y"></div>
           </div>
 
         </div>
@@ -48,32 +48,32 @@ export class DirectController {
 
           <div class="frame">
             <div class="frame-label">Направление на ориентир</div>
-            <div class="frame-value"><input type="text" class="menu-item" id="direct-landmark-direction" value="359.5959"/></div>
+            <div class="frame-value"><input type="text" id="direct-landmark-direction"></div>
           </div>
 
           <div class="frame">
             <div class="frame-label">Высота инструмента над точкой</div>
-            <div class="frame-value"><input type="text" class="menu-item" id="direct-base-height" value="99.555"/></div>
+            <div class="frame-value"><input type="text" id="direct-base-height"></div>
           </div>
 
           <div class="frame">
             <div class="frame-label">Направление на цель</div>
-            <div class="frame-value"><input type="text" class="menu-item" id="direct-target-direction" value="359.5959"/></div>
+            <div class="frame-value"><input type="text" id="direct-target-direction"></div>
           </div>
 
           <div class="frame">
             <div class="frame-label">Наклонное расстояние до цели</div>
-            <div class="frame-value"><input type="text" class="menu-item" id="direct-target-distance" value="99.555"/></div>
+            <div class="frame-value"><input type="text" id="direct-target-distance"></div>
           </div>
 
           <div class="frame">
             <div class="frame-label">Угол наклона</div>
-            <div class="frame-value"><input type="text" class="menu-item" id="direct-target-tilt" value="-9.5959"/></div>
+            <div class="frame-value"><input type="text" id="direct-target-tilt"></div>
           </div>
 
           <div class="frame">
             <div class="frame-label">Высота цели над определяемой точкой</div>
-            <div class="frame-value"><input type="text" class="menu-item" id="direct-target-height" value="99.555"/></div>
+            <div class="frame-value"><input type="text" id="direct-target-height"></div>
           </div>
 
         </div>
@@ -82,14 +82,15 @@ export class DirectController {
           <div class="panel-title">Результаты обработки</div>
           <div class="frame">
             <div class="frame-label">Координаты цели</div>
-            <div class="frame-value" id="direct-target-x">X: 2000000.000</div>
-            <div class="frame-value" id="direct-target-y">Y: 2000000.000</div>
-            <div class="frame-value" id="direct-target-z">Z: 2000.000</div>
+            <div class="frame-value" id="direct-target-x">X: </div>
+            <div class="frame-value" id="direct-target-y">Y: </div>
+            <div class="frame-value" id="direct-target-z">Z: </div>
           </div>
 
         </div>
 
       </div>
+
         
         `;
 

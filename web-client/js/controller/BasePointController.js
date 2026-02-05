@@ -32,10 +32,10 @@ export class BasePointController {
         <div class="scrollpanel-points">
           <table class="table-points">
             <thead>
-              <th class="menu-item">Название</th>
-              <th class="menu-item">X</th>
-              <th class="menu-item">Y</th>
-              <th class="menu-item">Z</th>
+              <th class="menu-item" id="button-sort-name">Название</th>
+              <th>X</th>
+              <th>Y</th>
+              <th>Z</th>
             </thead>
             <tbody id="list-points">
             </tbody>
@@ -80,10 +80,22 @@ export class BasePointController {
       panelPoints.addEventListener('click', (event) => {
         let element = event.target;
 
+        
+
         if (element.hasAttribute("data-point-id")) {
           this.currentBasePoint = +element.dataset.pointId;
         }
+
+        switch (element.id) {
+
+          case "button-sort-name":
+            this.basePointService.sortByName();
+            this.setTableBasePoints();
+            break;
+        }
       });
+
+      
 
       panelPoints.addEventListener('input', (event) => {
         let element = event.target;
@@ -170,7 +182,7 @@ export class BasePointController {
             try {
               let file = element.files[0];
               if (!file) throw new Error("Select a file!");
-              this.basePointService.addFromTextFile(file).then(() => {
+              this.basePointService.readFromTextFile(file).then(() => {
                 this.setTableBasePoints();
                 this.currentBasePoint = 0;
                 });
@@ -195,7 +207,7 @@ export class BasePointController {
       let cell = document.createElement('td');
       let item = document.createElement('input');
       item.type = "text";
-      item.className = "menu-item";
+      // item.className = "menu-item";
       item.setAttribute("data-point-id", pointIndex);
       item.setAttribute("data-target", "point-name");
       item.size = "12";
@@ -206,7 +218,7 @@ export class BasePointController {
       cell = document.createElement('td');
       item = document.createElement('input');
       item.type = "text";
-      item.className = "menu-item";
+      // item.className = "menu-item";
       item.setAttribute("data-point-id", pointIndex);
       item.setAttribute("data-target", "point-x");
       item.size = "12";
@@ -217,7 +229,7 @@ export class BasePointController {
       cell = document.createElement('td');
       item = document.createElement('input');
       item.type = "text";
-      item.className = "menu-item";
+      // item.className = "menu-item";
       item.setAttribute("data-point-id", pointIndex);
       item.setAttribute("data-target", "point-y");
       item.size = "12";
@@ -228,7 +240,7 @@ export class BasePointController {
       cell = document.createElement('td');
       item = document.createElement('input');
       item.type = "text";
-      item.className = "menu-item";
+      // item.className = "menu-item";
       item.setAttribute("data-point-id", pointIndex);
       item.setAttribute("data-target", "point-z");
       item.size = "12";

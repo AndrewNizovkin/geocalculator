@@ -603,7 +603,7 @@ export class SurveyController {
           let sell = document.createElement('td');
           let item = document.createElement('input');
           item.type = "text";
-          item.className = "menu-item";
+          // item.className = "menu-item";
           item.size = "10";
           item.setAttribute('data-target', 'name');
           item.setAttribute('data-measurement-id', indexMeasurement);
@@ -614,7 +614,7 @@ export class SurveyController {
           sell = document.createElement('td');
           item = document.createElement('input');
           item.type = "text";
-          item.className = "menu-item";
+          // item.className = "menu-item";
           item.size = "10";
           item.setAttribute('data-target', 'direction');
           item.setAttribute('data-measurement-id', indexMeasurement);
@@ -625,7 +625,7 @@ export class SurveyController {
           sell = document.createElement('td');
           item = document.createElement('input');
           item.type = "text";
-          item.className = "menu-item";
+          // item.className = "menu-item";
           item.size = "10";
           item.setAttribute('data-target', 'distance');
           item.setAttribute('data-measurement-id', indexMeasurement);
@@ -636,7 +636,7 @@ export class SurveyController {
           sell = document.createElement('td');
           item = document.createElement('input');
           item.type = "text";
-          item.className = "menu-item";
+          // item.className = "menu-item";
           item.size = "10";
           item.setAttribute('data-target', 'tilt');
           item.setAttribute('data-measurement-id', indexMeasurement);
@@ -647,7 +647,7 @@ export class SurveyController {
           sell = document.createElement('td');
           item = document.createElement('input');
           item.type = "text";
-          item.className = "menu-item";
+          // item.className = "menu-item";
           item.size = "10";
           item.setAttribute('data-target', 'height');
           item.setAttribute('data-measurement-id', indexMeasurement);
