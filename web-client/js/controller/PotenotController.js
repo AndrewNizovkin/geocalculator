@@ -233,7 +233,7 @@ export class PotenotController {
           }
       });
 
-      panelPotenot.addEventListener('input', (event) => {
+      panelPotenot.addEventListener('change', (event) => {
         let element = event.target;
 
         switch(element.id) {

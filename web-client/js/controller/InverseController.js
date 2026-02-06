@@ -231,7 +231,7 @@ export class InverseController {
         }
       });
       
-      panelInverse.addEventListener('input', (event) => {
+      panelInverse.addEventListener('change', (event) => {
         let element = event.target;
 
         switch(element.id) {

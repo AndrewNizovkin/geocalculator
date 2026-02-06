@@ -383,7 +383,7 @@ export class SurveyController {
         }
       });
 
-      surveyPanelStation.addEventListener('input', (event) => {
+      surveyPanelStation.addEventListener('change', (event) => {
         let element = event.target;
 
         switch(element.id) {
@@ -472,7 +472,7 @@ export class SurveyController {
         }
       });
 
-      document.getElementById("list-measurements").addEventListener('input', (event) => {
+      document.getElementById("list-measurements").addEventListener('change', (event) => {
         let element = event.target;
 
         if(element.hasAttribute('data-measurement-id')) {

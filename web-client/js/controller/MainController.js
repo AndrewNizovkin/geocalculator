@@ -18,7 +18,7 @@ export class MainController {
       this.potenotController = new PotenotController(this.basePointController.getBasePointService());
       this.surveyController = new SurveyController(this.basePointController.getBasePointService());
       this.polygonController = new PolygonContoller();
-        
+              
     }
 
     /**

@@ -180,7 +180,7 @@ export class DirectController {
         
       });        
 
-      panelDirect.addEventListener('input', (event) => {
+      panelDirect.addEventListener('change', (event) => {
         let element = event.target;
 
         switch(element.id) {

@@ -2,6 +2,7 @@ import { PolygonStation } from "../model/PolygonStation.js";
 
 /**
  * Provides methods for working with a collection of polygon stations
+ * @author Nizovkin_A.V.
  */
 export class PolygonRepository {
     constructor() {
@@ -25,10 +26,9 @@ export class PolygonRepository {
 
     /**
      * Adds new instance of PolygonStation
-     * @returns {PolygonStation}
      */
     addNewStation() {
-        return this.poligonStations.push(new PolygonStation());
+        this.poligonStations.push(new PolygonStation());
     }
 
     /**

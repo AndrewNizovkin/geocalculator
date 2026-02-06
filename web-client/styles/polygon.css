@@ -1,5 +1,14 @@
 @import './survey.css';
 
+#toolbar-polygon input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0.0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;    
+}
+
 .panel-polygon {
     /* background-color: yellow; */
     /* display: flex; */
@@ -27,7 +36,7 @@
 
 .table-cell {
     display: flex;
-    width: 100px;
+    width: 50px;
     justify-content: center;
 }
 
