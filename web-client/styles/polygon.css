@@ -28,16 +28,34 @@
 
 .table-polygon {
     border: 2px outset #bab6b7;
+    border-collapse: collapse;
+    border-spacing: 0px;
 }
 
 .table-polygon th {
     text-align: center;
 }
 
+/* .table-polygon tr {
+    border: 2px outset #bab6b7;
+} */
+
 .table-cell {
     display: flex;
     width: 50px;
     justify-content: center;
+}
+
+.line-shift {
+    padding-top: 15px;
+}
+
+.line {
+    padding-bottom: 15px;
+}
+
+.selected {
+border: 2px solid red;
 }
 
 .panel-polygon-processing {

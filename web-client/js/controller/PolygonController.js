@@ -6,8 +6,10 @@ import { PolygonService } from "../service/PolygonService.js";
  * the user and the model.
  */
 export class PolygonContoller {
+    #currentStation = 0;
     constructor() {
         this.polygonService = new PolygonService();
+        this.#currentStation = 0;
 
         this.#fillDemo();
 
@@ -58,7 +60,7 @@ export class PolygonContoller {
             <input type="file" id="polygon-open-input" accept=".pol">
         </div>
 
-        <div class="panel-polygon">
+        <div class="panel-polygon" id="panel-polygon">
 
             <div class="scrollpanel-polygon">
 
@@ -136,6 +138,10 @@ export class PolygonContoller {
 
         this.#setListPolygonStations();
 
+        this.#addListenersPanelPolygon();
+        this.#addListenersToolbarPolygon();
+        // this.#toggleSelectedRow(this.#currentStation);
+
     }
 
     /**
@@ -147,129 +153,129 @@ export class PolygonContoller {
 
         for (let i = 0; i < this.polygonService.size(); i++) {
             const row = document.createElement('tr');
+            row.setAttribute("data-row-id", i);
 
             let status = false;
             if (this.polygonService.getStationX(i) != "Not") status = true;
             
             let cell = document.createElement('td');
+            cell.className = "line";
             let item = document.createElement('input')
             item.type = "text";
-            item.setAttribute("data-poligon-station-id", i);
-            item.setAttribute("data-station-property", "name");
+            item.setAttribute("data-polygon-station-id", i);
+            item.setAttribute("data-property", "name");
             item.size = "10";
             item.value = this.polygonService.getStationName(i);
-            item.addEventListener("blur", (event) => {
-                let elem = event.target;
-                this.polygonService.saveStationName(+elem.dataset.poligonStationId, elem.value);
-            });
             cell.append(item);
             row.append(cell);
 
             cell = document.createElement('td');
+            cell.className = "line";
             item = document.createElement('input')
             item.type = "text";
-            item.setAttribute("data-poligon-station-id", i);
-            item.setAttribute("data-station-property", "hor-angle");
+            item.setAttribute("data-polygon-station-id", i);
+            item.setAttribute("data-property", "hor-angle");
             item.size = "8";
             item.value = this.polygonService.getHorAngle(i);
-            item.addEventListener("blur", (event) => {
-                let elem = event.target;
-                this.polygonService.saveHorAngle(+elem.dataset.poligonStationId, elem.value);
-            });
             cell.append(item);
             row.append(cell);
 
             cell = document.createElement('td');
+            cell.className = "line-shift";
             item = document.createElement('input')
             item.type = "text";
-            item.setAttribute("data-poligon-station-id", i);
-            item.setAttribute("data-station-property", "hor-distance");
+            item.setAttribute("data-polygon-station-id", i);
+            item.setAttribute("data-property", "hor-distance");
             item.size = "8";
             item.value = this.polygonService.getHorDistance(i);
-            item.addEventListener("blur", (event) => {
-                let elem = event.target;
-                this.polygonService.saveHorDistance(+elem.dataset.poligonStationId, elem.value);
-            });
             cell.append(item);
             row.append(cell);
 
             cell = document.createElement('td');
+            cell.className = "line-shift";
             item = document.createElement('input')
             item.type = "text";
-            item.setAttribute("data-poligon-station-id", i);
-            item.setAttribute("data-station-property", "elevation");
+            item.setAttribute("data-polygon-station-id", i);
+            item.setAttribute("data-property", "elevation");
             item.size = "7";
             item.value = this.polygonService.getElevation(i);
-            item.addEventListener("blur", (event) => {
-                let elem = event.target;
-                this.polygonService.saveElevation(+elem.dataset.poligonStationId, elem.value);
-            });
             cell.append(item);
             row.append(cell);
 
             cell = document.createElement('td');
+            cell.className = "line";
             item = document.createElement('input')
             item.type = "text";
-            item.setAttribute("data-poligon-station-id", i);
-            item.setAttribute("data-station-property", "x");
+            item.setAttribute("data-polygon-station-id", i);
+            item.setAttribute("data-property", "x");
             item.size = "10";
             item.disabled = true;
             if (status) {
-                item.value = this.polygonService.getStationX(i);
-                item.disabled = false;
-                item.addEventListener("blur", (event) => {
-                    let elem = event.target;
-                    this.polygonService.saveStationX(+elem.dataset.poligonStationId, elem.value);
-                });
+                if ( (i > 1) && ( i < this.polygonService.size() - 2) ) {
+                    this.polygonService.saveStationX(i, "Not");
+                    status = false;
+                } else {
+                    item.value = this.polygonService.getStationX(i);
+                    item.disabled = false;
+                }                
             }
             cell.append(item);
             row.append(cell);
 
             cell = document.createElement('td');
+            cell.className = "line";
             item = document.createElement('input')
             item.type = "text";
-            item.setAttribute("data-poligon-station-id", i);
-            item.setAttribute("data-station-property", "y");
+            item.setAttribute("data-polygon-station-id", i);
+            item.setAttribute("data-property", "y");
             item.size = "10";
             item.disabled = true;
             if (status) {
-                item.value = this.polygonService.getStationY(i);
-                item.disabled = false;
-                item.addEventListener("blur", (event) => {
-                    let elem = event.target;
-                    this.polygonService.saveStationY(+elem.dataset.poligonStationId, elem.value);
-                });
+                if ( (i > 1) && ( i < this.polygonService.size() - 2) ) {
+                    this.polygonService.saveStationY(i, "Not");
+                    status = false;
+                } else {
+                    item.value = this.polygonService.getStationY(i);
+                    item.disabled = false;
+                }                
             }
             cell.append(item);
             row.append(cell);
 
             cell = document.createElement('td');
+            cell.className = "line";
             item = document.createElement('input')
             item.type = "text";
-            item.setAttribute("data-poligon-station-id", i);
-            item.setAttribute("data-station-property", "z");
+            item.setAttribute("data-polygon-station-id", i);
+            item.setAttribute("data-property", "z");
             item.size = "10";
             item.disabled = true;
             if (status) {
-                item.value = this.polygonService.getStationZ(i);
-                item.disabled = false;
-                item.addEventListener("blur", (event) => {
-                    let elem = event.target;
-                    this.polygonService.saveStationZ(+elem.dataset.poligonStationId, elem.value);
-                });
+                if ( (i > 1) && ( i < this.polygonService.size() - 2) ) {
+                    this.polygonService.saveStationZ(i, "Not");
+                    status = false;
+                } else {
+                    item.value = this.polygonService.getStationZ(i);
+                    item.disabled = false;
+                }                
             }
             cell.append(item);
             row.append(cell);
 
             cell = document.createElement('td');
+            cell.className = "line";
             let cellContainer = document.createElement('div');
             cellContainer.className = "table-cell";
             item = document.createElement('input')
             item.type = "checkbox";
-            item.setAttribute("data-poligon-station-id", i);
-            item.setAttribute("data-station-property", "status");
+            item.setAttribute("data-station-id", i);
+            item.setAttribute("data-property", "status");
             // item.size = "10";
             if (status) item.setAttribute("checked", true);
+            if ( (i > 1) && ( i < this.polygonService.size() - 2) ) {
+                item.unchecked = true;
+                item.disabled = true;
+            }
             cellContainer.append(item);
             cell.append(cellContainer);
             row.append(cell);
@@ -277,9 +283,144 @@ export class PolygonContoller {
             listPoligonStations.append(row);
 
         }
+    }
+
+    /**
+     * Toggles the selected row
+     * @param {number} selectedRow 
+     */
+    #toggleSelectedRow(indexRow) {
+        // let selector = `tr [data-row-id="${indexRow}"]`;
+        let selector = `tr[data-row-id="${indexRow}"]`;
+        let selectedRow = document.querySelector(selector);
+        selectedRow.classList.toggle("selected");
+    }
+
+
+    /**
+     * Adds event listeners to toolar-polygon
+     */
+    #addListenersToolbarPolygon() {
+        const toolbarPolygon = document.getElementById("toolbar-polygon");
+
+        toolbarPolygon.addEventListener('click', (event) => {
+            const elem = event.target;
+
+            switch (elem.id) {
+
+                case "delete-station":
+                    if (this.polygonService.size() > 1) {
+                        this.polygonService.removeStation(this.#currentStation);
+                        this.#setListPolygonStations();
+                        if (this.#currentStation == this.polygonService.size()) {
+                            this.#currentStation--;
+                        }
+                    }
+                    break;
+
+                case "before-station":
+                    this.polygonService.insertNewStation(this.#currentStation);
+                    this.#setListPolygonStations();
+                    break;
+
+                case "after-station":
+                    this.#currentStation++;
+                    this.polygonService.insertNewStation(this.#currentStation);
+                    this.#setListPolygonStations();
+                    break;
+
+                case "catalog":
+                    break;
+
+                case "polygon-new":
+                    this.polygonService.clearAll();
+                    this.polygonService.addNewStation();
+                    this.#setListPolygonStations();
+                    break;
+
+                case "polygon-open":
+                    break;
+
+                case "polygon-run":
+                    break;
+
+                case "polygon-view":
+                    break;
+            }
+            
+        });
 
     }
 
+    /**
+     * Adds event listeners to panel-polygon
+     */
+    #addListenersPanelPolygon() {
+        const panelPolygon = document.getElementById("panel-polygon");
+
+        panelPolygon.addEventListener('click', (event) => {
+            const elem = event.target;
+
+            if (elem.hasAttribute('data-polygon-station-id')) {
+                // this.#toggleSelectedRow(this.#currentStation);
+                this.#currentStation = +elem.dataset.polygonStationId;
+                // this.#toggleSelectedRow(this.#currentStation);
+            }
+        });
+
+        panelPolygon.addEventListener('change', (event) => {
+            const elem = event.target;
+
+            if (elem.hasAttribute('data-property')) {
+                switch (elem.dataset.property) {
+
+                    case "name":
+                        this.polygonService.saveStationName(+elem.dataset.polygonStationId, elem.value);
+                        break;
+
+                    case "hor-angle":
+                        this.polygonService.saveHorAngle(+elem.dataset.polygonStationId, elem.value);
+                        break;
+
+                    case "hor-distance":
+                        this.polygonService.saveHorDistance(+elem.dataset.polygonStationId, elem.value);
+                        break;
+
+                    case "elevation":
+                        this.polygonService.saveElevation(+elem.dataset.polygonStationId, elem.value);
+                        break;
+
+                    case "x":
+                        this.polygonService.saveStationX(+elem.dataset.polygonStationId, elem.value);
+                        break;
+
+                    case "y":
+                        this.polygonService.saveStationY(+elem.dataset.polygonStationId, elem.value);
+                        break;
+
+                    case "z":
+                        this.polygonService.saveStationZ(+elem.dataset.poliygonStationId, elem.value);
+                        break;
+
+                    case "status":
+                        if (elem.checked) {
+                            this.polygonService.saveStationX(+elem.dataset.stationId, "0.000");
+                            this.polygonService.saveStationY(+elem.dataset.stationId, "0.000");
+                            this.polygonService.saveStationZ(+elem.dataset.stationId, "0.000");
+
+                        } else {
+                            this.polygonService.saveStationX(+elem.dataset.stationId, "Not");
+                            this.polygonService.saveStationY(+elem.dataset.stationId, "Not");
+                            this.polygonService.saveStationZ(+elem.dataset.stationId, "Not");
+
+                        }
+                        this.#setListPolygonStations();
+                        break;
+                }
+            }
+        }); 
+
+    }
     
 
 

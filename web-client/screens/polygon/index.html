@@ -6,8 +6,8 @@
   <meta name="author" content="taheoport.ru">
   <meta name="keywords" content="топография, геодезия, тахеометрия, тахеометр, теодолитный ход">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="../../styles/polygon.css" rel="stylesheet" type="text/css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  <link href="../../styles/style.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -29,7 +29,7 @@
             <input type="file" id="polygon-open-input" accept=".pol">
         </div>
 
-        <div class="panel-polygon">
+        <div class="panel-polygon" id="panel-polygon">
 
             <div class="scrollpanel-polygon">
 
@@ -46,22 +46,51 @@
                     </thead>
                     <tbody id="list-poligon-stations">
                         <!-- Демо данные -->
-                        <tr>
-                            <td><input type="text" data-poligon-station-id="0" data-poligon-station="name" size="10" value="1302"></td>
-                            <td><input type="text" data-poligon-station-id="0" data-poligon-station="hor-angle" size="10" value="359.5959"></td>
-                            <td><input type="text" data-poligon-station-id="0" data-poligon-station="hor-distanse" size="10" value="150.999"/></td>
-                            <td><input type="text" data-poligon-station-id="0" data-poligon-station="elevation" size="10" value="-0.999"></td>
-                            <td><input type="text" data-poligon-station-id="0" data-poligon-station="x" size="10" value="2222222.222"></td>
-                            <td><input type="text" data-poligon-station-id="0" data-poligon-station="y" size="10" value="444444.444"></td>
-                            <td><input type="text" data-poligon-station-id="0" data-poligon-station="y" size="10" value="297.356"></td>
-                            <td>
+                        <tr class="selected">
+                            <td class="line"><input type="text" data-poligon-station-id="0" data-poligon-station="name" size="10" value="1302"></td>
+                            <td class="line-shift"><input type="text" data-poligon-station-id="0" data-poligon-station="hor-angle" size="10" value="359.5959"></td>
+                            <td class="line-shift"><input type="text" data-poligon-station-id="0" data-poligon-station="hor-distanse" size="10" value="150.999"/></td>
+                            <td class="line-shift"><input type="text" data-poligon-station-id="0" data-poligon-station="elevation" size="10" value="-0.999"></td>
+                            <td class="line"><input type="text" data-poligon-station-id="0" data-poligon-station="x" size="10" value="2222222.222"></td>
+                            <td class="line"><input type="text" data-poligon-station-id="0" data-poligon-station="y" size="10" value="444444.444"></td>
+                            <td class="line"><input type="text" data-poligon-station-id="0" data-poligon-station="y" size="10" value="297.356"></td>
+                            <td class="line">
                                 <div class="table-cell">
                                     <input type="checkbox" data-poligon-station-id="0" data-poligon-station="status" checked>
                                 </div>
                                 
                             </td>
                         </tr>
-
+                        <tr>
+                            <td class="line"><input type="text" data-poligon-station-id="0" data-poligon-station="name" size="10" value="1302"></td>
+                            <td class="line-shift"><input type="text" data-poligon-station-id="0" data-poligon-station="hor-angle" size="10" value="359.5959"></td>
+                            <td class="line-shift"><input type="text" data-poligon-station-id="0" data-poligon-station="hor-distanse" size="10" value="150.999"/></td>
+                            <td class="line-shift"><input type="text" data-poligon-station-id="0" data-poligon-station="elevation" size="10" value="-0.999"></td>
+                            <td class="line"><input type="text" data-poligon-station-id="0" data-poligon-station="x" size="10" value="2222222.222"></td>
+                            <td class="line"><input type="text" data-poligon-station-id="0" data-poligon-station="y" size="10" value="444444.444"></td>
+                            <td class="line"><input type="text" data-poligon-station-id="0" data-poligon-station="y" size="10" value="297.356"></td>
+                            <td class="line">
+                                <div class="table-cell">
+                                    <input type="checkbox" data-poligon-station-id="0" data-poligon-station="status" checked>
+                                </div>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="line"><input type="text" data-poligon-station-id="0" data-poligon-station="name" size="10" value="1302"></td>
+                            <td class="line-shift"><input type="text" data-poligon-station-id="0" data-poligon-station="hor-angle" size="10" value="359.5959"></td>
+                            <td class="line-shift"><input type="text" data-poligon-station-id="0" data-poligon-station="hor-distanse" size="10" value="150.999"/></td>
+                            <td class="line-shift"><input type="text" data-poligon-station-id="0" data-poligon-station="elevation" size="10" value="-0.999"></td>
+                            <td class="line"><input type="text" data-poligon-station-id="0" data-poligon-station="x" size="10" value="2222222.222"></td>
+                            <td class="line"><input type="text" data-poligon-station-id="0" data-poligon-station="y" size="10" value="444444.444"></td>
+                            <td class="line"><input type="text" data-poligon-station-id="0" data-poligon-station="y" size="10" value="297.356"></td>
+                            <td class="line">
+                                <div class="table-cell">
+                                    <input type="checkbox" data-poligon-station-id="0" data-poligon-station="status" checked>
+                                </div>
+                                
+                            </td>
+                        </tr>
                         <!-- Демо данные -->
                     </tbody>
 
