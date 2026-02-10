@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.3.8">
   <diagram name="Страница-1" id="o-5GadF2C5qq2WKj6GCM">
-    <mxGraphModel dx="2906" dy="1782" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2041" dy="1607" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1807,7 +1807,7 @@
         <mxCell id="-9L3J_AtXJEdFd3-hej4-80" parent="-9L3J_AtXJEdFd3-hej4-32" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getLilnesPolArray(): string[]" vertex="1">
           <mxGeometry height="26" width="250" y="164" as="geometry" />
         </mxCell>
-        <mxCell id="-9L3J_AtXJEdFd3-hej4-81" parent="-9L3J_AtXJEdFd3-hej4-32" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ readFromTextFile(FIle): void" vertex="1">
+        <mxCell id="-9L3J_AtXJEdFd3-hej4-81" parent="-9L3J_AtXJEdFd3-hej4-32" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ readFromDevice(FIle): void" vertex="1">
           <mxGeometry height="26" width="250" y="190" as="geometry" />
         </mxCell>
         <mxCell id="-9L3J_AtXJEdFd3-hej4-37" parent="-9L3J_AtXJEdFd3-hej4-32" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ addNewStation(): void" vertex="1">

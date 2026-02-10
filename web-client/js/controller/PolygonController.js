@@ -7,11 +7,13 @@ import { PolygonService } from "../service/PolygonService.js";
  */
 export class PolygonContoller {
     #currentStation = 0;
-    constructor() {
+    constructor(basePointService) {
         this.polygonService = new PolygonService();
+        this.polygonService.addNewStation();
         this.#currentStation = 0;
+        this.basePointService = basePointService;
 
-        this.#fillDemo();
+        // this.#fillDemo();
 
     }
 
@@ -41,6 +43,9 @@ export class PolygonContoller {
     }
 
 
+    /**
+     * Loads page Polygon
+     */
     loadPagePolygon() {
         const content = document.getElementById("content");
 
@@ -49,7 +54,7 @@ export class PolygonContoller {
             <div class="survey-button delete" id="delete-station" title="Удалить станцию"></div>
             <div class="survey-button insert-before" id="before-station" title="Вставить перед выбранной"></div>
             <div class="survey-button insert-after" id="after-station" title="Вставить после выбранной"></div>
-            <div class="survey-button catalog" id="catalog" title="Вставить из каталога"></div>
+            <div class="survey-button catalog toggle" id="catalog" title="Вставить из каталога"></div>
             <div class="survey-toolbar-separator"></div>
 
             <div class="survey-button new" id="polygon-new" title="Новый полигон"></div>
@@ -137,6 +142,7 @@ export class PolygonContoller {
         `;
 
         this.#setListPolygonStations();
+        this.#setListBasePoints();
 
         this.#addListenersPanelPolygon();
         this.#addListenersToolbarPolygon();
@@ -176,7 +182,11 @@ export class PolygonContoller {
             item.setAttribute("data-polygon-station-id", i);
             item.setAttribute("data-property", "hor-angle");
             item.size = "8";
-            item.value = this.polygonService.getHorAngle(i);
+            if (this.polygonService.getHorAngle(i) == "Not") {
+                item.value = '';
+            } else {
+                item.value = this.polygonService.getHorAngle(i);
+            }
             cell.append(item);
             row.append(cell);
 
@@ -187,7 +197,11 @@ export class PolygonContoller {
             item.setAttribute("data-polygon-station-id", i);
             item.setAttribute("data-property", "hor-distance");
             item.size = "8";
-            item.value = this.polygonService.getHorDistance(i);
+            if (this.polygonService.getHorDistance(i) == "Not") {
+                item.value = '';
+            } else {
+                item.value = this.polygonService.getHorDistance(i);
+            }
             cell.append(item);
             row.append(cell);
 
@@ -198,7 +212,11 @@ export class PolygonContoller {
             item.setAttribute("data-polygon-station-id", i);
             item.setAttribute("data-property", "elevation");
             item.size = "7";
-            item.value = this.polygonService.getElevation(i);
+            if (this.polygonService.getElevation(i) == "Not") {
+                item.value = '';
+            } else {
+                item.value = this.polygonService.getElevation(i);
+            }
             cell.append(item);
             row.append(cell);
 
@@ -286,6 +304,29 @@ export class PolygonContoller {
     }
 
     /**
+     * Creates and adds a list of base stations to the DOM
+     */
+    #setListBasePoints() {
+      const toolbarPolygon = document.getElementById("toolbar-polygon");
+      const listBasePoints = document.createElement('div');
+
+      listBasePoints.className = "pop-up";
+      listBasePoints.id = "list-base-point";
+
+      if (this.basePointService.size() > 0) {
+        for (let i = 0; i < this.basePointService.size(); i++) {
+          let row = document.createElement('div');
+          row.className = "menu-item";
+          row.setAttribute("data-base-point-id", i);
+          row.innerHTML = this.basePointService.getBasePointName(i);
+          listBasePoints.append(row);
+        }
+      }
+      toolbarPolygon.append(listBasePoints);
+    }
+
+
+    /**
      * Toggles the selected row
      * @param {number} selectedRow 
      */
@@ -303,8 +344,65 @@ export class PolygonContoller {
     #addListenersToolbarPolygon() {
         const toolbarPolygon = document.getElementById("toolbar-polygon");
 
+        toolbarPolygon.addEventListener('change', (event) => {
+            let element = event.target;
+
+            switch (element.id) {
+
+                case "polygon-open-input":
+            try {
+              let file = element.files[0];
+              if (!file) throw new Error("Select a file!");
+                this.polygonService.readFromDevice(file).then(() =>{
+                    this.#currentStation = 0;
+                    this.#setListPolygonStations();
+                });
+             } catch (error) {
+              console.error(error.message);
+            }
+                    break;
+            }
+        });
+
         toolbarPolygon.addEventListener('click', (event) => {
             const elem = event.target;
+            let toggleRect = elem.getBoundingClientRect(); 
+            let toolbarPolygonRect = toolbarPolygon.getBoundingClientRect();
+            let listBasePoints = document.getElementById("list-base-point");      
+            let overlay = document.getElementById("overlay");
+
+            let selector = `input[data-station-id="${this.#currentStation}"]`;
+            let currentStatus = document.querySelector(selector).checked;
+
+
+            if (elem.hasAttribute("data-base-point-id")) {
+
+            listBasePoints.classList.toggle("open");
+            overlay.classList.toggle("open");
+
+            if ( ((this.#currentStation <= 1) || (this.#currentStation >= this.polygonService.size() - 2)) && (currentStatus) ) {
+                let basePointId = +elem.dataset.basePointId;
+                this.polygonService.saveStationName(this.#currentStation, this.basePointService.getBasePointName(basePointId));
+                this.polygonService.saveStationX(this.#currentStation, this.basePointService.getBasePointX(basePointId));
+                this.polygonService.saveStationY(this.#currentStation, this.basePointService.getBasePointY(basePointId));
+                this.polygonService.saveStationZ(this.#currentStation, this.basePointService.getBasePointZ(basePointId));
+            }
+            this.#setListPolygonStations();
+
+            // if (this.insertCoordinateToBase) {
+            //     this.directService.saveBaseX(this.basePointService.getBasePointX(basePointId));
+            //     this.directService.saveBaseY(this.basePointService.getBasePointY(basePointId));
+            //     this.directService.saveBaseZ(this.basePointService.getBasePointZ(basePointId));
+            // } else {
+            //     this.directService.saveLandmarkX(this.basePointService.getBasePointX(basePointId));
+            //     this.directService.saveLandmarkY(this.basePointService.getBasePointY(basePointId));
+            // }
+
+            // this.setData();
+
+        }
+
+
 
             switch (elem.id) {
 
@@ -330,6 +428,11 @@ export class PolygonContoller {
                     break;
 
                 case "catalog":
+                    listBasePoints.style.top = `${toggleRect.top - toolbarPolygonRect.top +toggleRect.height + window.scrollY}px`;
+                    listBasePoints.style.left = `${toggleRect.left - toolbarPolygonRect.left + window.scrollX}px`;
+                    listBasePoints.classList.toggle("open");
+                    overlay.classList.toggle("open");
+
                     break;
 
                 case "polygon-new":
@@ -339,6 +442,7 @@ export class PolygonContoller {
                     break;
 
                 case "polygon-open":
+                    document.getElementById("polygon-open-input").click();
                     break;
 
                 case "polygon-run":
@@ -360,10 +464,19 @@ export class PolygonContoller {
 
         panelPolygon.addEventListener('click', (event) => {
             const elem = event.target;
+            let selector = `input[data-station-id="${this.#currentStation}"]`;
+            let currentStatus = document.querySelector(selector).checked;
+            // let buttonCatalog = document.getElementById('catalog');
 
             if (elem.hasAttribute('data-polygon-station-id')) {
                 // this.#toggleSelectedRow(this.#currentStation);
                 this.#currentStation = +elem.dataset.polygonStationId;
+
+                // if ( ((this.#currentStation <= 1) || (this.#currentStation >= this.polygonService.size() - 2)) && (currentStatus) ) {
+                //     buttonCatalog.disabled = false;
+                // } else {
+                //     buttonCatalog.disabled = true;
+                // }
                 // this.#toggleSelectedRow(this.#currentStation);
             }
         });
@@ -403,6 +516,7 @@ export class PolygonContoller {
                         break;
 
                     case "status":
+                        this.#currentStation = +elem.dataset.stationId;
                         if (elem.checked) {
                             this.polygonService.saveStationX(+elem.dataset.stationId, "0.000");
                             this.polygonService.saveStationY(+elem.dataset.stationId, "0.000");

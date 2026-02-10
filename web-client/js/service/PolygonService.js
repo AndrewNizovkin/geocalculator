@@ -1,6 +1,6 @@
 import { PolygonRepository } from "../repository/PolygonRepository.js";
-// import { PolygonMapper } from "./mapper/PolygonMapper.js";
-// import { PoligonProvider } from "./provider/PolygonProvider.js";
+import { PolygonMapper } from "./mapper/PolygonMapper.js";
+import { PolygonProvider } from "./provider/PolygonProvider.js";
 
 /**
  * This class provides methods for working 
@@ -10,8 +10,8 @@ import { PolygonRepository } from "../repository/PolygonRepository.js";
 export class PolygonService {
     constructor() {
         this.polygonRepository = new PolygonRepository();
-        // this.polygonMapper = new PolygonMapper();
-        // this.poligonProvider = new PoligonProvider();
+        this.polygonMapper = new PolygonMapper();
+        this.poligonProvider = new PolygonProvider();
     }
 
     /**
@@ -28,6 +28,30 @@ export class PolygonService {
     size() {
         return this.polygonRepository.size();
     }
+
+   /**
+    * Returns an array of strings in the 'pol' format
+    * @returns {string[]}
+    */
+    getLinesPolArray() {
+        return this.polygonMapper.poligonRepositoryToArray(this.polygonRepository);
+    }
+
+    /**
+     * Fills in the survey stations repository from a text file in the "tah" format
+     * @param {File} 
+     */
+    async readFromDevice(filePol) {
+        try {
+            await this.poligonProvider.getStringArrayFromDevice(filePol).then((object) => {
+                this.polygonRepository.clearAll();
+                this.polygonRepository = this.polygonMapper.arrayToPolygonRepository(object, this.polygonRepository);
+            });
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
 
     /**
      * Adds new instance of PolygonStation

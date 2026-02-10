@@ -9,30 +9,32 @@ const polygonService = new PolygonService();
 
 // test PolygonRepository
 
-// fillDemoPolygonRepository();
-// showPolygonRepository("Демо-репозиторий");
-// polygonRepository.removeStation(0);
-// showPolygonRepository("удалили первую");
-// polygonRepository.insertNewStation(2);
-// showPolygonRepository("вставили по индексу 2");
-// polygonRepository.clearAll();
-// showPolygonRepository("Очистили");
+fillDemoPolygonRepository();
+showPolygonRepository("Демо-репозиторий");
+polygonRepository.removeStation(0);
+showPolygonRepository("удалили первую");
+polygonRepository.insertNewStation(2);
+showPolygonRepository("вставили по индексу 2");
+polygonRepository.clearAll();
+showPolygonRepository("Очистили");
 
 // test PolygonService
 
-showPolygonService("После создания нового polygonService");
-fillDemoPolygonService();
-showPolygonService("Заполнил демо данными");
-polygonService.insertNewStation(0);
-showPolygonService("Вставил пустую в начало");
-polygonService.removeStation(5);
-showPolygonService("Удалил последнюю");
-polygonService.insertNewStation(2);
-showPolygonService("Вставил пустую с индексом 2");
-polygonService.clearAll();
-showPolygonService("Очистил всё");
-polygonService.addNewStation();
-showPolygonService("Добавил пустую");
+// showPolygonService("После создания нового polygonService");
+// fillDemoPolygonService();
+// showPolygonService("Заполнил демо данными");
+// let linesArray = polygonService.getLinesPolArray();
+// showLinesAray("файл kat:", linesArray);
+// polygonService.insertNewStation(0);
+// showPolygonService("Вставил пустую в начало");
+// polygonService.removeStation(5);
+// showPolygonService("Удалил последнюю");
+// polygonService.insertNewStation(2);
+// showPolygonService("Вставил пустую с индексом 2");
+// polygonService.clearAll();
+// showPolygonService("Очистил всё");
+// polygonService.addNewStation();
+// showPolygonService("Добавил пустую");
 
 /**
  * Отображает текущее состояние репозитория 
@@ -155,6 +157,24 @@ function fillDemoPolygonService() {
         }
         
     }
+}
 
+/**
+ * Displays string array
+ * @param {string} message 
+ * @param {string[]} linesArray 
+ */
+function showLinesAray(message, linesArray) {
+
+    let newElem = document.createElement('div');
+    newElem.innerHTML = `<br>------${message}-----<br>`
+    content.append(newElem);
+
+    linesArray.forEach((elem) => {
+        let newElem = document.createElement('div');        
+        newElem.innerHTML = `${elem}<br>`;
+        content.append(newElem);
+
+    });
 }
 

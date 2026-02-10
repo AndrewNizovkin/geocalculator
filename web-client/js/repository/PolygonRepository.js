@@ -6,14 +6,14 @@ import { PolygonStation } from "../model/PolygonStation.js";
  */
 export class PolygonRepository {
     constructor() {
-        this.poligonStations = new Array();
+        this.polygonStations = new Array();
     }
 
     /**
      * Crears polygon repository
      */
     clearAll() {
-        this.poligonStations = new Array;
+        this.polygonStations = new Array;
     }
 
     /**
@@ -21,14 +21,14 @@ export class PolygonRepository {
      * @returns {number}
      */
     size() {
-        return this.poligonStations.length;
+        return this.polygonStations.length;
     }
 
     /**
      * Adds new instance of PolygonStation
      */
     addNewStation() {
-        this.poligonStations.push(new PolygonStation());
+        this.polygonStations.push(new PolygonStation());
     }
 
     /**
@@ -37,8 +37,8 @@ export class PolygonRepository {
      * @param {number} stationIndex 
      */
     insertNewStation(stationIndex) {
-        if (stationIndex <= this.poligonStations.length) {
-            this.poligonStations.splice(stationIndex, 0, new PolygonStation());
+        if (stationIndex <= this.polygonStations.length) {
+            this.polygonStations.splice(stationIndex, 0, new PolygonStation());
         }
     }
 
@@ -47,8 +47,8 @@ export class PolygonRepository {
      * @param {number} stationIndex 
      */
     removeStation(stationIndex) {
-        if (this.poligonStations.length > 0) {
-            this.poligonStations.splice(stationIndex, 1);
+        if (this.polygonStations.length > 0) {
+            this.polygonStations.splice(stationIndex, 1);
         }
     }
 
@@ -59,8 +59,8 @@ export class PolygonRepository {
      * @returns {string}
      */
     getStationName(stationIndex) {
-        if (stationIndex > this.poligonStations.length) return null;
-        return this.poligonStations.at(stationIndex).stationName;
+        if (stationIndex > this.polygonStations.length) return null;
+        return this.polygonStations.at(stationIndex).stationName;
     }
 
     /**
@@ -71,8 +71,8 @@ export class PolygonRepository {
      * @returns 
      */
     saveStationName(stationIndex, stationName) {
-        if (stationIndex > this.poligonStations.length) return;        
-        this.poligonStations.at(stationIndex).stationName = stationName;
+        if (stationIndex > this.polygonStations.length) return;        
+        this.polygonStations.at(stationIndex).stationName = stationName;
     }
 
 
@@ -83,8 +83,8 @@ export class PolygonRepository {
      * @returns {string}
      */
     getHorAngle(stationIndex) {
-        if (stationIndex > this.poligonStations.length) return null;
-        return this.poligonStations.at(stationIndex).horAngle;
+        if (stationIndex > this.polygonStations.length) return null;
+        return this.polygonStations.at(stationIndex).horAngle;
     }
 
     /**
@@ -95,8 +95,8 @@ export class PolygonRepository {
      * @returns 
      */
     saveHorAngle(stationIndex, horAngle) {
-        if (stationIndex > this.poligonStations.length) return;        
-        this.poligonStations.at(stationIndex).horAngle = horAngle;
+        if (stationIndex > this.polygonStations.length) return;        
+        this.polygonStations.at(stationIndex).horAngle = horAngle;
     }
 
     /**
@@ -106,8 +106,8 @@ export class PolygonRepository {
      * @returns {string}
      */
     getHorDistance(stationIndex) {
-        if (stationIndex > this.poligonStations.length) return null;
-        return this.poligonStations.at(stationIndex).horDistance;
+        if (stationIndex > this.polygonStations.length) return null;
+        return this.polygonStations.at(stationIndex).horDistance;
     }
 
     /**
@@ -118,8 +118,8 @@ export class PolygonRepository {
      * @returns 
      */
     saveHorDistance(stationIndex, horDistance) {
-        if (stationIndex > this.poligonStations.length) return;        
-        this.poligonStations.at(stationIndex).horDistance = horDistance;
+        if (stationIndex > this.polygonStations.length) return;        
+        this.polygonStations.at(stationIndex).horDistance = horDistance;
     }
     
 
@@ -130,8 +130,8 @@ export class PolygonRepository {
      * @returns {string}
      */
     getElevation(stationIndex) {
-        if (stationIndex > this.poligonStations.length) return null;
-        return this.poligonStations.at(stationIndex).elevation;
+        if (stationIndex > this.polygonStations.length) return null;
+        return this.polygonStations.at(stationIndex).elevation;
     }
 
     /**
@@ -142,8 +142,8 @@ export class PolygonRepository {
      * @returns 
      */
     saveElevation(stationIndex, elevation) {
-        if (stationIndex > this.poligonStations.length) return;        
-        this.poligonStations.at(stationIndex).elevation = elevation;
+        if (stationIndex > this.polygonStations.length) return;        
+        this.polygonStations.at(stationIndex).elevation = elevation;
     }
 
 
@@ -154,8 +154,8 @@ export class PolygonRepository {
      * @returns {string}
      */
     getStationX(stationIndex) {
-        if (stationIndex > this.poligonStations.length) return null;
-        return this.poligonStations.at(stationIndex).stationX;
+        if (stationIndex > this.polygonStations.length) return null;
+        return this.polygonStations.at(stationIndex).stationX;
     }
 
     /**
@@ -166,8 +166,8 @@ export class PolygonRepository {
      * @returns 
      */
     saveStationX(stationIndex, stationX) {
-        if (stationIndex > this.poligonStations.length) return;        
-        this.poligonStations.at(stationIndex).stationX = stationX;
+        if (stationIndex > this.polygonStations.length) return;        
+        this.polygonStations.at(stationIndex).stationX = stationX;
     }
 
 
@@ -178,8 +178,8 @@ export class PolygonRepository {
      * @returns {string}
      */
     getStationY(stationIndex) {
-        if (stationIndex > this.poligonStations.length) return null;
-        return this.poligonStations.at(stationIndex).stationY;
+        if (stationIndex > this.polygonStations.length) return null;
+        return this.polygonStations.at(stationIndex).stationY;
     }
 
     /**
@@ -190,8 +190,8 @@ export class PolygonRepository {
      * @returns 
      */
     saveStationY(stationIndex, stationY) {
-        if (stationIndex > this.poligonStations.length) return;        
-        this.poligonStations.at(stationIndex).stationY = stationY;
+        if (stationIndex > this.polygonStations.length) return;        
+        this.polygonStations.at(stationIndex).stationY = stationY;
     }
 
 
@@ -202,8 +202,8 @@ export class PolygonRepository {
      * @returns {string}
      */
     getStationZ(stationIndex) {
-        if (stationIndex > this.poligonStations.length) return null;
-        return this.poligonStations.at(stationIndex).stationZ;
+        if (stationIndex > this.polygonStations.length) return null;
+        return this.polygonStations.at(stationIndex).stationZ;
     }
 
     /**
@@ -214,8 +214,8 @@ export class PolygonRepository {
      * @returns 
      */
     saveStationZ(stationIndex, stationZ) {
-        if (stationIndex > this.poligonStations.length) return;        
-        this.poligonStations.at(stationIndex).stationZ = stationZ;
+        if (stationIndex > this.polygonStations.length) return;        
+        this.polygonStations.at(stationIndex).stationZ = stationZ;
     }
 
 
