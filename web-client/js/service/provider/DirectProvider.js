@@ -1,6 +1,8 @@
 import { AppConfigurator } from '../../AppConfigurator.js';
 /**
  * This class executes a query to the backend to solve the direct geodetic task.
+ * @author Nizovkin_A.V.
+ * @copyright 2026 Nizovkin_A.V.
  */
 export class DirectProvider {
 

@@ -1,13 +1,24 @@
 import {PotenotService} from '../service/PotenotService.js';
 
 /**
- * 
+ * Displays the "Potenot task" screen and 
+ * adds event handlers for its components.
+ * @author Nizovkin_A.V.
+ * @copyright 2026 Nizovkin_A.V.
  */
 export class PotenotController {
+  #potenotService;
+  #basePointService;
+  #insertCoordinatesTarget;
+
+  /**
+   * @constructor
+   * @param {BasePointService} basePointService 
+   */
     constructor(basePointService) {
-        this.potenotService = new PotenotService();
-        this.basePointService = basePointService;
-        this.insertCoordinatesTarget = "first";
+        this.#potenotService = new PotenotService();
+        this.#basePointService = basePointService;
+        this.#insertCoordinatesTarget = "first";
     }
 
     /**
@@ -87,35 +98,23 @@ export class PotenotController {
      * Sets data of gui components from model
      */
     setData() {
-
-      document.getElementById("potenot-first-x").value = this.potenotService.getFirstX();
-
-      document.getElementById("potenot-first-y").value = this.potenotService.getFirstY();
-
-      document.getElementById("potenot-first-direction").value = this.potenotService.getFirstDirection();
-
-      document.getElementById("potenot-second-x").value = this.potenotService.getSecondX();
-
-      document.getElementById("potenot-second-y").value = this.potenotService.getSecondY();
-
-      document.getElementById("potenot-second-direction").value = this.potenotService.getSecondDirection();
-
-      document.getElementById("potenot-third-x").value = this.potenotService.getThirdX();
-
-      document.getElementById("potenot-third-y").value = this.potenotService.getThirdY();
-
-      document.getElementById("potenot-third-direction").value = this.potenotService.getThirdDirection();
+      document.getElementById("potenot-first-x").value = this.#potenotService.getFirstX();
+      document.getElementById("potenot-first-y").value = this.#potenotService.getFirstY();
+      document.getElementById("potenot-first-direction").value = this.#potenotService.getFirstDirection();
+      document.getElementById("potenot-second-x").value = this.#potenotService.getSecondX();
+      document.getElementById("potenot-second-y").value = this.#potenotService.getSecondY();
+      document.getElementById("potenot-second-direction").value = this.#potenotService.getSecondDirection();
+      document.getElementById("potenot-third-x").value = this.#potenotService.getThirdX();
+      document.getElementById("potenot-third-y").value = this.#potenotService.getThirdY();
+      document.getElementById("potenot-third-direction").value = this.#potenotService.getThirdDirection();
     }
 
     /**
      * Sets result of gui components from model
      */
     setResult() {
-
-      document.getElementById("potenot-base-x").innerHTML = `X: ${this.potenotService.getBaseX()}`;
-
-      document.getElementById("potenot-base-y").innerHTML = `X: ${this.potenotService.getBaseY()}`;
-
+      document.getElementById("potenot-base-x").innerHTML = `X: ${this.#potenotService.getBaseX()}`;
+      document.getElementById("potenot-base-y").innerHTML = `X: ${this.#potenotService.getBaseY()}`;
     }
 
     /**
@@ -127,12 +126,12 @@ export class PotenotController {
       listBasePoints.className = "pop-up";
       listBasePoints.id = "list-base-point";
 
-      if (this.basePointService.size() > 0) {
-        for (let i = 0; i < this.basePointService.size(); i++) {
+      if (this.#basePointService.size() > 0) {
+        for (let i = 0; i < this.#basePointService.size(); i++) {
           let row = document.createElement('div');
           row.className = "menu-item";
           row.setAttribute("data-base-point-id", i);
-          row.innerHTML = this.basePointService.getBasePointName(i);
+          row.innerHTML = this.#basePointService.getBasePointName(i);
           listBasePoints.append(row);
         }
       }
@@ -149,13 +148,13 @@ export class PotenotController {
           switch(event.target.id) {
 
             case "potenot-clear":
-              this.potenotService.clearAll();
+              this.#potenotService.clearAll();
               this.setData();
               this.setResult();              
               break;
 
             case "potenot-run":
-              this.potenotService.solvePotenotTask().then(() => this.setResult());
+              this.#potenotService.solvePotenotTask().then(() => this.setResult());
               break;
           }
         });
@@ -182,21 +181,21 @@ export class PotenotController {
 
           let basePointId = +element.dataset.basePointId;
 
-          switch (this.insertCoordinatesTarget) {
+          switch (this.#insertCoordinatesTarget) {
 
             case "first":
-              this.potenotService.saveFirstX(this.basePointService.getBasePointX(basePointId));
-              this.potenotService.saveFirstY(this.basePointService.getBasePointY(basePointId));
+              this.#potenotService.saveFirstX(this.#basePointService.getBasePointX(basePointId));
+              this.#potenotService.saveFirstY(this.#basePointService.getBasePointY(basePointId));
               break;
 
             case "second":
-              this.potenotService.saveSecondX(this.basePointService.getBasePointX(basePointId));
-              this.potenotService.saveSecondY(this.basePointService.getBasePointY(basePointId));
+              this.#potenotService.saveSecondX(this.#basePointService.getBasePointX(basePointId));
+              this.#potenotService.saveSecondY(this.#basePointService.getBasePointY(basePointId));
               break;
 
             case "third":
-              this.potenotService.saveThirdX(this.basePointService.getBasePointX(basePointId));
-              this.potenotService.saveThirdY(this.basePointService.getBasePointY(basePointId));
+              this.#potenotService.saveThirdX(this.#basePointService.getBasePointX(basePointId));
+              this.#potenotService.saveThirdY(this.#basePointService.getBasePointY(basePointId));
               break;
           }
 
@@ -212,7 +211,7 @@ export class PotenotController {
             listBasePoints.style.left = `${toggleRect.left - panelPotenotRect.left + window.scrollX}px`;
             listBasePoints.classList.toggle("open");
             overlay.classList.toggle("open");
-            this.insertCoordinatesTarget = "first";
+            this.#insertCoordinatesTarget = "first";
             break;
 
           case "potenot-second-button":
@@ -220,7 +219,7 @@ export class PotenotController {
             listBasePoints.style.left = `${toggleRect.left - panelPotenotRect.left + window.scrollX}px`;
             listBasePoints.classList.toggle("open");
             overlay.classList.toggle("open");
-            this.insertCoordinatesTarget = "second";
+            this.#insertCoordinatesTarget = "second";
             break;
 
           case "potenot-third-button":
@@ -228,7 +227,7 @@ export class PotenotController {
             listBasePoints.style.left = `${toggleRect.left - panelPotenotRect.left + window.scrollX}px`;
             listBasePoints.classList.toggle("open");
             overlay.classList.toggle("open");
-            this.insertCoordinatesTarget = "third";
+            this.#insertCoordinatesTarget = "third";
             break;
           }
       });
@@ -239,39 +238,39 @@ export class PotenotController {
         switch(element.id) {
 
           case "potenot-first-x":
-            this.potenotService.saveFirstX(element.value);
+            this.#potenotService.saveFirstX(element.value);
             break;
 
           case "potenot-first-y":
-            this.potenotService.saveFirstY(element.value);
+            this.#potenotService.saveFirstY(element.value);
             break;
 
           case "potenot-first-direction":
-            this.potenotService.saveFirstDirection(element.value);
+            this.#potenotService.saveFirstDirection(element.value);
             break;
 
           case "potenot-second-x":
-            this.potenotService.saveSecondX(element.value);
+            this.#potenotService.saveSecondX(element.value);
             break;
 
           case "potenot-second-y":
-            this.potenotService.saveSecondY(element.value);
+            this.#potenotService.saveSecondY(element.value);
             break;
 
           case "potenot-second-direction":
-            this.potenotService.saveSecondDirection(element.value);
+            this.#potenotService.saveSecondDirection(element.value);
             break;
 
           case "potenot-third-x":
-            this.potenotService.saveThirdX(element.value);
+            this.#potenotService.saveThirdX(element.value);
             break;
 
           case "potenot-third-y":
-            this.potenotService.saveThirdY(element.value);
+            this.#potenotService.saveThirdY(element.value);
             break;
 
           case "potenot-third-direction":
-            this.potenotService.saveThirdDirection(element.value);
+            this.#potenotService.saveThirdDirection(element.value);
             break;
 
         }

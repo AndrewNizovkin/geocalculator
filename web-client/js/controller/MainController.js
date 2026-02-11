@@ -1,4 +1,4 @@
-import {DirectController} from './DIrectController.js';
+import {DirectController} from './DirectController.js';
 import {InverseController} from './InverseController.js';
 import {PotenotController} from './PotenotController.js';
 import { SurveyController } from './SurveyController.js';
@@ -6,19 +6,26 @@ import { BasePointController } from './BasePointController.js';
 import { PolygonContoller } from './PolygonController.js';
 
 /**
- * 
+ * Displays the main screen of the application and 
+ * adds event handlers for its components
  * @author Nizovkin A.V.
  * @copyright 2025 Nizovkin A.V.
  */
 export class MainController {
+  #basePointController;
+  #directController;
+  #inverseController;
+  #potenotController;
+  #surveyController;
+  #polygonController;
+
     constructor() {
-      this.basePointController = new BasePointController();
-      this.directController = new DirectController(this.basePointController.getBasePointService());
-      this.inverseController = new InverseController(this.basePointController.getBasePointService());
-      this.potenotController = new PotenotController(this.basePointController.getBasePointService());
-      this.surveyController = new SurveyController(this.basePointController.getBasePointService());
-      this.polygonController = new PolygonContoller(this.basePointController.getBasePointService());
-              
+      this.#basePointController = new BasePointController();
+      this.#directController = new DirectController(this.#basePointController.getBasePointService());
+      this.#inverseController = new InverseController(this.#basePointController.getBasePointService());
+      this.#potenotController = new PotenotController(this.#basePointController.getBasePointService());
+      this.#surveyController = new SurveyController(this.#basePointController.getBasePointService());
+      this.#polygonController = new PolygonContoller(this.#basePointController.getBasePointService());
     }
 
     /**
@@ -86,8 +93,8 @@ export class MainController {
 
         `;
         this.loadMainPage();
-        this.addListenersMainMenu();
-        this.addListenersNavMenu();
+        this.#addListenersMainMenu();
+        this.#addListenersNavMenu();
     }
 
     /**
@@ -119,7 +126,7 @@ export class MainController {
     /**
      * Adds listeners to main menu
      */
-    addListenersMainMenu() {
+    #addListenersMainMenu() {
       document.getElementById('header').addEventListener('click', (event) => {
 
         switch(event.target.id) {
@@ -133,22 +140,22 @@ export class MainController {
             break;
 
           case "main-direct":
-            this.directController.loadPageDirect();
+            this.#directController.loadPageDirect();
             subMenuTools.classList.toggle("open");
             break;
 
           case "main-inverse":
-            this.inverseController.loadPageInverse();
+            this.#inverseController.loadPageInverse();
             subMenuTools.classList.toggle("open");
             break;
 
           case "main-potenot":
-            this.potenotController.loadPagePotenot();
+            this.#potenotController.loadPagePotenot();
             subMenuTools.classList.toggle("open");
             break;
 
           case "main-survey":
-            this.surveyController.loadPageSurvey();
+            this.#surveyController.loadPageSurvey();
             subMenuTools.classList.toggle("open");
             break;              
         }
@@ -160,7 +167,7 @@ export class MainController {
     /**
      * Adds listeners to nav menu
      */
-    addListenersNavMenu() {
+    #addListenersNavMenu() {
       document.getElementById("nav-menu").addEventListener('click', (event) => {
         let titleSeparator = document.getElementById("title-separator");
 
@@ -172,32 +179,32 @@ export class MainController {
             break;
           
           case "direct-page":
-            this.directController.loadPageDirect();
+            this.#directController.loadPageDirect();
             titleSeparator.innerHTML = "Прямая геодезическая задача";
             break;
 
           case "inverse-page":
-            this.inverseController.loadPageInverse();
+            this.#inverseController.loadPageInverse();
             titleSeparator.innerHTML = "Обратная геодезическая задача";
             break;
 
           case "potenot-page":
-            this.potenotController.loadPagePotenot();
+            this.#potenotController.loadPagePotenot();
             titleSeparator.innerHTML = "Задача Потенота";
             break;
 
           case "survey-page":
-            this.surveyController.loadPageSurvey();
+            this.#surveyController.loadPageSurvey();
             titleSeparator.innerHTML = "Тахеометрическая съёмка";
             break;
 
           case "points-page":
-            this.basePointController.loadPageBasePoints();
+            this.#basePointController.loadPageBasePoints();
             titleSeparator.innerHTML = "Каталог координат";
             break;
 
           case "poligon-page":
-            this.polygonController.loadPagePolygon();
+            this.#polygonController.loadPagePolygon();
             titleSeparator.innerHTML = "Уравнивание тахеометрического хода";
             break;
         }

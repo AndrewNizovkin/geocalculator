@@ -3,20 +3,26 @@ import { BasePointMapper } from "./mapper/BasePointMapper.js";
 import { BasePointProvider } from "./provider/BasePointProvider.js";
 
 /**
- * Provides methods for working with a basepoints repository
+ * Provides methods for working with a base points repository
+ * @author Nizovkin_A.V.
+ * @copyright 2026 Nizovkin_A.V.
  */
 export class BasePointService {
+    #basePointRepository;
+    #basePointMapper;
+    #basePointProvider;
+
     constructor() {
-        this.basePointRepository = new BasePointRepository();
-        this.basePointMapper = new BasePointMapper();
-        this.basePointProvider = new BasePointProvider();
+        this.#basePointRepository = new BasePointRepository();
+        this.#basePointMapper = new BasePointMapper();
+        this.#basePointProvider = new BasePointProvider();
     }
 
     /**
      * Clears repository
      */
     clearAll() {
-        this.basePointRepository.clearAll();
+        this.#basePointRepository.clearAll();
     }
 
     /**
@@ -24,7 +30,7 @@ export class BasePointService {
      * @returns {number}
      */
     size() {
-        return this.basePointRepository.size();
+        return this.#basePointRepository.size();
     }
 
     /**
@@ -33,7 +39,7 @@ export class BasePointService {
      */
     getLinesArray() {
 
-        let linesArray = this.basePointMapper.basePointRepositoryToArray(this.basePointRepository);
+        let linesArray = this.#basePointMapper.basePointRepositoryToArray(this.#basePointRepository);
 
         return linesArray;
 
@@ -45,9 +51,9 @@ export class BasePointService {
      */
     async readFromTextFile(fileKat) {
         try {
-            await this.basePointProvider.getStringArrayFromDevice(fileKat).then((arrayKat) => {
-                this.basePointRepository.clearAll();
-                this.surveyRepository = this.basePointMapper.arrayToBasePointRepository(arrayKat, this.basePointRepository);
+            await this.#basePointProvider.getStringArrayFromDevice(fileKat).then((arrayKat) => {
+                this.#basePointRepository.clearAll();
+                this.surveyRepository = this.#basePointMapper.arrayToBasePointRepository(arrayKat, this.#basePointRepository);
             });
         } catch (err) {
             console.error(err.message);
@@ -59,7 +65,7 @@ export class BasePointService {
      * Adds new empty base point to repository
      */
     addNewBasePoint() {
-        this.basePointRepository.addNewBasePoint();
+        this.#basePointRepository.addNewBasePoint();
     }
 
     /**
@@ -67,14 +73,14 @@ export class BasePointService {
      * @param {number} index 
      */
     removeBasePoint(index) {
-        this.basePointRepository.removeBasePoint(index);
+        this.#basePointRepository.removeBasePoint(index);
         }
 
     /**
      * Sorts by name repository
      */
     sortByName() {
-        this.basePointRepository.sortByName();
+        this.#basePointRepository.sortByName();
     }
 
 
@@ -84,7 +90,7 @@ export class BasePointService {
      * @returns {string}
      */
     getBasePointName(index) {
-        return this.basePointRepository.getBasePointName(index);
+        return this.#basePointRepository.getBasePointName(index);
     }
 
     /**
@@ -93,7 +99,7 @@ export class BasePointService {
      * @param {string} pointName 
      */
     saveBasePointName(index, pointName) {
-        this.basePointRepository.saveBasePointName(index, pointName);
+        this.#basePointRepository.saveBasePointName(index, pointName);
     }
 
     /**
@@ -102,7 +108,7 @@ export class BasePointService {
      * @returns {string}
      */
     getBasePointX(index) {
-        return this.basePointRepository.getBasePointX(index);
+        return this.#basePointRepository.getBasePointX(index);
     }
 
     /**
@@ -111,7 +117,7 @@ export class BasePointService {
      * @param {string} pointX 
      */
     saveBasePointX(index, pointX) {
-        this.basePointRepository.saveBasePointX(index, pointX);
+        this.#basePointRepository.saveBasePointX(index, pointX);
     }
 
     /**
@@ -120,7 +126,7 @@ export class BasePointService {
      * @returns {string}
      */
     getBasePointY(index) {
-        return this.basePointRepository.getBasePointY(index);
+        return this.#basePointRepository.getBasePointY(index);
     }
 
     /**
@@ -129,7 +135,7 @@ export class BasePointService {
      * @param {string} pointY
      */
     saveBasePointY(index, pointY) {
-        this.basePointRepository.saveBasePointY(index, pointY);
+        this.#basePointRepository.saveBasePointY(index, pointY);
     }
 
     /**
@@ -138,7 +144,7 @@ export class BasePointService {
      * @returns {string}
      */
     getBasePointZ(index) {
-        return this.basePointRepository.getBasePointZ(index);
+        return this.#basePointRepository.getBasePointZ(index);
     }
 
     /**
@@ -147,7 +153,7 @@ export class BasePointService {
      * @param {string} pointZ 
      */
     saveBasePointZ(index, pointZ) {
-        this.basePointRepository.saveBasePointZ(index, pointZ);
+        this.#basePointRepository.saveBasePointZ(index, pointZ);
     }    
 
 }

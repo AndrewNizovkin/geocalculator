@@ -20,21 +20,21 @@ showPolygonRepository("Очистили");
 
 // test PolygonService
 
-// showPolygonService("После создания нового polygonService");
-// fillDemoPolygonService();
-// showPolygonService("Заполнил демо данными");
-// let linesArray = polygonService.getLinesPolArray();
-// showLinesAray("файл kat:", linesArray);
-// polygonService.insertNewStation(0);
-// showPolygonService("Вставил пустую в начало");
-// polygonService.removeStation(5);
-// showPolygonService("Удалил последнюю");
-// polygonService.insertNewStation(2);
-// showPolygonService("Вставил пустую с индексом 2");
-// polygonService.clearAll();
-// showPolygonService("Очистил всё");
-// polygonService.addNewStation();
-// showPolygonService("Добавил пустую");
+showPolygonService("После создания нового polygonService");
+fillDemoPolygonService();
+showPolygonService("Заполнил демо данными");
+let linesArray = polygonService.getLinesPolArray();
+showLinesAray("файл kat:", linesArray);
+polygonService.insertNewStation(0);
+showPolygonService("Вставил пустую в начало");
+polygonService.removeStation(5);
+showPolygonService("Удалил последнюю");
+polygonService.insertNewStation(2);
+showPolygonService("Вставил пустую с индексом 2");
+polygonService.clearAll();
+showPolygonService("Очистил всё");
+polygonService.addNewStation();
+showPolygonService("Добавил пустую");
 
 /**
  * Отображает текущее состояние репозитория 

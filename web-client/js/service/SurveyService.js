@@ -5,20 +5,25 @@ import { SurveyProvider } from "../service/provider/SurveyProvider.js";
 /**
  * This class provides methods for working 
  * with the survey model.
+ * @author Nizovkin_A.V.
+ * @copyright 2026 Nizovkin_A.V.
  */
 export class SurveyService {
+    #surveyRepository;
+    #surveyMapper;
+    #surveyProvider;
 
     constructor() {
-        this.surveyRepository = new SurveyRepository();
-        this.surveyMapper = new SurveyMapper();
-        this.surveyProvider = new SurveyProvider();
+        this.#surveyRepository = new SurveyRepository();
+        this.#surveyMapper = new SurveyMapper();
+        this.#surveyProvider = new SurveyProvider();
     }
 
     /**
      * Clears survey repository
      */
     clearAll() {
-        this.surveyRepository.clearAll();
+        this.#surveyRepository.clearAll();
     }
 
     /**
@@ -26,7 +31,7 @@ export class SurveyService {
      * @returns {number}
      */
     size() {
-        return this.surveyRepository.size();
+        return this.#surveyRepository.size();
     }
 
     /**
@@ -35,7 +40,7 @@ export class SurveyService {
      * @returns {number}
      */
     measurementSize(indexStation) {
-        return this.surveyRepository.measurementSize(indexStation);
+        return this.#surveyRepository.measurementSize(indexStation);
     }
 
     /**
@@ -44,9 +49,9 @@ export class SurveyService {
      */
     async readFromDevice(fileTah) {
         try {
-            await this.surveyProvider.getStringArrayFromDevice(fileTah).then((object) => {
-                this.surveyRepository.clearAll();
-                this.surveyRepository = this.surveyMapper.arrayToSurveyRepository(object, this.surveyRepository);
+            await this.#surveyProvider.getStringArrayFromDevice(fileTah).then((object) => {
+                this.#surveyRepository.clearAll();
+                this.#surveyRepository = this.#surveyMapper.arrayToSurveyRepository(object, this.#surveyRepository);
             });
         } catch (err) {
             console.error(err.message);
@@ -60,19 +65,18 @@ export class SurveyService {
      */
     async importFromTotalStation(fileImport, typeImport) {
         try {
-            await this.surveyProvider.getStringArrayFromDevice(fileImport).then((linesArray) => {
+            await this.#surveyProvider.getStringArrayFromDevice(fileImport).then((linesArray) => {
                 linesArray.unshift(typeImport);
                 for (let line of linesArray) {
                     console.log(line);
                 }
 
-                // let fileTah = this.surveyProvider.importTah(linesArray);
+                // let fileTah = this.#surveyProvider.importTah(linesArray);
 
-                this.surveyRepository.clearAll();
-                this.surveyRepository.addNewStation();
-                this.surveyRepository.addNewMeasurement(0);
+                this.#surveyRepository.clearAll();
+                this.#surveyRepository.addNewStation();
+                this.#surveyRepository.addNewMeasurement(0);
 
-                // this.surveyRepository = this.surveyMapper.arrayToSurveyRepository(fileTah, this.surveyRepository);
             });
         } catch (err) {
             console.error(err.message);
@@ -84,7 +88,7 @@ export class SurveyService {
      * @returns {string[]}
      */
     getTahArray() {
-        let linesArray = this.surveyMapper.surveyRepositoryToArray(this.surveyRepository);
+        let linesArray = this.#surveyMapper.surveyRepositoryToArray(this.#surveyRepository);
         return linesArray;
 
     }
@@ -93,7 +97,7 @@ export class SurveyService {
      * Appends new SurveyStation to the end of repository
      */
     addNewStation () {
-        this.surveyRepository.addNewStation();
+        this.#surveyRepository.addNewStation();
     }
 
     /**
@@ -101,7 +105,7 @@ export class SurveyService {
      * @param {number} index position new element at repository
      */
     insertNewStation(indexStation) {
-        this.surveyRepository.insertNewStation(indexStation);
+        this.#surveyRepository.insertNewStation(indexStation);
     }
 
     /**
@@ -109,7 +113,7 @@ export class SurveyService {
      * @param {number} indexStation location of the repository item being deleted
      */
     removeStation(indexStation) {
-        this.surveyRepository.removeStation(indexStation);
+        this.#surveyRepository.removeStation(indexStation);
     }
 
     /**
@@ -117,7 +121,7 @@ export class SurveyService {
      * @param {number} indexStation the index of the station to which the new measurement is being added
      */
     addNewMeasurement(indexStation) {
-        this.surveyRepository.addNewMeasurement(indexStation);
+        this.#surveyRepository.addNewMeasurement(indexStation);
     }
 
     /**
@@ -126,7 +130,7 @@ export class SurveyService {
      * @param {number} indexMeasurement position of new measurement
      */
     insertNewMeasurement(indexStation, indexMeasurement) {
-        this.surveyRepository.insertNewMeasurement(indexStation, indexMeasurement);
+        this.#surveyRepository.insertNewMeasurement(indexStation, indexMeasurement);
     }
 
     /**
@@ -135,7 +139,7 @@ export class SurveyService {
      * @param {number} indexMeasurement 
      */
     removeMeasurement(indexStation, indexMeasurement) {
-        this.surveyRepository.removeMeasurement(indexStation, indexMeasurement);
+        this.#surveyRepository.removeMeasurement(indexStation, indexMeasurement);
     }
 
     /**
@@ -144,7 +148,7 @@ export class SurveyService {
      * @returns {string}
      */
     getStationName(indexStation) {
-        return this.surveyRepository.getStationName(indexStation);
+        return this.#surveyRepository.getStationName(indexStation);
     }
 
     /**
@@ -153,7 +157,7 @@ export class SurveyService {
      * @param {string} stationName 
      */
     saveStationName(indexStation, stationName) {
-        this.surveyRepository.saveStationName(indexStation, stationName);
+        this.#surveyRepository.saveStationName(indexStation, stationName);
     }
 
     /**
@@ -162,7 +166,7 @@ export class SurveyService {
      * @returns {string}
      */
     getStationX(indexStation) {
-        return this.surveyRepository.getStationX(indexStation);
+        return this.#surveyRepository.getStationX(indexStation);
     }
 
     /**
@@ -171,7 +175,7 @@ export class SurveyService {
      * @param {string} stationX 
      */
     saveStationX(indexStation, stationX) {
-        this.surveyRepository.saveStationX(indexStation, stationX);
+        this.#surveyRepository.saveStationX(indexStation, stationX);
     }    
     
     /**
@@ -180,7 +184,7 @@ export class SurveyService {
      * @returns {string}
      */
     getStationY(indexStation) {
-        return this.surveyRepository.getStationY(indexStation);
+        return this.#surveyRepository.getStationY(indexStation);
     }
 
     /**
@@ -189,7 +193,7 @@ export class SurveyService {
      * @param {string} stationY 
      */
     saveStationY(indexStation, stationY) {
-        this.surveyRepository.saveStationY(indexStation, stationY);
+        this.#surveyRepository.saveStationY(indexStation, stationY);
     }        
 
     /**
@@ -198,7 +202,7 @@ export class SurveyService {
      * @returns {string}
      */
     getStationZ(indexStation) {
-        return this.surveyRepository.getStationZ(indexStation);
+        return this.#surveyRepository.getStationZ(indexStation);
     }
 
     /**
@@ -207,7 +211,7 @@ export class SurveyService {
      * @param {string} stationZ 
      */
     saveStationZ(indexStation, stationZ) {
-        this.surveyRepository.saveStationZ(indexStation, stationZ);
+        this.#surveyRepository.saveStationZ(indexStation, stationZ);
     }            
 
     /**
@@ -217,7 +221,7 @@ export class SurveyService {
      * @returns {string}
      */
     getStationHeight(indexStation) {
-        return this.surveyRepository.getStationHeight(indexStation);
+        return this.#surveyRepository.getStationHeight(indexStation);
     }
 
     /**
@@ -226,7 +230,7 @@ export class SurveyService {
      * @param {string} stationHeight 
      */
     saveStationHeight(indexStation, stationHeight) {
-        this.surveyRepository.saveStationHeight(indexStation, stationHeight);
+        this.#surveyRepository.saveStationHeight(indexStation, stationHeight);
     }    
     
     /**
@@ -236,7 +240,7 @@ export class SurveyService {
      * @returns {string}
      */
     getOrDirection(indexStation) {
-        return this.surveyRepository.getOrDirection(indexStation);
+        return this.#surveyRepository.getOrDirection(indexStation);
     }
 
     /**
@@ -245,7 +249,7 @@ export class SurveyService {
      * @param {string} orDirection 
      */
     saveOrDirection(indexStation, orDirection) {
-        this.surveyRepository.saveOrDirection(indexStation, orDirection);
+        this.#surveyRepository.saveOrDirection(indexStation, orDirection);
     }
 
     /**
@@ -255,7 +259,7 @@ export class SurveyService {
      * @returns {string}
      */
     getOrName(indexStation) {
-        return this.surveyRepository.getOrName(indexStation);
+        return this.#surveyRepository.getOrName(indexStation);
     }
 
 
@@ -265,7 +269,7 @@ export class SurveyService {
      * @param {string} orName 
      */
     saveOrName(indexStation, orName) {
-        this.surveyRepository.saveOrName(indexStation, orName);
+        this.#surveyRepository.saveOrName(indexStation, orName);
     }
 
     /**
@@ -275,7 +279,7 @@ export class SurveyService {
      * @returns {string}
      */
     getOrX(indexStation) {
-        return this.surveyRepository.getOrX(indexStation);
+        return this.#surveyRepository.getOrX(indexStation);
     }
 
 
@@ -285,7 +289,7 @@ export class SurveyService {
      * @param {string} orX 
      */
     saveOrX(indexStation, orX) {
-        this.surveyRepository.saveOrX(indexStation, orX);
+        this.#surveyRepository.saveOrX(indexStation, orX);
     }
 
     /**
@@ -295,7 +299,7 @@ export class SurveyService {
      * @returns {string}
      */
     getOrY(indexStation) {
-        return this.surveyRepository.getOrY(indexStation);
+        return this.#surveyRepository.getOrY(indexStation);
     }
 
     /**
@@ -305,7 +309,7 @@ export class SurveyService {
      * @param {string} orY
      */
     saveOrY(indexStation, orY) {
-        this.surveyRepository.saveOrY(indexStation, orY);
+        this.#surveyRepository.saveOrY(indexStation, orY);
     }
 
     /**
@@ -316,7 +320,7 @@ export class SurveyService {
      * @returns {string}
      */
     getTargetName(indexStation, indexMeasurement) {
-        return this.surveyRepository.getTargetName(indexStation, indexMeasurement);
+        return this.#surveyRepository.getTargetName(indexStation, indexMeasurement);
     }
 
     /**
@@ -327,7 +331,7 @@ export class SurveyService {
      * @param {string} targetName 
      */
     saveTargetName(indexStation, indexMeasurement, targetName) {
-        this.surveyRepository.saveTargetName(indexStation, indexMeasurement, targetName);
+        this.#surveyRepository.saveTargetName(indexStation, indexMeasurement, targetName);
     }
 
     /**
@@ -338,7 +342,7 @@ export class SurveyService {
      * @returns {string}
      */
     getTargetDirection(indexStation, indexMeasurement) {
-        return this.surveyRepository.getTargetDirection(indexStation, indexMeasurement);
+        return this.#surveyRepository.getTargetDirection(indexStation, indexMeasurement);
     }
     
     /**
@@ -349,7 +353,7 @@ export class SurveyService {
      * @param {string} targetDirection 
      */
     saveTargetDirection(indexStation, indexMeasurement, targetDirection) {
-        this.surveyRepository.saveTargetDirection(indexStation, indexMeasurement, targetDirection);
+        this.#surveyRepository.saveTargetDirection(indexStation, indexMeasurement, targetDirection);
     }    
 
     /**
@@ -360,7 +364,7 @@ export class SurveyService {
      * @returns {string}
      */
     getTargetDistance(indexStation, indexMeasurement) {
-        return this.surveyRepository.getTargetDistance(indexStation, indexMeasurement);
+        return this.#surveyRepository.getTargetDistance(indexStation, indexMeasurement);
     }
 
 
@@ -372,7 +376,7 @@ export class SurveyService {
      * @param {string} targetDistance 
      */
     saveTargetDistance(indexStation, indexMeasurement, targetDistance) {
-        this.surveyRepository.saveTargetDistance(indexStation, indexMeasurement, targetDistance);
+        this.#surveyRepository.saveTargetDistance(indexStation, indexMeasurement, targetDistance);
     }    
 
     /**
@@ -383,7 +387,7 @@ export class SurveyService {
      * @returns {string}
      */
     getTargetTiltAngle(indexStation, indexMeasurement) {
-        return this.surveyRepository.getTargetTiltAngle(indexStation, indexMeasurement);
+        return this.#surveyRepository.getTargetTiltAngle(indexStation, indexMeasurement);
     }
 
 
@@ -395,7 +399,7 @@ export class SurveyService {
      * @param {string} targetTiltAngle 
      */
     saveTargetTiltAngle(indexStation, indexMeasurement, targetTiltAngle) {
-        this.surveyRepository.saveTargetTiltAngle(indexStation, indexMeasurement, targetTiltAngle);
+        this.#surveyRepository.saveTargetTiltAngle(indexStation, indexMeasurement, targetTiltAngle);
     }    
 
     /**
@@ -406,7 +410,7 @@ export class SurveyService {
      * @returns {string}
      */
     getTargetHeight(indexStation, indexMeasurement) {
-        return this.surveyRepository.getTargetHeight(indexStation, indexMeasurement);
+        return this.#surveyRepository.getTargetHeight(indexStation, indexMeasurement);
     }
     
     /**
@@ -417,8 +421,6 @@ export class SurveyService {
      * @param {string} targetHeight 
      */
     saveTargetHeight(indexStation, indexMeasurement, targetHeight) {
-        this.surveyRepository.saveTargetHeight(indexStation, indexMeasurement, targetHeight);
+        this.#surveyRepository.saveTargetHeight(indexStation, indexMeasurement, targetHeight);
     }    
-
-
 }

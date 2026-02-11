@@ -8,25 +8,17 @@ let surveyRepository = new SurveyRepository();
 
 let surveyService = new SurveyService();
 
-// createDemoSurveyReposiory();
-
-// showSurveyRepository("Демо-репозиторий начальные значения");
-
-// surveyRepository.clearAll();
-
-// showSurveyRepository("Очищаем репозиторий");
+createDemoSurveyReposiory();
+showSurveyRepository("Демо-репозиторий начальные значения");
+surveyRepository.clearAll();
+showSurveyRepository("Очищаем репозиторий");
 
 createDemoSurveyService();
-
 showSurveyService("Начальное содержание демо-съёмки")
-
 let lines = surveyService.getTahArray();
-
 showLinesAray("tahfile:", lines);
-
-// surveyService.removeMeasurement(0, 0);
-
-// showSurveyService("Удаляем измерение")
+surveyService.removeMeasurement(0, 0);
+showSurveyService("Удаляем измерение")
 
 /**
  * Создаёт тестовый репозиторий

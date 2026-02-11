@@ -1,8 +1,12 @@
+/**
+ * Provides static methods for unit conversion
+ */
 export class UnitsConverter {
     
     /***
      * Converts meters to millimeters
-     * 
+     * @author Nizovkin_A.V.
+     * @copyright 2026 Nizovkin_A.V.
      * @param {string} value linear value in meters
      * @returns {number} linear value in millimeters
      */

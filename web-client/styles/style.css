@@ -1,60 +1,10 @@
+@import './general.css';
 @import './direct.css';
 @import './inverse.css';
 @import './potenot.css';
 @import './survey.css';
 @import './points.css';
 @import './polygon.css';
-
-* {
-    box-sizing: border-box;
-}
-
-html, body {
-    padding: 0;
-    margin: 0;
-    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
-    font-family: sans-serif, Verdana;
-}
-
-:root {
-    --panel-bg-color: #dfe4ea;
-    /* --container-bg-color: #f1f2f6; */
-    --container-bg-color: #89bf8d;
-    --sidebar-bg-color: #f1f2a6;
-    --text-color: #2f3542;
-}
-
-:root[theme='dark'] {
-    --panel-bg-color: #2f3542;
-    /* --container-bg-color: #57606f; */
-    --container-bg-color: #89bf8d;
-    --sidebar-bg-color: #666e7c;
-    --text-color: #ced6e0;
-}
-
-body {
-    height: 100vh;
-    font-size: 0.6em;
-    padding: 1em;
-    display: flex;
-    flex-direction: column;
-}
-
-input[type="text"] {
-   /* border: 1px solid #cccccc; //цвет рамки
-   border-radius: 3px; //закругление углов (общее)
-   -webkit-border-radius: 3px; //закругление углов (Google Chrome)
-   -moz-border-radius: 3px; //закругление углов (FireFox)
-   -khtml-border-radius: 3px; //закругление углов (Safari)
-   background: #ffffff !important; // желательно прописывать, так как в Chrome при сохранных данных оно может быть желтым
-   outline: none; // удаляет обводку в браузерах хром(желтая) и сафари(синяя)
-   height: 24px; // высота на свое усмотрение
-   width: 120px; // ширина на свое усмотрение
-   color: #cccccc; //цвет шрифта в обычном состоянии */
-   font-size: 1em;
-   font-family: sans-serif, Tahoma;
-}
-
 
 .header {
     display: flex;
@@ -85,19 +35,6 @@ input[type="text"] {
     justify-content: safe center;
     font-size: 1.1em;
 
-}
-
-.overlay {
-    position: absolute;
-    top: 0;
-    /* bottom: 0; */
-    /* right: 0; */
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.1); /* Полупрозрачность */
-    z-index: 999;
-    display: none; /* Изначально скрытый */
 }
 
 #icon-menu {
@@ -198,22 +135,10 @@ input[type="text"] {
     text-align: center;
 }
 
-.content {
+/* .panel-survey {
     display: flex;
     flex-direction: column;
-    height: auto;
-    background-color: var(--container-bg-color);
-    border: 2px outset #bab6b7;
-    margin: 2px;
-    color: var(--text-color);
-    flex: 1 1 12em;
-    padding: 2px;
-}
-
-.panel-survey {
-    display: flex;
-    flex-direction: column;
-}
+} */
 
 table > caption {
     text-align: center;
@@ -250,13 +175,6 @@ table > caption {
     margin-top: 10px;
 }
 
-
-.menu-item:hover {
-    background-color: black;
-    color: white;
-    cursor: pointer;
-}
-
 .nav, .sidebar {
     flex: 1;
     background-color: var(--sidebar-bg-color);
@@ -275,10 +193,6 @@ table > caption {
 }
 
 @media screen and (min-width: 768px) {
-    body {
-        height: 100vh;
-
-    }
 
         .header {
         display: flex;
@@ -347,12 +261,6 @@ table > caption {
         justify-content: end;
     }
 
-
-    .open {
-        display: flex;
-    }
-
-
     .main-menu > .menu-item {
         padding: 10px;
         margin-top: 10px;
@@ -380,14 +288,10 @@ table > caption {
     min-width: 10em;
     }
 
-    .content {
-        flex-direction: column;
-        flex: 1 1 80%;
-    }
 
-    .panel-survey {
+    /* .panel-survey {
         flex-direction: row;
         flex: 1 1 auto;
-    }
+    } */
 
 }

@@ -4,44 +4,24 @@ import { PolygonService } from "../service/PolygonService.js";
  * Encapsulates the components of the "Polygon" screen 
  * and the methods for their interaction with 
  * the user and the model.
+ * @author Nizovkin A.V.
+ * @copyright 2025 Nizovkin A.V.
  */
 export class PolygonContoller {
-    #currentStation = 0;
-    constructor(basePointService) {
-        this.polygonService = new PolygonService();
-        this.polygonService.addNewStation();
-        this.#currentStation = 0;
-        this.basePointService = basePointService;
-
-        // this.#fillDemo();
-
-    }
+    #currentStation;
+    #polygonService;
+    #basePointService;
 
     /**
-     * Заполняет репозиторий демо данными
+     * @constructor
+     * @param {BasePointService} basePointService 
      */
-    #fillDemo() {
-    for (let i = 0; i < 5; i++) {
-        this.polygonService.addNewStation();
-        
-        this.polygonService.saveStationName(-1, `station-${i + 1}`);
-        this.polygonService.saveHorAngle(-1, "359.5959");
-        this.polygonService.saveHorDistance(-1, "69.999");
-        this.polygonService.saveElevation(-1, "-1.356");
-        if (i == 0) {
-            this.polygonService.saveStationX(-1, "478676.113");
-            this.polygonService.saveStationY(-1, "2297003.862");
-            this.polygonService.saveStationZ(-1, "12.630");
-        } else {
-            this.polygonService.saveStationX(-1, "Not");
-            this.polygonService.saveStationY(-1, "Not");
-            this.polygonService.saveStationZ(-1, "Not");
-        }
-        
+    constructor(basePointService) {
+        this.#polygonService = new PolygonService();
+        this.#polygonService.addNewStation();
+        this.#currentStation = 0;
+        this.#basePointService = basePointService;
     }
-
-    }
-
 
     /**
      * Loads page Polygon
@@ -157,12 +137,12 @@ export class PolygonContoller {
         const listPoligonStations = document.getElementById("list-poligon-stations");
         listPoligonStations.innerHTML = '';
 
-        for (let i = 0; i < this.polygonService.size(); i++) {
+        for (let i = 0; i < this.#polygonService.size(); i++) {
             const row = document.createElement('tr');
             row.setAttribute("data-row-id", i);
 
             let status = false;
-            if (this.polygonService.getStationX(i) != "Not") status = true;
+            if (this.#polygonService.getStationX(i) != "Not") status = true;
             
             let cell = document.createElement('td');
             cell.className = "line";
@@ -171,7 +151,7 @@ export class PolygonContoller {
             item.setAttribute("data-polygon-station-id", i);
             item.setAttribute("data-property", "name");
             item.size = "10";
-            item.value = this.polygonService.getStationName(i);
+            item.value = this.#polygonService.getStationName(i);
             cell.append(item);
             row.append(cell);
 
@@ -182,10 +162,10 @@ export class PolygonContoller {
             item.setAttribute("data-polygon-station-id", i);
             item.setAttribute("data-property", "hor-angle");
             item.size = "8";
-            if (this.polygonService.getHorAngle(i) == "Not") {
+            if (this.#polygonService.getHorAngle(i) == "Not") {
                 item.value = '';
             } else {
-                item.value = this.polygonService.getHorAngle(i);
+                item.value = this.#polygonService.getHorAngle(i);
             }
             cell.append(item);
             row.append(cell);
@@ -197,10 +177,10 @@ export class PolygonContoller {
             item.setAttribute("data-polygon-station-id", i);
             item.setAttribute("data-property", "hor-distance");
             item.size = "8";
-            if (this.polygonService.getHorDistance(i) == "Not") {
+            if (this.#polygonService.getHorDistance(i) == "Not") {
                 item.value = '';
             } else {
-                item.value = this.polygonService.getHorDistance(i);
+                item.value = this.#polygonService.getHorDistance(i);
             }
             cell.append(item);
             row.append(cell);
@@ -212,10 +192,10 @@ export class PolygonContoller {
             item.setAttribute("data-polygon-station-id", i);
             item.setAttribute("data-property", "elevation");
             item.size = "7";
-            if (this.polygonService.getElevation(i) == "Not") {
+            if (this.#polygonService.getElevation(i) == "Not") {
                 item.value = '';
             } else {
-                item.value = this.polygonService.getElevation(i);
+                item.value = this.#polygonService.getElevation(i);
             }
             cell.append(item);
             row.append(cell);
@@ -229,11 +209,11 @@ export class PolygonContoller {
             item.size = "10";
             item.disabled = true;
             if (status) {
-                if ( (i > 1) && ( i < this.polygonService.size() - 2) ) {
-                    this.polygonService.saveStationX(i, "Not");
+                if ( (i > 1) && ( i < this.#polygonService.size() - 2) ) {
+                    this.#polygonService.saveStationX(i, "Not");
                     status = false;
                 } else {
-                    item.value = this.polygonService.getStationX(i);
+                    item.value = this.#polygonService.getStationX(i);
                     item.disabled = false;
                 }                
             }
@@ -249,11 +229,11 @@ export class PolygonContoller {
             item.size = "10";
             item.disabled = true;
             if (status) {
-                if ( (i > 1) && ( i < this.polygonService.size() - 2) ) {
-                    this.polygonService.saveStationY(i, "Not");
+                if ( (i > 1) && ( i < this.#polygonService.size() - 2) ) {
+                    this.#polygonService.saveStationY(i, "Not");
                     status = false;
                 } else {
-                    item.value = this.polygonService.getStationY(i);
+                    item.value = this.#polygonService.getStationY(i);
                     item.disabled = false;
                 }                
             }
@@ -269,11 +249,11 @@ export class PolygonContoller {
             item.size = "10";
             item.disabled = true;
             if (status) {
-                if ( (i > 1) && ( i < this.polygonService.size() - 2) ) {
-                    this.polygonService.saveStationZ(i, "Not");
+                if ( (i > 1) && ( i < this.#polygonService.size() - 2) ) {
+                    this.#polygonService.saveStationZ(i, "Not");
                     status = false;
                 } else {
-                    item.value = this.polygonService.getStationZ(i);
+                    item.value = this.#polygonService.getStationZ(i);
                     item.disabled = false;
                 }                
             }
@@ -290,7 +270,7 @@ export class PolygonContoller {
             item.setAttribute("data-property", "status");
             // item.size = "10";
             if (status) item.setAttribute("checked", true);
-            if ( (i > 1) && ( i < this.polygonService.size() - 2) ) {
+            if ( (i > 1) && ( i < this.#polygonService.size() - 2) ) {
                 item.unchecked = true;
                 item.disabled = true;
             }
@@ -313,12 +293,12 @@ export class PolygonContoller {
       listBasePoints.className = "pop-up";
       listBasePoints.id = "list-base-point";
 
-      if (this.basePointService.size() > 0) {
-        for (let i = 0; i < this.basePointService.size(); i++) {
+      if (this.#basePointService.size() > 0) {
+        for (let i = 0; i < this.#basePointService.size(); i++) {
           let row = document.createElement('div');
           row.className = "menu-item";
           row.setAttribute("data-base-point-id", i);
-          row.innerHTML = this.basePointService.getBasePointName(i);
+          row.innerHTML = this.#basePointService.getBasePointName(i);
           listBasePoints.append(row);
         }
       }
@@ -353,7 +333,7 @@ export class PolygonContoller {
             try {
               let file = element.files[0];
               if (!file) throw new Error("Select a file!");
-                this.polygonService.readFromDevice(file).then(() =>{
+                this.#polygonService.readFromDevice(file).then(() =>{
                     this.#currentStation = 0;
                     this.#setListPolygonStations();
                 });
@@ -380,26 +360,14 @@ export class PolygonContoller {
             listBasePoints.classList.toggle("open");
             overlay.classList.toggle("open");
 
-            if ( ((this.#currentStation <= 1) || (this.#currentStation >= this.polygonService.size() - 2)) && (currentStatus) ) {
+            if ( ((this.#currentStation <= 1) || (this.#currentStation >= this.#polygonService.size() - 2)) && (currentStatus) ) {
                 let basePointId = +elem.dataset.basePointId;
-                this.polygonService.saveStationName(this.#currentStation, this.basePointService.getBasePointName(basePointId));
-                this.polygonService.saveStationX(this.#currentStation, this.basePointService.getBasePointX(basePointId));
-                this.polygonService.saveStationY(this.#currentStation, this.basePointService.getBasePointY(basePointId));
-                this.polygonService.saveStationZ(this.#currentStation, this.basePointService.getBasePointZ(basePointId));
+                this.#polygonService.saveStationName(this.#currentStation, this.#basePointService.getBasePointName(basePointId));
+                this.#polygonService.saveStationX(this.#currentStation, this.#basePointService.getBasePointX(basePointId));
+                this.#polygonService.saveStationY(this.#currentStation, this.#basePointService.getBasePointY(basePointId));
+                this.#polygonService.saveStationZ(this.#currentStation, this.#basePointService.getBasePointZ(basePointId));
             }
             this.#setListPolygonStations();
-
-            // if (this.insertCoordinateToBase) {
-            //     this.directService.saveBaseX(this.basePointService.getBasePointX(basePointId));
-            //     this.directService.saveBaseY(this.basePointService.getBasePointY(basePointId));
-            //     this.directService.saveBaseZ(this.basePointService.getBasePointZ(basePointId));
-            // } else {
-            //     this.directService.saveLandmarkX(this.basePointService.getBasePointX(basePointId));
-            //     this.directService.saveLandmarkY(this.basePointService.getBasePointY(basePointId));
-            // }
-
-            // this.setData();
-
         }
 
 
@@ -407,23 +375,23 @@ export class PolygonContoller {
             switch (elem.id) {
 
                 case "delete-station":
-                    if (this.polygonService.size() > 1) {
-                        this.polygonService.removeStation(this.#currentStation);
+                    if (this.#polygonService.size() > 1) {
+                        this.#polygonService.removeStation(this.#currentStation);
                         this.#setListPolygonStations();
-                        if (this.#currentStation == this.polygonService.size()) {
+                        if (this.#currentStation == this.#polygonService.size()) {
                             this.#currentStation--;
                         }
                     }
                     break;
 
                 case "before-station":
-                    this.polygonService.insertNewStation(this.#currentStation);
+                    this.#polygonService.insertNewStation(this.#currentStation);
                     this.#setListPolygonStations();
                     break;
 
                 case "after-station":
                     this.#currentStation++;
-                    this.polygonService.insertNewStation(this.#currentStation);
+                    this.#polygonService.insertNewStation(this.#currentStation);
                     this.#setListPolygonStations();
                     break;
 
@@ -436,8 +404,8 @@ export class PolygonContoller {
                     break;
 
                 case "polygon-new":
-                    this.polygonService.clearAll();
-                    this.polygonService.addNewStation();
+                    this.#polygonService.clearAll();
+                    this.#polygonService.addNewStation();
                     this.#setListPolygonStations();
                     break;
 
@@ -471,13 +439,6 @@ export class PolygonContoller {
             if (elem.hasAttribute('data-polygon-station-id')) {
                 // this.#toggleSelectedRow(this.#currentStation);
                 this.#currentStation = +elem.dataset.polygonStationId;
-
-                // if ( ((this.#currentStation <= 1) || (this.#currentStation >= this.polygonService.size() - 2)) && (currentStatus) ) {
-                //     buttonCatalog.disabled = false;
-                // } else {
-                //     buttonCatalog.disabled = true;
-                // }
-                // this.#toggleSelectedRow(this.#currentStation);
             }
         });
 
@@ -488,44 +449,44 @@ export class PolygonContoller {
                 switch (elem.dataset.property) {
 
                     case "name":
-                        this.polygonService.saveStationName(+elem.dataset.polygonStationId, elem.value);
+                        this.#polygonService.saveStationName(+elem.dataset.polygonStationId, elem.value);
                         break;
 
                     case "hor-angle":
-                        this.polygonService.saveHorAngle(+elem.dataset.polygonStationId, elem.value);
+                        this.#polygonService.saveHorAngle(+elem.dataset.polygonStationId, elem.value);
                         break;
 
                     case "hor-distance":
-                        this.polygonService.saveHorDistance(+elem.dataset.polygonStationId, elem.value);
+                        this.#polygonService.saveHorDistance(+elem.dataset.polygonStationId, elem.value);
                         break;
 
                     case "elevation":
-                        this.polygonService.saveElevation(+elem.dataset.polygonStationId, elem.value);
+                        this.#polygonService.saveElevation(+elem.dataset.polygonStationId, elem.value);
                         break;
 
                     case "x":
-                        this.polygonService.saveStationX(+elem.dataset.polygonStationId, elem.value);
+                        this.#polygonService.saveStationX(+elem.dataset.polygonStationId, elem.value);
                         break;
 
                     case "y":
-                        this.polygonService.saveStationY(+elem.dataset.polygonStationId, elem.value);
+                        this.#polygonService.saveStationY(+elem.dataset.polygonStationId, elem.value);
                         break;
 
                     case "z":
-                        this.polygonService.saveStationZ(+elem.dataset.poliygonStationId, elem.value);
+                        this.#polygonService.saveStationZ(+elem.dataset.poliygonStationId, elem.value);
                         break;
 
                     case "status":
                         this.#currentStation = +elem.dataset.stationId;
                         if (elem.checked) {
-                            this.polygonService.saveStationX(+elem.dataset.stationId, "0.000");
-                            this.polygonService.saveStationY(+elem.dataset.stationId, "0.000");
-                            this.polygonService.saveStationZ(+elem.dataset.stationId, "0.000");
+                            this.#polygonService.saveStationX(+elem.dataset.stationId, "0.000");
+                            this.#polygonService.saveStationY(+elem.dataset.stationId, "0.000");
+                            this.#polygonService.saveStationZ(+elem.dataset.stationId, "0.000");
 
                         } else {
-                            this.polygonService.saveStationX(+elem.dataset.stationId, "Not");
-                            this.polygonService.saveStationY(+elem.dataset.stationId, "Not");
-                            this.polygonService.saveStationZ(+elem.dataset.stationId, "Not");
+                            this.#polygonService.saveStationX(+elem.dataset.stationId, "Not");
+                            this.#polygonService.saveStationY(+elem.dataset.stationId, "Not");
+                            this.#polygonService.saveStationZ(+elem.dataset.stationId, "Not");
 
                         }
                         this.#setListPolygonStations();

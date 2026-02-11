@@ -6,19 +6,24 @@ import { PolygonProvider } from "./provider/PolygonProvider.js";
  * This class provides methods for working 
  * with the polygon model.
  * @author Nizovkin_A.V.
+ * @copyright 2026 Nizovkin_A.V.
  */
 export class PolygonService {
+    #polygonRepository;
+    #polygonMapper;
+    #polygonProvider;
+
     constructor() {
-        this.polygonRepository = new PolygonRepository();
-        this.polygonMapper = new PolygonMapper();
-        this.poligonProvider = new PolygonProvider();
+        this.#polygonRepository = new PolygonRepository();
+        this.#polygonMapper = new PolygonMapper();
+        this.#polygonProvider = new PolygonProvider();
     }
 
     /**
      * Crears polygon repository
      */
     clearAll() {
-        this.polygonRepository.clearAll();
+        this.#polygonRepository.clearAll();
     }
 
     /**
@@ -26,7 +31,7 @@ export class PolygonService {
      * @returns {number}
      */
     size() {
-        return this.polygonRepository.size();
+        return this.#polygonRepository.size();
     }
 
    /**
@@ -34,7 +39,7 @@ export class PolygonService {
     * @returns {string[]}
     */
     getLinesPolArray() {
-        return this.polygonMapper.poligonRepositoryToArray(this.polygonRepository);
+        return this.#polygonMapper.poligonRepositoryToArray(this.#polygonRepository);
     }
 
     /**
@@ -43,9 +48,9 @@ export class PolygonService {
      */
     async readFromDevice(filePol) {
         try {
-            await this.poligonProvider.getStringArrayFromDevice(filePol).then((object) => {
-                this.polygonRepository.clearAll();
-                this.polygonRepository = this.polygonMapper.arrayToPolygonRepository(object, this.polygonRepository);
+            await this.#polygonProvider.getStringArrayFromDevice(filePol).then((object) => {
+                this.#polygonRepository.clearAll();
+                this.#polygonRepository = this.#polygonMapper.arrayToPolygonRepository(object, this.#polygonRepository);
             });
         } catch (err) {
             console.error(err.message);
@@ -57,7 +62,7 @@ export class PolygonService {
      * Adds new instance of PolygonStation
      */
     addNewStation() {
-        this.polygonRepository.addNewStation();
+        this.#polygonRepository.addNewStation();
     }
 
     /**
@@ -66,7 +71,7 @@ export class PolygonService {
      * @param {number} stationIndex 
      */
     insertNewStation(stationIndex) {
-        this.polygonRepository.insertNewStation(stationIndex);
+        this.#polygonRepository.insertNewStation(stationIndex);
     }
 
     /**
@@ -74,7 +79,7 @@ export class PolygonService {
      * @param {number} stationIndex 
      */
     removeStation(stationIndex) {
-        this.polygonRepository.removeStation(stationIndex);
+        this.#polygonRepository.removeStation(stationIndex);
     }
 
     /**
@@ -84,7 +89,7 @@ export class PolygonService {
      * @returns {string}
      */
     getStationName(stationIndex) {
-        return this.polygonRepository.getStationName(stationIndex);
+        return this.#polygonRepository.getStationName(stationIndex);
     }
 
     /**
@@ -95,7 +100,7 @@ export class PolygonService {
      * @returns 
      */
     saveStationName(stationIndex, stationName) {
-        this.polygonRepository.saveStationName(stationIndex, stationName);
+        this.#polygonRepository.saveStationName(stationIndex, stationName);
     }
 
 
@@ -106,7 +111,7 @@ export class PolygonService {
      * @returns {string}
      */
     getHorAngle(stationIndex) {
-        return this.polygonRepository.getHorAngle(stationIndex);
+        return this.#polygonRepository.getHorAngle(stationIndex);
     }
 
     /**
@@ -117,7 +122,7 @@ export class PolygonService {
      * @returns 
      */
     saveHorAngle(stationIndex, horAngle) {
-        this.polygonRepository.saveHorAngle(stationIndex, horAngle);
+        this.#polygonRepository.saveHorAngle(stationIndex, horAngle);
     }
 
     /**
@@ -127,7 +132,7 @@ export class PolygonService {
      * @returns {string}
      */
     getHorDistance(stationIndex) {
-        return this.polygonRepository.getHorDistance(stationIndex);
+        return this.#polygonRepository.getHorDistance(stationIndex);
     }
 
     /**
@@ -138,7 +143,7 @@ export class PolygonService {
      * @returns 
      */
     saveHorDistance(stationIndex, horDistance) {
-        this.polygonRepository.saveHorDistance(stationIndex, horDistance);
+        this.#polygonRepository.saveHorDistance(stationIndex, horDistance);
     }
     
 
@@ -149,7 +154,7 @@ export class PolygonService {
      * @returns {string}
      */
     getElevation(stationIndex) {
-        return this.polygonRepository.getElevation(stationIndex);
+        return this.#polygonRepository.getElevation(stationIndex);
     }
 
     /**
@@ -160,7 +165,7 @@ export class PolygonService {
      * @returns 
      */
     saveElevation(stationIndex, elevation) {
-        this.polygonRepository.saveElevation(stationIndex, elevation);
+        this.#polygonRepository.saveElevation(stationIndex, elevation);
     }
 
 
@@ -171,7 +176,7 @@ export class PolygonService {
      * @returns {string}
      */
     getStationX(stationIndex) {
-        return this.polygonRepository.getStationX(stationIndex);
+        return this.#polygonRepository.getStationX(stationIndex);
     }
 
     /**
@@ -182,7 +187,7 @@ export class PolygonService {
      * @returns 
      */
     saveStationX(stationIndex, stationX) {
-        this.polygonRepository.saveStationX(stationIndex, stationX);
+        this.#polygonRepository.saveStationX(stationIndex, stationX);
     }
 
 
@@ -193,7 +198,7 @@ export class PolygonService {
      * @returns {string}
      */
     getStationY(stationIndex) {
-        return this.polygonRepository.getStationY(stationIndex);
+        return this.#polygonRepository.getStationY(stationIndex);
     }
 
     /**
@@ -204,7 +209,7 @@ export class PolygonService {
      * @returns 
      */
     saveStationY(stationIndex, stationY) {
-        this.polygonRepository.saveStationY(stationIndex, stationY);
+        this.#polygonRepository.saveStationY(stationIndex, stationY);
     }
 
 
@@ -215,7 +220,7 @@ export class PolygonService {
      * @returns {string}
      */
     getStationZ(stationIndex) {
-        return this.polygonRepository.getStationZ(stationIndex);
+        return this.#polygonRepository.getStationZ(stationIndex);
     }
 
     /**
@@ -226,7 +231,7 @@ export class PolygonService {
      * @returns 
      */
     saveStationZ(stationIndex, stationZ) {
-        this.polygonRepository.saveStationZ(stationIndex, stationZ);
+        this.#polygonRepository.saveStationZ(stationIndex, stationZ);
     }
 
 }

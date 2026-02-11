@@ -1,6 +1,8 @@
 /**
  * This class provides methods for working 
  * with the device's file system.
+ * @author Nizovkin_A.V.
+ * @copyright 2026 Nizovkin_A.V.
  */
 export class TextFileReader {
 

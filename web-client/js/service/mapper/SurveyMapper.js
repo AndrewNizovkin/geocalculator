@@ -1,5 +1,7 @@
 /**
  * This class provides methods for converting models and dto objects.
+ * @author Nizovkin_A.V.
+ * @copyright 2026 Nizovkin_A.V.
  */
 export class SurveyMapper {
 

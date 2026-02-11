@@ -3,8 +3,10 @@ import {PotenotRequest} from '../../dto/PotenotRequest.js';
 import { PotenotResponse } from '../../dto/PotenotResponse.js';
 
 /**
- *  * This class represents methods for converting 
+ * This class represents methods for converting 
  * models to dto and vice versa for Potenot Task.
+ * @author Nizovkin_A.V.
+ * @copyright 2026 Nizovkin_A.V.
  */
 export class PotenotMapper {
 

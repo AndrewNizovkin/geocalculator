@@ -4,6 +4,8 @@ import { UnitsConverter } from './UnitsConverter.js';
 
 /**
  * This class represents methods for converting models to dto and vice versa.
+ * @author Nizovkin_A.V.
+ * @copyright 2026 Nizovkin_A.V.
  */
 export class InverseMapper {
    

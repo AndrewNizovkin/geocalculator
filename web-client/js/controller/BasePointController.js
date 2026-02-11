@@ -3,12 +3,17 @@ import {BasePointService} from "../service/BasePointService.js";
 /**
  * Provides methods for managing the DOM elements 
  * of the 'Points' screen
+ * @author Nizovkin_A.V.
+ * @copyright 2026 Nizovkin_A.V.
  */
 export class BasePointController {
+  #basePointService;
+  #currentBasePoint;
+
     constructor() {
-        this.basePointService = new BasePointService();
-        this.basePointService.addNewBasePoint();
-        this.currentBasePoint = 0;
+        this.#basePointService = new BasePointService();
+        this.#basePointService.addNewBasePoint();
+        this.#currentBasePoint = 0;
     }
 
     /**
@@ -49,22 +54,22 @@ export class BasePointController {
         
         `;
 
-        this.setTableBasePoints();
-        this.addListenersTablePoints();
-        this.addListenersToolbarPoints();
+        this.#setTableBasePoints();
+        this.#addListenersTablePoints();
+        this.#addListenersToolbarPoints();
 
     }
 
     /**
      * Displays the contents of the base point repository in the DOM
      */
-    setTableBasePoints() {
-      if (this.basePointService.size() > 0) {
+    #setTableBasePoints() {
+      if (this.#basePointService.size() > 0) {
         let tableBasePoints = document.getElementById("list-points");
         tableBasePoints.innerHTML = '';
         
-        for (let i = 0; i < this.basePointService.size(); i++) {
-          let row = this.getElementBasePoint(i);
+        for (let i = 0; i < this.#basePointService.size(); i++) {
+          let row = this.#getElementBasePoint(i);
           tableBasePoints.append(row);
         }
       }
@@ -74,7 +79,7 @@ export class BasePointController {
     /**
      * Adds evert listeners to panel-points
      */
-    addListenersTablePoints() {
+    #addListenersTablePoints() {
       const panelPoints = document.getElementById("panel-points");
 
       panelPoints.addEventListener('click', (event) => {
@@ -83,14 +88,14 @@ export class BasePointController {
         
 
         if (element.hasAttribute("data-point-id")) {
-          this.currentBasePoint = +element.dataset.pointId;
+          this.#currentBasePoint = +element.dataset.pointId;
         }
 
         switch (element.id) {
 
           case "button-sort-name":
-            this.basePointService.sortByName();
-            this.setTableBasePoints();
+            this.#basePointService.sortByName();
+            this.#setTableBasePoints();
             break;
         }
       });
@@ -104,25 +109,25 @@ export class BasePointController {
           switch (element.dataset.target) {
 
             case "point-name":
-              this.basePointService.saveBasePointName(
+              this.#basePointService.saveBasePointName(
                 +element.dataset.pointId, 
                 element.value)
               break;
 
             case "point-x":
-              this.basePointService.saveBasePointX(
+              this.#basePointService.saveBasePointX(
                 +element.dataset.pointId, 
                 element.value)
               break;
 
             case "point-y":
-              this.basePointService.saveBasePointY(
+              this.#basePointService.saveBasePointY(
                 +element.dataset.pointId, 
                 element.value)
               break;
 
             case "point-z":
-              this.basePointService.saveBasePointZ(
+              this.#basePointService.saveBasePointZ(
                 +element.dataset.pointId, 
                 element.value)
               break;
@@ -136,7 +141,7 @@ export class BasePointController {
     /**
      * Adds event listeners to points toolbar
      */
-    addListenersToolbarPoints() {
+    #addListenersToolbarPoints() {
       const tolbarPoints = document.getElementById("points-toolbar");
 
       tolbarPoints.addEventListener('click', (event) => {
@@ -145,26 +150,26 @@ export class BasePointController {
         switch (element.id) {
 
           case "points-clear":
-            this.basePointService.clearAll();
-            this.basePointService.addNewBasePoint();
-            this.currentBasePoint = 0;
-            this.setTableBasePoints();
+            this.#basePointService.clearAll();
+            this.#basePointService.addNewBasePoint();
+            this.#currentBasePoint = 0;
+            this.#setTableBasePoints();
             break;
 
           case "points-remove":
-            if (this.basePointService.size() > 1) {
-              this.basePointService.removeBasePoint(this.currentBasePoint);
-              if (this.currentBasePoint == this.basePointService.size()) {
-                this.currentBasePoint--;
+            if (this.#basePointService.size() > 1) {
+              this.#basePointService.removeBasePoint(this.#currentBasePoint);
+              if (this.#currentBasePoint == this.#basePointService.size()) {
+                this.#currentBasePoint--;
               }
-              this.setTableBasePoints();
+              this.#setTableBasePoints();
             }
             break;
 
           case "points-add":
-            this.basePointService.addNewBasePoint();
-            this.currentBasePoint = this.basePointService.size() - 1;
-            this.setTableBasePoints();
+            this.#basePointService.addNewBasePoint();
+            this.#currentBasePoint = this.#basePointService.size() - 1;
+            this.#setTableBasePoints();
             break;
 
           case "points-file":
@@ -182,9 +187,9 @@ export class BasePointController {
             try {
               let file = element.files[0];
               if (!file) throw new Error("Select a file!");
-              this.basePointService.readFromTextFile(file).then(() => {
-                this.setTableBasePoints();
-                this.currentBasePoint = 0;
+              this.#basePointService.readFromTextFile(file).then(() => {
+                this.#setTableBasePoints();
+                this.#currentBasePoint = 0;
                 });
              } catch (error) {
               console.error(error.message);
@@ -201,7 +206,7 @@ export class BasePointController {
      * @param {number} pointIndex 
      * @returns {HTMLElement}
      */
-    getElementBasePoint(pointIndex) {
+    #getElementBasePoint(pointIndex) {
       let row = document.createElement('tr');
 
       let cell = document.createElement('td');
@@ -211,7 +216,7 @@ export class BasePointController {
       item.setAttribute("data-point-id", pointIndex);
       item.setAttribute("data-target", "point-name");
       item.size = "12";
-      item.value = this.basePointService.getBasePointName(pointIndex);
+      item.value = this.#basePointService.getBasePointName(pointIndex);
       cell.append(item);
       row.append(cell);
 
@@ -222,7 +227,7 @@ export class BasePointController {
       item.setAttribute("data-point-id", pointIndex);
       item.setAttribute("data-target", "point-x");
       item.size = "12";
-      item.value = this.basePointService.getBasePointX(pointIndex);
+      item.value = this.#basePointService.getBasePointX(pointIndex);
       cell.append(item);
       row.append(cell);
 
@@ -233,7 +238,7 @@ export class BasePointController {
       item.setAttribute("data-point-id", pointIndex);
       item.setAttribute("data-target", "point-y");
       item.size = "12";
-      item.value = this.basePointService.getBasePointY(pointIndex);
+      item.value = this.#basePointService.getBasePointY(pointIndex);
       cell.append(item);
       row.append(cell);
 
@@ -244,7 +249,7 @@ export class BasePointController {
       item.setAttribute("data-point-id", pointIndex);
       item.setAttribute("data-target", "point-z");
       item.size = "12";
-      item.value = this.basePointService.getBasePointZ(pointIndex);
+      item.value = this.#basePointService.getBasePointZ(pointIndex);
       cell.append(item);
       row.append(cell);
 
@@ -256,7 +261,7 @@ export class BasePointController {
      * @returns {BasePointService}
      */
     getBasePointService() {
-      return this.basePointService;
+      return this.#basePointService;
     }
 
 }

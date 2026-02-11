@@ -4,69 +4,41 @@ import { BasePointService } from "../../js/service/BasePointService.js";
 let content = document.getElementById("content");
 content.innerHTML = 'Hello, I am test-base-points.js';
 
-// --------region test BasePointRepository
-
+//#region  test BasePointRepository
 const basePointRepository = new BasePointRepository();
+createDemoBasePointRepository();
+showBasePointRepository("Начальное состояние демо репозитория");
+basePointRepository.sortByName();
+showBasePointRepository("Репозиторий отсортирован");
+basePointRepository.removeBasePoint(0);
+showBasePointRepository("удалёна первая точка");
+basePointRepository.addNewBasePoint();
+showBasePointRepository("добавлена новая пустая точка");
+basePointRepository.removeBasePoint(-1);
+showBasePointRepository("удалёна последняя точка");
+//#endregion
 
-// createDemoBasePointRepository();
-
-// showBasePointRepository("Начальное состояние демо репозитория");
-
-// basePointRepository.sortByName();
-
-// showBasePointRepository("Репозиторий отсортирован");
-
-// basePointRepository.removeBasePoint(0);
-
-// showBasePointRepository("удалёна первая точка");
-
-// basePointRepository.addNewBasePoint();
-
-// showBasePointRepository("добавлена новая пустая точка");
-
-// basePointRepository.removeBasePoint(-1);
-
-// showBasePointRepository("удалёна последняя точка");
-
-//------region test BasePointService----
-
+//#region region test BasePointService
 let basePointService = new BasePointService();
-
-basePointService.loadDemoRepository();
-
-// createDemoBasePointService();
-
+createDemoBasePointService();
 showBasePointService("Сервис демо создан");
-
-// basePointService.sortByName();
-
-// showBasePointService("отсортировано по имени содержимое");
-
-// let linesArray = basePointService.getLinesArray();
-
-// showLinesAray("Массив строк в формате 'kat'", linesArray);
-
-// basePointService.removeBasePoint(0);
-
-// showBasePointService("удалена первая точка");
-
-// basePointService.addNewBasePoint();
-// basePointService.saveBasePointName(-1, "Шахты");
-
-// showBasePointService("добавлена точка с названием 'Шахты'");
-
-// basePointService.addNewBasePoint();
-// basePointService.saveBasePointName(-1, "Артём");
-
-// showBasePointService("добавлена точка с названием 'Артём'");
-
-// basePointService.sortByName();
-
-// showBasePointService("отсортировано по имени содержимое");
-
-// basePointService.clearAll();
-
-// showBasePointService("репозиторий очищен");
+basePointService.sortByName();
+showBasePointService("отсортировано по имени содержимое");
+let linesArray = basePointService.getLinesArray();
+showLinesAray("Массив строк в формате 'kat'", linesArray);
+basePointService.removeBasePoint(0);
+showBasePointService("удалена первая точка");
+basePointService.addNewBasePoint();
+basePointService.saveBasePointName(-1, "Шахты");
+showBasePointService("добавлена точка с названием 'Шахты'");
+basePointService.addNewBasePoint();
+basePointService.saveBasePointName(-1, "Артём");
+showBasePointService("добавлена точка с названием 'Артём'");
+basePointService.sortByName();
+showBasePointService("отсортировано по имени содержимое");
+basePointService.clearAll();
+showBasePointService("репозиторий очищен");
+//#endregion
 
 /**
  * Displays message and content of repository by basePointService methods

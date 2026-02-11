@@ -1,18 +1,21 @@
 import { BasePoint } from "../model/BasePoint.js";
 
 /**
- * Provides methods for working with a collection of basepoints
+ * Provides methods for working with a collection of base points
+ * @author Nizovkin_A.V.
  */
 export class BasePointRepository {
+    #basePoints;
+
     constructor() {
-        this.basePoints = new Array();
+        this.#basePoints = new Array();
     }
 
     /**
      * Clears repository
      */
     clearAll() {
-        this.basePoints = new Array();
+        this.#basePoints = new Array();
     }
 
     /**
@@ -20,7 +23,7 @@ export class BasePointRepository {
      * @returns {number}
      */
     size() {
-        return this.basePoints.length;
+        return this.#basePoints.length;
     }
 
     /**
@@ -28,7 +31,7 @@ export class BasePointRepository {
      */
     addNewBasePoint() {
         let basePoint = new BasePoint();
-        this.basePoints.push(basePoint);
+        this.#basePoints.push(basePoint);
     }
 
     /**
@@ -36,8 +39,8 @@ export class BasePointRepository {
      * @param {number} index 
      */
     removeBasePoint(index) {
-        if (index < this.basePoints.length) {
-            this.basePoints.splice(index, 1);
+        if (index < this.#basePoints.length) {
+            this.#basePoints.splice(index, 1);
         }
     }
 
@@ -45,7 +48,7 @@ export class BasePointRepository {
      * Sorts by name repository
      */
     sortByName() {
-        this.basePoints.sort((a, b) => {
+        this.#basePoints.sort((a, b) => {
             if (a.pointName > b.pointName) return 1;
             if (a.pointName < b.pointName) return -1;
             return 0;
@@ -58,8 +61,8 @@ export class BasePointRepository {
      * @returns {string}
      */
     getBasePointName(index) {
-        if (index < this.basePoints.length) {
-            return this.basePoints.at(index).pointName;
+        if (index < this.#basePoints.length) {
+            return this.#basePoints.at(index).pointName;
         }
     }
 
@@ -69,8 +72,8 @@ export class BasePointRepository {
      * @param {string} pointName 
      */
     saveBasePointName(index, pointName) {
-        if (index < this.basePoints.length) {
-            this.basePoints.at(index).pointName = pointName;
+        if (index < this.#basePoints.length) {
+            this.#basePoints.at(index).pointName = pointName;
         }
     }
 
@@ -80,8 +83,8 @@ export class BasePointRepository {
      * @returns {string}
      */
     getBasePointX(index) {
-        if (index < this.basePoints.length) {
-            return this.basePoints.at(index).pointX;
+        if (index < this.#basePoints.length) {
+            return this.#basePoints.at(index).pointX;
         }
     }
 
@@ -91,8 +94,8 @@ export class BasePointRepository {
      * @param {string} pointX 
      */
     saveBasePointX(index, pointX) {
-        if (index < this.basePoints.length) {
-            this.basePoints.at(index).pointX = pointX;
+        if (index < this.#basePoints.length) {
+            this.#basePoints.at(index).pointX = pointX;
         }
     }
 
@@ -102,8 +105,8 @@ export class BasePointRepository {
      * @returns {string}
      */
     getBasePointY(index) {
-        if (index < this.basePoints.length) {
-            return this.basePoints.at(index).pointY;
+        if (index < this.#basePoints.length) {
+            return this.#basePoints.at(index).pointY;
         }
     }
 
@@ -113,8 +116,8 @@ export class BasePointRepository {
      * @param {string} pointY
      */
     saveBasePointY(index, pointY) {
-        if (index < this.basePoints.length) {
-            this.basePoints.at(index).pointY = pointY;
+        if (index < this.#basePoints.length) {
+            this.#basePoints.at(index).pointY = pointY;
         }
     }
 
@@ -124,8 +127,8 @@ export class BasePointRepository {
      * @returns {string}
      */
     getBasePointZ(index) {
-        if (index < this.basePoints.length) {
-            return this.basePoints.at(index).pointZ;
+        if (index < this.#basePoints.length) {
+            return this.#basePoints.at(index).pointZ;
         }
     }
 
@@ -135,8 +138,8 @@ export class BasePointRepository {
      * @param {string} pointZ 
      */
     saveBasePointZ(index, pointZ) {
-        if (index < this.basePoints.length) {
-            this.basePoints.at(index).pointZ = pointZ;
+        if (index < this.#basePoints.length) {
+            this.#basePoints.at(index).pointZ = pointZ;
         }
     }
 

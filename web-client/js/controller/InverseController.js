@@ -1,13 +1,24 @@
 import {InverseService} from '../service/InverseService.js';
 
 /**
- * 
+ * Displays the Inverse Geodetic Task screen and 
+ * adds event handlers for its components.
+ * @author Nizovkin_A.V.
+ * @copyright 2026 Nizovkin_A.V.
  */
 export class InverseController {
+  #inverseService;
+  #basePointService;
+  #insertCoordinateToBase;
+
+  /**
+   * @constructor
+   * @param {BasePointService} basePointService 
+   */
     constructor(basePointService) {
-        this.inverseService = new InverseService();
-        this.basePointService = basePointService;
-        this.insertCoordinateToBase = true;
+        this.#inverseService = new InverseService();
+        this.#basePointService = basePointService;
+        this.#insertCoordinateToBase = true;
     }
 
     /**
@@ -84,12 +95,12 @@ export class InverseController {
       
         `;
 
-        this.setData();
-        this.setResult();
-        this.setListBasePoints();
+        this.#setData();
+        this.#setResult();
+        this.#setListBasePoints();
 
-        this.addInverseToolbarListeners();
-        this.addInversePanelListeners();
+        this.#addInverseToolbarListeners();
+        this.#addInversePanelListeners();
 
 
 
@@ -98,55 +109,55 @@ export class InverseController {
     /**
      * Sets data of gui components from model
      */
-    setData() {
+    #setData() {
 
-      document.getElementById("inverse-base-x").value = this.inverseService.getBaseX();
+      document.getElementById("inverse-base-x").value = this.#inverseService.getBaseX();
 
-      document.getElementById("inverse-base-y").value = this.inverseService.getBaseY();
+      document.getElementById("inverse-base-y").value = this.#inverseService.getBaseY();
 
-      document.getElementById("inverse-base-z").value = this.inverseService.getBaseZ();
+      document.getElementById("inverse-base-z").value = this.#inverseService.getBaseZ();
 
-      document.getElementById("inverse-target-x").value = this.inverseService.getTargetX();
+      document.getElementById("inverse-target-x").value = this.#inverseService.getTargetX();
 
-      document.getElementById("inverse-target-y").value = this.inverseService.getTargetY();
+      document.getElementById("inverse-target-y").value = this.#inverseService.getTargetY();
 
-      document.getElementById("inverse-target-z").value = this.inverseService.getTargetZ();
+      document.getElementById("inverse-target-z").value = this.#inverseService.getTargetZ();
 
     }
 
     /**
      * Sets result of gui components from model
      */
-    setResult() {
+    #setResult() {
 
-      document.getElementById("inverse-direction").innerHTML = this.inverseService.getDirection();
+      document.getElementById("inverse-direction").innerHTML = this.#inverseService.getDirection();
 
-      document.getElementById("inverse-hor-distance").innerHTML = this.inverseService.getHorDistance();
+      document.getElementById("inverse-hor-distance").innerHTML = this.#inverseService.getHorDistance();
 
-      document.getElementById("inverse-inc-distance").innerHTML = this.inverseService.getInclinedDistance();
+      document.getElementById("inverse-inc-distance").innerHTML = this.#inverseService.getInclinedDistance();
 
-      document.getElementById("inverse-tilt").innerHTML = this.inverseService.getTiltAngle();
+      document.getElementById("inverse-tilt").innerHTML = this.#inverseService.getTiltAngle();
 
-      document.getElementById("inverse-elevation").innerHTML = this.inverseService.getElevation();
+      document.getElementById("inverse-elevation").innerHTML = this.#inverseService.getElevation();
 
     }
 
     /**
      * Creates and adds a list of base stations to the DOM
      */
-    setListBasePoints() {
+    #setListBasePoints() {
       const panelInverse = document.getElementById("inverse-panel");
       const listBasePoints = document.createElement('div');
 
       listBasePoints.className = "pop-up";
       listBasePoints.id = "list-base-point";
 
-      if (this.basePointService.size() > 0) {
-        for (let i = 0; i < this.basePointService.size(); i++) {
+      if (this.#basePointService.size() > 0) {
+        for (let i = 0; i < this.#basePointService.size(); i++) {
           let row = document.createElement('div');
           row.className = "menu-item";
           row.setAttribute("data-base-point-id", i);
-          row.innerHTML = this.basePointService.getBasePointName(i);
+          row.innerHTML = this.#basePointService.getBasePointName(i);
           listBasePoints.append(row);
         }
       }
@@ -156,19 +167,19 @@ export class InverseController {
     /**
      * Adds event listeners for inverse-toolbar
      */
-    addInverseToolbarListeners() {
+    #addInverseToolbarListeners() {
       document.getElementById("inverse-toolbar").addEventListener('click', (event) => {
 
         switch(event.target.id) {
 
           case "inverse-clear":
-            this.inverseService.clearAll();
-            this.setData();
-            this.setResult();              
+            this.#inverseService.clearAll();
+            this.#setData();
+            this.#setResult();              
             break;
 
           case "inverse-run":
-            this.inverseService.solveInverseTask().then(() => this.setResult());
+            this.#inverseService.solveInverseTask().then(() => this.#setResult());
             break;
         }
       });
@@ -178,7 +189,7 @@ export class InverseController {
     /**
      * Adds event listeners for inverse-panel
      */
-    addInversePanelListeners() {
+    #addInversePanelListeners() {
       const panelInverse = document.getElementById("inverse-panel");
 
       panelInverse.addEventListener('click', (event) => {
@@ -195,17 +206,17 @@ export class InverseController {
 
           let basePointId = +element.dataset.basePointId;
 
-          if (this.insertCoordinateToBase) {
-            this.inverseService.saveBaseX(this.basePointService.getBasePointX(basePointId));
-            this.inverseService.saveBaseY(this.basePointService.getBasePointY(basePointId));
-            this.inverseService.saveBaseZ(this.basePointService.getBasePointZ(basePointId));
+          if (this.#insertCoordinateToBase) {
+            this.#inverseService.saveBaseX(this.#basePointService.getBasePointX(basePointId));
+            this.#inverseService.saveBaseY(this.#basePointService.getBasePointY(basePointId));
+            this.#inverseService.saveBaseZ(this.#basePointService.getBasePointZ(basePointId));
           } else {
-            this.inverseService.saveTargetX(this.basePointService.getBasePointX(basePointId));
-            this.inverseService.saveTargetY(this.basePointService.getBasePointY(basePointId));
-            this.inverseService.saveTargetZ(this.basePointService.getBasePointZ(basePointId));
+            this.#inverseService.saveTargetX(this.#basePointService.getBasePointX(basePointId));
+            this.#inverseService.saveTargetY(this.#basePointService.getBasePointY(basePointId));
+            this.#inverseService.saveTargetZ(this.#basePointService.getBasePointZ(basePointId));
           }
 
-          this.setData();
+          this.#setData();
 
         }
 
@@ -218,7 +229,7 @@ export class InverseController {
             listBasePoints.style.left = `${toggleRect.left - panelInverseRect.left + window.scrollX}px`;
             listBasePoints.classList.toggle("open");
             overlay.classList.toggle("open");
-            this.insertCoordinateToBase = true;
+            this.#insertCoordinateToBase = true;
             break;
 
           case "inverse-target-button":
@@ -226,7 +237,7 @@ export class InverseController {
             listBasePoints.style.left = `${toggleRect.left - panelInverseRect.left + window.scrollX}px`;
             listBasePoints.classList.toggle("open");
             overlay.classList.toggle("open");
-            this.insertCoordinateToBase = false;
+            this.#insertCoordinateToBase = false;
             break;
         }
       });
@@ -237,27 +248,27 @@ export class InverseController {
         switch(element.id) {
 
           case "inverse-base-x":
-            this.inverseService.saveBaseX(element.value);
+            this.#inverseService.saveBaseX(element.value);
             break;
 
           case "inverse-base-y":
-            this.inverseService.saveBaseY(element.value);
+            this.#inverseService.saveBaseY(element.value);
             break;
 
           case "inverse-base-z":
-            this.inverseService.saveBaseZ(element.value);
+            this.#inverseService.saveBaseZ(element.value);
             break;
 
           case "inverse-target-x":
-            this.inverseService.saveTargetX(element.value);
+            this.#inverseService.saveTargetX(element.value);
             break;
 
           case "inverse-target-y":
-            this.inverseService.saveTargetY(element.value);
+            this.#inverseService.saveTargetY(element.value);
             break;
 
           case "inverse-target-z":
-            this.inverseService.saveTargetZ(element.value);
+            this.#inverseService.saveTargetZ(element.value);
             break;
 
         }

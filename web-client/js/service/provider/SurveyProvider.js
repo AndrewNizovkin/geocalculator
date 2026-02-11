@@ -3,6 +3,8 @@ import { TextFileReader } from "./TextFileReader.js";
 /**
  * This class provides methods 
  * for getting data from external sources.
+ * @author Nizovkin_A.V.
+ * @copyright 2026 Nizovkin_A.V.
  */
 export class SurveyProvider {
 

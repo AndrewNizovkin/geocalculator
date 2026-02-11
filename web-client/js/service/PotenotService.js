@@ -5,16 +5,21 @@ import { PotenotProvider } from './provider/PotenotProvider.js';
 
 /**
  * This class provides methods for working with the potenot task model.
+ * @author Nizovkin_A.V.
+ * @copyright 2026 Nizovkin_A.V.
  */
 export class PotenotService {
+    #potenot;
+    #potenotMapper;
+    #potenotProvider;
 
     /**
      * @constructor
      */
     constructor() {
-        this.potenot = new Potenot();
-        this.potenotMapper = new PotenotMapper();
-        this.potenotProvider = new PotenotProvider();
+        this.#potenot = new Potenot();
+        this.#potenotMapper = new PotenotMapper();
+        this.#potenotProvider = new PotenotProvider();
 
     }
 
@@ -22,17 +27,17 @@ export class PotenotService {
      * Sets the initial values of the potenot model fields
      */
     clearAll() {
-        this.potenot.firstX = "0.000";
-        this.potenot.firstY = "0.000";
-        this.potenot.firstDirection = "0.000";
-        this.potenot.secondX = "0.000";
-        this.potenot.secondY = "0.000";
-        this.potenot.secondDirection = "0.000";
-        this.potenot.thirdX = "0.000";
-        this.potenot.thirdY = "0.000";
-        this.potenot.thirdDirection = "0.000";                
-        this.potenot.baseX = "";
-        this.potenot.baseY = "";
+        this.#potenot.firstX = "0.000";
+        this.#potenot.firstY = "0.000";
+        this.#potenot.firstDirection = "0.000";
+        this.#potenot.secondX = "0.000";
+        this.#potenot.secondY = "0.000";
+        this.#potenot.secondDirection = "0.000";
+        this.#potenot.thirdX = "0.000";
+        this.#potenot.thirdY = "0.000";
+        this.#potenot.thirdDirection = "0.000";                
+        this.#potenot.baseX = "";
+        this.#potenot.baseY = "";
         
 
     }
@@ -42,13 +47,13 @@ export class PotenotService {
      */
     async solvePotenotTask() {
 
-        let potenotRequests = this.potenotMapper.potenotToPotenotRequest(this.potenot);
+        let potenotRequests = this.#potenotMapper.potenotToPotenotRequest(this.#potenot);
 
-        await this.potenotProvider.getPotenotResponse(potenotRequests).then(response => {
-            let potenotResponse = this.potenotMapper.responseToPotenotResponse(response);
+        await this.#potenotProvider.getPotenotResponse(potenotRequests).then(response => {
+            let potenotResponse = this.#potenotMapper.responseToPotenotResponse(response);
 
-            this.potenot.baseX = UnitsConverter.millimeterToMeter(potenotResponse?.pointX);
-            this.potenot.baseY = UnitsConverter.millimeterToMeter(potenotResponse?.pointY);
+            this.#potenot.baseX = UnitsConverter.millimeterToMeter(potenotResponse?.pointX);
+            this.#potenot.baseY = UnitsConverter.millimeterToMeter(potenotResponse?.pointY);
         });
 
     }
@@ -58,7 +63,7 @@ export class PotenotService {
      * @param {string} value coordinate X of first point in meters
      */
     saveFirstX(value) {
-        this.potenot.firstX = value;
+        this.#potenot.firstX = value;
     }
 
     /**
@@ -66,7 +71,7 @@ export class PotenotService {
      * @param {string} value coordinate Y of first point in meters
      */
     saveFirstY(value) {
-        this.potenot.firstY = value;
+        this.#potenot.firstY = value;
     }    
 
     /**
@@ -74,7 +79,7 @@ export class PotenotService {
      * @param {string} value direction from base to first point in d.mmss format
      */
     saveFirstDirection(value) {
-        this.potenot.firstDirection = value;
+        this.#potenot.firstDirection = value;
     }    
 
     /**
@@ -82,7 +87,7 @@ export class PotenotService {
      * @param {string} value coordinate X of second point in meters
      */
     saveSecondX(value) {
-        this.potenot.secondX = value;
+        this.#potenot.secondX = value;
     }
 
     /**
@@ -90,7 +95,7 @@ export class PotenotService {
      * @param {string} value coordinate Y of second point in meters
      */
     saveSecondY(value) {
-        this.potenot.secondY = value;
+        this.#potenot.secondY = value;
     }    
 
     /**
@@ -98,7 +103,7 @@ export class PotenotService {
      * @param {string} value direction from base to second point in d.mmss format
      */
     saveSecondDirection(value) {
-        this.potenot.secondDirection = value;
+        this.#potenot.secondDirection = value;
     }    
 
     /**
@@ -106,7 +111,7 @@ export class PotenotService {
      * @param {string} value coordinate X of third point in meters
      */
     saveThirdX(value) {
-        this.potenot.thirdX = value;
+        this.#potenot.thirdX = value;
     }
 
     /**
@@ -114,7 +119,7 @@ export class PotenotService {
      * @param {string} value coordinate Y of third point in meters
      */
     saveThirdY(value) {
-        this.potenot.thirdY = value;
+        this.#potenot.thirdY = value;
     }    
 
     /**
@@ -122,7 +127,7 @@ export class PotenotService {
      * @param {string} value direction from base to third point in d.mmss format
      */
     saveThirdDirection(value) {
-        this.potenot.thirdDirection = value;
+        this.#potenot.thirdDirection = value;
     }    
 
     /**
@@ -130,7 +135,7 @@ export class PotenotService {
      * @param {string} value coordinate X of base point in meters
      */
     saveBaseX(value) {
-        this.potenot.baseX = value;
+        this.#potenot.baseX = value;
     }
 
     /**
@@ -138,7 +143,7 @@ export class PotenotService {
      * @param {string} value coordinate Y of base point in meters
      */
     saveBaseY(value) {
-        this.potenot.baseY = value;
+        this.#potenot.baseY = value;
     }
     
     /**
@@ -146,7 +151,7 @@ export class PotenotService {
      * @returns {string} coordinate X of first point in meters
      */
     getFirstX() {
-        return this.potenot.firstX;
+        return this.#potenot.firstX;
     }
 
     /**
@@ -154,7 +159,7 @@ export class PotenotService {
      * @returns {string} coordinate Y of first point in meters
      */
     getFirstY() {
-        return this.potenot.firstY;
+        return this.#potenot.firstY;
     }
 
     /**
@@ -162,7 +167,7 @@ export class PotenotService {
      * @returns {string} direction from base to first point in d.mmss format
      */
     getFirstDirection() {
-        return this.potenot.firstDirection;
+        return this.#potenot.firstDirection;
     }
 
     /**
@@ -170,7 +175,7 @@ export class PotenotService {
      * @returns {string} coordinate X of second point in meters
      */
     getSecondX() {
-        return this.potenot.secondX;
+        return this.#potenot.secondX;
     }
 
     /**
@@ -178,7 +183,7 @@ export class PotenotService {
      * @returns {string} coordinate Y of second point in meters
      */
     getSecondY() {
-        return this.potenot.secondY;
+        return this.#potenot.secondY;
     }
 
     /**
@@ -186,7 +191,7 @@ export class PotenotService {
      * @returns {string} direction from base to second point in d.mmss format
      */
     getSecondDirection() {
-        return this.potenot.secondDirection;
+        return this.#potenot.secondDirection;
     }
 
     /**
@@ -194,7 +199,7 @@ export class PotenotService {
      * @returns {string} coordinate X of third point in meters
      */
     getThirdX() {
-        return this.potenot.thirdX;
+        return this.#potenot.thirdX;
     }
 
     /**
@@ -202,7 +207,7 @@ export class PotenotService {
      * @returns {string} coordinate Y of third point in meters
      */
     getThirdY() {
-        return this.potenot.thirdY;
+        return this.#potenot.thirdY;
     }
 
     /**
@@ -210,7 +215,7 @@ export class PotenotService {
      * @returns {string} direction from base to third point in d.mmss format
      */
     getThirdDirection() {
-        return this.potenot.thirdDirection;
+        return this.#potenot.thirdDirection;
     }
 
     /**
@@ -218,7 +223,7 @@ export class PotenotService {
      * @returns {string} coordinate X of base point in meters
      */
     getBaseX() {
-        return this.potenot.baseX;
+        return this.#potenot.baseX;
     }
 
     /**
@@ -226,8 +231,7 @@ export class PotenotService {
      * @returns {string} coordinate Y of base point in meters
      */
     getBaseY() {
-        return this.potenot.baseY;
+        return this.#potenot.baseY;
     }
-
 
 }
