@@ -35,7 +35,7 @@ export class PotenotController {
 
       <div class="panel-potenot" id="potenot-panel">
 
-        <div class="panel-potenot-basis">
+        <div class="panel-potenot-basis" id="panel-potenot-basis">
 
           <div class="panel-title">Исходные данные</div>
 
@@ -135,7 +135,7 @@ export class PotenotController {
           listBasePoints.append(row);
         }
       }
-      document.getElementById("potenot-panel").append(listBasePoints);
+      document.getElementById("panel-potenot-basis").append(listBasePoints);
     }
 
 

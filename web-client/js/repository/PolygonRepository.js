@@ -218,4 +218,27 @@ export class PolygonRepository {
         if (stationIndex > this.#polygonStations.length) return;        
         this.#polygonStations.at(stationIndex).stationZ = stationZ;
     }
+
+    /**
+     * Gets status of the polygon station 
+     * with the specified index
+     * @param {number} stationIndex 
+     * @returns {boolean}
+     */
+    getStatus(stationIndex) {
+        if (stationIndex > this.#polygonStations.length) return null;
+        return this.#polygonStations.at(stationIndex).status;
+    }
+
+    /**
+     * Saves status of the polygon station 
+     * with the specified index
+     * @param {number} indexStation 
+     * @param {boolean} status 
+     * @returns 
+     */
+    saveStatus(stationIndex, status) {
+        if (stationIndex > this.#polygonStations.length) return;        
+        this.#polygonStations.at(stationIndex).status = status;
+    }    
 }

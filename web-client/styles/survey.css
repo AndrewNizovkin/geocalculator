@@ -8,6 +8,8 @@
 .panel-survey {
     display: flex;
     flex-direction: column;
+    height: 90%;
+    overflow: auto;
 }
 
 table > caption {

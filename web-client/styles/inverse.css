@@ -4,6 +4,8 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    height: 90%;
+    overflow: auto;
 }
 
 .panel-inverse-base, .panel-inverse-target, .panel-inverse-result, .panel-inverse {

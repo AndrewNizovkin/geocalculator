@@ -24,7 +24,7 @@ showPolygonService("После создания нового polygonService");
 fillDemoPolygonService();
 showPolygonService("Заполнил демо данными");
 let linesArray = polygonService.getLinesPolArray();
-showLinesAray("файл kat:", linesArray);
+showLinesAray("файл pol:", linesArray);
 polygonService.insertNewStation(0);
 showPolygonService("Вставил пустую в начало");
 polygonService.removeStation(5);
@@ -64,6 +64,7 @@ function showPolygonService(message) {
             stationX: ${polygonService.getStationX(i)}<br>
             stationY: ${polygonService.getStationY(i)}<br>
             stationZ: ${polygonService.getStationZ(i)}<br>
+            status: ${polygonService.getStatus(i)}<br>
             `;
             stations.append(station);
         }
@@ -100,6 +101,7 @@ function showPolygonRepository(message) {
             stationX: ${polygonRepository.getStationX(i)}<br>
             stationY: ${polygonRepository.getStationY(i)}<br>
             stationZ: ${polygonRepository.getStationZ(i)}<br>
+            status: ${polygonRepository.getStatus(i)}<br>
             `;
             stations.append(station);
         }
@@ -124,10 +126,12 @@ function fillDemoPolygonRepository() {
             polygonRepository.saveStationX(-1, "478676.113");
             polygonRepository.saveStationY(-1, "2297003.862");
             polygonRepository.saveStationZ(-1, "12.630");
+            polygonRepository.saveStatus(-1, true);
         } else {
             polygonRepository.saveStationX(-1, "Not");
             polygonRepository.saveStationY(-1, "Not");
             polygonRepository.saveStationZ(-1, "Not");
+            polygonRepository.saveStatus(-1, false);
         }
         
     }
@@ -150,10 +154,12 @@ function fillDemoPolygonService() {
             polygonService.saveStationX(-1, "478676.113");
             polygonService.saveStationY(-1, "2297003.862");
             polygonService.saveStationZ(-1, "12.630");
+            polygonService.saveStatus(-1, true);
         } else {
             polygonService.saveStationX(-1, "Not");
             polygonService.saveStationY(-1, "Not");
             polygonService.saveStationZ(-1, "Not");
+            polygonService.saveStatus(-1, false);
         }
         
     }

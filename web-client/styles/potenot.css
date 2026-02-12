@@ -3,12 +3,17 @@
 .panel-potenot {
     display: flex;
     flex-direction: column;
-    position: relative;
+    height: 90%;
+    overflow: auto;
 }
 
 .panel-potenot-basis, .panel-potenot-result {
     display: flex;
     flex-direction: column;
+}
+
+.panel-potenot-basis {
+    position: relative;
 }
 
 .panel-potenot, .panel-potenot-basis, .panel-potenot-result {
@@ -18,7 +23,7 @@
     /* color: var(--text-color); */
 }
 
-.panel-potenot, .panel-potenot-basis, .panel-potenot-result {
+.panel-potenot-basis, .panel-potenot-result {
     flex: 1 1 auto;
 }
 

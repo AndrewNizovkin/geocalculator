@@ -34,7 +34,7 @@ export class DirectController {
 
     <div class="panel-direct" id="direct-panel">
 
-      <div class="panel-direct-basis">
+      <div class="panel-direct-basis" id="panel-direct-basis">
 
         <div class="panel-title">Параметры базиса</div>
 
@@ -290,7 +290,7 @@ export class DirectController {
    * Creates and adds a list of base stations to the DOM
    */
   #setListBasePoints() {
-    const panelDirect = document.getElementById("direct-panel");
+    const panelDirectBasis = document.getElementById("panel-direct-basis");
     const listBasePoints = document.createElement('div');
 
     listBasePoints.className = "pop-up";
@@ -305,7 +305,7 @@ export class DirectController {
         listBasePoints.append(row);
       }
     }
-    panelDirect.append(listBasePoints);
+    panelDirectBasis.append(listBasePoints);
   }
 
 }

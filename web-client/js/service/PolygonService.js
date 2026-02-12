@@ -39,7 +39,7 @@ export class PolygonService {
     * @returns {string[]}
     */
     getLinesPolArray() {
-        return this.#polygonMapper.poligonRepositoryToArray(this.#polygonRepository);
+        return this.#polygonMapper.polygonRepositoryToArray(this.#polygonRepository);
     }
 
     /**
@@ -56,7 +56,6 @@ export class PolygonService {
             console.error(err.message);
         }
     }
-
 
     /**
      * Adds new instance of PolygonStation
@@ -233,5 +232,27 @@ export class PolygonService {
     saveStationZ(stationIndex, stationZ) {
         this.#polygonRepository.saveStationZ(stationIndex, stationZ);
     }
+
+    /**
+     * Gets status of the polygon station 
+     * with the specified index
+     * @param {number} stationIndex 
+     * @returns {boolean}
+     */
+    getStatus(stationIndex) {
+        return this.#polygonRepository.getStatus(stationIndex);
+
+    }
+
+    /**
+     * Saves status of the polygon station 
+     * with the specified index
+     * @param {number} indexStation 
+     * @param {boolean} status 
+     * @returns 
+     */
+    saveStatus(stationIndex, status) {
+        this.#polygonRepository.saveStatus(stationIndex, status);
+    }        
 
 }

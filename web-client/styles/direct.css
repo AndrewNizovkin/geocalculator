@@ -3,12 +3,14 @@
 .panel-direct {
     display: flex;
     flex-direction: column;
-    position: relative;
+    height: 90%;
+    overflow: auto;
 }
 
 .panel-direct-basis {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 
@@ -19,7 +21,7 @@
     /* color: var(--text-color); */
 }
 
-.panel-direct, .panel-direct-basis, .panel-direct-measurement, .panel-direct-result {
+.panel-direct-basis, .panel-direct-measurement, .panel-direct-result {
     flex: 1 1 auto;
 }
 

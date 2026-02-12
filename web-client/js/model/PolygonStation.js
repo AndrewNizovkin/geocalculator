@@ -11,6 +11,7 @@ export class PolygonStation {
         this.stationX = "Not";
         this.stationY = "Not";
         this.stationZ = "Not";
+        this.status = false;
     }
 
 }

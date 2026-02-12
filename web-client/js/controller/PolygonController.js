@@ -141,8 +141,8 @@ export class PolygonContoller {
             const row = document.createElement('tr');
             row.setAttribute("data-row-id", i);
 
-            let status = false;
-            if (this.#polygonService.getStationX(i) != "Not") status = true;
+            let status = this.#polygonService.getStatus(i);
+            // if (this.#polygonService.getStationX(i) != "Not") status = true;
             
             let cell = document.createElement('td');
             cell.className = "line";
@@ -211,7 +211,7 @@ export class PolygonContoller {
             if (status) {
                 if ( (i > 1) && ( i < this.#polygonService.size() - 2) ) {
                     this.#polygonService.saveStationX(i, "Not");
-                    status = false;
+                    this.#polygonService.saveStatus(false);
                 } else {
                     item.value = this.#polygonService.getStationX(i);
                     item.disabled = false;
@@ -231,7 +231,7 @@ export class PolygonContoller {
             if (status) {
                 if ( (i > 1) && ( i < this.#polygonService.size() - 2) ) {
                     this.#polygonService.saveStationY(i, "Not");
-                    status = false;
+                    this.#polygonService.saveStatus(false);
                 } else {
                     item.value = this.#polygonService.getStationY(i);
                     item.disabled = false;
@@ -251,7 +251,7 @@ export class PolygonContoller {
             if (status) {
                 if ( (i > 1) && ( i < this.#polygonService.size() - 2) ) {
                     this.#polygonService.saveStationZ(i, "Not");
-                    status = false;
+                    this.#polygonService.saveStatus(false);
                 } else {
                     item.value = this.#polygonService.getStationZ(i);
                     item.disabled = false;
@@ -269,7 +269,7 @@ export class PolygonContoller {
             item.setAttribute("data-station-id", i);
             item.setAttribute("data-property", "status");
             // item.size = "10";
-            if (status) item.setAttribute("checked", true);
+            if (status) item.setAttribute("checked", this.#polygonService.getStatus(i));
             if ( (i > 1) && ( i < this.#polygonService.size() - 2) ) {
                 item.unchecked = true;
                 item.disabled = true;
@@ -482,11 +482,13 @@ export class PolygonContoller {
                             this.#polygonService.saveStationX(+elem.dataset.stationId, "0.000");
                             this.#polygonService.saveStationY(+elem.dataset.stationId, "0.000");
                             this.#polygonService.saveStationZ(+elem.dataset.stationId, "0.000");
+                            this.#polygonService.saveStatus(+elem.dataset.stationId, true);
 
                         } else {
                             this.#polygonService.saveStationX(+elem.dataset.stationId, "Not");
                             this.#polygonService.saveStationY(+elem.dataset.stationId, "Not");
                             this.#polygonService.saveStationZ(+elem.dataset.stationId, "Not");
+                            this.#polygonService.saveStatus(+elem.dataset.stationId, false);
 
                         }
                         this.#setListPolygonStations();

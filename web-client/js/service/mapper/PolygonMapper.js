@@ -12,7 +12,7 @@ export class PolygonMapper {
      * @param {PolygonRepository} polygonRepository 
      * @returns {string[]}
      */
-    poligonRepositoryToArray(polygonRepository) {
+    polygonRepositoryToArray(polygonRepository) {
         const linesArray = new Array();
         let line = '';
 
@@ -22,9 +22,17 @@ export class PolygonMapper {
             line += `${polygonRepository.getHorAngle(i)} `;
             line += `${polygonRepository.getHorDistance(i)} `;
             line += `${polygonRepository.getElevation(i)} `;
-            line += `${polygonRepository.getStationX(i)} `;
-            line += `${polygonRepository.getStationY(i)} `;
-            line += `${polygonRepository.getStationZ(i)}`;
+            if (polygonRepository.getStatus(i)) {
+                line += `${polygonRepository.getStationX(i)} `;
+                line += `${polygonRepository.getStationY(i)} `;
+                line += `${polygonRepository.getStationZ(i)}`;
+            } else {
+                line += `Not `;
+                line += `Not `;
+                line += `Not`;
+
+            }
+            
             linesArray.push(line);
         }
 
@@ -49,6 +57,11 @@ export class PolygonMapper {
                 polygonRepository.saveStationX(-1, itemsArray.at(4));
                 polygonRepository.saveStationY(-1, itemsArray.at(5));
                 polygonRepository.saveStationZ(-1, itemsArray.at(6));
+                if ((itemsArray.at(4) == "Not") || (itemsArray.at(5) == "Not") || (itemsArray.at(6) == "Not")) {
+                    polygonRepository.saveStatus(-1, false);
+                } else {
+                    polygonRepository.saveStatus(-1, true);
+                }
             }
         }
 
