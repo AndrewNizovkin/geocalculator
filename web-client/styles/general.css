@@ -71,6 +71,7 @@ input[type="text"] {
     color: var(--text-color);
     flex: 1 1 12em;
     padding: 2px;
+    overflow: auto;
 }
 
 .open {
@@ -106,6 +107,7 @@ input[type="text"] {
     flex-direction: column;
     border: 1px solid black;
     border-radius: 5px;
+    /* overflow: auto; */
 }
 
 .frame-label {

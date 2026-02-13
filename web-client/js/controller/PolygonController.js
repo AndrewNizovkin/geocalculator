@@ -131,6 +131,51 @@ export class PolygonContoller {
     }
 
     /**
+     * Loads page polygon report to content
+     */
+    #loadReportPolygon() {
+        const content = document.getElementById("content");
+
+        content.innerHTML = `
+            <div class="panel" id="panel-plan-report">
+                <div class="panel-title">Ведомость вычисления координат</div>
+                <div class="frame">
+                    <textarea class="text-report" cols="130" id="text-plan-report" placeholder="Ведомость уравнивания плановая"></textarea>
+                </div>
+
+            </div>
+
+            <div class="panel" id="panel-level-report">
+                <div class="panel-title">Ведомость вычисления высот</div>
+                <div class="frame">
+                    <textarea class="text-report" id="text-level-report" placeholder="Ведомость уравнивания высотная"></textarea>
+                </div>
+
+            </div>
+
+            <div class="panel" id="panel-catalog-pol-report">
+
+                <div class="panel" id="panel-catalog-report">
+                    <div class="panel-title">Каталог координат точек полигона</div>
+                    <div class="frame">
+                        <textarea class="text-report" id="text-catalog-report" placeholder="Каталог координат тахеометрического хода"></textarea>
+                    </div>
+
+                </div>
+
+                <div class="panel" id="panel-pol-report">
+                    <div class="panel-title">Исходные данные (*.pol)</div>
+                    <div class="frame">
+                        <textarea class="text-report" id="text-pol-report" placeholder="Исходные данные в формате '*.pol'"></textarea>
+                    </div>
+
+                </div>
+            </div>
+        `;
+
+    }
+
+    /**
      * Gets list of table row for table-polygon
      */
     #setListPolygonStations() {
@@ -417,6 +462,7 @@ export class PolygonContoller {
                     break;
 
                 case "polygon-view":
+                    this.#loadReportPolygon();
                     break;
             }
             
