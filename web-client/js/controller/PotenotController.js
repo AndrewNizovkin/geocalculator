@@ -28,14 +28,14 @@ export class PotenotController {
         let content  = document.getElementById("content");
 
         content.innerHTML = `
-      <div class="toolbar" id="potenot-toolbar">
+      <div class="panel toolbar" id="potenot-toolbar">
         <div class="button clear" id="potenot-clear" title="Очистить">Очистить</div>
         <div class="button run" id="potenot-run" title="Решить задачу">Обработать</div>
       </div>
 
-      <div class="panel-potenot" id="potenot-panel">
+      <div class="panel" id="potenot-panel">
 
-        <div class="panel-potenot-basis" id="panel-potenot-basis">
+        <div class="panel" id="panel-potenot-basis">
 
           <div class="panel-title">Исходные данные</div>
 
@@ -65,7 +65,7 @@ export class PotenotController {
 
         </div>
 
-        <div class="panel-potenot-result">
+        <div class="panel" id="panel-potenot-result">
 
           <div class="panel-title">Результаты обработки</div>
 

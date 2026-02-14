@@ -29,14 +29,14 @@ export class InverseController {
         let content = document.getElementById("content");
 
         content.innerHTML = `
-      <div class="toolbar" id="inverse-toolbar">
+      <div class="panel toolbar" id="inverse-toolbar">
         <div class="button clear" id="inverse-clear" title="Очистить">Очистить</div>
         <div class="button run" id="inverse-run" title="Решить задачу">Обработать</div>
       </div>
 
-      <div class="panel-inverse" id="inverse-panel">
+      <div class="panel" id="inverse-panel">
 
-        <div class="panel-inverse-base">
+        <div class="panel" id="panel-inverse-base">
 
           <div class="panel-title toggle menu-item" id="inverse-base-button" title="Вставить из каталога">Координаты базы</div>
 
@@ -48,7 +48,7 @@ export class InverseController {
 
         </div>
 
-        <div class="panel-inverse-target">
+        <div class="panel" id="panel-inverse-target">
 
           <div class="panel-title toggle menu-item" id="inverse-target-button" title="Вставить из каталога">Координаты цели</div>
 
@@ -60,7 +60,7 @@ export class InverseController {
 
         </div>
 
-        <div class="panel-inverse-result">
+        <div class="panel" id="panel-inverse-result">
 
           <div class="panel-title">Результаты обработки</div>
 

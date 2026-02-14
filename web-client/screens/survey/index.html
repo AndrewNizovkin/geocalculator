@@ -12,7 +12,7 @@
 </head>
 <body>
 
-  <div class="content"  id="content">
+  <div class="panel content"  id="content">
     
   
     <div class="survey-toolbar" id="toolbar-survey">
@@ -27,25 +27,25 @@
       <input type="file" id="survey-import-input" accept=".txt">
     </div>
 
-    <div class="panel-survey">
+    <div class="panel" id="panel-survey">
       
-      <div class="panel-basis">
-        <div class="panel-stations">
+      <div class="panel" id="panel-basis">
+        <div class="panel" id="panel-stations">
           <div class="survey-toolbar" id="toolbar-survey-stations">
             <div class="survey-button delete" id="delete-station" title="Удалить станцию"></div>
             <div class="survey-button insert-before" id="before-station" title="Вставить перед выбранной"></div>
             <div class="survey-button insert-after" id="after-station" title="Вставить после выбранной"></div>
           </div>
-          <div class="scrollpanel-stations">
-            <ul class="list-stations" id="list-stations">
-              <li><a class="menu-item" href="#" data-station-id="0">1301</a></li>
-              <li><a class="menu-item" href="#" data-station-id="1">100</a></li>
-              <li><a class="menu-item" href="#" data-station-id="0">101</a></li>
-            </ul>
+          <div class="panel" id="scrollpanel-stations">
+            <div class="list-stations" id="list-stations">
+              <a class="menu-item" href="#" data-station-id="0">1301</a>
+              <a class="menu-item" href="#" data-station-id="1">100</a>
+              <a class="menu-item" href="#" data-station-id="0">101</a>
+            </div>
           </div>
         </div>
 
-        <div class="panel-station" id="panel-station">
+        <div class="panel" id="panel-station">
           <!--   pop-up-panel     -->
           <div class="pop-up" id="list-base-point">
             <div class="menu-item" data-base-point-id="0">1201</div>
@@ -95,13 +95,13 @@
 
       </div>
 
-      <div class="panel-measurements">
+      <div class="panel" id="panel-measurements">
         <div class="survey-toolbar" id="toolbar-survey-measurements">
           <div class="survey-button delete" id="delete-measurement" title="Удалить выбранную"></div>
           <div class="survey-button insert-before" id="before-measurement" title="Вставить перед выбранной"></div>
           <div class="survey-button insert-after" id="after-measurement" title="Вставить после выбранной"></div>
         </div>
-        <div class="scrollpanel-measurements">
+        <div class="panel" id="scrollpanel-measurements">
           <table class="table-measurements">
             <thead>
               <th>Название</th>

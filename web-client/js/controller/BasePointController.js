@@ -23,7 +23,7 @@ export class BasePointController {
         let content = document.getElementById("content");
 
         content.innerHTML = `
-      <div class="toolbar" id="points-toolbar">
+      <div class="panel toolbar" id="points-toolbar">
         <div class="button" id="points-clear" title="Удалить все точки">Очистить</div>
         <div class="button" id="points-remove" title="Удалить все точки">Удалить</div>
         <div class="button" id="points-add" title="Добавить новую точку">Добавить</div>
@@ -33,8 +33,8 @@ export class BasePointController {
         </div>
       </div>
 
-      <div class="panel-points" id="panel-points">
-        <div class="scrollpanel-points">
+      <div class="panel" id="panel-points">
+        <div class="panel" id="scrollpanel-points">
           <table class="table-points">
             <thead>
               <th class="menu-item" id="button-sort-name">Название</th>
@@ -48,9 +48,7 @@ export class BasePointController {
           </table>            
         </div>
 
-
       </div>
-
         
         `;
 

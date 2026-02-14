@@ -5,7 +5,7 @@
 
 }
 
-.panel-survey {
+#panel-survey {
     display: flex;
     flex-direction: column;
     height: 90%;
@@ -18,14 +18,14 @@ table > caption {
     color: black;    
 }
 
-.panel-basis {
+#panel-basis {
     display: flex;
     flex-direction: row;
     width: auto;
     
 }
 
-.panel-station {
+#panel-station {
     width: auto;
     position: relative;
 }
@@ -83,7 +83,6 @@ table > caption {
 .station-row :first-child {
     flex: 1 1 auto;
     margin: 2px;
-    /* padding: 5px; */
 }
 
 .station-row :last-child {
@@ -98,38 +97,35 @@ table > caption {
     width: auto;     
 }
 
-.panel-station, .panel-stations, .panel-measurements, .scrollpanel-stations, .scrollpanel-measurements, .panel-survey {
-    border: 2px outset #bab6b7;
-    margin: 2px;
-}
-
-.panel-stations, .panel-measurements {
+#panel-measurements {
     display: flex;
     flex-direction: column;
 }
 
-.panel-stations {
+#panel-stations {
+    display: flex;
+    flex-direction: column;
     flex: 1 1 auto;
 }
 
-.scrollpanel-stations {
+#scrollpanel-stations {
     height: 25vh;
     flex: 1 1 auto;
     overflow: auto;
 }
 
-ul.list-stations {
+/* .list-stations {
     list-style: none;
-}
+} */
 
-ul.list-stations a {
+.list-stations a {
     display: block;
     width: auto;
     padding: 5px;
     text-decoration: none;
 }
 
-.scrollpanel-measurements {
+#scrollpanel-measurements {
     height: 40em;
     flex: 1 1 auto;
     overflow: auto;
@@ -163,6 +159,8 @@ ul.list-stations a {
 }
 
 .survey-button:hover {
+    /* height: 30px;
+    width: 30px; */
     border: 1px inset red;
 }
 
@@ -236,42 +234,45 @@ ul.list-stations a {
 
 @media screen and (min-width: 768px) {
 
-    .panel-survey {
+    #panel-survey {
         display: flex;
         flex-direction: row;
         flex: 1 1 auto;
     }
 
-    .panel-basis {
+    #panel-basis {
         display: flex;
         flex-direction: row;
         width: 40%;
-        flex: 1 1 auto;
+        flex: 0 0 auto;
+        overflow: auto;
     }
 
-    .panel-station {
+    #panel-station {
         width: auto;
     }
 
-    .panel-stations {
+    #panel-stations {
         display: flex;
-        flex: 1 1 150px;
+        width: auto;
+        flex: 1 1 auto;
     }
 
-    .scrollpanel-stations {
+    #scrollpanel-stations {
     height: 25vh;
     flex: 1 1 auto;
     overflow: auto;
     }
 
-    .panel-measurements {
+    #panel-measurements {
         display: flex;
         height: 90%;
         width: auto;
         flex: 0 0 auto;
+        overflow: auto;
     }
 
-    .scrollpanel-measurements {
+    #scrollpanel-measurements {
     height: 60em;
     flex: 1 1 auto;
     overflow: auto;

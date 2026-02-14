@@ -1,47 +1,51 @@
 @import './general.css';
 
-.panel-direct {
+#direct-panel {
     display: flex;
     flex-direction: column;
     height: 90%;
     overflow: auto;
 }
 
-.panel-direct-basis {
+#panel-direct-basis {
     display: flex;
     flex-direction: column;
+    flex: 1 1 auto;
     position: relative;
 }
 
 
-.panel-direct, .panel-direct-basis, .panel-direct-measurement, .panel-direct-result, .panel-direct-measurement {
-    /* background-color: var(--container-bg-color); */
+
+/* #direct-panel, .panel-direct-basis, .panel-direct-measurement, .panel-direct-result, .panel-direct-measurement {
+    
     border: 2px outset #bab6b7;
     margin: 2px;
-    /* color: var(--text-color); */
-}
+    
+} */
 
-.panel-direct-basis, .panel-direct-measurement, .panel-direct-result {
+/* #panel-direct-basis, #panel-direct-measurement, #panel-direct-result {
     flex: 1 1 auto;
-}
+} */
 
-.panel-direct-measurement {
+#panel-direct-measurement {
     display: flex;
     flex-direction: column;
+    flex: 1 1 auto;
     border-radius: 2px;
 
 }
 
-.panel-direct-result {
+#panel-direct-result {
     display: flex;
     flex-direction: column;
+    flex: 1 1 auto;
 }
 
 
 
 @media screen and (min-width: 768px) {
 
-.panel-direct {
+#direct-panel {
     flex-direction: row;
     height: 100%;
 }

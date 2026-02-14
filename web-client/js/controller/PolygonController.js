@@ -45,9 +45,9 @@ export class PolygonContoller {
             <input type="file" id="polygon-open-input" accept=".pol">
         </div>
 
-        <div class="panel-polygon" id="panel-polygon">
+        <div class="panel" id="panel-polygon">
 
-            <div class="scrollpanel-polygon">
+            <div class="panel" id="scrollpanel-polygon">
 
                 <table class="table-polygon">
                     <thead>
@@ -61,7 +61,6 @@ export class PolygonContoller {
                         <th>ПВОС</th>
                     </thead>
                     <tbody id="list-poligon-stations">
-
                     </tbody>
 
                 </table>
@@ -69,9 +68,9 @@ export class PolygonContoller {
             </div>
         </div>
 
-        <div class="panel-polygon-processing">
+        <div class="panel" id="panel-polygon-processing">
 
-            <div class="panel-polygon-residuals">
+            <div class="panel" id="panel-polygon-residuals">
                 
                 <div class="panel-title">Невязки</div>
 
@@ -113,7 +112,7 @@ export class PolygonContoller {
 
             </div>
 
-            <div class="panel-polygon-plan">
+            <div class="panel" id="panel-polygon-plan">
                 <h4>Схема полигона</h4>
             </div>
 
@@ -137,40 +136,41 @@ export class PolygonContoller {
         const content = document.getElementById("content");
 
         content.innerHTML = `
-            <div class="panel" id="panel-plan-report">
-                <div class="panel-title">Ведомость вычисления координат</div>
-                <div class="frame">
-                    <textarea class="text-report" cols="130" id="text-plan-report" placeholder="Ведомость уравнивания плановая"></textarea>
-                </div>
+    <div class="panel" id="panel-plan-report">
+        <div class="panel-title">Ведомость вычисления координат</div>
+        <div class="frame">
+            <textarea class="text-report" cols="130" id="text-plan-report" placeholder="Ведомость уравнивания плановая"></textarea>
+        </div>
 
+    </div>
+
+    <div class="panel" id="panel-level-report">
+        <div class="panel-title">Ведомость вычисления высот</div>
+        <div class="frame">
+            <textarea class="text-report" id="text-level-report" placeholder="Ведомость уравнивания высотная"></textarea>
+        </div>
+
+    </div>
+
+    <div class="panel" id="panel-catalog-pol-report">
+
+        <div class="panel" id="panel-catalog-report">
+            <div class="panel-title">Каталог координат точек полигона</div>
+            <div class="frame">
+                <textarea class="text-report" id="text-catalog-report" placeholder="Каталог координат тахеометрического хода"></textarea>
             </div>
 
-            <div class="panel" id="panel-level-report">
-                <div class="panel-title">Ведомость вычисления высот</div>
-                <div class="frame">
-                    <textarea class="text-report" id="text-level-report" placeholder="Ведомость уравнивания высотная"></textarea>
-                </div>
+        </div>
 
+        <div class="panel" id="panel-pol-report">
+            <div class="panel-title">Исходные данные (*.pol)</div>
+            <div class="frame">
+                <textarea class="text-report" id="text-pol-report" placeholder="Исходные данные в формате '*.pol'"></textarea>
             </div>
 
-            <div class="panel" id="panel-catalog-pol-report">
+        </div>
+    </div>
 
-                <div class="panel" id="panel-catalog-report">
-                    <div class="panel-title">Каталог координат точек полигона</div>
-                    <div class="frame">
-                        <textarea class="text-report" id="text-catalog-report" placeholder="Каталог координат тахеометрического хода"></textarea>
-                    </div>
-
-                </div>
-
-                <div class="panel" id="panel-pol-report">
-                    <div class="panel-title">Исходные данные (*.pol)</div>
-                    <div class="frame">
-                        <textarea class="text-report" id="text-pol-report" placeholder="Исходные данные в формате '*.pol'"></textarea>
-                    </div>
-
-                </div>
-            </div>
         `;
 
     }

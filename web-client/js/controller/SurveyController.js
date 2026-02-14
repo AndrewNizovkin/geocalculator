@@ -37,8 +37,6 @@ export class SurveyController {
         let content = document.getElementById("content");
 
         content.innerHTML = `
-
-    
     <div class="survey-toolbar" id="toolbar-survey">
       <div class="survey-button new" id="survey-new" title="Новая съёмка"></div>
       <div class="survey-button open" id="survey-open" title="Открыть">
@@ -51,23 +49,22 @@ export class SurveyController {
       <input type="file" id="survey-import-input" accept=".txt">
     </div>
 
-    <div class="panel-survey">
+    <div class="panel" id="panel-survey">
       
-      <div class="panel-basis">
-        <div class="panel-stations">
+      <div class="panel" id="panel-basis">
+        <div class="panel" id="panel-stations">
           <div class="survey-toolbar" id="toolbar-survey-stations">
             <div class="survey-button delete" id="delete-station" title="Удалить станцию"></div>
             <div class="survey-button insert-before" id="before-station" title="Вставить перед выбранной"></div>
             <div class="survey-button insert-after" id="after-station" title="Вставить после выбранной"></div>
           </div>
-          <div class="scrollpanel-stations">
-            <ul class="list-stations" id="list-stations">
-            </ul>
+          <div class="panel" id="scrollpanel-stations">
+            <div class="list-stations" id="list-stations">
+            </div>
           </div>
         </div>
 
-        <div class="panel-station" id="panel-station">
-
+        <div class="panel" id="panel-station">
           <div class="station-row">
             <div class="toggle menu-item" id="button-station-name" title="Вставить из каталога"class="">Станция</div>
             <input type="text" id="survey-station-name" size="12" placeholder="noname">
@@ -109,13 +106,13 @@ export class SurveyController {
 
       </div>
 
-      <div class="panel-measurements">
+      <div class="panel" id="panel-measurements">
         <div class="survey-toolbar" id="toolbar-survey-measurements">
           <div class="survey-button delete" id="delete-measurement" title="Удалить выбранную"></div>
           <div class="survey-button insert-before" id="before-measurement" title="Вставить перед выбранной"></div>
           <div class="survey-button insert-after" id="after-measurement" title="Вставить после выбранной"></div>
         </div>
-        <div class="scrollpanel-measurements">
+        <div class="panel" id="scrollpanel-measurements">
           <table class="table-measurements">
             <thead>
               <th>Название</th>
@@ -132,9 +129,6 @@ export class SurveyController {
       </div>
 
     </div>
-
-
-
 
       
         `;

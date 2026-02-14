@@ -74,6 +74,14 @@ input[type="text"] {
     overflow: auto;
 }
 
+.panel {
+    background-color: var(--container-bg-color);
+    border: 2px outset #bab6b7;
+    margin: 2px;
+    /* color: var(--text-color); */
+}
+
+
 .open {
     display: flex;
 }
@@ -133,8 +141,8 @@ input[type="text"] {
     align-items: center;
     flex: 0 0 auto;
     height: 50px;
-    margin: 2px;
-    border: 2px outset #bab6b7;
+    /* margin: 2px;
+    border: 2px outset #bab6b7; */
 }
 
 .button {

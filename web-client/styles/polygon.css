@@ -14,7 +14,7 @@
     position: relative;
 }
 
-.panel-polygon {
+#panel-polygon {
     /* background-color: yellow; */
     /* display: flex; */
     /* flex-direction: column; */
@@ -22,7 +22,7 @@
     height: auto;
 }
 
-.scrollpanel-polygon {
+#scrollpanel-polygon {
     /* background-color: aqua; */
     /* display: flex; */
     height: 20em;
@@ -59,11 +59,11 @@
     padding-bottom: 15px;
 }
 
-.selected {
+/* .selected {
 border: 2px solid red;
-}
+} */
 
-.panel-polygon-processing {
+#panel-polygon-processing {
     /* background-color: blue; */
     display: flex;
     flex-direction: column;
@@ -72,7 +72,7 @@ border: 2px solid red;
     padding: 10px;
 }
 
-.panel-polygon-residuals {
+#panel-polygon-residuals {
     /* background-color: red; */
     display: flex;
     flex-direction: column;
@@ -103,51 +103,51 @@ border: 2px solid red;
     flex: 1 1 auto;
 }
 
-.panel-polygon-plan {
+#panel-polygon-plan {
     /* background-color: green; */
     display: flex;
     width: auto;
     height: 60%;
 }
 
-.panel-polygon, .panel-polygon-plan, .panel-polygon-processing, .panel-polygon-residuals, .scrollpanel-polygon {
-    /* background-color: var(--container-bg-color); */
+/* .panel-polygon, .panel-polygon-plan, .panel-polygon-processing, .panel-polygon-residuals, .scrollpanel-polygon {
+ 
     border: 2px outset #bab6b7;
     margin: 2px;
-    /* color: var(--text-color); */
-}
+ 
+} */
 
 
 @media screen and (min-width: 768px) {
 
-    .panel-polygon {
+    #panel-polygon {
         display: flex;
         width: 100%;
         height: 40em;
         flex: 0 0 auto;
     }
 
-    .scrollpanel-polygon {
+    #scrollpanel-polygon {
         /* display: flex; */
         height: auto;
         overflow: auto;
     }
 
-    .panel-polygon-processing {
+    #panel-polygon-processing {
         display: flex;
         flex-direction: row;
         height: auto;
         flex: 1 1 auto;        
     }
 
-    .panel-polygon-residuals {
+    #panel-polygon-residuals {
         display: flex;
         flex-direction: column;
         width: 30%;
         height: auto;
     }
 
-    .panel-polygon-plan {
+    #panel-polygon-plan {
         display: flex;
         width: 70%;
         height: auto;
