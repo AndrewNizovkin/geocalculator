@@ -1,6 +1,7 @@
 import { PolygonRepository } from "../repository/PolygonRepository.js";
 import { PolygonMapper } from "./mapper/PolygonMapper.js";
 import { PolygonProvider } from "./provider/PolygonProvider.js";
+import { Residuals } from "../model/Residuals.js";
 
 /**
  * This class provides methods for working 
@@ -12,19 +13,38 @@ export class PolygonService {
     #polygonRepository;
     #polygonMapper;
     #polygonProvider;
+    #residuals;
+    #reportCatalog;
+    #reportPlan;
+    #reportElevation;
 
     constructor() {
         this.#polygonRepository = new PolygonRepository();
         this.#polygonMapper = new PolygonMapper();
         this.#polygonProvider = new PolygonProvider();
+        this.#residuals = new Residuals();
+        this.#reportCatalog = new Array();
+        this.#reportPlan = new Array();
+        this.#reportElevation = new Array();
     }
 
     /**
-     * Crears polygon repository
+     * Clears polygon repository
      */
     clearAll() {
         this.#polygonRepository.clearAll();
+        this.clearReports();
     }
+
+    /**
+     * Clears results of polygon processing
+     */
+    clearReports() {
+        this.#residuals = new Residuals();
+        this.#reportCatalog = new Array();
+        this.#reportPlan = new Array();
+        this.#reportElevation = new Array();
+    } 
 
     /**
      * Gets count of stations in polygon repository
@@ -49,12 +69,38 @@ export class PolygonService {
     async readFromDevice(filePol) {
         try {
             await this.#polygonProvider.getStringArrayFromDevice(filePol).then((object) => {
-                this.#polygonRepository.clearAll();
+                this.clearAll();
                 this.#polygonRepository = this.#polygonMapper.arrayToPolygonRepository(object, this.#polygonRepository);
             });
         } catch (err) {
             console.error(err.message);
         }
+    }
+
+    /**
+     * Updates reports on mathematical processing 
+     * of polygonometric measurements
+     */
+    async calculatePolygon(reportFile) {
+        // this.#setDemoReports();
+        // this.clearAll();
+        this.clearReports();
+        let polygonRequest = this.getLinesPolArray();
+
+        try {
+            await this.#polygonProvider.getPolygonResponse(reportFile).then((polygonResponse) => {
+                this.#polygonMapper.polygonResponseToReports(
+                    polygonResponse, 
+                    this.#residuals, 
+                    this.#reportCatalog,
+                    this.#reportPlan,
+                    this.#reportElevation
+                );
+            });
+        } catch (err) {
+            console.error(err.message);
+        }
+
     }
 
     /**
@@ -253,6 +299,88 @@ export class PolygonService {
      */
     saveStatus(stationIndex, status) {
         this.#polygonRepository.saveStatus(stationIndex, status);
-    }        
+    }     
+    
+    /**
+     * Gets elevation residual of polygon
+     * @returns {string}
+     */
+    getResidualElevation() {
+        return this.#residuals.elevation;
+    }
+
+    /**
+     * Gets horizontal angle residual of polygon
+     * @returns {string}
+     */
+    getResidualAngle() {
+        return this.#residuals.angle;
+    }
+
+    /**
+     * Gets line residual of polygon along x axis
+     * @returns {string}
+     */
+    getResidualX() {
+        return this.#residuals.x;
+    }
+
+    /**
+     * Gets line residual of polygon along y axis
+     * @returns {string}
+     */
+    getResidualY() {
+        return this.#residuals.y;
+    }
+
+    /**
+     * Gets absolute residual of polygon
+     * @returns {string}
+     */
+    getResidualAbsolute() {
+        return this.#residuals.ablolute;
+    }
+
+    /**
+     * Gets relative residual of polygon
+     * @returns {string}
+     */
+    getResidualRelative() {
+        return this.#residuals.relative;
+    }
+
+    /**
+     * Gets perimeter of polygon
+     * @returns {string}
+     */
+    getPerimeter() {
+        return this.#residuals.perimeter;
+    }
+
+    /**
+     * Gets the calculated coordinates of the polygon points
+     * @returns {string[]}
+     */
+    getReportCatalog() {
+        return this.#reportCatalog;
+    }
+
+    /**
+     * Gets a list of calculations of plan coordinates
+     * of the polygon points
+     * @returns {string[]}
+     */
+    getReportPlan() {
+        return this.#reportPlan;
+    }
+
+    /**
+     * Gets a list of calculations of height coordinates
+     * of the polygon points
+     * @returns {string[]}
+     */
+    getReportElevation() {
+        return this.#reportElevation;
+    }
 
 }

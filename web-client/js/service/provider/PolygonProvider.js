@@ -18,4 +18,16 @@ export class PolygonProvider {
         return TextFileReader.readFromTextFile(filePol);
     }
 
+    /**
+     * Sends a request to the back-end server for mathematical processing
+     * of polygonometric measurements and returns 
+     * the server's response in the form of a summary report
+     * @param {string[]} polygonRequest 
+     * @returns 
+     */
+    async getPolygonResponse(reportFile) {
+
+        return TextFileReader.readFromTextFile(reportFile);
+    }
+
 }

@@ -1,3 +1,4 @@
+
 /**
  * This class provides methods for converting 
  * models and dto objects for PolygonService
@@ -66,6 +67,113 @@ export class PolygonMapper {
         }
 
         return polygonRepository;
+    }
+
+    /**
+     * Parses "polygonResponse" and 
+     * fills reports after mathematic processing polygon
+     * @param {string[]} polygonResponse 
+     * @param {Residuals} residuals 
+     * @param {string[]} reportCatalog 
+     * @param {string[]} reportPlan 
+     * @param {string[]} reportElevation 
+     */
+    polygonResponseToReports(
+        polygonResponse, 
+        residuals, 
+        reportCatalog, 
+        reportPlan, 
+        reportElevation
+    ) {
+        const arrayResiduals = [];
+        let target = "";
+
+        for (let line of polygonResponse) {
+
+            if (line == "#residuals") {
+                target = "residuals";
+                continue;
+            }
+
+            if (line == "#report-catalog") {
+                target = "report-catalog";
+                continue;
+            }
+
+            if (line == "#report-plan") {
+                target = "report-plan";
+                continue;
+            }
+
+            if (line == "#report-elevation") {
+                target = "report-elevation";
+                continue;
+            }
+
+            switch (target) {
+
+                case "residuals":
+                    arrayResiduals.push(line);
+                    break;
+
+                case "report-catalog":
+                    reportCatalog.push(line);
+                    break;
+
+                case "report-plan":
+                    reportPlan.push(line);
+                    break;
+
+                case "report-elevation":
+                    reportElevation.push(line);
+                    break;
+            }
+
+
+        }
+
+        if (arrayResiduals.length === 7) {
+            for (let line of arrayResiduals) {
+                let residual = line.split("=");
+                if (residual.length === 2) {
+                    switch (residual.at(0)) {
+
+                        case "elevation":
+                            residuals.elevation = residual.at(1);
+                            break;
+
+                        case "angle":
+                            residuals.angle = residual.at(1);
+                            break;
+
+                        case "x":
+                            residuals.x = residual.at(1);
+                            break;
+
+                        case "y":
+                            residuals.y = residual.at(1);
+                            break;
+
+                        case "absolute":
+                            residuals.ablolute = residual.at(1);
+                            break;
+
+                        case "relative":
+                            residuals.relative = residual.at(1);
+                            break;
+
+                        case "perimeter":
+                            residuals.perimeter = residual.at(1);
+                            break;
+                        
+                    }
+
+                }
+
+            }
+
+        }
+
     }
 
 }

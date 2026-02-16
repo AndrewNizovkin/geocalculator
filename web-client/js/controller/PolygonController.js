@@ -9,6 +9,7 @@ import { PolygonService } from "../service/PolygonService.js";
  */
 export class PolygonContoller {
     #currentStation;
+    #reportsIsActual;
     #polygonService;
     #basePointService;
 
@@ -20,6 +21,7 @@ export class PolygonContoller {
         this.#polygonService = new PolygonService();
         this.#polygonService.addNewStation();
         this.#currentStation = 0;
+        this.#reportsIsActual = false;
         this.#basePointService = basePointService;
     }
 
@@ -43,6 +45,7 @@ export class PolygonContoller {
             <div class="survey-button run" id="polygon-run" title="Уравнять полигон"></div>
             <div class="survey-button view" id="polygon-view" title="Просмотр результатов"></div>
             <input type="file" id="polygon-open-input" accept=".pol">
+            <input type="file" id="polygon-open-response" accept=".txt">
         </div>
 
         <div class="panel" id="panel-polygon">
@@ -76,37 +79,37 @@ export class PolygonContoller {
 
                 <div class="row-residual">
                     <div>Высотная, м.</div>
-                    <div id="residual-height">-.-</div>
+                    <div id="residual-height"></div>
                 </div>
 
                 <div class="row-residual">
                     <div>Угловая, сек.</div>
-                    <div id="residual-direction">-.-</div>
+                    <div id="residual-direction"></div>
                 </div>
                 
                 <div class="row-residual">
                     <div>Линейная Fx, м.</div>
-                    <div id="residual-x">-.-</div>
+                    <div id="residual-x"></div>
                 </div>                
 
                 <div class="row-residual">
                     <div>Линейная Fy, м.</div>
-                    <div id="residual-y">-.-</div>
+                    <div id="residual-y"></div>
                 </div>                
 
                 <div class="row-residual">
                     <div>Абсолютная, м.</div>
-                    <div id="residual-absolute">-.-</div>
+                    <div id="residual-absolute"></div>
                 </div>                
 
                 <div class="row-residual">
                     <div>Относительная</div>
-                    <div id="residual-relative">-.-</div>
+                    <div id="residual-relative"></div>
                 </div>                
 
                 <div class="row-residual">
                     <div>Периметр</div>
-                    <div id="residual-perimeter">-.-</div>
+                    <div id="residual-perimeter"></div>
                 </div>                
 
 
@@ -122,6 +125,7 @@ export class PolygonContoller {
 
         this.#setListPolygonStations();
         this.#setListBasePoints();
+        this.#setResiduals();
 
         this.#addListenersPanelPolygon();
         this.#addListenersToolbarPolygon();
@@ -147,7 +151,7 @@ export class PolygonContoller {
     <div class="panel" id="panel-level-report">
         <div class="panel-title">Ведомость вычисления высот</div>
         <div class="frame">
-            <textarea class="text-report" id="text-level-report" placeholder="Ведомость уравнивания высотная"></textarea>
+            <textarea class="text-report" id="text-elevation-report" placeholder="Ведомость уравнивания высотная"></textarea>
         </div>
 
     </div>
@@ -172,6 +176,8 @@ export class PolygonContoller {
     </div>
 
         `;
+
+        this.#setReports();
 
     }
 
@@ -253,10 +259,10 @@ export class PolygonContoller {
             item.setAttribute("data-property", "x");
             item.size = "10";
             item.disabled = true;
-            if (status) {
+            if (this.#polygonService.getStatus(i)) {
                 if ( (i > 1) && ( i < this.#polygonService.size() - 2) ) {
                     this.#polygonService.saveStationX(i, "Not");
-                    this.#polygonService.saveStatus(false);
+                    this.#polygonService.saveStatus(i, false);
                 } else {
                     item.value = this.#polygonService.getStationX(i);
                     item.disabled = false;
@@ -273,10 +279,10 @@ export class PolygonContoller {
             item.setAttribute("data-property", "y");
             item.size = "10";
             item.disabled = true;
-            if (status) {
+            if (this.#polygonService.getStatus(i)) {
                 if ( (i > 1) && ( i < this.#polygonService.size() - 2) ) {
                     this.#polygonService.saveStationY(i, "Not");
-                    this.#polygonService.saveStatus(false);
+                    this.#polygonService.saveStatus(i, false);
                 } else {
                     item.value = this.#polygonService.getStationY(i);
                     item.disabled = false;
@@ -293,10 +299,10 @@ export class PolygonContoller {
             item.setAttribute("data-property", "z");
             item.size = "10";
             item.disabled = true;
-            if (status) {
+            if (this.#polygonService.getStatus(i)) {
                 if ( (i > 1) && ( i < this.#polygonService.size() - 2) ) {
                     this.#polygonService.saveStationZ(i, "Not");
-                    this.#polygonService.saveStatus(false);
+                    this.#polygonService.saveStatus(i, false);
                 } else {
                     item.value = this.#polygonService.getStationZ(i);
                     item.disabled = false;
@@ -313,8 +319,7 @@ export class PolygonContoller {
             item.type = "checkbox";
             item.setAttribute("data-station-id", i);
             item.setAttribute("data-property", "status");
-            // item.size = "10";
-            if (status) item.setAttribute("checked", this.#polygonService.getStatus(i));
+            if (this.#polygonService.getStatus(i)) item.setAttribute("checked", this.#polygonService.getStatus(i));
             if ( (i > 1) && ( i < this.#polygonService.size() - 2) ) {
                 item.unchecked = true;
                 item.disabled = true;
@@ -350,18 +355,35 @@ export class PolygonContoller {
       toolbarPolygon.append(listBasePoints);
     }
 
-
     /**
-     * Toggles the selected row
-     * @param {number} selectedRow 
+     * Sets value of elemnts on panel-polygon-residuals
      */
-    #toggleSelectedRow(indexRow) {
-        // let selector = `tr [data-row-id="${indexRow}"]`;
-        let selector = `tr[data-row-id="${indexRow}"]`;
-        let selectedRow = document.querySelector(selector);
-        selectedRow.classList.toggle("selected");
+    #setResiduals() {
+        document.getElementById("residual-height").innerHTML = this.#polygonService.getResidualElevation();
+        document.getElementById("residual-direction").innerHTML = this.#polygonService.getResidualAngle();
+        document.getElementById("residual-x").innerHTML = this.#polygonService.getResidualX();
+        document.getElementById("residual-y").innerHTML = this.#polygonService.getResidualY();
+        document.getElementById("residual-absolute").innerHTML = this.#polygonService.getResidualAbsolute();
+        document.getElementById("residual-relative").innerHTML = this.#polygonService.getResidualRelative();
+        document.getElementById("residual-perimeter").innerHTML = this.#polygonService.getPerimeter();
     }
 
+    /**
+     * Sets value of polygon reports 
+     */
+    #setReports() {
+        const reportPlan = document.getElementById("text-plan-report");
+        reportPlan.value = this.#polygonService.getReportPlan().join('\n');
+
+        const reportElevation = document.getElementById("text-elevation-report");
+        reportElevation.value = this.#polygonService.getReportElevation().join('\n');
+
+        const reportCatalog = document.getElementById("text-catalog-report");
+        reportCatalog.value = this.#polygonService.getReportCatalog().join('\n');
+
+        const reportPol = document.getElementById("text-pol-report");
+        reportPol.value = this.#polygonService.getLinesPolArray().join('\n');
+    }
 
     /**
      * Adds event listeners to toolar-polygon
@@ -375,17 +397,33 @@ export class PolygonContoller {
             switch (element.id) {
 
                 case "polygon-open-input":
-            try {
-              let file = element.files[0];
-              if (!file) throw new Error("Select a file!");
-                this.#polygonService.readFromDevice(file).then(() =>{
-                    this.#currentStation = 0;
-                    this.#setListPolygonStations();
-                });
-             } catch (error) {
-              console.error(error.message);
-            }
+                    try {
+                    let file = element.files[0];
+                    if (!file) throw new Error("Select a file!");
+                        this.#polygonService.readFromDevice(file).then(() =>{
+                            this.#currentStation = 0;
+                            this.#setListPolygonStations();
+                            this.#setResiduals();
+                            this.#reportsIsActual = file;
+                        });
+                    } catch (error) {
+                    console.error(error.message);
+                    }
                     break;
+
+                case "polygon-open-response":
+                    try {
+                    let file = element.files[0];
+                    if (!file) throw new Error("Select a file!");
+                        this.#polygonService.calculatePolygon(file).then(() =>{
+                            this.#setResiduals();
+                            this.#reportsIsActual = true;
+                        });
+                    } catch (error) {
+                    console.error(error.message);
+                    }
+                    break;
+
             }
         });
 
@@ -450,8 +488,12 @@ export class PolygonContoller {
 
                 case "polygon-new":
                     this.#polygonService.clearAll();
+                    this.#polygonService.clearReports();
                     this.#polygonService.addNewStation();
                     this.#setListPolygonStations();
+                    this.#setResiduals();
+                    this.#currentStation = 0;
+                    this.#reportsIsActual = false;
                     break;
 
                 case "polygon-open":
@@ -459,6 +501,7 @@ export class PolygonContoller {
                     break;
 
                 case "polygon-run":
+                    document.getElementById("polygon-open-response").click();
                     break;
 
                 case "polygon-view":
@@ -485,6 +528,18 @@ export class PolygonContoller {
             if (elem.hasAttribute('data-polygon-station-id')) {
                 // this.#toggleSelectedRow(this.#currentStation);
                 this.#currentStation = +elem.dataset.polygonStationId;
+            }
+        });
+
+        panelPolygon.addEventListener('input', (event) => {
+            const elem = event.target;
+
+            if (elem.hasAttribute('data-property')) {
+                if (this.#reportsIsActual) {
+                    this.#polygonService.clearReports();
+                    this.#reportsIsActual = false;
+                    this.#setResiduals();
+                }
             }
         });
 
