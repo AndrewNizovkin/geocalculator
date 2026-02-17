@@ -87,6 +87,8 @@ export class PolygonMapper {
     ) {
         const arrayResiduals = [];
         let target = "";
+        // polygonResponse = JSON.stringify(polygonResponse);
+        // polygonResponse = JSON.parse(polygonResponse);
 
         for (let line of polygonResponse) {
 

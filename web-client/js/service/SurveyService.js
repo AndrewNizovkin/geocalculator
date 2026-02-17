@@ -12,11 +12,39 @@ export class SurveyService {
     #surveyRepository;
     #surveyMapper;
     #surveyProvider;
+    #reportSurveyProcessing;
+    #reportSurveyCatalog;
 
     constructor() {
         this.#surveyRepository = new SurveyRepository();
         this.#surveyMapper = new SurveyMapper();
         this.#surveyProvider = new SurveyProvider();
+        this.#reportSurveyCatalog = new Array();
+        this.#reportSurveyProcessing = new Array();
+    }
+
+    /**
+     * Updates reports after mathematical processing 
+     * of survey data
+     */
+    async calculateSurvey(reportFile) {
+        this.clearReports();
+        let surveyRequest = this.#surveyMapper
+        .surveyRepositoryToSurveyRequest(this.#surveyRepository);
+
+        try {
+            await this.#surveyProvider.getSurveyResponse(reportFile).then((surveyResponse) => {
+                this.#surveyMapper.surveyResponseToReports(
+                    surveyResponse, 
+                    this.#reportSurveyProcessing, 
+                    this.#reportSurveyCatalog
+                );
+            });
+        } catch (err) {
+            console.error(err.message);
+        }
+
+
     }
 
     /**
@@ -24,6 +52,15 @@ export class SurveyService {
      */
     clearAll() {
         this.#surveyRepository.clearAll();
+        this.clearReports();
+    }
+
+    /**
+     * Clears reports processing and cataloog
+     */
+    clearReports() {
+        this.#reportSurveyCatalog = new Array();
+        this.#reportSurveyProcessing = new Array();
     }
 
     /**
@@ -91,6 +128,23 @@ export class SurveyService {
         let linesArray = this.#surveyMapper.surveyRepositoryToArray(this.#surveyRepository);
         return linesArray;
 
+    }
+
+    /**
+     * Gets report of mathematical processing of 
+     * total station survey
+     * @returns {string[]}
+     */
+    getReportSurveyProcessing() {
+        return this.#reportSurveyProcessing;
+    }
+
+    /**
+     * Gets catalog survey points
+     * @returns {string[]}
+     */
+    getReportSurveyCatalog() {
+        return this.#reportSurveyCatalog;
     }
 
     /**

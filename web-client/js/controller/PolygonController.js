@@ -136,7 +136,7 @@ export class PolygonContoller {
     /**
      * Loads page polygon report to content
      */
-    #loadReportPolygon() {
+    #loadPageReportPolygon() {
         const content = document.getElementById("content");
 
         content.innerHTML = `
@@ -505,7 +505,7 @@ export class PolygonContoller {
                     break;
 
                 case "polygon-view":
-                    this.#loadReportPolygon();
+                    this.#loadPageReportPolygon();
                     break;
             }
             

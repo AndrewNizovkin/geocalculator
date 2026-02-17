@@ -108,4 +108,81 @@ export class SurveyMapper {
         return arrayTah;
     }
 
+    /**
+     * Converts an instance of the 'SurveyRepository' object into 
+     * surveyRequest for send to backend server
+     * @param {SurveyRepository} surveyRepository 
+     * @returns {string[]}
+     */
+    surveyRepositoryToSurveyRequest(surveyRepository) {
+        let surveyRequest = [];
+        let line = '';
+
+        for (let i = 0; i < surveyRepository.size(); i++) {
+            line = '';
+            line += `${surveyRepository.getStationName(i)} `;
+            line += `${surveyRepository.getStationX(i)} `;
+            line += `${surveyRepository.getStationY(i)} `;
+            line += `${surveyRepository.getStationZ(i)} `;
+            line += `${surveyRepository.getStationHeight(i)} `;
+            line += `${surveyRepository.getOrDirection(i)} `;
+            line += `${surveyRepository.getOrName(i)} `;
+            line += `${surveyRepository.getOrX(i)} `;
+            line += `${surveyRepository.getOrY(i)}`;
+            surveyRequest.push(line);
+        }
+
+        surveyRequest.push("//");
+
+        for (let i = 0; i < surveyRepository.size(); i++) {
+            for (let j = 0; j < surveyRepository.measurementSize(i); j++) {
+                line = '';
+                line += `${surveyRepository.getTargetName(i, j)} `;
+                line += `${surveyRepository.getTargetDistance(i, j)} `;
+                line += `${surveyRepository.getTargetDirection(i, j)} `;
+                line += `${surveyRepository.getTargetTiltAngle(i, j)} `;
+                line += `${surveyRepository.getTargetHeight(i, j)} `;
+                line += `${i}`;
+                surveyRequest.push(line);
+            }
+            surveyRequest.push("//");
+        }
+
+        return surveyRequest;
+    }
+
+    /**
+     * Parses "suveyResponse" and fills 
+     * reports after mathematic processing survey data
+     * @param {string[]} suveyResponse 
+     * @param {string[]} reportSurveyProcessing 
+     * @param {string[]} reportSurveyCatalog 
+     */
+    surveyResponseToReports(
+        suveyResponse,
+        reportSurveyProcessing,
+        reportSurveyCatalog
+    ) {
+        let target = true;
+
+        for (let line of suveyResponse) {
+            if (line === "//") continue;
+            if (line === "#survey-report") {
+                target = true;
+                continue;
+            }
+            if (line === "#processing-report") {
+                target = false;
+                continue;
+            }
+
+            if (target) {
+                reportSurveyCatalog.push(line);
+            } else {
+                reportSurveyProcessing.push(line);
+            }
+        }
+
+    }
+
 }

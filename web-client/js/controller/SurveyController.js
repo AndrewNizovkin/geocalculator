@@ -31,104 +31,104 @@ export class SurveyController {
   }
 
     /**
-     * Loaded survey page and adds listeners to components
+     * Loads survey page and adds listeners to components
      */
     loadPageSurvey() {
-        let content = document.getElementById("content");
+        const content = document.getElementById("content");
 
         content.innerHTML = `
-    <div class="survey-toolbar" id="toolbar-survey">
-      <div class="survey-button new" id="survey-new" title="Новая съёмка"></div>
-      <div class="survey-button open" id="survey-open" title="Открыть">
-        <input type="file" id="survey-open-input" name="file" accept=".tah">
-      </div>
-      <div class="survey-button import" id="survey-import" title="Импорт из файла"></div>
-      <div class="survey-toolbar-separator"></div>
-      <div class="survey-button run" id="survey-run" title="Обработать"></div>
-      <div class="survey-button view" id="survey-view" title="Просмотр результатов"></div>
-      <input type="file" id="survey-import-input" accept=".txt">
-    </div>
-
-    <div class="panel" id="panel-survey">
-      
-      <div class="panel" id="panel-basis">
-        <div class="panel" id="panel-stations">
-          <div class="survey-toolbar" id="toolbar-survey-stations">
-            <div class="survey-button delete" id="delete-station" title="Удалить станцию"></div>
-            <div class="survey-button insert-before" id="before-station" title="Вставить перед выбранной"></div>
-            <div class="survey-button insert-after" id="after-station" title="Вставить после выбранной"></div>
-          </div>
-          <div class="panel" id="scrollpanel-stations">
-            <div class="list-stations" id="list-stations">
+          <div class="survey-toolbar" id="toolbar-survey">
+            <div class="survey-button new" id="survey-new" title="Новая съёмка"></div>
+            <div class="survey-button open" id="survey-open" title="Открыть">
+              <input type="file" id="survey-open-input" name="file" accept=".tah">
             </div>
+            <div class="survey-button import" id="survey-import" title="Импорт из файла"></div>
+            <div class="survey-toolbar-separator"></div>
+            <div class="survey-button run" id="survey-run" title="Обработать"></div>
+            <div class="survey-button view" id="survey-view" title="Просмотр результатов"></div>
+            <input type="file" id="survey-import-input" accept=".txt">
           </div>
-        </div>
 
-        <div class="panel" id="panel-station">
-          <div class="station-row">
-            <div class="toggle menu-item" id="button-station-name" title="Вставить из каталога"class="">Станция</div>
-            <input type="text" id="survey-station-name" size="12" placeholder="noname">
-          </div>
-          <div class="station-row">
-            <div>X:</div>
-            <input type="text" id="survey-station-x" size="12" placeholder="0.000">
-          </div>
-          <div class="station-row">
-            <div>Y:</div>
-            <input type="text" id="survey-station-y" size="12" placeholder="0.000">
-          </div>
-          <div class="station-row">
-            <div>Z:</div>
-            <input type="text" id="survey-station-z" size="12" placeholder="0.000">
-          </div>
-          <div class="station-row">
-            <div>i:</div>
-            <input type="text" id="survey-station-height" size="12" placeholder="0.000">
-          </div>
-          <div class="station-row">
-            <div>Ор.Напр.</div>
-            <input type="text" id="survey-or-direction" size="12" value="0.0000">
-          </div>
-          <div class="station-row">
-            <div class="toggle menu-item" id="button-or-name" title="Вставить из каталога">Ориентир</div>
-            <input type="text" id="survey-or-name" size="12" placeholder="noname">
-          </div>
-          <div class="station-row">
-            <div>X:</div>
-            <input type="text" id="survey-or-x" size="12" placeholder="0.000">
-          </div>
-          <div class="station-row">
-            <div>Y:</div>
-            <input type="text" id="survey-or-y" size="12" placeholder="0.000">
-          </div>          
+          <div class="panel" id="panel-survey">
+            
+            <div class="panel" id="panel-basis">
+              <div class="panel" id="panel-stations">
+                <div class="survey-toolbar" id="toolbar-survey-stations">
+                  <div class="survey-button delete" id="delete-station" title="Удалить станцию"></div>
+                  <div class="survey-button insert-before" id="before-station" title="Вставить перед выбранной"></div>
+                  <div class="survey-button insert-after" id="after-station" title="Вставить после выбранной"></div>
+                </div>
+                <div class="panel" id="scrollpanel-stations">
+                  <div class="list-stations" id="list-stations">
+                  </div>
+                </div>
+              </div>
 
-        </div>
+              <div class="panel" id="panel-station">
+                <div class="station-row">
+                  <div class="toggle menu-item" id="button-station-name" title="Вставить из каталога"class="">Станция</div>
+                  <input type="text" id="survey-station-name" size="12" placeholder="noname">
+                </div>
+                <div class="station-row">
+                  <div>X:</div>
+                  <input type="text" id="survey-station-x" size="12" placeholder="0.000">
+                </div>
+                <div class="station-row">
+                  <div>Y:</div>
+                  <input type="text" id="survey-station-y" size="12" placeholder="0.000">
+                </div>
+                <div class="station-row">
+                  <div>Z:</div>
+                  <input type="text" id="survey-station-z" size="12" placeholder="0.000">
+                </div>
+                <div class="station-row">
+                  <div>i:</div>
+                  <input type="text" id="survey-station-height" size="12" placeholder="0.000">
+                </div>
+                <div class="station-row">
+                  <div>Ор.Напр.</div>
+                  <input type="text" id="survey-or-direction" size="12" value="0.0000">
+                </div>
+                <div class="station-row">
+                  <div class="toggle menu-item" id="button-or-name" title="Вставить из каталога">Ориентир</div>
+                  <input type="text" id="survey-or-name" size="12" placeholder="noname">
+                </div>
+                <div class="station-row">
+                  <div>X:</div>
+                  <input type="text" id="survey-or-x" size="12" placeholder="0.000">
+                </div>
+                <div class="station-row">
+                  <div>Y:</div>
+                  <input type="text" id="survey-or-y" size="12" placeholder="0.000">
+                </div>          
 
-      </div>
+              </div>
 
-      <div class="panel" id="panel-measurements">
-        <div class="survey-toolbar" id="toolbar-survey-measurements">
-          <div class="survey-button delete" id="delete-measurement" title="Удалить выбранную"></div>
-          <div class="survey-button insert-before" id="before-measurement" title="Вставить перед выбранной"></div>
-          <div class="survey-button insert-after" id="after-measurement" title="Вставить после выбранной"></div>
-        </div>
-        <div class="panel" id="scrollpanel-measurements">
-          <table class="table-measurements">
-            <thead>
-              <th>Название</th>
-              <th>Направление</th>
-              <th>Расстояние</th>
-              <th>Наклон</th>
-              <th>Выс.Цели</th>
-            </thead>
-            <tbody id="list-measurements">
-            </tbody>
+            </div>
 
-          </table>
-        </div>
-      </div>
+            <div class="panel" id="panel-measurements">
+              <div class="survey-toolbar" id="toolbar-survey-measurements">
+                <div class="survey-button delete" id="delete-measurement" title="Удалить выбранную"></div>
+                <div class="survey-button insert-before" id="before-measurement" title="Вставить перед выбранной"></div>
+                <div class="survey-button insert-after" id="after-measurement" title="Вставить после выбранной"></div>
+              </div>
+              <div class="panel" id="scrollpanel-measurements">
+                <table class="table-measurements">
+                  <thead>
+                    <th>Название</th>
+                    <th>Направление</th>
+                    <th>Расстояние</th>
+                    <th>Наклон</th>
+                    <th>Выс.Цели</th>
+                  </thead>
+                  <tbody id="list-measurements">
+                  </tbody>
 
-    </div>
+                </table>
+              </div>
+            </div>
+
+          </div>
 
       
         `;
@@ -142,6 +142,45 @@ export class SurveyController {
         this.#addListenersPanelStations();
         this.#addListenersPanelStation();
         this.#addListenersPanelMeasurements();
+
+    }
+
+    /**
+     * Loads report survey page and adds listeners to components
+     */
+    #loadPageReportSurvey() {
+      const content = document.getElementById("content");
+
+      content.innerHTML = `
+        <div class="panel" id="panel-processing-report">
+            <div class="panel-title">Ведомость вычисления координат</div>
+            <div class="frame">
+                <textarea class="text-report" cols="130" id="text-processing-report" placeholder="Ведомость вычисления координат"></textarea>
+            </div>
+
+        </div>
+
+        <div class="panel" id="panel-survey-tah-report">
+
+            <div class="panel" id="panel-survey-report">
+                <div class="panel-title">Каталог координат точек</div>
+                <div class="frame">
+                    <textarea class="text-report" id="text-survey-report" placeholder="Каталог координат точек"></textarea>
+                </div>
+
+            </div>
+
+            <div class="panel" id="panel-tah-report">
+                <div class="panel-title">Исходные данные (*.tah)</div>
+                <div class="frame">
+                    <textarea class="text-report" id="text-pol-report" placeholder="Исходные данные в формате '*.tah'"></textarea>
+                </div>
+
+            </div>
+        </div>      
+      `;
+
+      this.#setReports();
 
     }
 
@@ -248,6 +287,10 @@ export class SurveyController {
 
 
           case "survey-run":
+            break;
+
+          case "survey-view":
+            this.#loadPageReportSurvey();
             break;
 
 
@@ -561,6 +604,21 @@ export class SurveyController {
           listSurveyStations.append(station);
         }
       }
+    }
+
+    /**
+     * Sets value of survey reports
+     */
+    #setReports() {
+      const reportSurveyProcessing = document.getElementById("text-processing-report");
+      reportSurveyProcessing.value = this.#surveyService.getReportSurveyProcessing().join('\n');
+
+      const reportSurveyCatalog = document.getElementById("text-survey-report");
+      reportSurveyCatalog.value = this.#surveyService.getReportSurveyCatalog().join('\n');
+
+      const reportSurveyTah = document.getElementById("text-pol-report");
+      reportSurveyTah.value = this.#surveyService.getTahArray().join('\n');
+
     }
 
 

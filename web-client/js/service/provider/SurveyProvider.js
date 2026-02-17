@@ -45,4 +45,17 @@ export class SurveyProvider {
 
     }
 
+    /**
+     * Sends a request to the back-end server for mathematical processing
+     * of survey data and returns 
+     * the server's response in the form of a summary report
+     * @param {string[]} surveyRequest 
+     * @returns 
+     */
+    async getSurveyResponse(reportFile) {
+
+        return TextFileReader.readFromTextFile(reportFile);
+    }
+
+
 }

@@ -1,0 +1,66 @@
+@import "./general.css";
+
+#panel-plan-report {
+    background-color: var(--container-bg-color);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    width: auto;
+    height: 500px;
+}
+
+#panel-level-report {
+    background-color: var(--container-bg-color);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    width: auto;
+    height: 500px;
+}
+
+#panel-catalog-pol-report {
+    background-color: var(--container-bg-color);
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    width: auto;
+    height: 500px;
+}
+
+#panel-catalog-report {
+    background-color: var(--container-bg-color);
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 50%;
+}
+
+#panel-pol-report {
+    background-color: var(--container-bg-color);
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 50%;
+}
+
+@media screen and (min-width: 768px) {
+    #panel-catalog-pol-report {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #panel-catalog-report {
+        width: 40%;
+        flex: 0 0 auto;
+        height: auto;
+    }
+
+    #panel-pol-report {
+        width: 60%;
+        flex: 0 0 auto;
+        height: auto;
+    }    
+}

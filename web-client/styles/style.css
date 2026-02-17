@@ -5,7 +5,8 @@
 @import './survey.css';
 @import './points.css';
 @import './polygon.css';
-@import './polygon-report.css';
+@import './report-polygon.css';
+@import './report-survey.css';
 
 .header {
     display: flex;

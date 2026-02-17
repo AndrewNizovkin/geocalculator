@@ -78,7 +78,7 @@ export class PolygonService {
     }
 
     /**
-     * Updates reports on mathematical processing 
+     * Updates reports after mathematical processing 
      * of polygonometric measurements
      */
     async calculatePolygon(reportFile) {
