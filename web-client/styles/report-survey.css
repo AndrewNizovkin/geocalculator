@@ -15,30 +15,33 @@
     padding: 5px;
     display: flex;
     flex-direction: column;
-    flex: 0 0 auto;
+    flex: 1 1 auto;
     width: auto;
-    height: 500px;
+    height: auto;
 }
 
 #panel-survey-report {
     background-color: var(--container-bg-color);
     display: flex;
     flex-direction: column;
+    flex: 0 0 auto;
     width: auto;
-    height: 50%;
+    height: 500px;
 }
 
 #panel-tah-report {
     background-color: var(--container-bg-color);
     display: flex;
     flex-direction: column;
+    flex: 0 0 auto;
     width: auto;
-    height: 50%;
+    height: 500px;
 }
 
 @media screen and (min-width: 768px) {
     #panel-survey-tah-report {
         display: flex;
+        flex: 1 1 auto;
         flex-direction: row;
     }
 

@@ -14,6 +14,7 @@ export class SurveyController {
   #currentMeasurement;
   #insertBasePointToStation;
   #surveyImportType;
+  #reportsActual;
 
   /**
    * @constructor
@@ -28,6 +29,7 @@ export class SurveyController {
     this.#currentMeasurement = 0;
     this.#insertBasePointToStation = true;
     this.#surveyImportType = "leica";
+    this.#reportsActual = false;
   }
 
     /**
@@ -39,14 +41,17 @@ export class SurveyController {
         content.innerHTML = `
           <div class="survey-toolbar" id="toolbar-survey">
             <div class="survey-button new" id="survey-new" title="Новая съёмка"></div>
-            <div class="survey-button open" id="survey-open" title="Открыть">
-              <input type="file" id="survey-open-input" name="file" accept=".tah">
-            </div>
+            <div class="survey-button open" id="survey-open" title="Открыть"></div>
             <div class="survey-button import" id="survey-import" title="Импорт из файла"></div>
             <div class="survey-toolbar-separator"></div>
             <div class="survey-button run" id="survey-run" title="Обработать"></div>
             <div class="survey-button view" id="survey-view" title="Просмотр результатов"></div>
+            <div class="survey-button extract" id="survey-extract" title="Извлечь полигон"></div>
+            <input type="file" id="survey-open-input" name="file" accept=".tah">
             <input type="file" id="survey-import-input" accept=".txt">
+            <input type="file" id="survey-report-input" accept=".txt">
+            <input type="file" id="survey-extract-input" accept=".txt">
+
           </div>
 
           <div class="panel" id="panel-survey">
@@ -185,6 +190,32 @@ export class SurveyController {
     }
 
     /**
+     * Loads report of extracting polygon from survey
+     */
+    #loadPageExtract() {
+      const content = document.getElementById("content");
+
+      content.innerHTML = `
+        <div class="panel" id="panel-extract-report">
+            <div class="panel-title">Ведомость вычисления средних горизонтальных проложений и превышений</div>
+            <div class="frame">
+                <textarea class="text-report" cols="130" id="text-extract-report" placeholder="Ведомость вычисления средних горизонтальных проложений и превышений"></textarea>
+            </div>
+
+        </div>
+
+        <div class="panel" id="panel-pol-report">
+            <div class="panel-title">Результат извлечения полигона (*.pol)</div>
+            <div class="frame">
+                <textarea class="text-report" id="text-pol-report" placeholder="Результат извлечения полигона (*.pol)"></textarea>
+            </div>
+
+        </div>
+      
+      `;
+    }
+
+    /**
      * Adds event listeners for main-toolbar
      */
     #addListenersMainToolbar() {
@@ -211,15 +242,37 @@ export class SurveyController {
             break;
 
           case "survey-import-input":
-            let file = element.files[0];
-            if (!file) throw new Error("Select a file!");
-            this.#surveyService.importFromTotalStation(file, this.#surveyImportType).then(() => {
-                this.#currentSurveyStation = 0;
-                this.#currentMeasurement = 0;              
-                this.#setListSurveyStations();
-                this.#setSurveyStation();
-                this.#setTableMeasurements();
-            });
+            try {
+              let file = element.files[0];
+              if (!file) throw new Error("Select a file!");
+              this.#surveyService.importFromTotalStation(file, this.#surveyImportType).then(() => {
+                  this.#currentSurveyStation = 0;
+                  this.#currentMeasurement = 0;              
+                  this.#setListSurveyStations();
+                  this.#setSurveyStation();
+                  this.#setTableMeasurements();
+              });
+
+             } catch (error) {
+              console.error(error.message);
+            }
+            break;
+
+          case "survey-report-input":
+            try {
+              let file = element.files[0];
+              if (!file) throw new Error("Select a file!");
+              this.#surveyService.calculateSurvey(file).then(() => {
+                this.#reportsActual = true;
+                let countMeasurements = 0;
+                for (let i = 0; i < this.#surveyService.size(); i++) {
+                  countMeasurements += this.#surveyService.measurementSize(i);
+                }
+                alert(`${countMeasurements} измерений успешно обработаны`);
+              });      
+            } catch (error) {
+              console.error(error.message);
+            }
             break;
         }
 
@@ -230,6 +283,7 @@ export class SurveyController {
         let element = event.target;
         let importFileInput = document.getElementById("survey-import-input");
         let surveyOpenInput = document.getElementById("survey-open-input");
+        let surveyReportInput = document.getElementById("survey-report-input");
         let overlay = document.getElementById("overlay");
         let menuImport = document.getElementById("menu-import");        
 
@@ -287,10 +341,15 @@ export class SurveyController {
 
 
           case "survey-run":
+            surveyReportInput.click();
             break;
 
           case "survey-view":
             this.#loadPageReportSurvey();
+            break;
+
+          case "survey-extract":
+            this.#loadPageExtract();
             break;
 
 
@@ -365,11 +424,18 @@ export class SurveyController {
       let surveyPanelStation = document.getElementById("panel-station");
       let overlay = document.getElementById("overlay");
 
+      surveyPanelStation.addEventListener('input', () => {
+        if (this.#reportsActual) {
+          this.#surveyService.clearReports();
+          this.#reportsActual = false;
+        }
+      });
+
       surveyPanelStation.addEventListener('click', (event) => {
         let element = event.target;
         let toggleRect = element.getBoundingClientRect(); 
         let panelStationRect = document.getElementById("panel-station").getBoundingClientRect();
-        let listBasePoints = document.getElementById("list-base-point");      
+        let listBasePoints = document.getElementById("list-base-point"); 
 
         if (element.hasAttribute("data-base-point-id")) {
 
@@ -485,6 +551,15 @@ export class SurveyController {
      * Adds event listeners for panel-measurement
      */
     #addListenersPanelMeasurements() {
+
+      const panelMeasurements = document.getElementById("panel-measurements");
+
+      panelMeasurements.addEventListener('input', () => {
+        if (this.#reportsActual) {
+          this.#surveyService.clearReports();
+          this.#reportsActual = false;
+        }
+      });
 
       document.getElementById("toolbar-survey-measurements").addEventListener('click', (event) => {
         let element = event.target;

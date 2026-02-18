@@ -1,0 +1,22 @@
+@import "./general.css";
+
+#panel-extract-report {
+    background-color: var(--container-bg-color);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    width: auto;
+    height: 500px;
+}
+
+#panel-pol-report {
+    background-color: var(--container-bg-color);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    width: auto;
+    height: 500px;
+}
+
