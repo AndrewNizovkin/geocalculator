@@ -69,12 +69,22 @@ export class PolygonService {
     async readFromDevice(filePol) {
         try {
             await this.#polygonProvider.getStringArrayFromDevice(filePol).then((object) => {
-                this.clearAll();
-                this.#polygonRepository = this.#polygonMapper.arrayToPolygonRepository(object, this.#polygonRepository);
+                this.readArrayPol(object)
+                // this.clearAll();
+                // this.#polygonRepository = this.#polygonMapper.arrayToPolygonRepository(object, this.#polygonRepository);
             });
         } catch (err) {
             console.error(err.message);
         }
+    }
+
+    /**
+     * Fills in the survey stations repository from a string array in the "tah" format
+     * @param {string[]} arrayPol 
+     */
+    readArrayPol(arrayPol) {
+        this.clearAll();
+        this.#polygonMapper.arrayToPolygonRepository(arrayPol, this.#polygonRepository);
     }
 
     /**

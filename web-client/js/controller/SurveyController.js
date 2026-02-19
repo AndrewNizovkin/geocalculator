@@ -9,6 +9,7 @@ import {SurveyService} from "../service/SurveyService.js";
  */
 export class SurveyController {
   #basePointService;
+  #polygonService;
   #surveyService;
   #currentSurveyStation;
   #currentMeasurement;
@@ -19,9 +20,11 @@ export class SurveyController {
   /**
    * @constructor
    * @param {BasePoinService} basePointService 
+   * @param {PolygonService} polygonService
    */
-  constructor(basePointService) {
+  constructor(basePointService, polygonService) {
     this.#basePointService = basePointService;
+    this.#polygonService = polygonService;
     this.#surveyService = new SurveyService();
     this.#surveyService.addNewStation();
     this.#surveyService.addNewMeasurement(0);
@@ -185,7 +188,7 @@ export class SurveyController {
         </div>      
       `;
 
-      this.#setReports();
+      this.#setSurveyReports();
 
     }
 
@@ -204,7 +207,7 @@ export class SurveyController {
 
         </div>
 
-        <div class="panel" id="panel-pol-report">
+        <div class="panel" id="panel-extract-pol-report">
             <div class="panel-title">Результат извлечения полигона (*.pol)</div>
             <div class="frame">
                 <textarea class="text-report" id="text-pol-report" placeholder="Результат извлечения полигона (*.pol)"></textarea>
@@ -213,6 +216,8 @@ export class SurveyController {
         </div>
       
       `;
+
+      this.#setExtractReports();
     }
 
     /**
@@ -274,6 +279,20 @@ export class SurveyController {
               console.error(error.message);
             }
             break;
+
+          case "survey-extract-input":
+            try {
+              let file = element.files[0];
+              if (!file) throw new Error("Select a file!");
+              this.#surveyService.extractPolygon(file).then(() => {
+                this.#polygonService.readArrayPol(this.#surveyService.getReportExtractPol());
+                this.#loadPageExtract();
+              });      
+            } catch (error) {
+              console.error(error.message);
+            }
+            break;
+
         }
 
         
@@ -283,10 +302,13 @@ export class SurveyController {
         let element = event.target;
         let importFileInput = document.getElementById("survey-import-input");
         let surveyOpenInput = document.getElementById("survey-open-input");
-        let surveyReportInput = document.getElementById("survey-report-input");
         let overlay = document.getElementById("overlay");
         let menuImport = document.getElementById("menu-import");        
-
+        //test-mode
+        let surveyReportInput = document.getElementById("survey-report-input");
+        let extractInput = document.getElementById("survey-extract-input");
+        //test-mode
+        
         switch(element.id) {
 
           case "survey-new":
@@ -349,10 +371,8 @@ export class SurveyController {
             break;
 
           case "survey-extract":
-            this.#loadPageExtract();
+            extractInput.click();
             break;
-
-
         }
       });
 
@@ -426,7 +446,7 @@ export class SurveyController {
 
       surveyPanelStation.addEventListener('input', () => {
         if (this.#reportsActual) {
-          this.#surveyService.clearReports();
+          this.#surveyService.clearSurveyReports();
           this.#reportsActual = false;
         }
       });
@@ -556,7 +576,7 @@ export class SurveyController {
 
       panelMeasurements.addEventListener('input', () => {
         if (this.#reportsActual) {
-          this.#surveyService.clearReports();
+          this.#surveyService.clearSurveyReports();
           this.#reportsActual = false;
         }
       });
@@ -684,7 +704,7 @@ export class SurveyController {
     /**
      * Sets value of survey reports
      */
-    #setReports() {
+    #setSurveyReports() {
       const reportSurveyProcessing = document.getElementById("text-processing-report");
       reportSurveyProcessing.value = this.#surveyService.getReportSurveyProcessing().join('\n');
 
@@ -694,6 +714,17 @@ export class SurveyController {
       const reportSurveyTah = document.getElementById("text-pol-report");
       reportSurveyTah.value = this.#surveyService.getTahArray().join('\n');
 
+    }
+
+    /**
+     * Sets value of extract reports
+     */
+    #setExtractReports() {
+      const reportExtractProcessing = document.getElementById("text-extract-report");
+      reportExtractProcessing.value = this.#surveyService.getReportExtractProcessing().join('\n');
+
+      const reportExtractPol = document.getElementById("text-pol-report");
+      reportExtractPol.value = this.#surveyService.getReportExtractPol().join('\n');
     }
 
 

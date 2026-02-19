@@ -26,6 +26,14 @@ export class PolygonContoller {
     }
 
     /**
+     * Gets a reference to the object #polygonService
+     * @returns {PolygonService}
+     */
+    getPolygonService() {
+        return this.#polygonService;
+    }
+
+    /**
      * Loads page Polygon
      */
     loadPagePolygon() {
@@ -599,7 +607,5 @@ export class PolygonContoller {
         }); 
 
     }
-    
-
 
 }

@@ -56,13 +56,13 @@
 
     #panel-catalog-report {
         width: 40%;
-        flex: 0 0 auto;
+        flex: 1 1 auto;
         height: auto;
     }
 
     #panel-pol-report {
         width: 60%;
-        flex: 0 0 auto;
+        flex: 1 1 auto;
         height: auto;
     }    
 }

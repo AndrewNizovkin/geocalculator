@@ -10,7 +10,7 @@
     height: 500px;
 }
 
-#panel-pol-report {
+#panel-extract-pol-report {
     background-color: var(--container-bg-color);
     padding: 10px;
     display: flex;

@@ -14,6 +14,8 @@ export class SurveyService {
     #surveyProvider;
     #reportSurveyProcessing;
     #reportSurveyCatalog;
+    #reportExtractProcessing;
+    #reportExtractPol;
 
     constructor() {
         this.#surveyRepository = new SurveyRepository();
@@ -21,6 +23,8 @@ export class SurveyService {
         this.#surveyProvider = new SurveyProvider();
         this.#reportSurveyCatalog = new Array();
         this.#reportSurveyProcessing = new Array();
+        this.#reportExtractProcessing = new Array();
+        this.#reportExtractPol = new Array();
     }
 
     /**
@@ -28,9 +32,8 @@ export class SurveyService {
      * of survey data
      */
     async calculateSurvey(reportFile) {
-        this.clearReports();
-        let surveyRequest = this.#surveyMapper
-        .surveyRepositoryToSurveyRequest(this.#surveyRepository);
+        this.clearSurveyReports();
+        let surveyRequest = this.#surveyMapper.surveyRepositoryToSurveyRequest(this.#surveyRepository);
 
         try {
             await this.#surveyProvider.getSurveyResponse(reportFile).then((surveyResponse) => {
@@ -43,8 +46,27 @@ export class SurveyService {
         } catch (err) {
             console.error(err.message);
         }
+    }
 
+    /**
+     * Extract polygon from survey and
+     * updates reportExtractProcessing and reportExtractPol
+     */
+    async extractPolygon(extractFile) {
+        this.clearExtactReports();
+        // let extractRequest = this.#surveyMapper.surveyRepositoryToArray(this.#surveyRepository);
 
+        try {
+            await this.#surveyProvider.getExtractResponse(extractFile).then((extractResponse) => {
+                this.#surveyMapper.extractResponseToReports(
+                    extractResponse, 
+                    this.#reportExtractProcessing, 
+                    this.#reportExtractPol
+                );
+            });
+        } catch (err) {
+            console.error(err.message);
+        }
     }
 
     /**
@@ -52,15 +74,24 @@ export class SurveyService {
      */
     clearAll() {
         this.#surveyRepository.clearAll();
-        this.clearReports();
+        this.clearSurveyReports();
+        this.clearExtactReports();
     }
 
     /**
-     * Clears reports processing and cataloog
+     * Clears survey reports processing and cataloog
      */
-    clearReports() {
+    clearSurveyReports() {
         this.#reportSurveyCatalog = new Array();
         this.#reportSurveyProcessing = new Array();
+    }
+
+    /**
+     * Clears extract reports processing and pol
+     */
+    clearExtactReports() {
+        this.#reportExtractProcessing = new Array();
+        this.#reportExtractPol = new Array();
     }
 
     /**
@@ -145,6 +176,22 @@ export class SurveyService {
      */
     getReportSurveyCatalog() {
         return this.#reportSurveyCatalog;
+    }
+
+    /**
+     * Gets extract processing report
+     * @returns {string[]}
+     */
+    getReportExtractProcessing() {
+        return this.#reportExtractProcessing;
+    }
+
+    /**
+     * Gets extract pol report
+     * @returns {string[]}
+     */
+    getReportExtractPol() {
+        return this.#reportExtractPol;
     }
 
     /**

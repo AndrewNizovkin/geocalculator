@@ -24,8 +24,9 @@ export class MainController {
       this.#directController = new DirectController(this.#basePointController.getBasePointService());
       this.#inverseController = new InverseController(this.#basePointController.getBasePointService());
       this.#potenotController = new PotenotController(this.#basePointController.getBasePointService());
-      this.#surveyController = new SurveyController(this.#basePointController.getBasePointService());
       this.#polygonController = new PolygonContoller(this.#basePointController.getBasePointService());
+      this.#surveyController = new SurveyController(this.#basePointController.getBasePointService(), this.#polygonController.getPolygonService());
+      
     }
 
     /**

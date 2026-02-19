@@ -185,4 +185,38 @@ export class SurveyMapper {
 
     }
 
+    /**
+     * Parses "extractResponse" and fills 
+     * reports after extracting polygon from survey
+     * @param {string[]} extractResponse 
+     * @param {string[]} reportExtractProcessing 
+     * @param {string[]} reportExtractPol 
+     */
+    extractResponseToReports(
+        extractResponse,
+        reportExtractProcessing,
+        reportExtractPol
+    ) {
+        let target = true;
+
+        for (let line of extractResponse) {
+            if (line === "#extract-pol") {
+                target = true;
+                continue;
+            }
+            
+            if (line === "#extract-report") {
+                target = false;
+                continue;
+            }
+
+            if (target) {
+                reportExtractPol.push(line);
+            } else {
+                reportExtractProcessing.push(line);
+            }
+        }
+
+    }
+
 }

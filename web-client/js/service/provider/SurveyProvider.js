@@ -50,12 +50,23 @@ export class SurveyProvider {
      * of survey data and returns 
      * the server's response in the form of a summary report
      * @param {string[]} surveyRequest 
-     * @returns 
+     * @returns {string[]}
      */
     async getSurveyResponse(reportFile) {
 
         return TextFileReader.readFromTextFile(reportFile);
     }
 
+    /**
+     * Sends a request to the back-end server for 
+     * extracting polygon from survey data and returns 
+     * the server's response in the form of a summary report
+     * @param {string[]} extractRequest 
+     * @returns {string[]}
+     */
+    async getExtractResponse(reportFile) {
+
+        return TextFileReader.readFromTextFile(reportFile);
+    }
 
 }
