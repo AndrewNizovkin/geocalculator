@@ -54,6 +54,38 @@ table > caption {
     border: 2px outset #bab6b7;
 }
 
+#survey-panel-info {
+    /* display: none;
+    flex-direction: column; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 150px;
+    z-index: 1002;
+    /* position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1001; */
+    /* padding: 10px; */
+    border-radius: 10px;
+    
+
+}
+
+#survey-panel-info button {
+    align-self: center;
+    width: auto;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+#survey-info-message {
+    padding: 10px;
+    align-self: center;
+    font-size: 1.2em;
+}
+
 .menu-import {
     display: none;
     flex-direction: column;
