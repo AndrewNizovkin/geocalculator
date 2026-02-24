@@ -29,68 +29,68 @@ export class InverseController {
         let content = document.getElementById("content");
 
         content.innerHTML = `
-      <div class="panel toolbar" id="inverse-toolbar">
-        <div class="button clear" id="inverse-clear" title="Очистить">Очистить</div>
-        <div class="button run" id="inverse-run" title="Решить задачу">Обработать</div>
-      </div>
-
-      <div class="panel" id="inverse-panel">
-
-        <div class="panel" id="panel-inverse-base">
-
-          <div class="panel-title toggle menu-item" id="inverse-base-button" title="Вставить из каталога">Координаты базы</div>
-
-          <div class="frame">
-            <div class="frame-value"><span>X: </span><input type="text" id="inverse-base-x"></div>
-            <div class="frame-value"><span>Y: </span><input type="text" id="inverse-base-y"></div>
-            <div class="frame-value"><span>Z: </span><input type="text" id="inverse-base-z"></div>
+          <div class="panel toolbar" id="inverse-toolbar">
+            <a href="#" class="button clear" id="inverse-clear" title="Очистить">Очистить</a>
+            <a href="#" class="button run" id="inverse-run" title="Решить задачу">Обработать</a>
           </div>
 
-        </div>
+          <div class="panel" id="inverse-panel">
 
-        <div class="panel" id="panel-inverse-target">
+            <div class="panel" id="panel-inverse-base">
 
-          <div class="panel-title toggle menu-item" id="inverse-target-button" title="Вставить из каталога">Координаты цели</div>
+              <a href="#" class="panel-title toggle menu-item" id="inverse-base-button" title="Вставить из каталога">Координаты базы</a>
 
-          <div class="frame">
-            <div class="frame-value"><span>X: </span><input type="text" id="inverse-target-x"></div>
-            <div class="frame-value"><span>Y: </span><input type="text" id="inverse-target-y"></div>
-            <div class="frame-value"><span>Z: </span><input type="text" id="inverse-target-z"></div>            
+              <div class="frame">
+                <div class="frame-value"><span>X: </span><input type="text" id="inverse-base-x"></div>
+                <div class="frame-value"><span>Y: </span><input type="text" id="inverse-base-y"></div>
+                <div class="frame-value"><span>Z: </span><input type="text" id="inverse-base-z"></div>
+              </div>
+
+            </div>
+
+            <div class="panel" id="panel-inverse-target">
+
+              <a href="#" class="panel-title toggle menu-item" id="inverse-target-button" title="Вставить из каталога">Координаты цели</a>
+
+              <div class="frame">
+                <div class="frame-value"><span>X: </span><input type="text" id="inverse-target-x"></div>
+                <div class="frame-value"><span>Y: </span><input type="text" id="inverse-target-y"></div>
+                <div class="frame-value"><span>Z: </span><input type="text" id="inverse-target-z"></div>            
+              </div>
+
+            </div>
+
+            <div class="panel" id="panel-inverse-result">
+
+              <div class="panel-title">Результаты обработки</div>
+
+              <div class="frame">
+                <div class="frame-label">Дирекционный угол</div>
+                <div class="frame-value" id="inverse-direction">359.5959</div>
+              </div>
+
+              <div class="frame">
+                <div class="frame-label">Горизонтальное проложение</div>
+                <div class="frame-value" id="inverse-hor-distance">99.999</div>
+              </div>
+
+              <div class="frame">
+                <div class="frame-label">Наклонное расстояние</div>
+                <div class="frame-value" id="inverse-inc-distance">359.5959</div>
+              </div>
+
+              <div class="frame">
+                <div class="frame-label">Угол наклона</div>
+                <div class="frame-value" id="inverse-tilt">-9.5959</div>
+              </div>
+
+              <div class="frame">
+                <div class="frame-label">Превышение цели над базой</div>
+                <div class="frame-value" id="inverse-elevation">-99.999</div>
+              </div>
+
+            </div>
           </div>
-
-        </div>
-
-        <div class="panel" id="panel-inverse-result">
-
-          <div class="panel-title">Результаты обработки</div>
-
-          <div class="frame">
-            <div class="frame-label">Дирекционный угол</div>
-            <div class="frame-value" id="inverse-direction">359.5959</div>
-          </div>
-
-          <div class="frame">
-            <div class="frame-label">Горизонтальное проложение</div>
-            <div class="frame-value" id="inverse-hor-distance">99.999</div>
-          </div>
-
-          <div class="frame">
-            <div class="frame-label">Наклонное расстояние</div>
-            <div class="frame-value" id="inverse-inc-distance">359.5959</div>
-          </div>
-
-          <div class="frame">
-            <div class="frame-label">Угол наклона</div>
-            <div class="frame-value" id="inverse-tilt">-9.5959</div>
-          </div>
-
-          <div class="frame">
-            <div class="frame-label">Превышение цели над базой</div>
-            <div class="frame-value" id="inverse-elevation">-99.999</div>
-          </div>
-
-        </div>
-      </div>
 
       
         `;

@@ -699,8 +699,12 @@ export class SurveyController {
       listSurveyStations.innerHTML = '';
 
       for(let i = 0; i < this.#surveyService.size(); i++) {
-        let station = this.#getElementSurveyStation(i);
-        listSurveyStations.append(station);
+        let menuItem = document.createElement('a');
+        menuItem.className = "menu-item";
+        menuItem.href = "#";
+        menuItem.setAttribute('data-station-id', i);
+        menuItem.innerHTML = this.#surveyService.getStationName(i);
+        listSurveyStations.append(menuItem);
       }
     }
   }
@@ -731,24 +735,6 @@ export class SurveyController {
     reportExtractPol.value = this.#surveyService.getReportExtractPol().join('\n');
   }
 
-
-  /**
-   * Gets element for list of survey stations
-   * @param {number} indexStation 
-   * @returns {HtmlElement} 
-   */
-  #getElementSurveyStation(indexStation) {
-        let station = document.createElement('li');
-        let menuItem = document.createElement('a');
-        menuItem.className = "menu-item";
-        menuItem.href = "#";
-        menuItem.setAttribute('data-station-id', indexStation);
-        menuItem.innerHTML = this.#surveyService.getStationName(indexStation);
-        station.append(menuItem);
-        return station;
-
-  }
-
   /**
    * Creates and displays a list of DOM elements 
    * of all measurements for a station with the currentStation index
@@ -758,21 +744,7 @@ export class SurveyController {
       let listMeasurements = document.getElementById("list-measurements");
       listMeasurements.innerHTML = '';
       for(let i = 0; i < this.#surveyService.measurementSize(this.#currentSurveyStation); i++) {
-        let row = this.#getElementMeasurement(this.#currentSurveyStation, i);
-        listMeasurements.append(row);
 
-      }
-
-    }
-  }
-
-  /**
-   * Gets row for measurement table
-   * @param {number} indexStation 
-   * @param {number} indexMeasurement 
-   * @returns 
-   */
-  #getElementMeasurement(indexStation, indexMeasurement) {
         let row = document.createElement('tr');
 
         let sell = document.createElement('td');
@@ -781,8 +753,8 @@ export class SurveyController {
         // item.className = "menu-item";
         item.size = "10";
         item.setAttribute('data-target', 'name');
-        item.setAttribute('data-measurement-id', indexMeasurement);
-        item.value = this.#surveyService.getTargetName(indexStation, indexMeasurement);
+        item.setAttribute('data-measurement-id', i);
+        item.value = this.#surveyService.getTargetName(this.#currentSurveyStation, i);
         sell.append(item);
         row.append(sell);
 
@@ -792,8 +764,8 @@ export class SurveyController {
         // item.className = "menu-item";
         item.size = "10";
         item.setAttribute('data-target', 'direction');
-        item.setAttribute('data-measurement-id', indexMeasurement);
-        item.value = this.#surveyService.getTargetDirection(indexStation, indexMeasurement);
+        item.setAttribute('data-measurement-id', i);
+        item.value = this.#surveyService.getTargetDirection(this.#currentSurveyStation, i);
         sell.append(item);
         row.append(sell);
 
@@ -803,8 +775,8 @@ export class SurveyController {
         // item.className = "menu-item";
         item.size = "10";
         item.setAttribute('data-target', 'distance');
-        item.setAttribute('data-measurement-id', indexMeasurement);
-        item.value = this.#surveyService.getTargetDistance(indexStation, indexMeasurement);
+        item.setAttribute('data-measurement-id', i);
+        item.value = this.#surveyService.getTargetDistance(this.#currentSurveyStation, i);
         sell.append(item);
         row.append(sell);
 
@@ -814,8 +786,8 @@ export class SurveyController {
         // item.className = "menu-item";
         item.size = "10";
         item.setAttribute('data-target', 'tilt');
-        item.setAttribute('data-measurement-id', indexMeasurement);
-        item.value = this.#surveyService.getTargetTiltAngle(indexStation, indexMeasurement);
+        item.setAttribute('data-measurement-id', i);
+        item.value = this.#surveyService.getTargetTiltAngle(this.#currentSurveyStation, i);
         sell.append(item);
         row.append(sell);
 
@@ -825,12 +797,19 @@ export class SurveyController {
         // item.className = "menu-item";
         item.size = "10";
         item.setAttribute('data-target', 'height');
-        item.setAttribute('data-measurement-id', indexMeasurement);
-        item.value = this.#surveyService.getTargetHeight(indexStation, indexMeasurement);
+        item.setAttribute('data-measurement-id', i);
+        item.value = this.#surveyService.getTargetHeight(this.#currentSurveyStation, i);
         sell.append(item);
         row.append(sell);
+        // let row = this.#getElementMeasurement(this.#currentSurveyStation, i);
 
-        return row;
+
+
+        listMeasurements.append(row);
+
+      }
+
+    }
   }
 
   /**

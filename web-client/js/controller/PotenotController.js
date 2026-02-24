@@ -28,58 +28,56 @@ export class PotenotController {
         let content  = document.getElementById("content");
 
         content.innerHTML = `
-      <div class="panel toolbar" id="potenot-toolbar">
-        <div class="button clear" id="potenot-clear" title="Очистить">Очистить</div>
-        <div class="button run" id="potenot-run" title="Решить задачу">Обработать</div>
-      </div>
-
-      <div class="panel" id="potenot-panel">
-
-        <div class="panel" id="panel-potenot-basis">
-
-          <div class="panel-title">Исходные данные</div>
-
-          <div class="frame">
-            <div class="frame-label toggle menu-item" id="potenot-first-button" title="Вставить из каталога">Координаты точки</div>
-            <div class="frame-value"><span>X: </span><input type="text" id="potenot-first-x"></div>
-            <div class="frame-value"><span>Y: </span><input type="text" id="potenot-first-y"></div>
-            <div class="frame-label">Направление на точку</div>
-            <div class="frame-value"><input type="text" id="potenot-first-direction"></div>
+          <div class="panel toolbar" id="potenot-toolbar">
+            <a href="#" class="button clear" id="potenot-clear" title="Очистить">Очистить</a>
+            <a href="#" class="button run" id="potenot-run" title="Решить задачу">Обработать</a>
           </div>
 
-          <div class="frame">
-            <div class="frame-label toggle menu-item" id="potenot-second-button" title="Вставить из каталога">Координаты точки</div>
-            <div class="frame-value"><span>X: </span><input type="text" id="potenot-second-x"></div>
-            <div class="frame-value"><span>Y: </span><input type="text" id="potenot-second-y"></div>
-            <div class="frame-label">Направление на точку</div>
-            <div class="frame-value"><input type="text" id="potenot-second-direction"></div>
+          <div class="panel" id="potenot-panel">
+
+            <div class="panel" id="panel-potenot-basis">
+
+              <div class="panel-title">Исходные данные</div>
+
+              <div class="frame">
+                <a href="#" class="frame-label toggle menu-item" id="potenot-first-button" title="Вставить из каталога">Координаты точки</a>
+                <div class="frame-value"><span>X: </span><input type="text" id="potenot-first-x"></div>
+                <div class="frame-value"><span>Y: </span><input type="text" id="potenot-first-y"></div>
+                <div class="frame-label">Направление на точку</div>
+                <div class="frame-value"><input type="text" id="potenot-first-direction"></div>
+              </div>
+
+              <div class="frame">
+                <a href="#" class="frame-label toggle menu-item" id="potenot-second-button" title="Вставить из каталога">Координаты точки</a>
+                <div class="frame-value"><span>X: </span><input type="text" id="potenot-second-x"></div>
+                <div class="frame-value"><span>Y: </span><input type="text" id="potenot-second-y"></div>
+                <div class="frame-label">Направление на точку</div>
+                <div class="frame-value"><input type="text" id="potenot-second-direction"></div>
+              </div>
+
+              <div class="frame">
+                <a href="#" class="frame-label toggle menu-item" id="potenot-third-button" title="Вставить из каталога">Координаты точки</a>
+                <div class="frame-value"><span>X: </span><input type="text" id="potenot-third-x"></div>
+                <div class="frame-value"><span>Y: </span><input type="text" id="potenot-third-y"></div>
+                <div class="frame-label">Направление на точку</div>
+                <div class="frame-value"><input type="text" id="potenot-third-direction"></div>
+              </div>
+
+            </div>
+
+            <div class="panel" id="panel-potenot-result">
+
+              <div class="panel-title">Результаты обработки</div>
+
+              <div class="frame">
+                <div class="frame-label">Координаты определяемой точки</div>
+                <div id="potenot-base-x" class="frame-value">X: 2333444.555</div>
+                <div id="potenot-base-y" class="frame-value">Y: 2333444.555</div>
+              </div>
+
+            </div>
+
           </div>
-
-          <div class="frame">
-            <div class="frame-label toggle menu-item" id="potenot-third-button" title="Вставить из каталога">Координаты точки</div>
-            <div class="frame-value"><span>X: </span><input type="text" id="potenot-third-x"></div>
-            <div class="frame-value"><span>Y: </span><input type="text" id="potenot-third-y"></div>
-            <div class="frame-label">Направление на точку</div>
-            <div class="frame-value"><input type="text" id="potenot-third-direction"></div>
-          </div>
-
-        </div>
-
-        <div class="panel" id="panel-potenot-result">
-
-          <div class="panel-title">Результаты обработки</div>
-
-          <div class="frame">
-            <div class="frame-label">Координаты определяемой точки</div>
-            <div id="potenot-base-x" class="frame-value">X: 2333444.555</div>
-            <div id="potenot-base-y" class="frame-value">Y: 2333444.555</div>
-          </div>
-
-        </div>
-
-      </div>
-
-
         
         `;
         

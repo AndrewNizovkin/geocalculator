@@ -24,13 +24,11 @@ export class BasePointController {
 
         content.innerHTML = `
       <div class="panel toolbar" id="points-toolbar">
-        <div class="button" id="points-clear" title="Удалить все точки">Очистить</div>
-        <div class="button" id="points-remove" title="Удалить все точки">Удалить</div>
-        <div class="button" id="points-add" title="Добавить новую точку">Добавить</div>
-        <div class="button" id="points-file" title="Добавить из файла">
-          <input type="file" id="points-open-input" accept=".kat">
-          Открыть
-        </div>
+        <a href="#" class="button" id="points-clear" title="Удалить все точки">Очистить</a>
+        <a href="#" class="button" id="points-remove" title="Удалить текущую">Удалить</a>
+        <a href="#" class="button" id="points-add" title="Добавить новую точку">Добавить</a>
+        <a href="#" class="button" id="points-file" title="Добавить из файла">Открыть</a>
+        <input type="file" id="points-open-input" accept=".kat">
       </div>
 
       <div class="panel" id="panel-points">
@@ -42,11 +40,10 @@ export class BasePointController {
               <th>Y</th>
               <th>Z</th>
             </thead>
-            <tbody id="list-points">
-            </tbody>
-
+            <tbody id="list-points"></tbody>
           </table>            
         </div>
+
 
       </div>
         

@@ -27,80 +27,80 @@ export class DirectController {
   loadPageDirect() {
       let content = document.getElementById("content");
       content.innerHTML = `
-      <div class="toolbar panel" id="direct-toolbar">
-        <div class="button clear" title="Очистить" id="direct-clear">Очистить</div>
-        <div class="button run" title="Решить задачу" id="direct-run">Обработать</div>
-      </div>
+        <div class="toolbar panel" id="direct-toolbar">
+          <a href="#" class="button clear" title="Очистить" id="direct-clear">Очистить</a>
+          <a href="#" class="button run" title="Решить задачу" id="direct-run">Обработать</a>
+        </div>
 
-      <div class="panel" id="direct-panel">
+        <div class="panel" id="direct-panel">
 
-        <div class="panel" id="panel-direct-basis">
+          <div class="panel" id="panel-direct-basis">
 
-          <div class="panel-title">Параметры базиса</div>
+            <div class="panel-title">Параметры базиса</div>
 
-          <div class="frame">
-            <div class="frame-label menu-item toggle" id="direct-base-button">Координаты базы</div>
-            <div class="frame-value"><span>X: </span><input type="text" id="direct-base-x"></div>
-            <div class="frame-value"><span>Y: </span><input type="text" id="direct-base-y"></div>
-            <div class="frame-value"><span>Z: </span><input type="text" id="direct-base-z"></div>
+            <div class="frame">
+              <a href="#" class="frame-label menu-item toggle" title="Вставить из каталога" id="direct-base-button">Координаты базы</a>
+              <div class="frame-value"><span>X: </span><input type="text" id="direct-base-x"></div>
+              <div class="frame-value"><span>Y: </span><input type="text" id="direct-base-y"></div>
+              <div class="frame-value"><span>Z: </span><input type="text" id="direct-base-z"></div>
+            </div>
+
+            <div class="frame">
+              <a href="#" class="frame-label menu-item toggle" title="Вставить из каталога" id="direct-landmark-button">Координаты ориентира</a>
+              <div class="frame-value"><span>X: </span><input type="text" id="direct-landmark-x"></div>
+              <div class="frame-value"><span>Y: </span><input type="text" id="direct-landmark-y"></div>
+            </div>
+
           </div>
 
-          <div class="frame">
-            <div class="frame-label menu-item toggle" id="direct-landmark-button">Координаты ориентира</div>
-            <div class="frame-value"><span>X: </span><input type="text" id="direct-landmark-x"></div>
-            <div class="frame-value"><span>Y: </span><input type="text" id="direct-landmark-y"></div>
+          <div class="panel" id="panel-direct-measurement">
+
+            <div class="panel-title">Измерения</div>
+
+            <div class="frame">
+              <div class="frame-label">Направление на ориентир</div>
+              <div class="frame-value"><input type="text" id="direct-landmark-direction"></div>
+            </div>
+
+            <div class="frame">
+              <div class="frame-label">Высота инструмента над точкой</div>
+              <div class="frame-value"><input type="text" id="direct-base-height"></div>
+            </div>
+
+            <div class="frame">
+              <div class="frame-label">Направление на цель</div>
+              <div class="frame-value"><input type="text" id="direct-target-direction"></div>
+            </div>
+
+            <div class="frame">
+              <div class="frame-label">Наклонное расстояние до цели</div>
+              <div class="frame-value"><input type="text" id="direct-target-distance"></div>
+            </div>
+
+            <div class="frame">
+              <div class="frame-label">Угол наклона</div>
+              <div class="frame-value"><input type="text" id="direct-target-tilt"></div>
+            </div>
+
+            <div class="frame">
+              <div class="frame-label">Высота цели над определяемой точкой</div>
+              <div class="frame-value"><input type="text" id="direct-target-height"></div>
+            </div>
+
+          </div>
+
+          <div class="panel" id="panel-direct-result">
+            <div class="panel-title">Результаты обработки</div>
+            <div class="frame">
+              <div class="frame-label">Координаты цели</div>
+              <div class="frame-value" id="direct-target-x">X: </div>
+              <div class="frame-value" id="direct-target-y">Y: </div>
+              <div class="frame-value" id="direct-target-z">Z: </div>
+            </div>
+
           </div>
 
         </div>
-
-        <div class="panel" id="panel-direct-measurement">
-
-          <div class="panel-title">Измерения</div>
-
-          <div class="frame">
-            <div class="frame-label">Направление на ориентир</div>
-            <div class="frame-value"><input type="text" id="direct-landmark-direction"></div>
-          </div>
-
-          <div class="frame">
-            <div class="frame-label">Высота инструмента над точкой</div>
-            <div class="frame-value"><input type="text" id="direct-base-height"></div>
-          </div>
-
-          <div class="frame">
-            <div class="frame-label">Направление на цель</div>
-            <div class="frame-value"><input type="text" id="direct-target-direction"></div>
-          </div>
-
-          <div class="frame">
-            <div class="frame-label">Наклонное расстояние до цели</div>
-            <div class="frame-value"><input type="text" id="direct-target-distance"></div>
-          </div>
-
-          <div class="frame">
-            <div class="frame-label">Угол наклона</div>
-            <div class="frame-value"><input type="text" id="direct-target-tilt"></div>
-          </div>
-
-          <div class="frame">
-            <div class="frame-label">Высота цели над определяемой точкой</div>
-            <div class="frame-value"><input type="text" id="direct-target-height"></div>
-          </div>
-
-        </div>
-
-        <div class="panel" id="panel-direct-result">
-          <div class="panel-title">Результаты обработки</div>
-          <div class="frame">
-            <div class="frame-label">Координаты цели</div>
-            <div class="frame-value" id="direct-target-x">X: </div>
-            <div class="frame-value" id="direct-target-y">Y: </div>
-            <div class="frame-value" id="direct-target-z">Z: </div>
-          </div>
-
-        </div>
-
-      </div>
 
       
       `;

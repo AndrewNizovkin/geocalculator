@@ -137,6 +137,12 @@ input[type="text"] {
     padding-bottom: 5px;
 }
 
+a.panel-title {
+    display: block;
+    text-decoration: none;
+}
+
+
 .toolbar {
     display: flex;
     flex-direction: row;
@@ -146,6 +152,17 @@ input[type="text"] {
     /* margin: 2px;
     border: 2px outset #bab6b7; */
 }
+
+.toolbar a {
+    display: block;
+    text-decoration: none;
+}
+
+.frame a {
+    display: block;
+    text-decoration: none;
+}
+
 
 .button {
     /* height: 40px; */

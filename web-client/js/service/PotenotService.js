@@ -29,13 +29,13 @@ export class PotenotService {
     clearAll() {
         this.#potenot.firstX = "0.000";
         this.#potenot.firstY = "0.000";
-        this.#potenot.firstDirection = "0.000";
+        this.#potenot.firstDirection = "0.0000";
         this.#potenot.secondX = "0.000";
         this.#potenot.secondY = "0.000";
-        this.#potenot.secondDirection = "0.000";
+        this.#potenot.secondDirection = "0.0000";
         this.#potenot.thirdX = "0.000";
         this.#potenot.thirdY = "0.000";
-        this.#potenot.thirdDirection = "0.000";                
+        this.#potenot.thirdDirection = "0.0000";                
         this.#potenot.baseX = "";
         this.#potenot.baseY = "";
         

@@ -76,8 +76,9 @@ border: 2px solid red;
     /* background-color: red; */
     display: flex;
     flex-direction: column;
+    flex: 1 1 auto;
     width: auto;
-    height: 40%;
+    height: 50%;
     overflow: auto;
 }
 
@@ -87,11 +88,12 @@ border: 2px solid red;
 }
 
 .row-residual :first-child {
+    display: flex;
     font-size: 1.2em;
     padding: 5px;
-    width: 60%;
+    width: 10em;
+    flex: 0 0 auto;
     text-align: right;
-    flex: 1 1 auto;
 }
 
 .row-residual :last-child {
@@ -107,7 +109,7 @@ border: 2px solid red;
     /* background-color: green; */
     display: flex;
     width: auto;
-    height: 60%;
+    height: 50%;
 }
 
 /* .panel-polygon, .panel-polygon-plan, .panel-polygon-processing, .panel-polygon-residuals, .scrollpanel-polygon {
