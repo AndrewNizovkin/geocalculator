@@ -64,7 +64,49 @@ export class BasePointController {
         tableBasePoints.innerHTML = '';
         
         for (let i = 0; i < this.#basePointService.size(); i++) {
-          let row = this.#getElementBasePoint(i);
+
+          let row = document.createElement('tr');
+
+          let cell = document.createElement('td');
+          let item = document.createElement('input');
+          item.type = "text";
+          item.setAttribute("data-point-id", i);
+          item.setAttribute("data-target", "point-name");
+          item.size = "8";
+          item.value = this.#basePointService.getBasePointName(i);
+          cell.append(item);
+          row.append(cell);
+
+          cell = document.createElement('td');
+          item = document.createElement('input');
+          item.type = "text";
+          item.setAttribute("data-point-id", i);
+          item.setAttribute("data-target", "point-x");
+          item.size = "10";
+          item.value = this.#basePointService.getBasePointX(i);
+          cell.append(item);
+          row.append(cell);
+
+          cell = document.createElement('td');
+          item = document.createElement('input');
+          item.type = "text";
+          item.setAttribute("data-point-id", i);
+          item.setAttribute("data-target", "point-y");
+          item.size = "10";
+          item.value = this.#basePointService.getBasePointY(i);
+          cell.append(item);
+          row.append(cell);
+
+          cell = document.createElement('td');
+          item = document.createElement('input');
+          item.type = "text";
+          item.setAttribute("data-point-id", i);
+          item.setAttribute("data-target", "point-z");
+          item.size = "7";
+          item.value = this.#basePointService.getBasePointZ(i);
+          cell.append(item);
+          row.append(cell);
+
           tableBasePoints.append(row);
         }
       }

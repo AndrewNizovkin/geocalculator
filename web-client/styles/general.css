@@ -5,8 +5,8 @@
 html, body {
     padding: 0;
     margin: 0;
-    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
-    font-family: sans-serif, Verdana;
+    font-family: sans-serif, Verdana, Geneva, Tahoma;
+    /* font-family: sans-serif, Verdana; */
 }
 
 :root {
@@ -61,7 +61,7 @@ input[type="text"] {
     display: none; /* Изначально скрытый */
 }
 
-.content {
+#content {
     display: flex;
     flex-direction: column;
     height: auto;
@@ -206,9 +206,10 @@ textarea {
 
     }
 
-    .content {
+    #content {
         flex-direction: column;
-        flex: 1 1 80%;
+        width: 65em;
+        flex: 0 0 auto;
     }
     
 }

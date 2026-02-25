@@ -86,13 +86,13 @@ export class MainController {
         let content = document.getElementById("content");
 
         content.innerHTML = `
-      <div class="main-title">
+      <div class="panel" id="main-title">
         <h3>Задачи</h3>
         Геодезический калькулятор Тахеопорт предназначен для решения прикладных 
         задач, встречающихся в практике топографов, геодезистов и смежных с ними профессий.
       </div>
 
-      <div class="panel-main">
+      <div class="panel" id="panel-main">
 
         <div class="main-banner"></div>
         <div class="main-banner"></div>

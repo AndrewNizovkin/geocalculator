@@ -152,18 +152,15 @@ table > caption {
     text-align: center;
 }
 
-.panel-main, .main-title {
-    /* background-color: var(--container-bg-color); */
-    border: 2px outset #bab6b7;
-    margin: 2px;
-    /* color: var(--text-color); */
-}
 
-.main-title {
+#main-title {
+    /* width: 50em; */
+    /* flex: 0 0 auto; */
     font-size: 1.4em;
 }
 
-.panel-main {
+
+#panel-main {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -221,15 +218,25 @@ table > caption {
     .nav {
         flex-direction: column;
         order: 1;
+        flex: 0 0 auto;
     }
 
-    .content {
+    #content {
         order: 2;
+        /* width: auto; */
+        /* flex: 0 0 auto; */
     }
 
     .sidebar {
         order: 4;
+        flex: 1 1 auto;
     }
+
+    /* #panel-main { */
+        /* flex-direction: column; */
+        /* width: 50em; */
+        /* flex: 0 0 auto; */
+    /* } */
 
     .nav {
         position: static;
@@ -253,6 +260,19 @@ table > caption {
         display: flex;
         flex-direction: row;
     }
+
+    #main-title {
+        width: auto;
+        flex: 0 0 auto;
+        font-size: 1.4em;
+    }
+
+    #panel-main {
+        width: auto;
+        flex: 0 0 auto;
+        font-size: 1.4em;
+    }
+
 
     .title > .menu-item {
         padding: 10px;
@@ -289,20 +309,10 @@ table > caption {
         border-radius: 10px;        
     }
 
-/*     
-    #panel-survey {
-        flex-direction: row;
-        flex: 1 1 auto;
-    } */
 
-    .nav, .sidebar {
+
+    .nav {
     min-width: 10em;
     }
-
-
-    /* .panel-survey {
-        flex-direction: row;
-        flex: 1 1 auto;
-    } */
 
 }

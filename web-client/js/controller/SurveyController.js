@@ -79,35 +79,35 @@ export class SurveyController {
               </div>
               <div class="station-row">
                 <div>X:</div>
-                <input type="text" id="survey-station-x" size="12" placeholder="0.000">
+                <input type="text" id="survey-station-x" size="10" placeholder="0.000">
               </div>
               <div class="station-row">
                 <div>Y:</div>
-                <input type="text" id="survey-station-y" size="12" placeholder="0.000">
+                <input type="text" id="survey-station-y" size="10" placeholder="0.000">
               </div>
               <div class="station-row">
                 <div>Z:</div>
-                <input type="text" id="survey-station-z" size="12" placeholder="0.000">
+                <input type="text" id="survey-station-z" size="10" placeholder="0.000">
               </div>
               <div class="station-row">
                 <div>i:</div>
-                <input type="text" id="survey-station-height" size="12" placeholder="0.000">
+                <input type="text" id="survey-station-height" size="10" placeholder="0.000">
               </div>
               <div class="station-row">
                 <div>Ор.Напр.</div>
-                <input type="text" id="survey-or-direction" size="12" value="0.0000">
+                <input type="text" id="survey-or-direction" size="10" value="0.0000">
               </div>
               <div class="station-row">
                 <div class="toggle menu-item" id="button-or-name" title="Вставить из каталога">Ориентир</div>
-                <input type="text" id="survey-or-name" size="12" placeholder="noname">
+                <input type="text" id="survey-or-name" size="10" placeholder="noname">
               </div>
               <div class="station-row">
                 <div>X:</div>
-                <input type="text" id="survey-or-x" size="12" placeholder="0.000">
+                <input type="text" id="survey-or-x" size="10" placeholder="0.000">
               </div>
               <div class="station-row">
                 <div>Y:</div>
-                <input type="text" id="survey-or-y" size="12" placeholder="0.000">
+                <input type="text" id="survey-or-y" size="10" placeholder="0.000">
               </div>          
 
             </div>
@@ -750,8 +750,7 @@ export class SurveyController {
         let sell = document.createElement('td');
         let item = document.createElement('input');
         item.type = "text";
-        // item.className = "menu-item";
-        item.size = "10";
+        item.size = "8";
         item.setAttribute('data-target', 'name');
         item.setAttribute('data-measurement-id', i);
         item.value = this.#surveyService.getTargetName(this.#currentSurveyStation, i);
@@ -761,8 +760,7 @@ export class SurveyController {
         sell = document.createElement('td');
         item = document.createElement('input');
         item.type = "text";
-        // item.className = "menu-item";
-        item.size = "10";
+        item.size = "8";
         item.setAttribute('data-target', 'direction');
         item.setAttribute('data-measurement-id', i);
         item.value = this.#surveyService.getTargetDirection(this.#currentSurveyStation, i);
@@ -772,8 +770,7 @@ export class SurveyController {
         sell = document.createElement('td');
         item = document.createElement('input');
         item.type = "text";
-        // item.className = "menu-item";
-        item.size = "10";
+        item.size = "6";
         item.setAttribute('data-target', 'distance');
         item.setAttribute('data-measurement-id', i);
         item.value = this.#surveyService.getTargetDistance(this.#currentSurveyStation, i);
@@ -783,8 +780,7 @@ export class SurveyController {
         sell = document.createElement('td');
         item = document.createElement('input');
         item.type = "text";
-        // item.className = "menu-item";
-        item.size = "10";
+        item.size = "6";
         item.setAttribute('data-target', 'tilt');
         item.setAttribute('data-measurement-id', i);
         item.value = this.#surveyService.getTargetTiltAngle(this.#currentSurveyStation, i);
@@ -794,16 +790,12 @@ export class SurveyController {
         sell = document.createElement('td');
         item = document.createElement('input');
         item.type = "text";
-        // item.className = "menu-item";
-        item.size = "10";
+        item.size = "6";
         item.setAttribute('data-target', 'height');
         item.setAttribute('data-measurement-id', i);
         item.value = this.#surveyService.getTargetHeight(this.#currentSurveyStation, i);
         sell.append(item);
         row.append(sell);
-        // let row = this.#getElementMeasurement(this.#currentSurveyStation, i);
-
-
 
         listMeasurements.append(row);
 

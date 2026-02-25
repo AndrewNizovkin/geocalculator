@@ -55,21 +55,14 @@ table > caption {
 }
 
 #survey-panel-info {
-    /* display: none;
-    flex-direction: column; */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
     height: 150px;
     z-index: 1002;
-    /* position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1001; */
-    /* padding: 10px; */
     border-radius: 10px;
-    
+    box-shadow: 10px 4px 10px 3px #888;
 
 }
 
@@ -133,7 +126,19 @@ table > caption {
 #panel-measurements {
     display: flex;
     flex-direction: column;
+    width: auto;
+    overflow: auto;
+    /* justify-content: safe center; */
 }
+
+#panel-measurements :last-child {
+    align-self: safe center;
+}
+
+/* #toolbar-survey-measurements {
+    flex: 1 1 auto;
+} */
+
 
 #panel-stations {
     display: flex;
@@ -142,7 +147,7 @@ table > caption {
 }
 
 #scrollpanel-stations {
-    height: 25vh;
+    height: 20vh;
     flex: 1 1 auto;
     overflow: auto;
 }
@@ -160,12 +165,23 @@ table > caption {
 
 #scrollpanel-measurements {
     height: 40em;
-    flex: 1 1 auto;
+    flex: 0 0 auto;
+    /* justify-content: safe center; */
     overflow: auto;
 }
 
+.table-measurements {
+    flex: 0 0 auto;
+    border: 2px outset #bab6b7;
+}
+
+.table-measurements th {
+    font-weight: 100;
+    font-size: 0.9em;
+}
+
 .table-measurements input {
-    width: 8em;
+    width: auto;
 }
 
 .menu-item:hover {
@@ -179,6 +195,7 @@ table > caption {
     flex-direction: row;
     align-items: center;
     flex: 0 0 auto;
+    width: auto;
     height: 30px;
     margin: 2px;
     border: 2px outset #bab6b7;
@@ -271,12 +288,13 @@ table > caption {
         display: flex;
         flex-direction: row;
         flex: 1 1 auto;
+        /* justify-content: safe space-around; */
     }
 
     #panel-basis {
         display: flex;
         flex-direction: row;
-        width: 40%;
+        width: 45%;
         flex: 0 0 auto;
         overflow: auto;
     }
@@ -287,8 +305,8 @@ table > caption {
 
     #panel-stations {
         display: flex;
-        width: auto;
-        flex: 1 1 auto;
+        width: 40%;
+        flex: 0 0 auto;
     }
 
     #scrollpanel-stations {
@@ -304,6 +322,11 @@ table > caption {
         flex: 0 0 auto;
         overflow: auto;
     }
+
+    /* #panel-measurements :last-child {
+        align-self: safe center;
+    } */
+    
 
     #scrollpanel-measurements {
     height: 60em;
