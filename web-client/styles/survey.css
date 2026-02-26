@@ -176,8 +176,8 @@ table > caption {
 }
 
 .table-measurements th {
-    font-weight: 100;
-    font-size: 0.9em;
+    font-weight: 400;
+    /* font-size: 0.9em; */
 }
 
 .table-measurements input {
@@ -196,22 +196,54 @@ table > caption {
     align-items: center;
     flex: 0 0 auto;
     width: auto;
-    height: 30px;
+    height: 40px;
     margin: 2px;
     border: 2px outset #bab6b7;
 }
 
+.survey-toolbar a {
+    display: block;
+    text-decoration: none;
+}
+
+
 .survey-button {
-    height: 20px;
-    width: 20px;
-    border: 1px outset #bab6b7;
-    margin-left: 5px;
+    height: 30px;
+    width: 30px;
+    border: 2px outset #bab6b7;
+    border-radius: 10px;
+    margin-left: 4px;
+    margin-right: 4px;
+    background-size: contain;
+    opacity: 0.7;
+    box-shadow: 0px 0px 0px 0px #3e5283;    
+    /* transition-property: height, width, opasity, margin-right, box-shadow; */
+    /* transition-duration: 100ms; */
+}
+
+@keyframes button-focus {
+    from {
+        height: 30px;
+        width: 30px;
+        margin-left: 4px;
+        margin-right: 4px;
+        opacity: 0.7;
+        box-shadow: 0px 0px 0px 0px #3e5283;    
+
+    }
+    to {
+        height: 34px;
+        width: 34px;
+        margin-left: 2px;
+        margin-right: 2px;
+        opacity: 1.0;
+        box-shadow: 2px 2px 2px 0px #3e5283;
+    }
+    
 }
 
 .survey-button:hover {
-    /* height: 30px;
-    width: 30px; */
-    border: 1px inset red;
+    animation: button-focus 100ms forwards;
 }
 
 .survey-toolbar-separator {

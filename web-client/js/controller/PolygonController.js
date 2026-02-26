@@ -62,14 +62,14 @@ export class PolygonContoller {
 
                 <table class="table-polygon">
                     <thead>
-                        <th>Название</th>
-                        <th>Гор.Угол</th>
-                        <th>Гор.Длина</th>
-                        <th>Превышение</th>
-                        <th>X</th>
-                        <th>Y</th>
-                        <th>Z</th>
-                        <th>ПВОС</th>
+                        <th title="Название точки">Название</th>
+                        <th title="Горизонтальный угол левый, г.ммсс">&#946;<span>лев</span></th>
+                        <th title="Горизонтальное проложение, м.">L<span>гор</span></th>
+                        <th title="Превышение, м.">&#916;Z</th>
+                        <th title="Координата X, м.">X</th>
+                        <th title="Координата Y, м.">Y</th>
+                        <th title="Координата Z, м.">Z</th>
+                        <th title="Планово-высотная опорная сеть">ПВОС</th>
                     </thead>
                     <tbody id="list-poligon-stations">
                     </tbody>
@@ -209,7 +209,7 @@ export class PolygonContoller {
             item.type = "text";
             item.setAttribute("data-polygon-station-id", i);
             item.setAttribute("data-property", "name");
-            item.size = "10";
+            item.size = "8";
             item.value = this.#polygonService.getStationName(i);
             cell.append(item);
             row.append(cell);
@@ -220,7 +220,7 @@ export class PolygonContoller {
             item.type = "text";
             item.setAttribute("data-polygon-station-id", i);
             item.setAttribute("data-property", "hor-angle");
-            item.size = "8";
+            item.size = "7";
             if (this.#polygonService.getHorAngle(i) == "Not") {
                 item.value = '';
             } else {
@@ -235,7 +235,7 @@ export class PolygonContoller {
             item.type = "text";
             item.setAttribute("data-polygon-station-id", i);
             item.setAttribute("data-property", "hor-distance");
-            item.size = "8";
+            item.size = "5";
             if (this.#polygonService.getHorDistance(i) == "Not") {
                 item.value = '';
             } else {
@@ -250,7 +250,7 @@ export class PolygonContoller {
             item.type = "text";
             item.setAttribute("data-polygon-station-id", i);
             item.setAttribute("data-property", "elevation");
-            item.size = "7";
+            item.size = "5";
             if (this.#polygonService.getElevation(i) == "Not") {
                 item.value = '';
             } else {
@@ -305,7 +305,7 @@ export class PolygonContoller {
             item.type = "text";
             item.setAttribute("data-polygon-station-id", i);
             item.setAttribute("data-property", "z");
-            item.size = "10";
+            item.size = "6";
             item.disabled = true;
             if (this.#polygonService.getStatus(i)) {
                 if ( (i > 1) && ( i < this.#polygonService.size() - 2) ) {

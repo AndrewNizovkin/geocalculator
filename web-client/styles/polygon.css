@@ -39,11 +39,14 @@
 
 .table-polygon th {
     text-align: center;
+    font-weight: 400;
+    /* font-size: 0.9em; */
 }
 
-/* .table-polygon tr {
-    border: 2px outset #bab6b7;
-} */
+.table-polygon th span {
+    font-size: 0.8em;
+    font-style: normal;
+}
 
 .table-cell {
     display: flex;
@@ -52,11 +55,11 @@
 }
 
 .line-shift {
-    padding-top: 15px;
+    padding-top: 22px;
 }
 
 .line {
-    padding-bottom: 15px;
+    padding-bottom: 22px;
 }
 
 /* .selected {
@@ -100,7 +103,7 @@ border: 2px solid red;
     font-size: 1.2em;
     padding: 5px;
     padding-left: 20px;
-    width: 40%;
+    width: auto;
     text-align: left;
     flex: 1 1 auto;
 }
@@ -145,13 +148,13 @@ border: 2px solid red;
     #panel-polygon-residuals {
         display: flex;
         flex-direction: column;
-        width: 30%;
+        width: 40%;
         height: auto;
     }
 
     #panel-polygon-plan {
         display: flex;
-        width: 70%;
+        width: 60%;
         height: auto;
     }
     

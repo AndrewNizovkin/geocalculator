@@ -43,18 +43,17 @@ export class SurveyController {
 
       content.innerHTML = `
         <div class="survey-toolbar" id="toolbar-survey">
-          <div class="survey-button new" id="survey-new" title="Новая съёмка"></div>
-          <div class="survey-button open" id="survey-open" title="Открыть"></div>
-          <div class="survey-button import" id="survey-import" title="Импорт из файла"></div>
-          <div class="survey-toolbar-separator"></div>
-          <div class="survey-button run" id="survey-run" title="Обработать"></div>
-          <div class="survey-button view" id="survey-view" title="Просмотр результатов"></div>
-          <div class="survey-button extract" id="survey-extract" title="Извлечь полигон"></div>
+          <a href="#" class="survey-button new" id="survey-new" title="Новая съёмка"></a>
+          <a href="#" class="survey-button open" id="survey-open" title="Открыть"></a>
+          <a href="#" class="survey-button import" id="survey-import" title="Импорт из файла"></a>
+          <a href="#" class="survey-toolbar-separator"></a>
+          <a href="#" class="survey-button run" id="survey-run" title="Обработать"></a>
+          <a href="#" class="survey-button view" id="survey-view" title="Просмотр результатов"></a>
+          <a href="#" class="survey-button extract" id="survey-extract" title="Извлечь полигон"></a>
           <input type="file" id="survey-open-input" name="file" accept=".tah">
           <input type="file" id="survey-import-input" accept=".txt">
           <input type="file" id="survey-report-input" accept=".txt">
           <input type="file" id="survey-extract-input" accept=".txt">
-
         </div>
 
         <div class="panel" id="panel-survey">
@@ -62,9 +61,9 @@ export class SurveyController {
           <div class="panel" id="panel-basis">
             <div class="panel" id="panel-stations">
               <div class="survey-toolbar" id="toolbar-survey-stations">
-                <div class="survey-button delete" id="delete-station" title="Удалить станцию"></div>
-                <div class="survey-button insert-before" id="before-station" title="Вставить перед выбранной"></div>
-                <div class="survey-button insert-after" id="after-station" title="Вставить после выбранной"></div>
+                <a href="#" class="survey-button delete" id="delete-station" title="Удалить станцию"></a>
+                <a href="#" class="survey-button insert-before" id="before-station" title="Вставить перед выбранной"></a>
+                <a href="#" class="survey-button insert-after" id="after-station" title="Вставить после выбранной"></a>
               </div>
               <div class="panel" id="scrollpanel-stations">
                 <div class="list-stations" id="list-stations">
@@ -116,18 +115,18 @@ export class SurveyController {
 
           <div class="panel" id="panel-measurements">
             <div class="survey-toolbar" id="toolbar-survey-measurements">
-              <div class="survey-button delete" id="delete-measurement" title="Удалить выбранную"></div>
-              <div class="survey-button insert-before" id="before-measurement" title="Вставить перед выбранной"></div>
-              <div class="survey-button insert-after" id="after-measurement" title="Вставить после выбранной"></div>
+              <a href="#" class="survey-button delete" id="delete-measurement" title="Удалить выбранную"></a>
+              <a href="#" class="survey-button insert-before" id="before-measurement" title="Вставить перед выбранной"></a>
+              <a href="#" class="survey-button insert-after" id="after-measurement" title="Вставить после выбранной"></a>
             </div>
             <div class="panel" id="scrollpanel-measurements">
               <table class="table-measurements">
                 <thead>
-                  <th>Название</th>
-                  <th>Направление</th>
-                  <th>Расстояние</th>
-                  <th>Наклон</th>
-                  <th>Выс.Цели</th>
+                  <th title="Название пикета">Название</th>
+                  <th title="Горизонтальный угол левый, г.ммсс">&#946;</th>
+                  <th title="Расстояние наклонное, м.">L</th>
+                  <th title="Угол наклона, г.ммсс">&#965;</th>
+                  <th title="Высота цели над пикетом, м.">V</th>
                 </thead>
                 <tbody id="list-measurements">
                 </tbody>
@@ -311,6 +310,10 @@ export class SurveyController {
       let surveyReportInput = document.getElementById("survey-report-input");
       let extractInput = document.getElementById("survey-extract-input");
       //test-mode
+
+      // if (element.classList.contains('survey-button')) {
+      //   element.style.boxShadow = "0px 0px 0px 0px #3e5283";
+      // }
       
       switch(element.id) {
 
@@ -404,6 +407,10 @@ export class SurveyController {
 
     document.getElementById("toolbar-survey-stations").addEventListener('click', (event) => {
       let element = event.target;
+
+      // if (element.classList.contains('survey-button')) {
+      //   element.style.boxShadow = "0px 0px 0px 0px #3e5283";
+      // }
 
       switch(element.id) {
         
@@ -587,6 +594,10 @@ export class SurveyController {
 
     document.getElementById("toolbar-survey-measurements").addEventListener('click', (event) => {
       let element = event.target;
+
+      // if (element.classList.contains('survey-button')) {
+      //   element.style.boxShadow = "0px 0px 0px 0px #3e5283";
+      // }
 
       switch(element.id) {
 
