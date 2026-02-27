@@ -38,7 +38,7 @@ export class InverseController {
 
             <div class="panel" id="panel-inverse-base">
 
-              <a href="#" class="panel-title toggle menu-item" id="inverse-base-button" title="Вставить из каталога">Координаты базы</a>
+              <a href="#" class="panel-title menu-item" id="inverse-base-button" title="Вставить из каталога">Координаты базы</a>
 
               <div class="frame">
                 <div class="frame-value"><span>X: </span><input type="text" id="inverse-base-x"></div>
@@ -50,7 +50,7 @@ export class InverseController {
 
             <div class="panel" id="panel-inverse-target">
 
-              <a href="#" class="panel-title toggle menu-item" id="inverse-target-button" title="Вставить из каталога">Координаты цели</a>
+              <a href="#" class="panel-title menu-item" id="inverse-target-button" title="Вставить из каталога">Координаты цели</a>
 
               <div class="frame">
                 <div class="frame-value"><span>X: </span><input type="text" id="inverse-target-x"></div>
@@ -146,7 +146,7 @@ export class InverseController {
      * Creates and adds a list of base stations to the DOM
      */
     #setListBasePoints() {
-      const panelInverse = document.getElementById("inverse-panel");
+      const panelInverseBase = document.getElementById("panel-inverse-base");
       const listBasePoints = document.createElement('div');
 
       listBasePoints.className = "pop-up";
@@ -161,7 +161,7 @@ export class InverseController {
           listBasePoints.append(row);
         }
       }
-      panelInverse.append(listBasePoints);
+      panelInverseBase.append(listBasePoints);
     }
 
     /**
@@ -207,10 +207,14 @@ export class InverseController {
           let basePointId = +element.dataset.basePointId;
 
           if (this.#insertCoordinateToBase) {
+            document.getElementById("inverse-base-button").classList.toggle("toggle");
+
             this.#inverseService.saveBaseX(this.#basePointService.getBasePointX(basePointId));
             this.#inverseService.saveBaseY(this.#basePointService.getBasePointY(basePointId));
             this.#inverseService.saveBaseZ(this.#basePointService.getBasePointZ(basePointId));
           } else {
+            document.getElementById("inverse-target-button").classList.toggle("toggle");
+
             this.#inverseService.saveTargetX(this.#basePointService.getBasePointX(basePointId));
             this.#inverseService.saveTargetY(this.#basePointService.getBasePointY(basePointId));
             this.#inverseService.saveTargetZ(this.#basePointService.getBasePointZ(basePointId));
@@ -230,6 +234,7 @@ export class InverseController {
             listBasePoints.classList.toggle("open");
             overlay.classList.toggle("open");
             this.#insertCoordinateToBase = true;
+            element.classList.toggle("toggle");
             break;
 
           case "inverse-target-button":
@@ -238,6 +243,7 @@ export class InverseController {
             listBasePoints.classList.toggle("open");
             overlay.classList.toggle("open");
             this.#insertCoordinateToBase = false;
+            element.classList.toggle("toggle");
             break;
         }
       });

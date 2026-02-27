@@ -1,6 +1,6 @@
 @import './general.css';
 
-.toolbar a {
+.toolbar a, #panel-points a {
     display: block;
     text-decoration: none;
 }
@@ -21,13 +21,13 @@ input[type="file"] {
     z-index: -1;    
 }
 
-
 #panel-points table {
     border: 2px outset #bab6b7;
     flex: 0 0 auto;
 }
 
 .table-points th {
+    font-weight: 400;
     text-align: center;
 }
 

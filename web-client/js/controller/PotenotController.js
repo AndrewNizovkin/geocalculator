@@ -40,7 +40,7 @@ export class PotenotController {
               <div class="panel-title">Исходные данные</div>
 
               <div class="frame">
-                <a href="#" class="frame-label toggle menu-item" id="potenot-first-button" title="Вставить из каталога">Координаты точки</a>
+                <a href="#" class="frame-label menu-item" id="potenot-first-button" title="Вставить из каталога">Координаты точки</a>
                 <div class="frame-value"><span>X: </span><input type="text" id="potenot-first-x"></div>
                 <div class="frame-value"><span>Y: </span><input type="text" id="potenot-first-y"></div>
                 <div class="frame-label">Направление на точку</div>
@@ -48,7 +48,7 @@ export class PotenotController {
               </div>
 
               <div class="frame">
-                <a href="#" class="frame-label toggle menu-item" id="potenot-second-button" title="Вставить из каталога">Координаты точки</a>
+                <a href="#" class="frame-label menu-item" id="potenot-second-button" title="Вставить из каталога">Координаты точки</a>
                 <div class="frame-value"><span>X: </span><input type="text" id="potenot-second-x"></div>
                 <div class="frame-value"><span>Y: </span><input type="text" id="potenot-second-y"></div>
                 <div class="frame-label">Направление на точку</div>
@@ -56,7 +56,7 @@ export class PotenotController {
               </div>
 
               <div class="frame">
-                <a href="#" class="frame-label toggle menu-item" id="potenot-third-button" title="Вставить из каталога">Координаты точки</a>
+                <a href="#" class="frame-label menu-item" id="potenot-third-button" title="Вставить из каталога">Координаты точки</a>
                 <div class="frame-value"><span>X: </span><input type="text" id="potenot-third-x"></div>
                 <div class="frame-value"><span>Y: </span><input type="text" id="potenot-third-y"></div>
                 <div class="frame-label">Направление на точку</div>
@@ -182,16 +182,19 @@ export class PotenotController {
           switch (this.#insertCoordinatesTarget) {
 
             case "first":
+              document.getElementById("potenot-first-button").classList.toggle("toggle");
               this.#potenotService.saveFirstX(this.#basePointService.getBasePointX(basePointId));
               this.#potenotService.saveFirstY(this.#basePointService.getBasePointY(basePointId));
               break;
 
             case "second":
+              document.getElementById("potenot-second-button").classList.toggle("toggle");
               this.#potenotService.saveSecondX(this.#basePointService.getBasePointX(basePointId));
               this.#potenotService.saveSecondY(this.#basePointService.getBasePointY(basePointId));
               break;
 
             case "third":
+              document.getElementById("potenot-third-button").classList.toggle("toggle");
               this.#potenotService.saveThirdX(this.#basePointService.getBasePointX(basePointId));
               this.#potenotService.saveThirdY(this.#basePointService.getBasePointY(basePointId));
               break;
@@ -210,6 +213,7 @@ export class PotenotController {
             listBasePoints.classList.toggle("open");
             overlay.classList.toggle("open");
             this.#insertCoordinatesTarget = "first";
+            element.classList.toggle("toggle");
             break;
 
           case "potenot-second-button":
@@ -218,6 +222,7 @@ export class PotenotController {
             listBasePoints.classList.toggle("open");
             overlay.classList.toggle("open");
             this.#insertCoordinatesTarget = "second";
+            element.classList.toggle("toggle");
             break;
 
           case "potenot-third-button":
@@ -226,6 +231,7 @@ export class PotenotController {
             listBasePoints.classList.toggle("open");
             overlay.classList.toggle("open");
             this.#insertCoordinatesTarget = "third";
+            element.classList.toggle("toggle");
             break;
           }
       });

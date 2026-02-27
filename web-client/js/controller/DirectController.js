@@ -39,14 +39,14 @@ export class DirectController {
             <div class="panel-title">Параметры базиса</div>
 
             <div class="frame">
-              <a href="#" class="frame-label menu-item toggle" title="Вставить из каталога" id="direct-base-button">Координаты базы</a>
+              <a href="#" class="frame-label menu-item" title="Вставить из каталога" id="direct-base-button">Координаты базы</a>
               <div class="frame-value"><span>X: </span><input type="text" id="direct-base-x"></div>
               <div class="frame-value"><span>Y: </span><input type="text" id="direct-base-y"></div>
               <div class="frame-value"><span>Z: </span><input type="text" id="direct-base-z"></div>
             </div>
 
             <div class="frame">
-              <a href="#" class="frame-label menu-item toggle" title="Вставить из каталога" id="direct-landmark-button">Координаты ориентира</a>
+              <a href="#" class="frame-label menu-item" title="Вставить из каталога" id="direct-landmark-button">Координаты ориентира</a>
               <div class="frame-value"><span>X: </span><input type="text" id="direct-landmark-x"></div>
               <div class="frame-value"><span>Y: </span><input type="text" id="direct-landmark-y"></div>
             </div>
@@ -157,10 +157,15 @@ export class DirectController {
         let basePointId = +element.dataset.basePointId;
 
         if (this.#insertCoordinateToBase) {
+          document.getElementById("direct-base-button").classList.toggle("toggle");
+
           this.#directService.saveBaseX(this.#basePointService.getBasePointX(basePointId));
           this.#directService.saveBaseY(this.#basePointService.getBasePointY(basePointId));
           this.#directService.saveBaseZ(this.#basePointService.getBasePointZ(basePointId));
+
         } else {
+          document.getElementById("direct-landmark-button").classList.toggle("toggle");
+
           this.#directService.saveLandmarkX(this.#basePointService.getBasePointX(basePointId));
           this.#directService.saveLandmarkY(this.#basePointService.getBasePointY(basePointId));
         }
@@ -178,6 +183,7 @@ export class DirectController {
           listBasePoints.classList.toggle("open");
           overlay.classList.toggle("open");
           this.#insertCoordinateToBase = true;
+          element.classList.toggle("toggle");
           break;
 
         case "direct-landmark-button":
@@ -186,6 +192,7 @@ export class DirectController {
           listBasePoints.classList.toggle("open");
           overlay.classList.toggle("open");
           this.#insertCoordinateToBase = false;
+          element.classList.toggle("toggle");
           break;
       }
       

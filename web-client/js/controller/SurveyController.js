@@ -73,8 +73,8 @@ export class SurveyController {
 
             <div class="panel" id="panel-station">
               <div class="station-row">
-                <div class="toggle menu-item" id="button-station-name" title="Вставить из каталога"class="">Станция</div>
-                <input type="text" id="survey-station-name" size="12" placeholder="noname">
+                <a href="#" class="menu-item" id="button-station-name" title="Вставить из каталога"class="">Станция</a>
+                <input type="text" id="survey-station-name" size="10" placeholder="noname">
               </div>
               <div class="station-row">
                 <div>X:</div>
@@ -97,7 +97,7 @@ export class SurveyController {
                 <input type="text" id="survey-or-direction" size="10" value="0.0000">
               </div>
               <div class="station-row">
-                <div class="toggle menu-item" id="button-or-name" title="Вставить из каталога">Ориентир</div>
+                <a href="#" class="menu-item" id="button-or-name" title="Вставить из каталога">Ориентир</a>
                 <input type="text" id="survey-or-name" size="10" placeholder="noname">
               </div>
               <div class="station-row">
@@ -305,16 +305,13 @@ export class SurveyController {
       let importFileInput = document.getElementById("survey-import-input");
       let surveyOpenInput = document.getElementById("survey-open-input");
       let overlay = document.getElementById("overlay");
-      let menuImport = document.getElementById("menu-import");        
+      let menuImport = document.getElementById("menu-import");
+      let buttonSurveyImport = document.getElementById("survey-import");       
       //test-mode
       let surveyReportInput = document.getElementById("survey-report-input");
       let extractInput = document.getElementById("survey-extract-input");
       //test-mode
 
-      // if (element.classList.contains('survey-button')) {
-      //   element.style.boxShadow = "0px 0px 0px 0px #3e5283";
-      // }
-      
       switch(element.id) {
 
         case "survey-new":
@@ -326,6 +323,8 @@ export class SurveyController {
           this.#setListSurveyStations();
           this.#setSurveyStation();
           this.#setTableMeasurements();
+          // document.getElementById("survey-station-name").focus();
+          // element.blur();
           break;
 
         case "survey-open":
@@ -333,6 +332,7 @@ export class SurveyController {
           break;
 
         case "survey-import":
+          element.classList.toggle("toggle");
           let toggleRect = element.getBoundingClientRect(); 
           let toolbarSurvey = document.getElementById("toolbar-survey").getBoundingClientRect();
 
@@ -340,6 +340,8 @@ export class SurveyController {
           menuImport.style.left = `${toggleRect.left - toolbarSurvey.left + window.scrollX}px`;
           menuImport.classList.toggle("open");
           overlay.classList.toggle("open");
+          // element.blur();
+          // document.getElementById("survey-station-name").focus();
 
         break;
 
@@ -347,6 +349,7 @@ export class SurveyController {
           this.#surveyImportType = element.id;
           menuImport.classList.toggle("open");
           overlay.classList.toggle("open");
+          buttonSurveyImport.classList.toggle("toggle");
           importFileInput.setAttribute("accept", ".gsi");
           importFileInput.click();
           break;
@@ -355,6 +358,7 @@ export class SurveyController {
           this.#surveyImportType = element.id;
           menuImport.classList.toggle("open");
           overlay.classList.toggle("open");
+          buttonSurveyImport.classList.toggle("toggle");
           importFileInput.setAttribute("accept", ".raw");
           importFileInput.click();
           break;
@@ -363,6 +367,7 @@ export class SurveyController {
           this.#surveyImportType = element.id;
           menuImport.classList.toggle("open");
           overlay.classList.toggle("open");
+          buttonSurveyImport.classList.toggle("toggle");
           importFileInput.setAttribute("accept", ".txt");
           importFileInput.click();
           break;
@@ -409,7 +414,14 @@ export class SurveyController {
       let element = event.target;
 
       // if (element.classList.contains('survey-button')) {
-      //   element.style.boxShadow = "0px 0px 0px 0px #3e5283";
+      //   element.style.cssText += `
+      //   height: 30px;
+      //   width: 30px;
+      //   margin-left: 4px;
+      //   margin-right: 4px;
+      //   opacity: 0.7;
+      //   box-shadow: 0px 0px 0px 0px #3e5283;    
+      //   `;
       // }
 
       switch(element.id) {
@@ -475,6 +487,8 @@ export class SurveyController {
           let i = +element.dataset.basePointId;
 
           if (this.#insertBasePointToStation) {
+            document.getElementById("button-station-name").classList.toggle("toggle");
+
             this.#surveyService.saveStationName(
               this.#currentSurveyStation, 
               this.#basePointService.getBasePointName(i));
@@ -490,7 +504,10 @@ export class SurveyController {
               this.#currentSurveyStation, 
               this.#basePointService.getBasePointZ(i)
             );
+
           } else {
+            document.getElementById("button-or-name").classList.toggle("toggle");
+
             this.#surveyService.saveOrName(
               this.#currentSurveyStation, 
               this.#basePointService.getBasePointName(i)
@@ -512,6 +529,7 @@ export class SurveyController {
       switch (element.id) {
 
         case "button-station-name":
+          element.classList.toggle("toggle");
           listBasePoints.style.top = `${toggleRect.top - panelStationRect.top +toggleRect.height + window.scrollY}px`;
           listBasePoints.style.left = `${toggleRect.left - panelStationRect.left + window.scrollX}px`;
           listBasePoints.classList.toggle("open");
@@ -520,6 +538,7 @@ export class SurveyController {
           break;
 
         case "button-or-name":
+          element.classList.toggle("toggle");
           listBasePoints.style.top = `${toggleRect.top - panelStationRect.top +toggleRect.height + window.scrollY}px`;
           listBasePoints.style.left = `${toggleRect.left - panelStationRect.left + window.scrollX}px`;
           listBasePoints.classList.toggle("open");
@@ -892,7 +911,7 @@ export class SurveyController {
     buttonClose.addEventListener('click', () => {
       panelInfo.classList.toggle("open");
       overlay.classList.toggle("open");
-      overlay.style.zIndex = "999";
+      // overlay.style.zIndex = "999";
     });
     buttonClose.innerHTML = "Закрыть";
     panelInfo.append(buttonClose);
@@ -908,7 +927,7 @@ export class SurveyController {
   #showMessage(message) {
     const panelInfo = document.getElementById("survey-panel-info");
     const overlay = document.getElementById("overlay");
-    overlay.style.zIndex = "1001";
+    // overlay.style.zIndex = "1001";
     document.getElementById("survey-info-message").innerHTML = message;
 
     panelInfo.classList.toggle("open");

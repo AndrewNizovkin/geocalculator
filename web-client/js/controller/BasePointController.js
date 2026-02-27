@@ -35,7 +35,7 @@ export class BasePointController {
         <div class="panel" id="scrollpanel-points">
           <table class="table-points">
             <thead>
-              <th class="menu-item" id="button-sort-name">Название</th>
+              <th><a class="menu-item" id="button-sort-name" href="#">Название</a></th>
               <th>X</th>
               <th>Y</th>
               <th>Z</th>
