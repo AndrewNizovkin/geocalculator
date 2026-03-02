@@ -2,6 +2,7 @@ import { PolygonRepository } from "../repository/PolygonRepository.js";
 import { PolygonMapper } from "./mapper/PolygonMapper.js";
 import { PolygonProvider } from "./provider/PolygonProvider.js";
 import { Residuals } from "../model/Residuals.js";
+import { ValidResiduals } from "../model/ValidResiduals.js";
 
 /**
  * This class provides methods for working 
@@ -14,6 +15,7 @@ export class PolygonService {
     #polygonMapper;
     #polygonProvider;
     #residuals;
+    #validResiduals;
     #reportCatalog;
     #reportPlan;
     #reportElevation;
@@ -23,6 +25,7 @@ export class PolygonService {
         this.#polygonMapper = new PolygonMapper();
         this.#polygonProvider = new PolygonProvider();
         this.#residuals = new Residuals();
+        this.#validResiduals = new ValidResiduals();
         this.#reportCatalog = new Array();
         this.#reportPlan = new Array();
         this.#reportElevation = new Array();
@@ -309,8 +312,72 @@ export class PolygonService {
      */
     saveStatus(stationIndex, status) {
         this.#polygonRepository.saveStatus(stationIndex, status);
-    }     
+    }
+
+    /**
+     * Gets valid elevation residual of polygon
+     * @returns {string}
+     */
+    getValidElevation() {
+        return this.#validResiduals.validElevation;
+    }
+
+    /**
+     * Saves valid elevation residual of polygon
+     * @param {string} validElevation 
+     */
+    saveValidElevation(validElevation) {
+        this.#validResiduals.validElevation = validElevation;
+    }
+
+    /**
+     * Gets valid angle residual of polygon
+     * @returns {string}
+     */
+    getValidAngle() {
+        return this.#validResiduals.validAngle;
+    }
     
+    /**
+     * Saves valid angle residual of polygon
+     * @param {string} validAngle 
+     */
+    saveValidAngle(validAngle) {
+        this.#validResiduals.validAngle = validAngle;
+    }
+
+    /**
+     * Gets valid absolute residual of polygon
+     * @returns {string}
+     */
+    getValidAbsolute() {
+        return this.#validResiduals.validAbsolute;
+    }
+
+    /**
+     * Saves valid absolute residual of polygon
+     * @param {string} validAbsolute 
+     */
+    saveValidAbsolute(validAbsolute) {
+        this.#validResiduals.validAbsolute = validAbsolute;
+    }
+
+    /**
+     * Gets valid relative residual of polygon
+     * @returns {string}
+     */
+    getValidRelative() {
+        return this.#validResiduals.validRelative;
+    }
+
+    /**
+     * Saves valid relative residual of polygon
+     * @param {string} validRelative 
+     */
+    saveValidRelative(validRelative) {
+        this.#validResiduals.validRelative = validRelative;
+    }
+
     /**
      * Gets elevation residual of polygon
      * @returns {string}

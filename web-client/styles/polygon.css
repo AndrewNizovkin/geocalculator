@@ -90,7 +90,7 @@ border: 2px solid red;
     flex-direction: row;
 }
 
-.row-residual :first-child {
+.row-residual > :first-child {
     display: flex;
     font-size: 1.2em;
     padding: 5px;
@@ -99,20 +99,22 @@ border: 2px solid red;
     text-align: right;
 }
 
-.row-residual :last-child {
+.row-residual > :last-child {
     font-size: 1.2em;
     padding: 5px;
     padding-left: 20px;
-    width: auto;
+    width: 8em;
     text-align: left;
-    flex: 1 1 auto;
+    flex: 0 0 auto;
 }
 
-#panel-polygon-plan {
-    /* background-color: green; */
+#panel-valid-residuals {
     display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
     width: auto;
     height: 50%;
+    overflow: auto;
 }
 
 /* .panel-polygon, .panel-polygon-plan, .panel-polygon-processing, .panel-polygon-residuals, .scrollpanel-polygon {
@@ -148,13 +150,13 @@ border: 2px solid red;
     #panel-polygon-residuals {
         display: flex;
         flex-direction: column;
-        width: 40%;
+        width: 50%;
         height: auto;
     }
 
-    #panel-polygon-plan {
+    #panel-valid-residuals {
         display: flex;
-        width: 60%;
+        width: 50%;
         height: auto;
     }
     

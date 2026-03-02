@@ -23,6 +23,11 @@ showPolygonRepository("Очистили");
 showPolygonService("После создания нового polygonService");
 fillDemoPolygonService();
 showPolygonService("Заполнил демо данными");
+polygonService.saveValidElevation("10");
+polygonService.saveValidAngle("5");
+polygonService.saveValidAbsolute("0.050");
+polygonService.saveValidRelative("1:10000");
+showPolygonService("Изменил допуски");
 let linesArray = polygonService.getLinesPolArray();
 showLinesAray("файл pol:", linesArray);
 polygonService.insertNewStation(0);
@@ -50,6 +55,26 @@ function showPolygonService(message) {
 
     element = document.createElement('div');
     element.innerHTML = `Количество станций полигонометрии в репозитории: ${polygonService.size()}<br>`;
+    content.append(element);
+
+    element = document.createElement('div');
+    element.innerHTML = `Допустимые невязки и определяющие их коэффициенты: <br>`;
+    content.append(element);
+
+    element = document.createElement('div');
+    element.innerHTML = `Высотная, м.: ${polygonService.getValidElevation()}&#8730;L<br>`;
+    content.append(element);
+
+    element = document.createElement('div');
+    element.innerHTML = `Угловая, сек.: ${polygonService.getValidAngle()}&#8730;n<br>`;
+    content.append(element);
+
+    element = document.createElement('div');
+    element.innerHTML = `Абсолютная, м.: ${polygonService.getValidAbsolute()}<br>`;
+    content.append(element);
+
+    element = document.createElement('div');
+    element.innerHTML = `Относительная : ${polygonService.getValidRelative()}<br>`;
     content.append(element);
 
     if (polygonService.size() > 0) {

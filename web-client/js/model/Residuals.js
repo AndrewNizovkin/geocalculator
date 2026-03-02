@@ -1,6 +1,6 @@
 /**
  * Properties of this class represent 
- * the technical characteristics of the polygon.
+ * the actual technical characteristics of the polygon.
  */
 export class Residuals {
     constructor() {
