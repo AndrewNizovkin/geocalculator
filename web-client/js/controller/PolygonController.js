@@ -83,7 +83,7 @@ export class PolygonContoller {
 
             <div class="panel" id="panel-polygon-residuals">
                 
-                <div class="panel-title">Невязки допустимые</div>
+                <div class="panel-title">Невязки фактические</div>
 
                 <div class="row-residual">
                     <div>Высотная, м.</div>
@@ -125,51 +125,6 @@ export class PolygonContoller {
 
             <div class="panel" id="panel-valid-residuals">
 
-                <div class="panel-title">Невязки допустимые</div>
-
-                <div class="row-residual">
-                    <div>Высотная, м.</div>
-                    <select id="vilid-height">
-                        <option value="5">5&#8730;L</option>
-                        <option value="10">10&#8730;L</option>
-                        <option value="20">20&#8730;L</option>
-                        <option value="50" selected>50&#8730;L</option>
-                    </select>
-                </div>
-
-                <div class="row-residual">
-                    <div>Угловая, сек.</div>
-                    <select id="vilid-direction">
-                        <option value="2;n">2&#8730;n</option>
-                        <option value="5">5&#8730;n</option>
-                        <option value="10;n">10&#8730;n</option>
-                        <option value="20;n" selected>20&#8730;n</option>
-                        <option value="30">30&#8730;n</option>
-                    </select>
-                </div>
-                
-                <div class="row-residual">
-                    <div>Абсолютная, м.</div>
-                    <select id="vilid-absolute">
-                        <option value="0.01">0.01</option>
-                        <option value="0.05">0.05</option>
-                        <option value="0.10">0.10</option>
-                        <option value="0.20" selected>0.20</option>
-                        <option value="0.30">0.30</option>
-                    </select>
-                </div>                
-
-                <div class="row-residual">
-                    <div>Относительная</div>
-                    <select id="vilid-relative">
-                        <option value="1:1000">1:1000</option>
-                        <option value="1:2000" selected>1:2000</option>
-                        <option value="1:5000">1:5000</option>
-                        <option value="1:10000">1:10000</option>
-                        <option value="1:20000">1:20000</option>
-                    </select>
-                </div>                
-
 
             </div>
 
@@ -180,10 +135,11 @@ export class PolygonContoller {
         this.#setListPolygonStations();
         this.#setListBasePoints();
         this.#setResiduals();
+        this.#setValidResiduals();
 
         this.#addListenersPanelPolygon();
         this.#addListenersToolbarPolygon();
-        // this.#toggleSelectedRow(this.#currentStation);
+        this.#addListenersPanelValidResiduals();
 
     }
 
@@ -423,6 +379,116 @@ export class PolygonContoller {
     }
 
     /**
+     * Creates and append to DOM panel-valid-residuals
+     */
+    #setValidResiduals() {
+        const panelValidResiduals = document.getElementById("panel-valid-residuals");
+
+        let panelTitle = document.createElement('div');
+        panelTitle.className = "panel-title";
+        panelTitle.innerHTML = "Невязки допустимые";
+        panelValidResiduals.append(panelTitle);
+
+        //#region vilid-height
+        let rowResidual = document.createElement('div');
+        rowResidual.className = "row-residual";
+
+        let lblRow = document.createElement('div');
+        lblRow.innerHTML = "Высотная, мм.";
+        rowResidual.append(lblRow);
+
+        let valueRow = document.createElement('select');
+        valueRow.id = "vilid-height";
+        let valueArray = ["5", "10", "20", "50"];
+        for (let value of valueArray) {
+            let option = document.createElement('option');
+            option.value = value;
+            option.innerHTML = `${value}&#8730;L`;
+            if (value === this.#polygonService.getValidElevation()) {
+                option.selected = true;
+            }
+            valueRow.append(option);
+        }
+        rowResidual.append(valueRow);
+        panelValidResiduals.append(rowResidual);
+        //#endregion
+
+        //#region valid-direction
+        rowResidual = document.createElement('div');
+        rowResidual.className = "row-residual";
+
+        lblRow = document.createElement('div');
+        lblRow.innerHTML = "Угловая, сек.";
+        rowResidual.append(lblRow);
+
+        valueRow = document.createElement('select');
+        valueRow.id = "vilid-direction";
+        valueArray = ["2", "5", "10", "20", "30"];
+        for (let value of valueArray) {
+            let option = document.createElement('option');
+            option.value = value;
+            option.innerHTML = `${value}&#8730;n`;
+            if (value === this.#polygonService.getValidAngle()) {
+                option.selected = true;
+            }
+            valueRow.append(option);
+        }
+        rowResidual.append(valueRow);
+        panelValidResiduals.append(rowResidual);
+        //#endregion
+
+        //#region valid-absolute
+        rowResidual = document.createElement('div');
+        rowResidual.className = "row-residual";
+
+        lblRow = document.createElement('div');
+        lblRow.innerHTML = "Абсолютная, м.";
+        rowResidual.append(lblRow);
+
+        valueRow = document.createElement('select');
+        valueRow.id = "vilid-absolute";
+        valueArray = ["0.01", "0.05", "0.10", "0.20", "0.30"];
+        for (let value of valueArray) {
+            let option = document.createElement('option');
+            option.value = value;
+            option.innerHTML = value;
+            if (value === this.#polygonService.getValidAbsolute()) {
+                option.selected = true;
+            }
+            valueRow.append(option);
+        }
+        rowResidual.append(valueRow);
+        panelValidResiduals.append(rowResidual);
+        //#endregion
+
+        //#region valid-relative
+        rowResidual = document.createElement('div');
+        rowResidual.className = "row-residual";
+
+        lblRow = document.createElement('div');
+        lblRow.innerHTML = "Относительная";
+        rowResidual.append(lblRow);
+
+        valueRow = document.createElement('select');
+        valueRow.id = "vilid-relative";
+        valueArray = ["1:1000", "1:2000", "1:5000", "1:10000", "1:20000"];
+        for (let value of valueArray) {
+            let option = document.createElement('option');
+            option.value = value;
+            option.innerHTML = value;
+            if (value === this.#polygonService.getValidRelative()) {
+                option.selected = true;
+            }
+            valueRow.append(option);
+        }
+        rowResidual.append(valueRow);
+        panelValidResiduals.append(rowResidual);
+        //#endregion
+
+
+    }
+
+    /**
      * Sets value of polygon reports 
      */
     #setReports() {
@@ -651,6 +717,38 @@ export class PolygonContoller {
                 }
             }
         }); 
+
+    }
+
+    /**
+     * Adds event listeners to panel-valid-residuals
+     */
+    #addListenersPanelValidResiduals() {
+        const panelValidResiduals = document.getElementById("panel-valid-residuals");
+
+        panelValidResiduals.addEventListener('change', (event) => {
+            const element = event.target;
+
+            switch (element.id) {
+
+                case "vilid-height":
+                    this.#polygonService.saveValidElevation(element.value);
+                    break;
+
+                case "vilid-direction":
+                    this.#polygonService.saveValidAngle(element.value);
+                    break;
+
+                case "vilid-absolute":
+                    this.#polygonService.saveValidAbsolute(element.value);
+                    break;
+
+                case "vilid-relative":
+                    this.#polygonService.saveValidRelative(element.value);
+                    break;
+            }
+
+        });
 
     }
 

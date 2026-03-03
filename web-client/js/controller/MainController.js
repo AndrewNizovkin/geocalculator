@@ -35,8 +35,7 @@ export class MainController {
     start() {
 
         document.body.innerHTML = `
-  <div class="overlay" id="overlay"></div>        
-  <div class="header" id="header">
+    <div class="header" id="header">
 
     <div class="title" id="title">
       <a href="#" class="logo menu-item" id="logo">Тахеопорт</a>  
@@ -71,6 +70,7 @@ export class MainController {
     <div class="sidebar">Sidebar</div>
   </div>
   <div class="footer">Footer</div>
+  <div class="overlay" id="overlay"></div>        
 
 
         `;
