@@ -41,15 +41,11 @@ export class PolygonContoller {
 
         content.innerHTML = `
         <div class="survey-toolbar" id="toolbar-polygon">
-            <div class="survey-button delete" id="delete-station" title="Удалить станцию"></div>
-            <div class="survey-button insert-before" id="before-station" title="Вставить перед выбранной"></div>
-            <div class="survey-button insert-after" id="after-station" title="Вставить после выбранной"></div>
-            <div class="survey-button catalog toggle" id="catalog" title="Вставить из каталога"></div>
-            <div class="survey-toolbar-separator"></div>
-
             <div class="survey-button new" id="polygon-new" title="Новый полигон"></div>
             <div class="survey-button open" id="polygon-open" title="Открыть"></div>
+
             <div class="survey-toolbar-separator"></div>
+
             <div class="survey-button run" id="polygon-run" title="Уравнять полигон"></div>
             <div class="survey-button view" id="polygon-view" title="Просмотр результатов"></div>
             <input type="file" id="polygon-open-input" accept=".pol">
@@ -57,6 +53,13 @@ export class PolygonContoller {
         </div>
 
         <div class="panel" id="panel-polygon">
+
+            <div class="survey-toolbar" id="toolbar-polygon-table">
+                <div class="survey-button delete" id="delete-station" title="Удалить станцию"></div>
+                <div class="survey-button insert-before" id="before-station" title="Вставить перед выбранной"></div>
+                <div class="survey-button insert-after" id="after-station" title="Вставить после выбранной"></div>
+                <div class="survey-button catalog toggle" id="catalog" title="Вставить из каталога"></div>
+            </div>
 
             <div class="panel" id="scrollpanel-polygon">
 
@@ -147,46 +150,47 @@ export class PolygonContoller {
      * Loads page polygon report to content
      */
     #loadPageReportPolygon() {
-        const content = document.getElementById("content");
+        const panelReports = document.getElementById("reports");
 
-        content.innerHTML = `
-    <div class="panel" id="panel-plan-report">
-        <div class="panel-title">Ведомость вычисления координат</div>
-        <div class="frame">
-            <textarea class="text-report" cols="130" id="text-plan-report" placeholder="Ведомость уравнивания плановая"></textarea>
-        </div>
+        panelReports.innerHTML = `
+            <a href="#" class="button" title="Закрыть" id="reports-close">Закрыть</a>        
+            <div class="panel" id="panel-plan-report">
+                <div class="panel-title">Ведомость вычисления координат</div>
+                <div class="frame">
+                    <textarea class="text-report" cols="130" id="text-plan-report" placeholder="Ведомость уравнивания плановая"></textarea>
+                </div>
 
-    </div>
-
-    <div class="panel" id="panel-level-report">
-        <div class="panel-title">Ведомость вычисления высот</div>
-        <div class="frame">
-            <textarea class="text-report" id="text-elevation-report" placeholder="Ведомость уравнивания высотная"></textarea>
-        </div>
-
-    </div>
-
-    <div class="panel" id="panel-catalog-pol-report">
-
-        <div class="panel" id="panel-catalog-report">
-            <div class="panel-title">Каталог координат точек полигона</div>
-            <div class="frame">
-                <textarea class="text-report" id="text-catalog-report" placeholder="Каталог координат тахеометрического хода"></textarea>
             </div>
 
-        </div>
+            <div class="panel" id="panel-level-report">
+                <div class="panel-title">Ведомость вычисления высот</div>
+                <div class="frame">
+                    <textarea class="text-report" id="text-elevation-report" placeholder="Ведомость уравнивания высотная"></textarea>
+                </div>
 
-        <div class="panel" id="panel-pol-report">
-            <div class="panel-title">Исходные данные (*.pol)</div>
-            <div class="frame">
-                <textarea class="text-report" id="text-pol-report" placeholder="Исходные данные в формате '*.pol'"></textarea>
             </div>
 
-        </div>
-    </div>
+            <div class="panel" id="panel-catalog-pol-report">
+
+                <div class="panel" id="panel-catalog-report">
+                    <div class="panel-title">Каталог координат точек полигона</div>
+                    <div class="frame">
+                        <textarea class="text-report" id="text-catalog-report" placeholder="Каталог координат тахеометрического хода"></textarea>
+                    </div>
+
+                </div>
+
+                <div class="panel" id="panel-pol-report">
+                    <div class="panel-title">Исходные данные (*.pol)</div>
+                    <div class="frame">
+                        <textarea class="text-report" id="text-pol-report" placeholder="Исходные данные в формате '*.pol'"></textarea>
+                    </div>
+
+                </div>
+            </div>
 
         `;
-
+        panelReports.classList.toggle("open");
         this.#setReports();
 
     }
@@ -347,7 +351,7 @@ export class PolygonContoller {
      * Creates and adds a list of base stations to the DOM
      */
     #setListBasePoints() {
-      const toolbarPolygon = document.getElementById("toolbar-polygon");
+      const toolbarPolygonTable = document.getElementById("toolbar-polygon-table");
       const listBasePoints = document.createElement('div');
 
       listBasePoints.className = "pop-up";
@@ -362,7 +366,7 @@ export class PolygonContoller {
           listBasePoints.append(row);
         }
       }
-      toolbarPolygon.append(listBasePoints);
+      toolbarPolygonTable.append(listBasePoints);
     }
 
     /**
@@ -548,63 +552,8 @@ export class PolygonContoller {
         });
 
         toolbarPolygon.addEventListener('click', (event) => {
-            const elem = event.target;
-            let toggleRect = elem.getBoundingClientRect(); 
-            let toolbarPolygonRect = toolbarPolygon.getBoundingClientRect();
-            let listBasePoints = document.getElementById("list-base-point");      
-            let overlay = document.getElementById("overlay");
-
-            let selector = `input[data-station-id="${this.#currentStation}"]`;
-            let currentStatus = document.querySelector(selector).checked;
-
-
-            if (elem.hasAttribute("data-base-point-id")) {
-
-            listBasePoints.classList.toggle("open");
-            overlay.classList.toggle("open");
-
-            if ( ((this.#currentStation <= 1) || (this.#currentStation >= this.#polygonService.size() - 2)) && (currentStatus) ) {
-                let basePointId = +elem.dataset.basePointId;
-                this.#polygonService.saveStationName(this.#currentStation, this.#basePointService.getBasePointName(basePointId));
-                this.#polygonService.saveStationX(this.#currentStation, this.#basePointService.getBasePointX(basePointId));
-                this.#polygonService.saveStationY(this.#currentStation, this.#basePointService.getBasePointY(basePointId));
-                this.#polygonService.saveStationZ(this.#currentStation, this.#basePointService.getBasePointZ(basePointId));
-            }
-            this.#setListPolygonStations();
-        }
-
-
-
-            switch (elem.id) {
-
-                case "delete-station":
-                    if (this.#polygonService.size() > 1) {
-                        this.#polygonService.removeStation(this.#currentStation);
-                        this.#setListPolygonStations();
-                        if (this.#currentStation == this.#polygonService.size()) {
-                            this.#currentStation--;
-                        }
-                    }
-                    break;
-
-                case "before-station":
-                    this.#polygonService.insertNewStation(this.#currentStation);
-                    this.#setListPolygonStations();
-                    break;
-
-                case "after-station":
-                    this.#currentStation++;
-                    this.#polygonService.insertNewStation(this.#currentStation);
-                    this.#setListPolygonStations();
-                    break;
-
-                case "catalog":
-                    listBasePoints.style.top = `${toggleRect.top - toolbarPolygonRect.top +toggleRect.height + window.scrollY}px`;
-                    listBasePoints.style.left = `${toggleRect.left - toolbarPolygonRect.left + window.scrollX}px`;
-                    listBasePoints.classList.toggle("open");
-                    overlay.classList.toggle("open");
-
-                    break;
+            const element = event.target;
+            switch (element.id) {
 
                 case "polygon-new":
                     this.#polygonService.clearAll();
@@ -638,23 +587,77 @@ export class PolygonContoller {
      */
     #addListenersPanelPolygon() {
         const panelPolygon = document.getElementById("panel-polygon");
+        const toolbarPolygonTable = document.getElementById("toolbar-polygon-table");
 
         panelPolygon.addEventListener('click', (event) => {
-            const elem = event.target;
+            const element = event.target;
             let selector = `input[data-station-id="${this.#currentStation}"]`;
             let currentStatus = document.querySelector(selector).checked;
-            // let buttonCatalog = document.getElementById('catalog');
+            let toggleRect = element.getBoundingClientRect(); 
+            let toolbarPolygonRect = toolbarPolygonTable.getBoundingClientRect();
 
-            if (elem.hasAttribute('data-polygon-station-id')) {
-                // this.#toggleSelectedRow(this.#currentStation);
-                this.#currentStation = +elem.dataset.polygonStationId;
+            let listBasePoints = document.getElementById("list-base-point");      
+            let overlay = document.getElementById("overlay");
+
+            if (element.hasAttribute("data-base-point-id")) {
+
+                listBasePoints.classList.toggle("open");
+                overlay.classList.toggle("open");
+
+                if ( ((this.#currentStation <= 1) || (this.#currentStation >= this.#polygonService.size() - 2)) && (currentStatus) ) {
+                    let basePointId = +element.dataset.basePointId;
+                    this.#polygonService.saveStationName(this.#currentStation, this.#basePointService.getBasePointName(basePointId));
+                    this.#polygonService.saveStationX(this.#currentStation, this.#basePointService.getBasePointX(basePointId));
+                    this.#polygonService.saveStationY(this.#currentStation, this.#basePointService.getBasePointY(basePointId));
+                    this.#polygonService.saveStationZ(this.#currentStation, this.#basePointService.getBasePointZ(basePointId));
+                }
+                this.#setListPolygonStations();
             }
+            
+            
+
+            if (element.hasAttribute('data-polygon-station-id')) {
+                this.#currentStation = +element.dataset.polygonStationId;
+            }
+
+            switch (element.id) {
+
+                case "delete-station":
+                    if (this.#polygonService.size() > 1) {
+                        this.#polygonService.removeStation(this.#currentStation);
+                        this.#setListPolygonStations();
+                        if (this.#currentStation == this.#polygonService.size()) {
+                            this.#currentStation--;
+                        }
+                    }
+                    break;
+
+                case "before-station":
+                    this.#polygonService.insertNewStation(this.#currentStation);
+                    this.#setListPolygonStations();
+                    break;
+
+                case "after-station":
+                    this.#currentStation++;
+                    this.#polygonService.insertNewStation(this.#currentStation);
+                    this.#setListPolygonStations();
+                    break;
+
+                case "catalog":
+                    listBasePoints.style.top = `${toggleRect.top - toolbarPolygonRect.top +toggleRect.height + window.scrollY}px`;
+                    listBasePoints.style.left = `${toggleRect.left - toolbarPolygonRect.left + window.scrollX}px`;
+                    listBasePoints.classList.toggle("open");
+                    overlay.classList.toggle("open");
+                    break;
+            }
+
+            
         });
 
         panelPolygon.addEventListener('input', (event) => {
-            const elem = event.target;
+            const element = event.target;
 
-            if (elem.hasAttribute('data-property')) {
+            if (element.hasAttribute('data-property')) {
                 if (this.#reportsIsActual) {
                     this.#polygonService.clearReports();
                     this.#reportsIsActual = false;
@@ -664,52 +667,52 @@ export class PolygonContoller {
         });
 
         panelPolygon.addEventListener('change', (event) => {
-            const elem = event.target;
+            const element = event.target;
 
-            if (elem.hasAttribute('data-property')) {
-                switch (elem.dataset.property) {
+            if (element.hasAttribute('data-property')) {
+                switch (element.dataset.property) {
 
                     case "name":
-                        this.#polygonService.saveStationName(+elem.dataset.polygonStationId, elem.value);
+                        this.#polygonService.saveStationName(+element.dataset.polygonStationId, element.value);
                         break;
 
                     case "hor-angle":
-                        this.#polygonService.saveHorAngle(+elem.dataset.polygonStationId, elem.value);
+                        this.#polygonService.saveHorAngle(+element.dataset.polygonStationId, element.value);
                         break;
 
                     case "hor-distance":
-                        this.#polygonService.saveHorDistance(+elem.dataset.polygonStationId, elem.value);
+                        this.#polygonService.saveHorDistance(+element.dataset.polygonStationId, element.value);
                         break;
 
                     case "elevation":
-                        this.#polygonService.saveElevation(+elem.dataset.polygonStationId, elem.value);
+                        this.#polygonService.saveElevation(+element.dataset.polygonStationId, element.value);
                         break;
 
                     case "x":
-                        this.#polygonService.saveStationX(+elem.dataset.polygonStationId, elem.value);
+                        this.#polygonService.saveStationX(+element.dataset.polygonStationId, element.value);
                         break;
 
                     case "y":
-                        this.#polygonService.saveStationY(+elem.dataset.polygonStationId, elem.value);
+                        this.#polygonService.saveStationY(+element.dataset.polygonStationId, element.value);
                         break;
 
                     case "z":
-                        this.#polygonService.saveStationZ(+elem.dataset.poliygonStationId, elem.value);
+                        this.#polygonService.saveStationZ(+element.dataset.poliygonStationId, element.value);
                         break;
 
                     case "status":
-                        this.#currentStation = +elem.dataset.stationId;
-                        if (elem.checked) {
-                            this.#polygonService.saveStationX(+elem.dataset.stationId, "0.000");
-                            this.#polygonService.saveStationY(+elem.dataset.stationId, "0.000");
-                            this.#polygonService.saveStationZ(+elem.dataset.stationId, "0.000");
-                            this.#polygonService.saveStatus(+elem.dataset.stationId, true);
+                        this.#currentStation = +element.dataset.stationId;
+                        if (element.checked) {
+                            this.#polygonService.saveStationX(+element.dataset.stationId, "0.000");
+                            this.#polygonService.saveStationY(+element.dataset.stationId, "0.000");
+                            this.#polygonService.saveStationZ(+element.dataset.stationId, "0.000");
+                            this.#polygonService.saveStatus(+element.dataset.stationId, true);
 
                         } else {
-                            this.#polygonService.saveStationX(+elem.dataset.stationId, "Not");
-                            this.#polygonService.saveStationY(+elem.dataset.stationId, "Not");
-                            this.#polygonService.saveStationZ(+elem.dataset.stationId, "Not");
-                            this.#polygonService.saveStatus(+elem.dataset.stationId, false);
+                            this.#polygonService.saveStationX(+element.dataset.stationId, "Not");
+                            this.#polygonService.saveStationY(+element.dataset.stationId, "Not");
+                            this.#polygonService.saveStationZ(+element.dataset.stationId, "Not");
+                            this.#polygonService.saveStatus(+element.dataset.stationId, false);
 
                         }
                         this.#setListPolygonStations();

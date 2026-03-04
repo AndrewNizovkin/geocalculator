@@ -10,15 +10,15 @@
     z-index: -1;    
 }
 
-#toolbar-polygon {
+#toolbar-polygon-table {
     position: relative;
 }
 
 #panel-polygon {
     /* background-color: yellow; */
-    /* display: flex; */
-    /* flex-direction: column; */
-    justify-content: safe center;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: safe center; */
     height: auto;
 }
 

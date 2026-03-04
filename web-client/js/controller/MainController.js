@@ -70,13 +70,16 @@ export class MainController {
     <div class="sidebar">Sidebar</div>
   </div>
   <div class="footer">Footer</div>
-  <div class="overlay" id="overlay"></div>        
+  <div class="overlay" id="overlay"></div>
+  <div class="toggle panel reports" id="reports"></div>
+
 
 
         `;
         this.loadMainPage();
         this.#addListenersMainMenu();
         this.#addListenersNavMenu();
+        this.#addListenersPanelReports();
     }
 
     /**
@@ -193,6 +196,24 @@ export class MainController {
 
       });
 
+    }
+
+    /**
+     * Adds event listenersto panel reports
+     */
+    #addListenersPanelReports() {
+      const panelReports = document.getElementById("reports");
+
+      panelReports.addEventListener('click', (event) => {
+        const element = event.target;
+
+        switch (element.id) {
+
+          case "reports-close":
+            document.getElementById("reports").classList.toggle("open");
+            break;
+        }
+      });
     }
 
 }

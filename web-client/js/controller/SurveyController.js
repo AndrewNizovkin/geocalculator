@@ -158,48 +158,52 @@ export class SurveyController {
    * Loads report survey page and adds listeners to components
    */
   #loadPageReportSurvey() {
-    const content = document.getElementById("content");
+    const reports = document.getElementById("reports");
 
-    content.innerHTML = `
-      <div class="panel" id="panel-processing-report">
-          <div class="panel-title">Ведомость вычисления координат</div>
-          <div class="frame">
-              <textarea class="text-report" cols="130" id="text-processing-report" placeholder="Ведомость вычисления координат"></textarea>
-          </div>
+    reports.innerHTML = `
+        <a href="#" class="button" title="Закрыть" id="reports-close">Закрыть</a>
+        <div class="panel" id="panel-processing-report">
+            <div class="panel-title">Ведомость вычисления координат</div>
+            <div class="frame">
+                <textarea class="text-report" cols="130" id="text-processing-report" placeholder="Ведомость вычисления координат"></textarea>
+            </div>
 
-      </div>
+        </div>
 
-      <div class="panel" id="panel-survey-tah-report">
+        <div class="panel" id="panel-survey-tah-report">
 
-          <div class="panel" id="panel-survey-report">
-              <div class="panel-title">Каталог координат точек</div>
-              <div class="frame">
-                  <textarea class="text-report" id="text-survey-report" placeholder="Каталог координат точек"></textarea>
-              </div>
+            <div class="panel" id="panel-survey-report">
+                <div class="panel-title">Каталог координат точек</div>
+                <div class="frame">
+                    <textarea class="text-report" id="text-survey-report" placeholder="Каталог координат точек"></textarea>
+                </div>
 
-          </div>
+            </div>
 
-          <div class="panel" id="panel-tah-report">
-              <div class="panel-title">Исходные данные (*.tah)</div>
-              <div class="frame">
-                  <textarea class="text-report" id="text-pol-report" placeholder="Исходные данные в формате '*.tah'"></textarea>
-              </div>
+            <div class="panel" id="panel-tah-report">
+                <div class="panel-title">Исходные данные (*.tah)</div>
+                <div class="frame">
+                    <textarea class="text-report" id="text-pol-report" placeholder="Исходные данные в формате '*.tah'"></textarea>
+                </div>
 
-          </div>
-      </div>      
+            </div>
+        </div>
+    
     `;
 
+    // this.#setSurveyReports();
+    reports.classList.toggle("open");
     this.#setSurveyReports();
-
   }
 
   /**
    * Loads report of extracting polygon from survey
    */
   #loadPageExtract() {
-    const content = document.getElementById("content");
+    const panelReport = document.getElementById("reports");
 
-    content.innerHTML = `
+    panelReport.innerHTML = `
+      <a href="#" class="button" title="Закрыть" id="reports-close">Закрыть</a>
       <div class="panel" id="panel-extract-report">
           <div class="panel-title">Ведомость вычисления средних горизонтальных проложений и превышений</div>
           <div class="frame">
@@ -217,8 +221,9 @@ export class SurveyController {
       </div>
     
     `;
-
+    panelReport.classList.toggle("open");
     this.#setExtractReports();
+
   }
 
   /**

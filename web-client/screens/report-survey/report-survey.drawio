@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" version="29.4.0">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" version="29.6.0">
   <diagram name="Страница-1" id="zoIXv_CNpzGKDmyAsH2C">
-    <mxGraphModel dx="1977" dy="968" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1878" dy="920" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -8,10 +8,10 @@
           <mxGeometry height="50" width="550" x="310" y="20" as="geometry" />
         </mxCell>
         <mxCell id="QaFuxqjUDcRosPqH5Kaw-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
-          <mxGeometry height="690" width="690" x="260" y="90" as="geometry" />
+          <mxGeometry height="720" width="690" x="260" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="QaFuxqjUDcRosPqH5Kaw-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="content" vertex="1">
-          <mxGeometry height="30" width="60" x="555" y="90" as="geometry" />
+        <mxCell id="QaFuxqjUDcRosPqH5Kaw-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="reports" vertex="1">
+          <mxGeometry height="30" width="60" x="573" y="60" as="geometry" />
         </mxCell>
         <mxCell id="S5s9uQzCb8q0eMPviUxN-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
           <mxGeometry height="260" width="650" x="280" y="120" as="geometry" />
@@ -93,6 +93,12 @@
         </mxCell>
         <mxCell id="S5s9uQzCb8q0eMPviUxN-40" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="text-tah-report" vertex="1">
           <mxGeometry height="30" width="105" x="698" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="-yuzgxOvLDB880bUnmMH-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="30" width="92" x="838" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="-yuzgxOvLDB880bUnmMH-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="button-close" vertex="1">
+          <mxGeometry height="30" width="98" x="832" y="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

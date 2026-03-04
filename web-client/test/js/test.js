@@ -95,28 +95,202 @@ describe("dmsToSecond", function() {
 describe("secondToDms", function() {
 
     it("Converts from 0 to '0.0000", function() {
-        assert.strictEqual(secondToDms(0), "0.0000")
+        assert.strictEqual(secondToDms(0), "0.0000");
     });
 
     it("Converts from 1 to '0.0001", function() {
-        assert.strictEqual(secondToDms(1), "0.0001")
+        assert.strictEqual(secondToDms(1), "0.0001");
     });
 
     it("Converts from -1 to '-0.0001", function() {
-        assert.strictEqual(secondToDms(-1), "-0.0001")
+        assert.strictEqual(secondToDms(-1), "-0.0001");
     });
 
     it("Converts from 702810 to '195.1330", function() {
-        assert.strictEqual(secondToDms(702810), "195.1330")
+        assert.strictEqual(secondToDms(702810), "195.1330");
     });
 
 
     it("Converts from 1295999 to '359.5959", function() {
-        assert.strictEqual(secondToDms(1295999), "359.5959")
+        assert.strictEqual(secondToDms(1295999), "359.5959");
     });
 
     it("Converts from -1295999 to '-359.5959", function() {
-        assert.strictEqual(secondToDms(-1295999), "-359.5959")
+        assert.strictEqual(secondToDms(-1295999), "-359.5959");
+    });
+
+});
+
+/**
+ * Tests isValidDigitalNumber
+ */
+describe("isValidDigitalNumber", function() {
+
+    it("'0' is valid digital number", function() {
+        let rezult = isValidDigitalNumber("0");
+        assert.isTrue(rezult);
+    });
+
+    it("'1' is valid digital number", function() {
+        let rezult = isValidDigitalNumber("1");
+        assert.isTrue(rezult);
+    });
+
+    it("'-1' is valid digital number", function() {
+        let rezult = isValidDigitalNumber("-1");
+        assert.isTrue(rezult);
+    });
+
+    it("'0.00001' is valid digital number", function() {
+        let rezult = isValidDigitalNumber("0.00001");
+        assert.isTrue(rezult);
+    });
+
+    it("'-0.00001' is valid digital number", function() {
+        let rezult = isValidDigitalNumber("-0.00001");
+        assert.isTrue(rezult);
+    });
+
+    it("'12345678912345678.1234' is valid digital number", function() {
+        let rezult = isValidDigitalNumber("12345678912345678.1234");
+        assert.isTrue(rezult);
+    });
+
+    it("'-12345678912345678.1234' is valid digital number", function() {
+        let rezult = isValidDigitalNumber("-12345678912345678.1234");
+        assert.isTrue(rezult);
+    });
+
+
+    it("'/' is not valid digital number", function() {
+        let rezult = isValidDigitalNumber("/");
+        assert.isFalse(rezult);
+    });
+    
+    it("'' is not valid digital number", function() {
+        let rezult = isValidDigitalNumber("");
+        assert.isFalse(rezult);
+    });
+
+    it("'asdf' is not valid digital number", function() {
+        let rezult = isValidDigitalNumber("asdf");
+        assert.isFalse(rezult);
+    });
+
+    it("'123 124' is not valid digital number", function() {
+        let rezult = isValidDigitalNumber("123 124");
+        assert.isFalse(rezult);
+    });
+
+    it("'123.124.2354' is not valid digital number", function() {
+        let rezult = isValidDigitalNumber("123.124.2354");
+        assert.isFalse(rezult);
+    });
+
+    it("'--12.34' is not valid digital number", function() {
+        let rezult = isValidDigitalNumber("--12.34");
+        assert.isFalse(rezult);
+    });
+
+    it("'1234.' is not valid digital number", function() {
+        let rezult = isValidDigitalNumber("1234.");
+        assert.isFalse(rezult);
+    });
+});
+
+/**
+ * Tests isValidHorizontalAngle
+ */
+describe("isValidHorizontalAngle", function() {
+
+    it("'0.0000' is valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle("0.0000");
+        assert.isTrue(rezult);
+    });
+
+    it("'1.1234' is valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle("1.1234");
+        assert.isTrue(rezult);
+    });
+
+    it("'90.0000' is valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle("90.0000");
+        assert.isTrue(rezult);
+    });
+
+    it("'270.0000' is valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle("270.0000");
+        assert.isTrue(rezult);
+    });
+
+    it("'359.5959' is valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle("359.5959");
+        assert.isTrue(rezult);
+    });
+
+    it("'123.3245' is valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle("123.3245");
+        assert.isTrue(rezult);
+    });
+
+    it("'-123.3245' is not valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle("-123.3245");
+        assert.isFalse(rezult);
+    });
+
+    it("'360.1213' is not valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle("360.1213");
+        assert.isFalse(rezult);
+    });
+
+    it("'60 12 13' is not valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle("60 12 13");
+        assert.isFalse(rezult);
+    });
+    
+    it("'#34.1234' is not valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle("#34.1234");
+        assert.isFalse(rezult);
+    });
+
+    it("'36.12134' is not valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle("36.12134");
+        assert.isFalse(rezult);
+    });
+
+    it("'/.1213' is not valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle("/.1213");
+        assert.isFalse(rezult);
+    });
+
+    it("'sdf' is not valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle("sdf");
+        assert.isFalse(rezult);
+    });
+
+    it("'0' is not valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle("0");
+        assert.isFalse(rezult);
+    });
+
+    it("'90' is not valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle("90");
+        assert.isFalse(rezult);
+    });
+
+    it("'.3030' is not valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle(".3030");
+        assert.isFalse(rezult);
+    });
+
+    it("'56.6030' is not valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle(".3030");
+        assert.isFalse(rezult);
+    });
+
+    it("'65.3061' is not valid horizontal angle", function() {
+        let rezult = isValidHorizontalAngle(".3030");
+        assert.isFalse(rezult);
     });
 
 });
