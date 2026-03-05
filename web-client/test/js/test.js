@@ -122,6 +122,68 @@ describe("secondToDms", function() {
 });
 
 /**
+ * Tests isValidName
+ */
+describe("isValidName", function() {
+
+    it("'name' is valid value of name", function() {
+        let result = isValidName("name");
+        assert.isTrue(result);
+    });
+
+    it("'Дружба-Мир' is valid value of name", function() {
+        let result = isValidName("Дружба-Мир");
+        assert.isTrue(result);
+    });
+
+    it("'Маломечетный' is valid value of name", function() {
+        let result = isValidName("Маломечетный");
+        assert.isTrue(result);
+    });
+
+    it("';%?*()_+' is valid value of name", function() {
+        let result = isValidName(";%?*()_+");
+        assert.isTrue(result);
+    });
+
+    it("'0123456789' is valid value of name", function() {
+        let result = isValidName("0123456789");
+        assert.isTrue(result);
+    });
+
+    it("'/name' is not valid value of name", function() {
+        let result = isValidName("/name");
+        assert.isFalse(result);
+    });
+
+    it("''name' is not valid value of name", function() {
+        let result = isValidName("'name");
+        assert.isFalse(result);
+    });
+
+    it("'n ame' is not valid value of name", function() {
+        let result = isValidName("n ame");
+        assert.isFalse(result);
+    });
+
+    it("'#name' is not valid value of name", function() {
+        let result = isValidName("#name");
+        assert.isFalse(result);
+    });
+
+});
+
+
+
+
+
+
+
+
+
+
+
+/**
  * Tests isValidDigitalNumber
  */
 describe("isValidDigitalNumber", function() {
@@ -197,6 +259,78 @@ describe("isValidDigitalNumber", function() {
         assert.isFalse(rezult);
     });
 });
+
+/**
+ * Tests isValiisValidPositiveNumber
+ */
+describe("isValidPositiveNumber", function() {
+
+    it("'0' is valid value of positive digital number", function() {
+        let rezult = isValidPositiveNumber("0");
+        assert.isTrue(rezult);
+    });
+
+    it("'1' is valid value of positive digital number", function() {
+        let rezult = isValidPositiveNumber("1");
+        assert.isTrue(rezult);
+    });
+
+    it("'0.00001' is valid value of positive digital number", function() {
+        let rezult = isValidPositiveNumber("0.00001");
+        assert.isTrue(rezult);
+    });
+
+    it("'12345678912345678.1234' is valid value of positive digital number", function() {
+        let rezult = isValidPositiveNumber("12345678912345678.1234");
+        assert.isTrue(rezult);
+    });
+
+    it("'-12345678912345678.1234' is not valid value of positive digital number", function() {
+        let rezult = isValidPositiveNumber("-12345678912345678.1234");
+        assert.isFalse(rezult);
+    });
+
+    it("'-0.00001' is not valid value of positive digital number", function() {
+        let rezult = isValidPositiveNumber("-0.00001");
+        assert.isFalse(rezult);
+    });
+
+    it("'/' is not valid value of positive digital number", function() {
+        let rezult = isValidPositiveNumber("/");
+        assert.isFalse(rezult);
+    });
+    
+    it("'' is not valid value of positive digital number", function() {
+        let rezult = isValidPositiveNumber("");
+        assert.isFalse(rezult);
+    });
+
+    it("'asdf'is not valid value of positive digital number", function() {
+        let rezult = isValidPositiveNumber("asdf");
+        assert.isFalse(rezult);
+    });
+
+    it("'123 124' is not valid value of positive digital number", function() {
+        let rezult = isValidPositiveNumber("123 124");
+        assert.isFalse(rezult);
+    });
+
+    it("'123.124.2354' is not valid value of positive digital number", function() {
+        let rezult = isValidPositiveNumber("123.124.2354");
+        assert.isFalse(rezult);
+    });
+
+    it("'--12.34' is not valid value of positive digital number", function() {
+        let rezult = isValidPositiveNumber("--12.34");
+        assert.isFalse(rezult);
+    });
+
+    it("'1234.' is not valid value of positive digital number", function() {
+        let rezult = isValidPositiveNumber("1234.");
+        assert.isFalse(rezult);
+    });
+});
+
 
 /**
  * Tests isValidHorizontalAngle
@@ -292,5 +426,94 @@ describe("isValidHorizontalAngle", function() {
         let rezult = isValidHorizontalAngle(".3030");
         assert.isFalse(rezult);
     });
+
+});
+
+/**
+ * Tests isValidTiltAngle
+ */
+describe("isValidTiltAngle", function() {
+
+    it("'0.0000' is valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("0.0000");
+        assert.isTrue(rezult);
+    });
+
+    it("'1.0001' is valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("1.0001");
+        assert.isTrue(rezult);
+    });
+
+    it("'-1.0001' is valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("-1.0001");
+        assert.isTrue(rezult);
+    });
+
+    it("'89.5959' is valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("89.5959");
+        assert.isTrue(rezult);
+    });
+
+    it("'-89.5959' is valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("-89.5959");
+        assert.isTrue(rezult);
+    });
+
+
+    it("'10.1545' is valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("10.1545");
+        assert.isTrue(rezult);
+    });
+
+    it("'-0.0000' is valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("-0.0000");
+        assert.isTrue(rezult);
+    });
+
+    it("'0 00 00' is not valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("0 00 00");
+        assert.isFalse(rezult);
+    });
+
+    it("'90.0000' is not valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("90.0000");
+        assert.isFalse(rezult);
+    });
+
+    it("'-90.0000' is not valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("-90.0000");
+        assert.isFalse(rezult);
+    });
+
+    it("'359.5959' is not valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("359.5959");
+        assert.isFalse(rezult);
+    });
+
+    it("'0.6159' is not valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("0.6159");
+        assert.isFalse(rezult);
+    });
+
+    it("'0.01560' is not valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("0.01560");
+        assert.isFalse(rezult);
+    });
+
+    it("'O.01560' is not valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("O.01560");
+        assert.isFalse(rezult);
+    });
+
+    it("'#.01560' is not valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("#.01560");
+        assert.isFalse(rezult);
+    });
+
+    it("'0.015597' is not valid value of tilt angle", function() {
+        let rezult = isValidTiltAngle("0.015597");
+        assert.isFalse(rezult);
+    });
+
 
 });

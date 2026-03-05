@@ -1,10 +1,30 @@
 /**
+ * Checks whether the argument is a valid name.
+ * @param {string} value 
+ * @returns {boolean}
+ */
+function isValidName(value) {
+    const regex = /^[^#"'\/\s]{1,20}$/;
+    return regex.test(value);
+}
+
+/**
  * Checks whether the argument is a positive or negative decimal number.
  * @param {string} value 
  * @returns {boolean}
  */
 function isValidDigitalNumber(value) {
     const regex = /^[-+]?(\d*\.)?\d+$/;
+    return regex.test(value);
+}
+
+/**
+ * Checks whether the argument is a positive decimal number.
+ * @param {string} value 
+ * @returns {boolean}
+ */
+function isValidPositiveNumber(value) {
+    const regex = /^(\d*\.)?\d+$/;
     return regex.test(value);
 }
 
@@ -36,7 +56,7 @@ function isValidHorizontalAngle(value) {
 
 /**
  * Checks whether the argument is a tilt angle 
- * in the range 0- +-89.5959 in d.mmss format.
+ * in the range 0 - +-89.5959 in d.mmss format.
  * @param {string} value 
  * @returns {boolean}
  */

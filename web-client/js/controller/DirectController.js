@@ -1,4 +1,5 @@
 import {DirectService} from '../service/DirectService.js';
+import {ValueValidator} from './ValueValidator.js';
 
 /**
  * Displays the Direct Geodetic Task screen and 
@@ -10,6 +11,7 @@ export class DirectController {
   #directService;
   #basePointService;
   #insertCoordinateToBase;
+  #resultActual;
 
   /**
    * @constructor
@@ -19,6 +21,7 @@ export class DirectController {
       this.#directService = new DirectService();
       this.#basePointService = basePointService;
       this.#insertCoordinateToBase = true;
+      this.#resultActual = false;
   }
 
   /**
@@ -129,7 +132,17 @@ export class DirectController {
             break;
 
           case "direct-run":
-            this.#directService.solveDirectTask().then(() => this.#setResult());
+            if (this.#isValidData()) {
+              this.#directService.solveDirectTask().then(() => {
+                this.#setResult()
+                this.#resultActual = true;
+              });
+            } else {
+              // this.#directService.clearRezults();
+              // this.#setResult();
+              alert("Данные содержат ошибки");
+            }
+            
             break;
         }
       });
@@ -141,6 +154,14 @@ export class DirectController {
    */
   #addDirectPanelListeners() {
     let panelDirect = document.getElementById("direct-panel");
+
+    panelDirect.addEventListener('input', () => {
+      if (this.#resultActual) {
+        this.#directService.clearRezults();
+        this.#setResult();
+        this.#resultActual = false;
+      }
+    });
 
     panelDirect.addEventListener('click', (event) => {
       let element = event.target;
@@ -204,46 +225,57 @@ export class DirectController {
       switch(element.id) {
 
         case "direct-base-x":
+          ValueValidator.checkNumber(element);
           this.#directService.saveBaseX(element.value);
           break;
 
         case "direct-base-y":
+          ValueValidator.checkNumber(element);
           this.#directService.saveBaseY(element.value);
           break;
 
         case "direct-base-z":
+          ValueValidator.checkNumber(element);
           this.#directService.saveBaseZ(element.value);
           break;
 
         case "direct-landmark-x":
+          ValueValidator.checkNumber(element);
           this.#directService.saveLandmarkX(element.value);
           break;
 
         case "direct-landmark-y":
+          ValueValidator.checkNumber(element);
           this.#directService.saveLandmarkY(element.value);
           break;
 
         case "direct-landmark-direction":
+          ValueValidator.checkHorisontalAngle(element);
           this.#directService.saveLandmarkDirection(element.value);
           break;
 
         case "direct-base-height":
+          ValueValidator.checkNumber(element);
           this.#directService.saveBaseHeight(element.value);
           break;
 
         case "direct-target-direction":
+          ValueValidator.checkHorisontalAngle(element);
           this.#directService.saveTargetDirection(element.value);
           break;
 
         case "direct-target-distance":
+          ValueValidator.checkPositiveNumber(element);
           this.#directService.saveTargetInclindeDistance(element.value);
           break;
 
         case "direct-target-tilt":
+          ValueValidator.checkTiltAngle(element);
           this.#directService.saveTargetTiltAngle(element.value);
           break;
 
         case "direct-target-height":
+          ValueValidator.checkNumber(element);
           this.#directService.saveTargetHeight(element.value);
           break;
       }
@@ -255,29 +287,50 @@ export class DirectController {
    * Sets data of gui components from model
    */
   #setData() {
+    let element = document.getElementById("direct-base-x");
+    element.value = this.#directService.getBaseX();
+    ValueValidator.checkNumber(element);
 
-      document.getElementById("direct-base-x").value = this.#directService.getBaseX();
+    element = document.getElementById("direct-base-y");
+    element.value = this.#directService.getBaseY();
+    ValueValidator.checkNumber(element);
 
-      document.getElementById("direct-base-y").value = this.#directService.getBaseY();
+    element = document.getElementById("direct-base-z");
+    element.value = this.#directService.getBaseZ();
+    ValueValidator.checkNumber(element);
+    
+    element = document.getElementById("direct-landmark-x");
+    element.value = this.#directService.getLandmarkX();
+    ValueValidator.checkNumber(element);
+    
+    element = document.getElementById("direct-landmark-y");
+    element.value = this.#directService.getLandmarkY();
+    ValueValidator.checkNumber(element);
+    
+    element = document.getElementById("direct-landmark-direction");
+    element.value = this.#directService.getLandmarkDirection();
+    ValueValidator.checkHorisontalAngle(element);
 
-      document.getElementById("direct-base-z").value = this.#directService.getBaseZ();
+    element = document.getElementById("direct-base-height");
+    element.value = this.#directService.getBaseHeight();
+    ValueValidator.checkNumber(element);
+    
+    element = document.getElementById("direct-target-direction");
+    element.value = this.#directService.getTargetDirection();
+    ValueValidator.checkHorisontalAngle(element);
 
-      document.getElementById("direct-landmark-x").value = this.#directService.getLandmarkX();
+    element = document.getElementById("direct-target-distance");
+    element.value = this.#directService.getTargetInclinedDistance();
+    ValueValidator.checkPositiveNumber(element);
 
-      document.getElementById("direct-landmark-y").value = this.#directService.getLandmarkY();
+    element = document.getElementById("direct-target-tilt");
+    element.value = this.#directService.getTargetTiltAngle();
+    ValueValidator.checkTiltAngle(element);
 
-      document.getElementById("direct-landmark-direction").value = this.#directService.getLandmarkDirection();
-
-      document.getElementById("direct-base-height").value = this.#directService.getBaseHeight();
-
-      document.getElementById("direct-target-direction").value = this.#directService.getTargetDirection();
-
-      document.getElementById("direct-target-distance").value = this.#directService.getTargetInclinedDistance();
-
-      document.getElementById("direct-target-tilt").value = this.#directService.getTargetTiltAngle();
-
-      document.getElementById("direct-target-height").value = this.#directService.getTargetHeight();
-
+    element = document.getElementById("direct-target-height");
+    element.value = this.#directService.getTargetHeight();
+    ValueValidator.checkNumber(element);
+    
   }
 
   /**
@@ -313,6 +366,31 @@ export class DirectController {
       }
     }
     panelDirectBasis.append(listBasePoints);
+  }
+
+  /**
+   * Verifies the validity of data for solving a direct geodetic task
+   * @returns {boolean}
+   */
+  #isValidData() {
+    let rezult = true;
+    if (
+      !ValueValidator.isValidDigitalNumber(this.#directService.getLandmarkX()) ||
+      !ValueValidator.isValidDigitalNumber(this.#directService.getLandmarkY()) ||
+      !ValueValidator.isValidHorizontalAngle(this.#directService.getLandmarkDirection()) ||
+      !ValueValidator.isValidDigitalNumber(this.#directService.getBaseX()) ||
+      !ValueValidator.isValidDigitalNumber(this.#directService.getBaseY()) ||
+      !ValueValidator.isValidDigitalNumber(this.#directService.getBaseZ()) ||
+      !ValueValidator.isValidDigitalNumber(this.#directService.getBaseHeight()) ||
+      !ValueValidator.isValidHorizontalAngle(this.#directService.getTargetDirection()) ||
+      !ValueValidator.isValidPositiveNumber(this.#directService.getTargetInclinedDistance()) ||
+      !ValueValidator.isValidTiltAngle(this.#directService.getTargetTiltAngle()) ||
+      !ValueValidator.isValidDigitalNumber(this.#directService.getTargetHeight())
+    ) {
+      rezult = false;
+    }
+
+    return rezult;
   }
 
 }

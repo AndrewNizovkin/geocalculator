@@ -26,7 +26,7 @@ export class DirectService {
      */
     async solveDirectTask() {
 
-        let directRequest = this.#directMapper.directToRequest(this.direct);
+        let directRequest = this.#directMapper.directToRequest(this.#direct);
 
         await this.#directProvider.getDirectResponse(directRequest).then(response => {
             let directResponse = this.#directMapper.responseToDirectResponse(response);
@@ -53,6 +53,13 @@ export class DirectService {
         this.#direct.targetInclinedDistance = "0.000";
         this.#direct.targetTiltAngle = "0.0000";
         this.#direct.targetHeight = "0.000";
+        this.clearRezults();
+    }
+
+    /**
+     * Sets the initial values of the direct rezults
+     */
+    clearRezults() {
         this.#direct.targetX = "";
         this.#direct.targetY = "";
         this.#direct.targetZ = "";
@@ -63,7 +70,7 @@ export class DirectService {
      * @param {string} value coordinate X of landmark in meters
      */
     saveLandmarkX(value) {
-        this.direct.landmarkX = value;
+        this.#direct.landmarkX = value;
     }
 
     /**

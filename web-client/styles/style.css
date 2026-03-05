@@ -8,6 +8,7 @@
 @import './report-polygon.css';
 @import './report-survey.css';
 @import './report-extract.css';
+@import './animations.css';
 
 .header {
     display: flex;
@@ -53,7 +54,7 @@
 
 }
 
-@keyframes changeColor {
+/* @keyframes changeColor {
     from {
         color: blue;
     }
@@ -64,7 +65,7 @@
         color: violet;
     }
     
-}
+} */
 
 .logo {
     padding: 10px;
@@ -73,7 +74,7 @@
     font-weight: bold;
     border-style: none;
     color: blue;
-    animation: changeColor 2s ease infinite;
+    animation: change-color 2s ease infinite;
 
 }
 

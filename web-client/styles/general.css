@@ -1,3 +1,5 @@
+@import './animations.css';
+
 * {
     box-sizing: border-box;
 }
@@ -84,6 +86,12 @@ input[type="text"] {
 
 .open {
     display: flex;
+}
+
+.novalid {
+    color: red;
+    animation: flash-alarm 1s ease infinite;
+
 }
 
 .toggle {

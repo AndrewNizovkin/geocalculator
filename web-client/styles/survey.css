@@ -1,4 +1,5 @@
 @import './general.css';
+@import './animations.css';
 
 #toolbar-survey {
     position: relative;
@@ -35,14 +36,14 @@
     text-decoration: none;
 }
 
-@keyframes show-panel-info {
+/* @keyframes show-panel-info {
     from {
         opacity: 0;
     }
     to {
         opacity: 1;
     }
-}
+} */
 
 /* #list-base-point {
     border-radius: 10px;

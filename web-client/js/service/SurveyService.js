@@ -276,8 +276,7 @@ export class SurveyService {
      * @param {string} stationX 
      */
     saveStationX(indexStation, stationX) {
-        let value = +stationX;
-        // this.#surveyRepository.saveStationX(indexStation, value.toFixed(3));
+        this.#surveyRepository.saveStationX(indexStation, stationX);
     }    
     
     /**
