@@ -54,8 +54,8 @@ export class ValueValidator {
 
         if (
             degrees >= 0 && degrees <= 359 &&
-            minutes >= 0 && minutes <= 59 &&
-            seconds >= 0 && seconds <= 59
+            minutes >= 0 && minutes <= 60 &&
+            seconds >= 0 && seconds <= 60
         ) {
             return true;
         }
@@ -81,8 +81,8 @@ export class ValueValidator {
 
         if (
             degrees >= 0 && degrees <= 89 &&
-            minutes >= 0 && minutes <= 59 &&
-            seconds >= 0 && seconds <= 59
+            minutes >= 0 && minutes <= 60 &&
+            seconds >= 0 && seconds <= 60
         ) {
             return true;
         }
@@ -95,10 +95,14 @@ export class ValueValidator {
    * @param {HTMLElement} element 
    */
   static checkName(element) {
+    
     if (element.value === '') {
       element.value = 'noname';
     }
-    if (ValueValidator.isValidPositiveNumber(element.value)) {
+
+    element.value = element.value.trim();
+
+    if (ValueValidator.isValidName(element.value)) {
       if (element.classList.contains('novalid')) {
         element.classList.toggle('novalid');
       }
@@ -115,12 +119,16 @@ export class ValueValidator {
    * @param {HTMLElement} element 
    */
   static checkNumber(element) {
+    
     if (element.value === '') {
       element.value = '0.000';
     }
+    element.value = element.value.trim();
+
     if (ValueValidator.isValidDigitalNumber(element.value)) {
       let valueNumber = +element.value;
       element.value = valueNumber.toFixed(3);
+
       if (element.classList.contains('novalid')) {
         element.classList.toggle('novalid');
       }
@@ -137,9 +145,11 @@ export class ValueValidator {
    * @param {HTMLElement} element 
    */
   static checkPositiveNumber(element) {
+    
     if (element.value === '') {
       element.value = '0.000';
     }
+    element.value = element.value.trim();    
     if (ValueValidator.isValidPositiveNumber(element.value)) {
       let valueNumber = +element.value;
       element.value = valueNumber.toFixed(3);
@@ -163,6 +173,13 @@ export class ValueValidator {
     if (element.value === '') {
       element.value = '0.0000';
     }
+    element.value = element.value.trim();    
+
+    if (ValueValidator.isValidPositiveNumber(element.value)) {
+      let valueNumber = +element.value;
+      element.value = valueNumber.toFixed(4);
+    }
+    
     if (ValueValidator.isValidHorizontalAngle(element.value)) {
       if (element.classList.contains('novalid')) {
         element.classList.toggle('novalid');
@@ -181,9 +198,15 @@ export class ValueValidator {
    * @param {HTMLElement} element 
    */
   static checkTiltAngle(element) {
+    element.value = element.value.trim();    
     if (element.value === '') {
       element.value = '0.0000';
     }
+    if (ValueValidator.isValidDigitalNumber(element.value)) {
+      let valueNumber = +element.value;
+      element.value = valueNumber.toFixed(4);
+    }
+
     if (ValueValidator.isValidTiltAngle(element.value)) {
       if (element.classList.contains('novalid')) {
         element.classList.toggle('novalid');

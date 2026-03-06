@@ -53,12 +53,21 @@ export class InverseService {
         this.#inverse.targetX = "0.000";
         this.#inverse.targetY = "0.000";
         this.#inverse.targetZ = "0.000";
+
+        this.clearResults();
+    }
+
+    /**
+     * Clears all rezults of the this.inverse
+     */
+    clearResults() {
         this.#inverse.direction = "";
         this.#inverse.horDistance = "";
         this.#inverse.inclinedDistance = "";
         this.#inverse.tiltAngle = "";
         this.#inverse.elevation = ""       
     }
+
 
     /**
      * 

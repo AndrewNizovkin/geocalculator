@@ -1,4 +1,5 @@
 import {PotenotService} from '../service/PotenotService.js';
+import {ValueValidator} from './ValueValidator.js';
 
 /**
  * Displays the "Potenot task" screen and 
@@ -10,6 +11,7 @@ export class PotenotController {
   #potenotService;
   #basePointService;
   #insertCoordinatesTarget;
+  #resultActual;
 
   /**
    * @constructor
@@ -19,6 +21,7 @@ export class PotenotController {
         this.#potenotService = new PotenotService();
         this.#basePointService = basePointService;
         this.#insertCoordinatesTarget = "first";
+        this.#resultActual = false;
     }
 
     /**
@@ -81,12 +84,12 @@ export class PotenotController {
         
         `;
         
-        this.setData();
-        this.setResult();
-        this.setListBasePoints();
+        this.#setData();
+        this.#setResult();
+        this.#setListBasePoints();
 
-        this.addListenersToolbarPotenot();
-        this.addListenersPanelPotenot();
+        this.#addListenersToolbarPotenot();
+        this.#addListenersPanelPotenot();
 
 
 
@@ -95,22 +98,48 @@ export class PotenotController {
     /**
      * Sets data of gui components from model
      */
-    setData() {
-      document.getElementById("potenot-first-x").value = this.#potenotService.getFirstX();
-      document.getElementById("potenot-first-y").value = this.#potenotService.getFirstY();
-      document.getElementById("potenot-first-direction").value = this.#potenotService.getFirstDirection();
-      document.getElementById("potenot-second-x").value = this.#potenotService.getSecondX();
-      document.getElementById("potenot-second-y").value = this.#potenotService.getSecondY();
-      document.getElementById("potenot-second-direction").value = this.#potenotService.getSecondDirection();
-      document.getElementById("potenot-third-x").value = this.#potenotService.getThirdX();
-      document.getElementById("potenot-third-y").value = this.#potenotService.getThirdY();
-      document.getElementById("potenot-third-direction").value = this.#potenotService.getThirdDirection();
+    #setData() {
+      let element = document.getElementById("potenot-first-x");
+      element.value = this.#potenotService.getFirstX();
+      ValueValidator.checkNumber(element);
+
+      element = document.getElementById("potenot-first-y");
+      element.value = this.#potenotService.getFirstY();
+      ValueValidator.checkNumber(element);
+
+      element = document.getElementById("potenot-first-direction");
+      element.value = this.#potenotService.getFirstDirection();
+      ValueValidator.checkHorisontalAngle(element);
+
+      element = document.getElementById("potenot-second-x");
+      element.value = this.#potenotService.getSecondX();
+      ValueValidator.checkNumber(element);
+
+      element = document.getElementById("potenot-second-y");
+      element.value = this.#potenotService.getSecondY();
+      ValueValidator.checkNumber(element);
+
+      element = document.getElementById("potenot-second-direction");
+      element.value = this.#potenotService.getSecondDirection();
+      ValueValidator.checkHorisontalAngle(element);
+
+      element = document.getElementById("potenot-third-x");
+      element.value = this.#potenotService.getThirdX();
+      ValueValidator.checkNumber(element);
+
+      element = document.getElementById("potenot-third-y");
+      element.value = this.#potenotService.getThirdY();
+      ValueValidator.checkNumber(element);
+
+      element = document.getElementById("potenot-third-direction");
+      element.value = this.#potenotService.getThirdDirection();
+      ValueValidator.checkHorisontalAngle(element);
     }
 
     /**
      * Sets result of gui components from model
      */
-    setResult() {
+    #setResult() {
       document.getElementById("potenot-base-x").innerHTML = `X: ${this.#potenotService.getBaseX()}`;
       document.getElementById("potenot-base-y").innerHTML = `X: ${this.#potenotService.getBaseY()}`;
     }
@@ -118,7 +147,7 @@ export class PotenotController {
     /**
      * Creates and adds a list of base stations to the DOM
      */
-    setListBasePoints() {
+    #setListBasePoints() {
       const listBasePoints = document.createElement('div');
 
       listBasePoints.className = "pop-up";
@@ -140,19 +169,26 @@ export class PotenotController {
     /**
      * Adds event listeners for potenot-toolbar
      */
-    addListenersToolbarPotenot() {
+    #addListenersToolbarPotenot() {
         document.getElementById("potenot-toolbar").addEventListener('click', (event) => {
 
           switch(event.target.id) {
 
             case "potenot-clear":
               this.#potenotService.clearAll();
-              this.setData();
-              this.setResult();              
+              this.#setData();
+              this.#setResult();              
               break;
 
             case "potenot-run":
-              this.#potenotService.solvePotenotTask().then(() => this.setResult());
+              if (this.#isValidData()) {
+                this.#potenotService.solvePotenotTask().then(() => {
+                  this.#setResult();
+                  this.#resultActual = true;
+                });
+              } else {
+                alert("Данные содержат ошибки");
+              }
               break;
           }
         });
@@ -162,8 +198,16 @@ export class PotenotController {
     /**
      * Adds event listeners for potenot-panel
      */
-    addListenersPanelPotenot() {
+    #addListenersPanelPotenot() {
       const panelPotenot = document.getElementById("potenot-panel");
+
+      panelPotenot.addEventListener('input', () => {
+        if (this.#resultActual) {
+          this.#potenotService.clearResults();
+          this.#setResult();
+          this.#resultActual = false;
+        }
+      });
 
       panelPotenot.addEventListener('click', (event) => {
         const element = event.target;
@@ -200,7 +244,7 @@ export class PotenotController {
               break;
           }
 
-          this.setData();
+          this.#setData();
 
         }
 
@@ -242,44 +286,76 @@ export class PotenotController {
         switch(element.id) {
 
           case "potenot-first-x":
+            ValueValidator.checkNumber(element);
             this.#potenotService.saveFirstX(element.value);
             break;
 
           case "potenot-first-y":
+            ValueValidator.checkNumber(element);
             this.#potenotService.saveFirstY(element.value);
             break;
 
           case "potenot-first-direction":
+            ValueValidator.checkHorisontalAngle(element);
             this.#potenotService.saveFirstDirection(element.value);
             break;
 
           case "potenot-second-x":
+            ValueValidator.checkNumber(element);
             this.#potenotService.saveSecondX(element.value);
             break;
 
           case "potenot-second-y":
+            ValueValidator.checkNumber(element);
             this.#potenotService.saveSecondY(element.value);
             break;
 
           case "potenot-second-direction":
+            ValueValidator.checkHorisontalAngle(element);
             this.#potenotService.saveSecondDirection(element.value);
             break;
 
           case "potenot-third-x":
+            ValueValidator.checkNumber(element);
             this.#potenotService.saveThirdX(element.value);
             break;
 
           case "potenot-third-y":
+            ValueValidator.checkNumber(element);
             this.#potenotService.saveThirdY(element.value);
             break;
 
           case "potenot-third-direction":
+            ValueValidator.checkHorisontalAngle(element);
             this.#potenotService.saveThirdDirection(element.value);
             break;
 
         }
       });
 
+    }
+
+    /**
+     * Verifies the validity of data for solving a Potenot geodetic task
+     * @returns {boolean}
+     */
+    #isValidData() {
+      let result = true;
+      if (
+        !ValueValidator.isValidDigitalNumber(this.#potenotService.getFirstX()) ||
+        !ValueValidator.isValidDigitalNumber(this.#potenotService.getFirstY()) ||
+        !ValueValidator.isValidHorizontalAngle(this.#potenotService.getFirstDirection()) ||
+        !ValueValidator.isValidDigitalNumber(this.#potenotService.getSecondX()) ||
+        !ValueValidator.isValidDigitalNumber(this.#potenotService.getSecondY()) ||
+        !ValueValidator.isValidHorizontalAngle(this.#potenotService.getSecondDirection()) ||
+        !ValueValidator.isValidDigitalNumber(this.#potenotService.getThirdX()) ||
+        !ValueValidator.isValidDigitalNumber(this.#potenotService.getThirdY()) ||
+        !ValueValidator.isValidHorizontalAngle(this.#potenotService.getThirdDirection())
+      ) {
+        result = false;
+      }
+
+      return result;
     }
 
 }

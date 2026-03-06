@@ -53,13 +53,13 @@ export class DirectService {
         this.#direct.targetInclinedDistance = "0.000";
         this.#direct.targetTiltAngle = "0.0000";
         this.#direct.targetHeight = "0.000";
-        this.clearRezults();
+        this.clearResults();
     }
 
     /**
      * Sets the initial values of the direct rezults
      */
-    clearRezults() {
+    clearResults() {
         this.#direct.targetX = "";
         this.#direct.targetY = "";
         this.#direct.targetZ = "";

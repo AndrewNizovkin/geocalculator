@@ -36,11 +36,18 @@ export class PotenotService {
         this.#potenot.thirdX = "0.000";
         this.#potenot.thirdY = "0.000";
         this.#potenot.thirdDirection = "0.0000";                
+
+        this.clearResults();
+    }
+
+    /**
+     * Sets the initial values of result of the potenot model fields
+     */
+    clearResults() {
         this.#potenot.baseX = "";
         this.#potenot.baseY = "";
-        
-
     }
+
 
     /**
      * Solves potenot task

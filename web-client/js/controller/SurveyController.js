@@ -1,4 +1,5 @@
 import {SurveyService} from "../service/SurveyService.js";
+import {ValueValidator} from "./ValueValidator.js";
 
 /**
  * Encapsulates the components of the "Survey" screen 
@@ -328,8 +329,6 @@ export class SurveyController {
           this.#setListSurveyStations();
           this.#setSurveyStation();
           this.#setTableMeasurements();
-          // document.getElementById("survey-station-name").focus();
-          // element.blur();
           break;
 
         case "survey-open":
@@ -345,10 +344,7 @@ export class SurveyController {
           menuImport.style.left = `${toggleRect.left - toolbarSurvey.left + window.scrollX}px`;
           menuImport.classList.toggle("open");
           overlay.classList.toggle("open");
-          // element.blur();
-          // document.getElementById("survey-station-name").focus();
-
-        break;
+          break;
 
         case "import-leica":
           this.#surveyImportType = element.id;
@@ -379,7 +375,12 @@ export class SurveyController {
 
 
         case "survey-run":
-          surveyReportInput.click();
+          if (this.#isValidData()) {
+            surveyReportInput.click();
+          } else {
+            alert("Данные содержат ошибки");
+          }
+          
           break;
 
         case "survey-view":
@@ -560,40 +561,49 @@ export class SurveyController {
       switch(element.id) {
 
         case "survey-station-name":
+          ValueValidator.checkName(element);
           this.#surveyService.saveStationName(this.#currentSurveyStation, element.value);
           document.getElementById("list-stations").innerHTML = '';
           this.#setListSurveyStations();
           break;
 
         case "survey-station-x":
+          ValueValidator.checkNumber(element);
           this.#surveyService.saveStationX(this.#currentSurveyStation, element.value);
           break;
 
         case "survey-station-y":
+          ValueValidator.checkNumber(element);
           this.#surveyService.saveStationY(this.#currentSurveyStation, element.value);
           break;
           
         case "survey-station-z":
+          ValueValidator.checkNumber(element);
           this.#surveyService.saveStationZ(this.#currentSurveyStation, element.value);
           break;
 
         case "survey-station-height":
+          ValueValidator.checkNumber(element);
           this.#surveyService.saveStationHeight(this.#currentSurveyStation, element.value);
           break;
 
         case "survey-or-direction":
+          ValueValidator.checkHorisontalAngle(element);
           this.#surveyService.saveOrDirection(this.#currentSurveyStation, element.value);
           break;
 
         case "survey-or-name":
+          ValueValidator.checkName(element);
           this.#surveyService.saveOrName(this.#currentSurveyStation, element.value);
           break;
 
         case "survey-or-x":
+          ValueValidator.checkNumber(element);
           this.#surveyService.saveOrX(this.#currentSurveyStation, element.value);
           break;
 
         case "survey-or-y":
+          ValueValidator.checkNumber(element);
           this.#surveyService.saveOrY(this.#currentSurveyStation, element.value);
           break;
 
@@ -663,6 +673,7 @@ export class SurveyController {
         switch(element.dataset.target) {
 
           case "name":
+            ValueValidator.checkName(element);
             this.#surveyService.saveTargetName(
               this.#currentSurveyStation, 
               +element.dataset.measurementId, 
@@ -670,6 +681,7 @@ export class SurveyController {
             break;
 
           case "direction":
+            ValueValidator.checkHorisontalAngle(element);
             this.#surveyService.saveTargetDirection(
               this.#currentSurveyStation, 
               +element.dataset.measurementId, 
@@ -677,6 +689,7 @@ export class SurveyController {
             break;
 
           case "distance":
+            ValueValidator.checkPositiveNumber(element);
             this.#surveyService.saveTargetDistance(
               this.#currentSurveyStation, 
               +element.dataset.measurementId, 
@@ -684,6 +697,7 @@ export class SurveyController {
             break;
 
           case "tilt":
+            ValueValidator.checkTiltAngle(element);
             this.#surveyService.saveTargetTiltAngle(
               this.#currentSurveyStation, 
               +element.dataset.measurementId, 
@@ -691,6 +705,7 @@ export class SurveyController {
             break;
 
           case "height":
+            ValueValidator.checkNumber(element);
             this.#surveyService.saveTargetHeight(
               this.#currentSurveyStation, 
               +element.dataset.measurementId, 
@@ -702,24 +717,47 @@ export class SurveyController {
 
   }
 
-
-
-
   /**
    * Sets the values of DOM elements for a station 
    * with the currentStation index
    */
   #setSurveyStation() {
     if(this.#surveyService.size() > 0) {
-      document.getElementById("survey-station-name").value = this.#surveyService.getStationName(this.#currentSurveyStation);
-      document.getElementById("survey-station-x").value = this.#surveyService.getStationX(this.#currentSurveyStation);
-      document.getElementById("survey-station-y").value = this.#surveyService.getStationY(this.#currentSurveyStation);
-      document.getElementById("survey-station-z").value = this.#surveyService.getStationZ(this.#currentSurveyStation);
-      document.getElementById("survey-station-height").value = this.#surveyService.getStationHeight(this.#currentSurveyStation);
-      document.getElementById("survey-or-direction").value = this.#surveyService.getOrDirection(this.#currentSurveyStation);
-      document.getElementById("survey-or-name").value = this.#surveyService.getOrName(this.#currentSurveyStation);
-      document.getElementById("survey-or-x").value = this.#surveyService.getOrX(this.#currentSurveyStation);
-      document.getElementById("survey-or-y").value = this.#surveyService.getOrY(this.#currentSurveyStation);
+      let element = document.getElementById("survey-station-name");
+      element.value = this.#surveyService.getStationName(this.#currentSurveyStation);
+      ValueValidator.checkName(element);
+
+      element = document.getElementById("survey-station-x");
+      element.value = this.#surveyService.getStationX(this.#currentSurveyStation);
+      ValueValidator.checkNumber(element);
+
+      element = document.getElementById("survey-station-y");
+      element.value = this.#surveyService.getStationY(this.#currentSurveyStation);
+      ValueValidator.checkNumber(element);
+
+      element = document.getElementById("survey-station-z");
+      element.value = this.#surveyService.getStationZ(this.#currentSurveyStation);
+      ValueValidator.checkNumber(element);
+
+      element = document.getElementById("survey-station-height");
+      element.value = this.#surveyService.getStationHeight(this.#currentSurveyStation);
+      ValueValidator.checkNumber(element);
+
+      element = document.getElementById("survey-or-direction");
+      element.value = this.#surveyService.getOrDirection(this.#currentSurveyStation);
+      ValueValidator.checkHorisontalAngle(element);
+
+      element = document.getElementById("survey-or-name");
+      element.value = this.#surveyService.getOrName(this.#currentSurveyStation);
+      ValueValidator.checkName(element);
+
+      element = document.getElementById("survey-or-x");
+      element.value = this.#surveyService.getOrX(this.#currentSurveyStation);
+      ValueValidator.checkNumber(element);
+
+      element = document.getElementById("survey-or-y");
+      element.value = this.#surveyService.getOrY(this.#currentSurveyStation);
+      ValueValidator.checkNumber(element);
     }
 
   }
@@ -789,6 +827,7 @@ export class SurveyController {
         item.setAttribute('data-target', 'name');
         item.setAttribute('data-measurement-id', i);
         item.value = this.#surveyService.getTargetName(this.#currentSurveyStation, i);
+        ValueValidator.checkName(item);
         sell.append(item);
         row.append(sell);
 
@@ -799,6 +838,7 @@ export class SurveyController {
         item.setAttribute('data-target', 'direction');
         item.setAttribute('data-measurement-id', i);
         item.value = this.#surveyService.getTargetDirection(this.#currentSurveyStation, i);
+        ValueValidator.checkHorisontalAngle(item);
         sell.append(item);
         row.append(sell);
 
@@ -809,6 +849,7 @@ export class SurveyController {
         item.setAttribute('data-target', 'distance');
         item.setAttribute('data-measurement-id', i);
         item.value = this.#surveyService.getTargetDistance(this.#currentSurveyStation, i);
+        ValueValidator.checkPositiveNumber(item);
         sell.append(item);
         row.append(sell);
 
@@ -819,6 +860,7 @@ export class SurveyController {
         item.setAttribute('data-target', 'tilt');
         item.setAttribute('data-measurement-id', i);
         item.value = this.#surveyService.getTargetTiltAngle(this.#currentSurveyStation, i);
+        ValueValidator.checkTiltAngle(item);
         sell.append(item);
         row.append(sell);
 
@@ -829,6 +871,7 @@ export class SurveyController {
         item.setAttribute('data-target', 'height');
         item.setAttribute('data-measurement-id', i);
         item.value = this.#surveyService.getTargetHeight(this.#currentSurveyStation, i);
+        ValueValidator.checkNumber(item);
         sell.append(item);
         row.append(sell);
 
@@ -916,7 +959,6 @@ export class SurveyController {
     buttonClose.addEventListener('click', () => {
       panelInfo.classList.toggle("open");
       overlay.classList.toggle("open");
-      // overlay.style.zIndex = "999";
     });
     buttonClose.innerHTML = "Закрыть";
     panelInfo.append(buttonClose);
@@ -932,11 +974,48 @@ export class SurveyController {
   #showMessage(message) {
     const panelInfo = document.getElementById("survey-panel-info");
     const overlay = document.getElementById("overlay");
-    // overlay.style.zIndex = "1001";
     document.getElementById("survey-info-message").innerHTML = message;
 
     panelInfo.classList.toggle("open");
     overlay.classList.toggle("open");
+  }
+
+  /**
+   * Checks the data for the correct values
+   * @returns {boolean}
+   */
+  #isValidData() {
+    let result = true;
+
+    for (let i = 0; i < this.#surveyService.size(); i++) {
+      if (
+        !ValueValidator.isValidName(this.#surveyService.getStationName(i)) ||
+        !ValueValidator.isValidDigitalNumber(this.#surveyService.getStationX(i)) ||
+        !ValueValidator.isValidDigitalNumber(this.#surveyService.getStationY(i)) ||
+        !ValueValidator.isValidDigitalNumber(this.#surveyService.getStationZ(i)) ||
+        !ValueValidator.isValidDigitalNumber(this.#surveyService.getStationHeight(i)) ||
+        !ValueValidator.isValidHorizontalAngle(this.#surveyService.getOrDirection(i)) ||
+        !ValueValidator.isValidName(this.#surveyService.getOrName(i)) ||
+        !ValueValidator.isValidDigitalNumber(this.#surveyService.getOrX(i)) ||
+        !ValueValidator.isValidDigitalNumber(this.#surveyService.getOrY(i))
+      ) {
+        result = false;
+      }
+
+      for (let j = 0; j < this.#surveyService.measurementSize(i); j++) {
+        if (
+          !ValueValidator.isValidName(this.#surveyService.getTargetName(i, j)) ||
+          !ValueValidator.isValidHorizontalAngle(this.#surveyService.getTargetDirection(i, j)) ||
+          !ValueValidator.isValidPositiveNumber(this.#surveyService.getTargetDistance(i, j)) ||
+          !ValueValidator.isValidTiltAngle(this.#surveyService.getTargetTiltAngle(i, j)) ||
+          !ValueValidator.isValidDigitalNumber(this.#surveyService.getTargetHeight(i, j))
+        ) {
+          result = false;
+        }
+      }
+    }
+
+    return result;
   }
 
 }

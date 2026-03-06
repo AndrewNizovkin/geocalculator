@@ -1,4 +1,5 @@
 import {InverseService} from '../service/InverseService.js';
+import {ValueValidator} from './ValueValidator.js';
 
 /**
  * Displays the Inverse Geodetic Task screen and 
@@ -10,6 +11,7 @@ export class InverseController {
   #inverseService;
   #basePointService;
   #insertCoordinateToBase;
+  #resultActual;
 
   /**
    * @constructor
@@ -19,6 +21,7 @@ export class InverseController {
         this.#inverseService = new InverseService();
         this.#basePointService = basePointService;
         this.#insertCoordinateToBase = true;
+        this.#resultActual = false;
     }
 
     /**
@@ -111,17 +114,29 @@ export class InverseController {
      */
     #setData() {
 
-      document.getElementById("inverse-base-x").value = this.#inverseService.getBaseX();
+      let element = document.getElementById("inverse-base-x");
+      element.value = this.#inverseService.getBaseX();
+      ValueValidator.checkNumber(element);
 
-      document.getElementById("inverse-base-y").value = this.#inverseService.getBaseY();
+      element = document.getElementById("inverse-base-y");
+      element.value = this.#inverseService.getBaseY();
+      ValueValidator.checkNumber(element);
 
-      document.getElementById("inverse-base-z").value = this.#inverseService.getBaseZ();
+      element = document.getElementById("inverse-base-z");
+      element.value = this.#inverseService.getBaseZ();
+      ValueValidator.checkNumber(element);
 
-      document.getElementById("inverse-target-x").value = this.#inverseService.getTargetX();
+      element = document.getElementById("inverse-target-x");
+      element.value = this.#inverseService.getTargetX();
+      ValueValidator.checkNumber(element);
 
-      document.getElementById("inverse-target-y").value = this.#inverseService.getTargetY();
+      element = document.getElementById("inverse-target-y");
+      element.value = this.#inverseService.getTargetY();
+      ValueValidator.checkNumber(element);
 
-      document.getElementById("inverse-target-z").value = this.#inverseService.getTargetZ();
+      element = document.getElementById("inverse-target-z");
+      element.value = this.#inverseService.getTargetZ();
+      ValueValidator.checkNumber(element);
 
     }
 
@@ -179,7 +194,14 @@ export class InverseController {
             break;
 
           case "inverse-run":
-            this.#inverseService.solveInverseTask().then(() => this.#setResult());
+            if (this.#isValidData()) {
+              this.#inverseService.solveInverseTask().then(() => {
+                this.#setResult();
+                this.#resultActual = true;
+              });
+            } else {
+              alert("Данные содержат ошибки");
+            }
             break;
         }
       });
@@ -191,6 +213,14 @@ export class InverseController {
      */
     #addInversePanelListeners() {
       const panelInverse = document.getElementById("inverse-panel");
+
+      panelInverse.addEventListener('input', () => {
+        if (this.#resultActual) {
+          this.#inverseService.clearResults();
+          this.#setResult();
+          this.#resultActual = false;
+        }
+      });
 
       panelInverse.addEventListener('click', (event) => {
         let element = event.target;
@@ -221,10 +251,7 @@ export class InverseController {
           }
 
           this.#setData();
-
         }
-
-
 
         switch (element.id) {
 
@@ -254,32 +281,58 @@ export class InverseController {
         switch(element.id) {
 
           case "inverse-base-x":
+            ValueValidator.checkNumber(element);
             this.#inverseService.saveBaseX(element.value);
             break;
 
           case "inverse-base-y":
+            ValueValidator.checkNumber(element);
             this.#inverseService.saveBaseY(element.value);
             break;
 
           case "inverse-base-z":
+            ValueValidator.checkNumber(element);
             this.#inverseService.saveBaseZ(element.value);
             break;
 
           case "inverse-target-x":
+            ValueValidator.checkNumber(element);
             this.#inverseService.saveTargetX(element.value);
             break;
 
           case "inverse-target-y":
+            ValueValidator.checkNumber(element);
             this.#inverseService.saveTargetY(element.value);
             break;
 
           case "inverse-target-z":
+            ValueValidator.checkNumber(element);
             this.#inverseService.saveTargetZ(element.value);
             break;
 
         }
       });
 
+    }
+
+    /**
+     * Verifies the validity of data for solving 
+     * the inverse geodetic task
+     * @returns {boolean}
+     */
+    #isValidData() {
+      let result = true;
+      if (
+        !ValueValidator.isValidDigitalNumber(this.#inverseService.getBaseX()) ||
+        !ValueValidator.isValidDigitalNumber(this.#inverseService.getBaseY()) ||
+        !ValueValidator.isValidDigitalNumber(this.#inverseService.getBaseZ()) ||
+        !ValueValidator.isValidDigitalNumber(this.#inverseService.getTargetX()) ||
+        !ValueValidator.isValidDigitalNumber(this.#inverseService.getTargetY()) ||
+        !ValueValidator.isValidDigitalNumber(this.#inverseService.getTargetZ())
+      ) {
+        result = false;
+      }
+      return result;
     }
 
 

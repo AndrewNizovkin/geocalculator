@@ -138,8 +138,6 @@ export class DirectController {
                 this.#resultActual = true;
               });
             } else {
-              // this.#directService.clearRezults();
-              // this.#setResult();
               alert("Данные содержат ошибки");
             }
             
@@ -157,7 +155,7 @@ export class DirectController {
 
     panelDirect.addEventListener('input', () => {
       if (this.#resultActual) {
-        this.#directService.clearRezults();
+        this.#directService.clearResults();
         this.#setResult();
         this.#resultActual = false;
       }
@@ -373,7 +371,7 @@ export class DirectController {
    * @returns {boolean}
    */
   #isValidData() {
-    let rezult = true;
+    let result = true;
     if (
       !ValueValidator.isValidDigitalNumber(this.#directService.getLandmarkX()) ||
       !ValueValidator.isValidDigitalNumber(this.#directService.getLandmarkY()) ||
@@ -387,10 +385,10 @@ export class DirectController {
       !ValueValidator.isValidTiltAngle(this.#directService.getTargetTiltAngle()) ||
       !ValueValidator.isValidDigitalNumber(this.#directService.getTargetHeight())
     ) {
-      rezult = false;
+      result = false;
     }
 
-    return rezult;
+    return result;
   }
 
 }
