@@ -1,4 +1,5 @@
 import { PolygonService } from "../service/PolygonService.js";
+import {ValueValidator} from "./ValueValidator.js";
 
 /**
  * Encapsulates the components of the "Polygon" screen 
@@ -217,6 +218,7 @@ export class PolygonContoller {
             item.setAttribute("data-property", "name");
             item.size = "8";
             item.value = this.#polygonService.getStationName(i);
+            ValueValidator.checkName(item);
             cell.append(item);
             row.append(cell);
 
@@ -231,6 +233,7 @@ export class PolygonContoller {
                 item.value = '';
             } else {
                 item.value = this.#polygonService.getHorAngle(i);
+                ValueValidator.checkHorisontalAngle(item);
             }
             cell.append(item);
             row.append(cell);
@@ -246,6 +249,7 @@ export class PolygonContoller {
                 item.value = '';
             } else {
                 item.value = this.#polygonService.getHorDistance(i);
+                ValueValidator.checkPositiveNumber(item);
             }
             cell.append(item);
             row.append(cell);
@@ -261,6 +265,7 @@ export class PolygonContoller {
                 item.value = '';
             } else {
                 item.value = this.#polygonService.getElevation(i);
+                ValueValidator.checkNumber(item);
             }
             cell.append(item);
             row.append(cell);
@@ -279,6 +284,7 @@ export class PolygonContoller {
                     this.#polygonService.saveStatus(i, false);
                 } else {
                     item.value = this.#polygonService.getStationX(i);
+                    ValueValidator.checkNumber(item);
                     item.disabled = false;
                 }                
             }
@@ -299,6 +305,7 @@ export class PolygonContoller {
                     this.#polygonService.saveStatus(i, false);
                 } else {
                     item.value = this.#polygonService.getStationY(i);
+                    ValueValidator.checkNumber(item);
                     item.disabled = false;
                 }                
             }
@@ -319,6 +326,7 @@ export class PolygonContoller {
                     this.#polygonService.saveStatus(i, false);
                 } else {
                     item.value = this.#polygonService.getStationZ(i);
+                    ValueValidator.checkNumber(item);
                     item.disabled = false;
                 }                
             }
@@ -570,7 +578,11 @@ export class PolygonContoller {
                     break;
 
                 case "polygon-run":
-                    document.getElementById("polygon-open-response").click();
+                    if (this.#isValidData()) {
+                        document.getElementById("polygon-open-response").click();
+                    } else {
+                        alert("Данные содержат ошибки");
+                    }
                     break;
 
                 case "polygon-view":
@@ -673,30 +685,49 @@ export class PolygonContoller {
                 switch (element.dataset.property) {
 
                     case "name":
+                        ValueValidator.checkName(element);
                         this.#polygonService.saveStationName(+element.dataset.polygonStationId, element.value);
                         break;
 
                     case "hor-angle":
-                        this.#polygonService.saveHorAngle(+element.dataset.polygonStationId, element.value);
+                        if (element.value === "") {
+                            this.#polygonService.saveHorAngle(+element.dataset.polygonStationId, "Not");
+                        } else {
+                            ValueValidator.checkHorisontalAngle(element);
+                            this.#polygonService.saveHorAngle(+element.dataset.polygonStationId, element.value);
+                        }
                         break;
 
                     case "hor-distance":
-                        this.#polygonService.saveHorDistance(+element.dataset.polygonStationId, element.value);
+                        if (element.value === "") {
+                            this.#polygonService.saveHorDistance(+element.dataset.polygonStationId, "Not");
+                        } else {
+                            ValueValidator.checkPositiveNumber(element);
+                            this.#polygonService.saveHorDistance(+element.dataset.polygonStationId, element.value);
+                        }
                         break;
 
                     case "elevation":
-                        this.#polygonService.saveElevation(+element.dataset.polygonStationId, element.value);
+                        if (element.value === "") {
+                            this.#polygonService.saveElevation(+element.dataset.polygonStationId, "Not");
+                        } else {
+                            ValueValidator.checkNumber(element);
+                            this.#polygonService.saveElevation(+element.dataset.polygonStationId, element.value);
+                        }
                         break;
 
                     case "x":
+                        ValueValidator.checkNumber(element);
                         this.#polygonService.saveStationX(+element.dataset.polygonStationId, element.value);
                         break;
 
                     case "y":
+                        ValueValidator.checkNumber(element);
                         this.#polygonService.saveStationY(+element.dataset.polygonStationId, element.value);
                         break;
 
                     case "z":
+                        ValueValidator.checkNumber(element);
                         this.#polygonService.saveStationZ(+element.dataset.poliygonStationId, element.value);
                         break;
 
@@ -750,9 +781,64 @@ export class PolygonContoller {
                     this.#polygonService.saveValidRelative(element.value);
                     break;
             }
-
         });
+    }
 
+    /**
+     * Checks the data for the correct values
+     * @returns {boolean}
+     */
+    #isValidData() {
+        let result = true;
+
+        for (let i = 0; i < this.#polygonService.size(); i++) {
+
+            if (
+                !ValueValidator.isValidName(this.#polygonService.getStationName(i))
+            ) {
+                result = false;
+            }
+
+            if (this.#polygonService.getHorAngle(i) !== "Not") {
+                if (!ValueValidator.isValidHorizontalAngle(this.#polygonService.getHorAngle(i))) {
+                    result = false;
+                }
+            }
+
+            if (this.#polygonService.getHorDistance(i) !== "Not") {
+                if (!ValueValidator.isValidPositiveNumber(this.#polygonService.getHorDistance(i))) {
+                    result = false;
+                }
+            }
+
+            if (this.#polygonService.getElevation(i) !== "Not") {
+                if (!ValueValidator.isValidDigitalNumber(this.#polygonService.getElevation(i))) {
+                    result = false;
+                }
+            }
+
+            if (this.#polygonService.getStationX(i) !== "Not") {
+                if (!ValueValidator.isValidDigitalNumber(this.#polygonService.getStationX(i))) {
+                    result = false;
+                }
+            }
+
+            if (this.#polygonService.getStationY(i) !== "Not") {
+                if (!ValueValidator.isValidDigitalNumber(this.#polygonService.getStationY(i))) {
+                    result = false;
+                }
+            }
+
+            if (this.#polygonService.getStationZ(i) !== "Not") {
+                if (!ValueValidator.isValidDigitalNumber(this.#polygonService.getStationZ(i))) {
+                    result = false;
+                }
+            }
+
+
+        }
+
+        return result;
     }
 
 }

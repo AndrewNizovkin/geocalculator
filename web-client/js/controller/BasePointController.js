@@ -1,4 +1,5 @@
 import {BasePointService} from "../service/BasePointService.js";
+import {ValueValidator} from "./ValueValidator.js";
 
 /**
  * Provides methods for managing the DOM elements 
@@ -74,6 +75,7 @@ export class BasePointController {
           item.setAttribute("data-target", "point-name");
           item.size = "8";
           item.value = this.#basePointService.getBasePointName(i);
+          ValueValidator.checkName(item);
           cell.append(item);
           row.append(cell);
 
@@ -84,6 +86,7 @@ export class BasePointController {
           item.setAttribute("data-target", "point-x");
           item.size = "10";
           item.value = this.#basePointService.getBasePointX(i);
+          ValueValidator.checkNumber(item);
           cell.append(item);
           row.append(cell);
 
@@ -94,6 +97,7 @@ export class BasePointController {
           item.setAttribute("data-target", "point-y");
           item.size = "10";
           item.value = this.#basePointService.getBasePointY(i);
+          ValueValidator.checkNumber(item);
           cell.append(item);
           row.append(cell);
 
@@ -104,6 +108,7 @@ export class BasePointController {
           item.setAttribute("data-target", "point-z");
           item.size = "7";
           item.value = this.#basePointService.getBasePointZ(i);
+          ValueValidator.checkNumber(item);
           cell.append(item);
           row.append(cell);
 
@@ -139,31 +144,35 @@ export class BasePointController {
 
       
 
-      panelPoints.addEventListener('input', (event) => {
+      panelPoints.addEventListener('change', (event) => {
         let element = event.target;
 
         if (element.hasAttribute("data-target")) {
           switch (element.dataset.target) {
 
             case "point-name":
+              ValueValidator.checkName(element);
               this.#basePointService.saveBasePointName(
                 +element.dataset.pointId, 
                 element.value)
               break;
 
             case "point-x":
+              ValueValidator.checkNumber(element);
               this.#basePointService.saveBasePointX(
                 +element.dataset.pointId, 
                 element.value)
               break;
 
             case "point-y":
+              ValueValidator.checkNumber(element);
               this.#basePointService.saveBasePointY(
                 +element.dataset.pointId, 
                 element.value)
               break;
 
             case "point-z":
+              ValueValidator.checkNumber(element);
               this.#basePointService.saveBasePointZ(
                 +element.dataset.pointId, 
                 element.value)
