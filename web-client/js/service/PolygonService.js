@@ -98,7 +98,10 @@ export class PolygonService {
         // this.#setDemoReports();
         // this.clearAll();
         this.clearReports();
-        let polygonRequest = this.getLinesPolArray();
+        let polygonRequest = this.#polygonMapper.polygonRepositoryToPolygonRequest(this.#polygonRepository, this.#validResiduals);
+        for (let line of polygonRequest) {
+            console.log(line);
+        }
 
         try {
             await this.#polygonProvider.getPolygonResponse(reportFile).then((polygonResponse) => {

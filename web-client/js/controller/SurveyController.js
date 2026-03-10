@@ -1,5 +1,6 @@
 import {SurveyService} from "../service/SurveyService.js";
 import {ValueValidator} from "./ValueValidator.js";
+import { Informer } from "./Informer.js";
 
 /**
  * Encapsulates the components of the "Survey" screen 
@@ -146,7 +147,7 @@ export class SurveyController {
       this.#setTableMeasurements();
       this.#setListBasePoints();
       this.#setMenuImport();
-      this.#setInfoPanel();
+      // this.#setInfoPanel();
       this.#addListenersMainToolbar()
       this.#addListenersPanelStations();
       this.#addListenersPanelStation();
@@ -281,7 +282,7 @@ export class SurveyController {
                 countMeasurements += this.#surveyService.measurementSize(i);
               }
               let message = `${countMeasurements} измерений успешно обработаны`;
-              this.#showMessage(message);
+              Informer.showMessage(message);
             });      
           } catch (error) {
             console.error(error.message);
@@ -375,12 +376,14 @@ export class SurveyController {
 
 
         case "survey-run":
-          if (this.#isValidData()) {
-            surveyReportInput.click();
-          } else {
-            alert("Данные содержат ошибки");
-          }
-          
+          this.#isValidData().then((result) => {
+            if (result) {
+              surveyReportInput.click();
+            } else {
+              Informer.showMessage("Данные содержат ошибки");
+            }
+
+          });
           break;
 
         case "survey-view":
@@ -935,56 +938,10 @@ export class SurveyController {
   }
 
   /**
-   * Creates and apends to DOM modal info panel
-   */
-  #setInfoPanel() {
-    const overlay = document.getElementById("overlay");
-    const panelInfo = document.createElement('div');
-    panelInfo.className = "panel pop-up";
-    panelInfo.id = "survey-panel-info";
-
-    const logo = document.createElement('div');
-    logo.className = "logo";
-    logo.innerHTML = "Тахеопорт";
-    panelInfo.append(logo);
-
-    const message = document.createElement('div');
-    message.id = "survey-info-message";
-    message.innerHTML = "Hello, World!"
-    panelInfo.append(message);
-
-    const buttonClose = document.createElement('button');
-    buttonClose.className = "panel menu-item";
-    buttonClose.id = "info-close";
-    buttonClose.addEventListener('click', () => {
-      panelInfo.classList.toggle("open");
-      overlay.classList.toggle("open");
-    });
-    buttonClose.innerHTML = "Закрыть";
-    panelInfo.append(buttonClose);
-
-    document.getElementById("panel-survey").append(panelInfo);
-
-  }
-
-  /**
-   * Displays an information panel  with message
-   * @param {string} message 
-   */
-  #showMessage(message) {
-    const panelInfo = document.getElementById("survey-panel-info");
-    const overlay = document.getElementById("overlay");
-    document.getElementById("survey-info-message").innerHTML = message;
-
-    panelInfo.classList.toggle("open");
-    overlay.classList.toggle("open");
-  }
-
-  /**
    * Checks the data for the correct values
    * @returns {boolean}
    */
-  #isValidData() {
+  async #isValidData() {
     let result = true;
 
     for (let i = 0; i < this.#surveyService.size(); i++) {

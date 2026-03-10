@@ -1,5 +1,6 @@
 import {InverseService} from '../service/InverseService.js';
 import {ValueValidator} from './ValueValidator.js';
+import { Informer } from './Informer.js';
 
 /**
  * Displays the Inverse Geodetic Task screen and 
@@ -200,7 +201,7 @@ export class InverseController {
                 this.#resultActual = true;
               });
             } else {
-              alert("Данные содержат ошибки");
+              Informer.showMessage("Данные содержат ошибки");
             }
             break;
         }

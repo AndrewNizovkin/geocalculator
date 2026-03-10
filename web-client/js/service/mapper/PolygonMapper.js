@@ -1,4 +1,3 @@
-
 /**
  * This class provides methods for converting 
  * models and dto objects for PolygonService
@@ -8,7 +7,7 @@
 export class PolygonMapper {
 
     /**
-     * Converts an instance of the PolygonRepositoryinto 
+     * Converts an instance of the PolygonRepository into 
      * an array of strings in the 'pol' format
      * @param {PolygonRepository} polygonRepository 
      * @returns {string[]}
@@ -36,8 +35,27 @@ export class PolygonMapper {
             
             linesArray.push(line);
         }
-
         return linesArray;
+    }
+
+    /**
+     * Generates a request to the backend server
+     * @param {PolygonRepository} polygonRepository 
+     * @param {ValidResiduals} validResiduals
+     * @returns {string[]}
+     */
+    polygonRepositoryToPolygonRequest(polygonRepository, validResiduals) {
+        const arrayValidResiduals = [];
+
+        arrayValidResiduals.push("#valid-residuals");
+        arrayValidResiduals.push(`elevation=${validResiduals?.validElevation}`);
+        arrayValidResiduals.push(`angle=${validResiduals?.validAngle}`);
+        arrayValidResiduals.push(`absolute=${validResiduals?.validAbsolute}`);
+        arrayValidResiduals.push(`relative=${validResiduals?.validRelative}`);
+        arrayValidResiduals.push("#polygon");
+        let polygoRequest = arrayValidResiduals.concat(this.polygonRepositoryToArray(polygonRepository));
+
+        return polygoRequest;
     }
 
     /**

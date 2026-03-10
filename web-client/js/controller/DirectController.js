@@ -1,5 +1,6 @@
 import {DirectService} from '../service/DirectService.js';
 import {ValueValidator} from './ValueValidator.js';
+import {Informer} from './Informer.js';
 
 /**
  * Displays the Direct Geodetic Task screen and 
@@ -138,7 +139,7 @@ export class DirectController {
                 this.#resultActual = true;
               });
             } else {
-              alert("Данные содержат ошибки");
+              Informer.showMessage("Данные содержат ошибки");
             }
             
             break;

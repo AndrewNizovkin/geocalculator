@@ -34,6 +34,9 @@ export class SurveyService {
     async calculateSurvey(reportFile) {
         this.clearSurveyReports();
         let surveyRequest = this.#surveyMapper.surveyRepositoryToSurveyRequest(this.#surveyRepository);
+        for (let line of surveyRequest) {
+            console.log(line);
+        }
 
         try {
             await this.#surveyProvider.getSurveyResponse(reportFile).then((surveyResponse) => {

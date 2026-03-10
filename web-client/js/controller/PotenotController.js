@@ -1,5 +1,6 @@
 import {PotenotService} from '../service/PotenotService.js';
 import {ValueValidator} from './ValueValidator.js';
+import { Informer } from './Informer.js';
 
 /**
  * Displays the "Potenot task" screen and 
@@ -187,7 +188,7 @@ export class PotenotController {
                   this.#resultActual = true;
                 });
               } else {
-                alert("Данные содержат ошибки");
+                Informer.showMessage("Данные содержат ошибки");
               }
               break;
           }

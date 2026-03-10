@@ -76,6 +76,7 @@ export class MainController {
 
 
         `;
+        this.#setInfoPanel();
         this.loadMainPage();
         this.#addListenersMainMenu();
         this.#addListenersNavMenu();
@@ -107,6 +108,40 @@ export class MainController {
         `;
 
     }
+
+  /**
+   * Creates and apends to DOM modal info panel
+   */
+  #setInfoPanel() {
+    const overlay = document.getElementById("overlay");
+    const panelInfo = document.createElement('div');
+    panelInfo.className = "panel pop-up";
+    panelInfo.id = "survey-panel-info";
+
+    const logo = document.createElement('div');
+    logo.className = "logo";
+    logo.innerHTML = "Тахеопорт";
+    panelInfo.append(logo);
+
+    const message = document.createElement('div');
+    message.id = "survey-info-message";
+    message.innerHTML = "Hello, World!"
+    panelInfo.append(message);
+
+    const buttonClose = document.createElement('button');
+    buttonClose.className = "panel menu-item";
+    buttonClose.id = "info-close";
+    buttonClose.addEventListener('click', () => {
+      panelInfo.classList.toggle("open");
+      overlay.classList.toggle("open");
+    });
+    buttonClose.innerHTML = "Закрыть";
+    panelInfo.append(buttonClose);
+
+    document.body.append(panelInfo);
+
+  }
+    
 
     /**
      * Adds listeners to main menu

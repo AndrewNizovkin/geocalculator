@@ -1,5 +1,6 @@
 import { PolygonService } from "../service/PolygonService.js";
 import {ValueValidator} from "./ValueValidator.js";
+import {Informer} from "./Informer.js";
 
 /**
  * Encapsulates the components of the "Polygon" screen 
@@ -578,11 +579,15 @@ export class PolygonContoller {
                     break;
 
                 case "polygon-run":
-                    if (this.#isValidData()) {
-                        document.getElementById("polygon-open-response").click();
-                    } else {
-                        alert("Данные содержат ошибки");
-                    }
+                    this.#isValidData().then((result) => {
+                        if (result) {
+                            document.getElementById("polygon-open-response").click();
+                        } else {
+                            Informer.showMessage("Данные содержат ошибки");
+                        }
+
+                    });
+
                     break;
 
                 case "polygon-view":
@@ -788,7 +793,7 @@ export class PolygonContoller {
      * Checks the data for the correct values
      * @returns {boolean}
      */
-    #isValidData() {
+    async #isValidData() {
         let result = true;
 
         for (let i = 0; i < this.#polygonService.size(); i++) {
