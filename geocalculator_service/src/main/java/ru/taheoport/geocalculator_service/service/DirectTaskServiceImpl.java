@@ -2,15 +2,15 @@ package ru.taheoport.geocalculator_service.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.taheoport.geocalculator_service.dto.*;
 import ru.taheoport.geocalculator_service.mapper.DirectTaskMapper;
-
 import java.util.List;
 
 /**
  * This class implements interface DirectTaskService
  */
-@Component
+@Service
 @RequiredArgsConstructor
 public class DirectTaskServiceImpl implements DirectTaskService{
 

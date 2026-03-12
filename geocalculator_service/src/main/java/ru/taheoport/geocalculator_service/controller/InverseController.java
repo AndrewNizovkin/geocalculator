@@ -9,14 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.taheoport.geocalculator_service.dto.InverseTaskFullResponse;
 import ru.taheoport.geocalculator_service.dto.InverseTaskRequest;
-import ru.taheoport.geocalculator_service.dto.InverseTaskResponse;
 import ru.taheoport.geocalculator_service.service.InverseTaskService;
 
 @RestController
 @RequestMapping("inverse")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
-public class InverseTackController {
+public class InverseController {
 
     private final InverseTaskService inverseTaskService;
 

@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("direct")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
-public class DirectTaskController {
+public class DirectController {
 
 
     private final DirectTaskService directTaskService;

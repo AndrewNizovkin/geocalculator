@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("potenot")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
-public class PotenotTaskController {
+public class PotenotController {
 
     private final PotenotService potenotService;
 
@@ -32,7 +32,7 @@ public class PotenotTaskController {
 //            @ApiResponse(responseCode = "500", description = "Internal server error")
 //    })
     @PostMapping
-    public ResponseEntity<PotenotTaskResponse> solvePotenotProblem(@RequestBody List<PotenotTaskRequest> potenotTaskRequestList) {
+    public ResponseEntity<PotenotTaskResponse> solvePotenotTask(@RequestBody List<PotenotTaskRequest> potenotTaskRequestList) {
         try {
             return new ResponseEntity<>(potenotService.resolvePotenotTask(potenotTaskRequestList), HttpStatus.CREATED);
         } catch (RuntimeException e) {

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureWebTestClient
 @ActiveProfiles("test")
-class InverseTackControllerTest {
+class InverseControllerTest {
 
     @Autowired
     private InverseTaskService inverseTaskService;

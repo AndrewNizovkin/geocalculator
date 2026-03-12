@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureWebTestClient
 @ActiveProfiles("test")
-class PotenotTaskControllerTest {
+class PotenotControllerTest {
 
     @Autowired
     private PotenotService potenotService;
@@ -36,7 +36,7 @@ class PotenotTaskControllerTest {
             "100000, 100000, 1142287, 200000, 200000, 1168488, 100000, 300000, 1173462, -709005, 846436",
             "-100000, -100000, 587159, -200000, -200000, 662082, -100000, -300000, 742845, 150295, -176044"
     })
-    void solvePotenotProblemTest(
+    void solvePotenotTaskTest(
             long firstX,
             long firstY,
             long firstDirection,
@@ -71,7 +71,7 @@ class PotenotTaskControllerTest {
     }
 
     @Test
-    void solvePotenotProblemTestBadRequest() {
+    void solvePotenotTaskTestBadRequest() {
         List<PotenotTaskRequest> potenotTaskRequestList = List.of(
                 new PotenotTaskRequest(),
                 new PotenotTaskRequest()

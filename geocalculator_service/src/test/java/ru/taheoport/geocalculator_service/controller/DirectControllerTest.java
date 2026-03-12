@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureWebTestClient
 @ActiveProfiles("test")
-class DirectTaskControllerTest {
+class DirectControllerTest {
 
     @Autowired
     private DirectTaskService directTaskService;

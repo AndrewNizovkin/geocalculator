@@ -2,6 +2,7 @@ package ru.taheoport.geocalculator_service.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.taheoport.geocalculator_service.dto.PotenotStringRequest;
 import ru.taheoport.geocalculator_service.dto.PotenotStringResponse;
 import ru.taheoport.geocalculator_service.dto.PotenotTaskRequest;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * This class implements interface PotenotService
  */
-@Component
+@Service
 @RequiredArgsConstructor
 public class PotenotServiceImpl implements PotenotService{
 
