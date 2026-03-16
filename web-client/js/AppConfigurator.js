@@ -4,8 +4,8 @@
 export class AppConfigurator {
 
     static baseUrl = '192.168.0.12:8181';
-    static directEndPoint = 'direct';
-    static inverseEndPoint = 'inverse';
-    static potenotEndPoint = 'potenot';
+    static directEndPoint = 'direct/str';
+    static inverseEndPoint = 'inverse/str';
+    static potenotEndPoint = 'potenot/str';
     static surveyImportEndPoint = 'import';
 }

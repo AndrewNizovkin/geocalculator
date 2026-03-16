@@ -21,16 +21,16 @@ public class DirectValidatorDefault implements DirectValidator{
      */
     @Override
     public boolean isValidDirectStringRequest(DirectStringRequest directStringRequest) {
-        return validator.isDigit(directStringRequest.getLandmarkX()) &&
-                validator.isDigit(directStringRequest.getLandmarkY()) &&
-                validator.isDms(directStringRequest.getLandmarkDirection()) &&
-                validator.isDigit(directStringRequest.getBaseX()) &&
-                validator.isDigit(directStringRequest.getBaseY()) &&
-                validator.isDigit(directStringRequest.getBaseZ()) &&
-                validator.isDigit(directStringRequest.getBaseHeight()) &&
-                validator.isDms(directStringRequest.getTargetDirection()) &&
-                validator.isDigit(directStringRequest.getTargetInclinedDistance()) &&
-                validator.isDms(directStringRequest.getTargetTiltAngle()) &&
-                validator.isDigit(directStringRequest.getTargetHeight());
+        return validator.isValidNumber(directStringRequest.getLandmarkX()) &&
+                validator.isValidNumber(directStringRequest.getLandmarkY()) &&
+                validator.isValidHorizontalAngle(directStringRequest.getLandmarkDirection()) &&
+                validator.isValidNumber(directStringRequest.getBaseX()) &&
+                validator.isValidNumber(directStringRequest.getBaseY()) &&
+                validator.isValidNumber(directStringRequest.getBaseZ()) &&
+                validator.isValidNumber(directStringRequest.getBaseHeight()) &&
+                validator.isValidHorizontalAngle(directStringRequest.getTargetDirection()) &&
+                validator.isValidPositiveNumber(directStringRequest.getTargetInclinedDistance()) &&
+                validator.isValidTiltAngle(directStringRequest.getTargetTiltAngle()) &&
+                validator.isValidNumber(directStringRequest.getTargetHeight());
     }
 }

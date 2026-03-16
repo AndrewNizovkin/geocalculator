@@ -27,9 +27,9 @@ public class PotenotValidatorDefault implements PotenotValidator{
     public boolean isValidPotenotStringRequest(List<PotenotStringRequest> potenotStringRequests) {
         if (potenotStringRequests.size() != 3) return false;
         for (PotenotStringRequest potenotStringRequest: potenotStringRequests) {
-            if (!(validator.isDigit(potenotStringRequest.getPointX()) &&
-            validator.isDigit(potenotStringRequest.getPointY()) &&
-            validator.isDms(potenotStringRequest.getDirection()))) {
+            if (!(validator.isValidNumber(potenotStringRequest.getPointX()) &&
+            validator.isValidNumber(potenotStringRequest.getPointY()) &&
+            validator.isValidHorizontalAngle(potenotStringRequest.getDirection()))) {
                 return false;
             }
         }

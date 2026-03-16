@@ -7,10 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.taheoport.geocalculator_service.dto.DirectTaskFullResponse;
-import ru.taheoport.geocalculator_service.dto.DirectTaskRequest;
-import ru.taheoport.geocalculator_service.dto.DirectTaskResponse;
+import ru.taheoport.geocalculator_service.dto.*;
 import ru.taheoport.geocalculator_service.service.DirectTaskService;
+import ru.taheoport.geocalculator_service.validator.DirectValidator;
 
 import java.util.List;
 
@@ -22,6 +21,7 @@ public class DirectController {
 
 
     private final DirectTaskService directTaskService;
+    private final DirectValidator directValidator;
 
 //    @Operation(summary = "Resolves Direct Geodetic Problem", description = "Определяет координаты точки (target) по известным координатам двух точек (base и landmark), расстоянию и углу наклона линии base->target, угловым направлениям base->landmark и base->target ")
 //    @ApiResponses(value = {
@@ -32,6 +32,20 @@ public class DirectController {
     @PostMapping
     public ResponseEntity<DirectTaskResponse> solveDirectTask(@RequestBody DirectTaskRequest directTaskRequest) {
         return new ResponseEntity<>(directTaskService.solveDirectTask(directTaskRequest), HttpStatus.CREATED);
+    }
+
+    /**
+     * Resolves direct geodetic task
+     * @param directStringRequest DirectStringRequest
+     * @return DirectStringResponse
+     */
+    @PostMapping("str")
+    public ResponseEntity<DirectStringResponse> getDirectStringResponse(@RequestBody DirectStringRequest directStringRequest) {
+        if (directValidator.isValidDirectStringRequest(directStringRequest)) {
+            return new ResponseEntity<>(directTaskService.getDirectStringResponse(directStringRequest), HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(directTaskService.getDirectStringErrorResponse(), HttpStatus.CREATED);
+        }
     }
 
     @PostMapping("full")

@@ -38,7 +38,7 @@ export class DirectService {
 
     }
 
-    /**
+    /** 
      * Sets the initial values of the direct model fields
      */
     clearAll() {

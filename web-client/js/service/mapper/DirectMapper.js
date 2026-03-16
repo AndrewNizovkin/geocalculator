@@ -1,4 +1,3 @@
-import { UnitsConverter } from './UnitsConverter.js';
 import { DirectRequest } from '../../dto/DirectRequest.js';
 import { DirectResponse } from '../../dto/DirectResponse.js';
 
@@ -22,17 +21,17 @@ export class DirectMapper {
     directToRequest(direct) {
         let directRequest = new DirectRequest();
 
-        directRequest.landmarkX = UnitsConverter.meterToMillimeter(direct?.landmarkX);
-        directRequest.landmarkY = UnitsConverter.meterToMillimeter(direct?.landmarkY);
-        directRequest.landmarkDirection = UnitsConverter.dmsToSecond(direct?.landmarkDirection);
-        directRequest.baseX = UnitsConverter.meterToMillimeter(direct?.baseX);
-        directRequest.baseY = UnitsConverter.meterToMillimeter(direct?.baseY);
-        directRequest.baseZ = UnitsConverter.meterToMillimeter(direct?.baseZ);
-        directRequest.baseHeight = UnitsConverter.meterToMillimeter(direct?.baseHeight);
-        directRequest.targetDirection = UnitsConverter.dmsToSecond(direct?.targetDirection);
-        directRequest.targetInclinedDistance = UnitsConverter.meterToMillimeter(direct?.targetInclinedDistance);
-        directRequest.targetTiltAngle = UnitsConverter.dmsToSecond(direct?.targetTiltAngle);
-        directRequest.targetHeight = UnitsConverter.meterToMillimeter(direct?.targetHeight);
+        directRequest.landmarkX = direct?.landmarkX;
+        directRequest.landmarkY = direct?.landmarkY;
+        directRequest.landmarkDirection = direct?.landmarkDirection;
+        directRequest.baseX = direct?.baseX;
+        directRequest.baseY = direct?.baseY;
+        directRequest.baseZ = direct?.baseZ;
+        directRequest.baseHeight = direct?.baseHeight;
+        directRequest.targetDirection = direct?.targetDirection;
+        directRequest.targetInclinedDistance = direct?.targetInclinedDistance;
+        directRequest.targetTiltAngle = direct?.targetTiltAngle;
+        directRequest.targetHeight = direct?.targetHeight;
 
         return directRequest;
     }
@@ -48,9 +47,9 @@ export class DirectMapper {
 
         // let response = JSON.parse(jsonResponse);
 
-        directResponse.targetX = UnitsConverter.millimeterToMeter(jsonResponse?.targetX);
-        directResponse.targetY = UnitsConverter.millimeterToMeter(jsonResponse?.targetY);
-        directResponse.targetZ = UnitsConverter.millimeterToMeter(jsonResponse?.targetZ);
+        directResponse.targetX = jsonResponse?.targetX;
+        directResponse.targetY = jsonResponse?.targetY;
+        directResponse.targetZ = jsonResponse?.targetZ;
 
         return directResponse;
     }

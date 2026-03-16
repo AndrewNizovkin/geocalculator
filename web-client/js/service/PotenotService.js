@@ -1,6 +1,5 @@
 import { Potenot } from '../model/Potenot.js';
 import { PotenotMapper } from './mapper/PotenotMapper.js';
-import { UnitsConverter } from './mapper/UnitsConverter.js';
 import { PotenotProvider } from './provider/PotenotProvider.js';
 
 /**
@@ -59,8 +58,10 @@ export class PotenotService {
         await this.#potenotProvider.getPotenotResponse(potenotRequests).then(response => {
             let potenotResponse = this.#potenotMapper.responseToPotenotResponse(response);
 
-            this.#potenot.baseX = UnitsConverter.millimeterToMeter(potenotResponse?.pointX);
-            this.#potenot.baseY = UnitsConverter.millimeterToMeter(potenotResponse?.pointY);
+            
+
+            this.#potenot.baseX = potenotResponse?.pointX;
+            this.#potenot.baseY = potenotResponse?.pointY;
         });
 
     }

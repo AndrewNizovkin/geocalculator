@@ -21,11 +21,11 @@ public class InverseValidatorDefault implements InverseValidator{
      */
     @Override
     public boolean isValidInverseStringRequest(InverseStringRequest inverseStringRequest) {
-        return validator.isDigit(inverseStringRequest.getBaseX()) &&
-                validator.isDigit(inverseStringRequest.getBaseY()) &&
-                validator.isDigit(inverseStringRequest.getBaseZ()) &&
-                validator.isDigit(inverseStringRequest.getTargetX()) &&
-                validator.isDigit(inverseStringRequest.getTargetY()) &&
-                validator.isDigit(inverseStringRequest.getTargetZ());
+        return validator.isValidNumber(inverseStringRequest.getBaseX()) &&
+                validator.isValidNumber(inverseStringRequest.getBaseY()) &&
+                validator.isValidNumber(inverseStringRequest.getBaseZ()) &&
+                validator.isValidNumber(inverseStringRequest.getTargetX()) &&
+                validator.isValidNumber(inverseStringRequest.getTargetY()) &&
+                validator.isValidNumber(inverseStringRequest.getTargetZ());
     }
 }

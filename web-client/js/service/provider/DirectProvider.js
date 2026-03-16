@@ -15,7 +15,7 @@ export class DirectProvider {
         const urlServer = `http://${AppConfigurator.baseUrl}/${AppConfigurator.directEndPoint}`;
 
         try {
-            const response = await fetch('http://192.168.0.12:8181/direct', {
+            const response = await fetch(urlServer, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -7,9 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.taheoport.geocalculator_service.dto.InverseStringRequest;
+import ru.taheoport.geocalculator_service.dto.InverseStringResponse;
 import ru.taheoport.geocalculator_service.dto.InverseTaskFullResponse;
 import ru.taheoport.geocalculator_service.dto.InverseTaskRequest;
 import ru.taheoport.geocalculator_service.service.InverseTaskService;
+import ru.taheoport.geocalculator_service.validator.InverseValidator;
 
 @RestController
 @RequestMapping("inverse")
@@ -18,6 +21,7 @@ import ru.taheoport.geocalculator_service.service.InverseTaskService;
 public class InverseController {
 
     private final InverseTaskService inverseTaskService;
+    private final InverseValidator inverseValidator;
 
 
     /**
@@ -39,5 +43,20 @@ public class InverseController {
     @PostMapping
     public ResponseEntity<InverseTaskFullResponse> solveInverseTask(@RequestBody InverseTaskRequest inverseTaskRequest) {
         return new ResponseEntity<>(inverseTaskService.getInverseTaskFullResponse(inverseTaskRequest), HttpStatus.CREATED);
+    }
+
+    /**
+     * Resolves inverse geodetic task
+     * @param inverseStringRequest InverseStringRequest
+     * @return InverseStringRequest
+     */
+    @PostMapping("str")
+    public ResponseEntity<InverseStringResponse> getInverseStringResponse(@RequestBody InverseStringRequest inverseStringRequest) {
+        if (inverseValidator.isValidInverseStringRequest(inverseStringRequest)) {
+            return new ResponseEntity<>(inverseTaskService.getInverseStringResponse(inverseStringRequest), HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(inverseTaskService.getInverseStringErrorResponse(), HttpStatus.CREATED);
+        }
+
     }
 }

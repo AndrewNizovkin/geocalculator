@@ -21,21 +21,21 @@ export class PotenotMapper {
 
         let potenotRequest = new PotenotRequest();
         
-        potenotRequest.pointX = UnitsConverter.meterToMillimeter(potenot?.firstX);
-        potenotRequest.pointY = UnitsConverter.meterToMillimeter(potenot?.firstY);
-        potenotRequest.direction = UnitsConverter.dmsToSecond(potenot?.firstDirection);
+        potenotRequest.pointX = potenot?.firstX;
+        potenotRequest.pointY = potenot?.firstY;
+        potenotRequest.direction = potenot?.firstDirection;
         potenotRequests.push(potenotRequest);
 
         potenotRequest = new PotenotRequest();
-        potenotRequest.pointX = UnitsConverter.meterToMillimeter(potenot?.secondX);
-        potenotRequest.pointY = UnitsConverter.meterToMillimeter(potenot?.secondY);
-        potenotRequest.direction = UnitsConverter.dmsToSecond(potenot?.secondDirection);
+        potenotRequest.pointX = potenot?.secondX;
+        potenotRequest.pointY = potenot?.secondY;
+        potenotRequest.direction = potenot?.secondDirection;
         potenotRequests.push(potenotRequest);
         
         potenotRequest = new PotenotRequest();
-        potenotRequest.pointX = UnitsConverter.meterToMillimeter(potenot?.thirdX);
-        potenotRequest.pointY = UnitsConverter.meterToMillimeter(potenot?.thirdY);
-        potenotRequest.direction = UnitsConverter.dmsToSecond(potenot?.thirdDirection);
+        potenotRequest.pointX = potenot?.thirdX;
+        potenotRequest.pointY = potenot?.thirdY;
+        potenotRequest.direction = potenot?.thirdDirection;
         potenotRequests.push(potenotRequest);
 
         return potenotRequests;
