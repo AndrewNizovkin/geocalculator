@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -68,7 +69,7 @@ public class SurveyStation {
     /**
      * Collection of measurements of this survey station
      */
-    private List<Measurement> measurements;
+    private List<Measurement> measurements = new ArrayList<>();
 
 
 }

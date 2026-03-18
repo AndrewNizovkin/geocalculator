@@ -35,7 +35,7 @@ public class Measurement {
     private double targetTiltAngle;
 
     /**
-     * The height of the reflector above the target in meters
+     * The height of the reflector over the target in meters
      */
     private double targetHeight;
 
