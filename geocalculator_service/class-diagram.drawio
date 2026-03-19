@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36" version="29.6.3">
   <diagram name="Страница-1" id="o-5GadF2C5qq2WKj6GCM">
-    <mxGraphModel dx="20525" dy="10369" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="15062" dy="7302" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1272,10 +1272,10 @@
         <mxCell id="g0e7y1NHO5i2GlyFNATW-23" parent="g0e7y1NHO5i2GlyFNATW-18" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ measurementsSize(int): int" vertex="1">
           <mxGeometry height="26" width="310" y="121" as="geometry" />
         </mxCell>
-        <mxCell id="g0e7y1NHO5i2GlyFNATW-24" parent="g0e7y1NHO5i2GlyFNATW-18" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ addNewStation(): void" vertex="1">
+        <mxCell id="g0e7y1NHO5i2GlyFNATW-24" parent="g0e7y1NHO5i2GlyFNATW-18" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ addNewStation(): SurveyStation" vertex="1">
           <mxGeometry height="26" width="310" y="147" as="geometry" />
         </mxCell>
-        <mxCell id="g0e7y1NHO5i2GlyFNATW-27" parent="g0e7y1NHO5i2GlyFNATW-18" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ addNewMeasurement(int): void" vertex="1">
+        <mxCell id="g0e7y1NHO5i2GlyFNATW-27" parent="g0e7y1NHO5i2GlyFNATW-18" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ addNewMeasurement(int): Measurement" vertex="1">
           <mxGeometry height="26" width="310" y="173" as="geometry" />
         </mxCell>
         <mxCell id="g0e7y1NHO5i2GlyFNATW-30" parent="g0e7y1NHO5i2GlyFNATW-18" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getStationName(int): string" vertex="1">
