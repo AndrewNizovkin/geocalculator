@@ -5,6 +5,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = {DataMapperDefault.class})
@@ -83,6 +85,43 @@ class DataMapperDefaultTest {
 
         assertNotNull(actualMeters);
         assertEquals(expectMeters, actualMeters);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "0.0000, 0",
+            "0.0059, 0.00028604",
+            "-0.0059, -0.00028604",
+            "359.5959, 6.283180459",
+            "0.0001, 0.000004848",
+            "-0.0001, -0.000004848",
+            "0.0300, 0.000872664",
+            "5.0505, 0.088745144",
+            "-5.0505, -0.088745144"
+    })
+    void dmsToRadiansTest(String value, double expectValue) {
+        double actualValue = dataMapper.dmsToRadians(value);
+
+        assertEquals(expectValue, actualValue, 0.000000001);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "0, 0.0000",
+            "0.00028604, 0.0059",
+            "-0.00028604, -0.0059",
+            "6.283180459, 359.5959",
+            "0.000004848, 0.0001",
+            "-0.000004848, -0.0001",
+            "0.000872664, 0.0300",
+            "0.088745144, 5.0505",
+            "-0.088745144, -5.0505"
+    })
+    void radiansToDmsTest(double value, String expectValue) {
+        String actualValue = dataMapper.radiansToDms(value);
+
+        assertEquals(expectValue, actualValue);
 
     }
 }

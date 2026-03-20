@@ -107,4 +107,49 @@ public class DataMapperDefault implements DataMapper {
     public String commaToPoint(String value) {
         return value.replaceAll(",", ".");
     }
+
+    /**
+     * Converts angle value from d.mmss format to radians
+     *
+     * @param value string
+     * @return double
+     */
+    @Override
+    public double dmsToRadians(String value) {
+        double sign = Math.signum(Double.parseDouble(value));
+        String[] parts = value.split("\\.");
+        double degree = Math.abs(Double.parseDouble(parts[0]));
+//        degree = Math.abs(degree);
+
+        double minutes = Double.parseDouble(parts[1].substring(0, 2));
+
+        double seconds = Double.parseDouble(parts[1].substring(2, 4));
+
+        return sign * (degree + minutes / 60 + seconds / 3600) * Math.PI / 180;
+    }
+
+    /**
+     * Converts angle value from radians to d.mmss format
+     *
+     * @param value double
+     * @return String
+     */
+    @Override
+    public String radiansToDms(double value) {
+        double valueDegree = Math.abs(Math.toDegrees(value));
+        int sign = (int) Math.signum(value);
+        if (sign == 0) {
+            return "0.0000";
+        }
+        long degree = Math.round(valueDegree);
+
+        double minDouble = (valueDegree - degree) * 60;
+        long minutes = Math.round(minDouble);
+
+        long seconds = Math.round((minDouble - minutes) * 60);
+
+        long valueSeconds = sign * (degree * 3600 + minutes * 60 + seconds);
+
+        return secondsToDms(valueSeconds);
+    }
 }

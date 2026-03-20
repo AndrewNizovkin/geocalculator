@@ -40,4 +40,18 @@ public interface DataMapper {
      */
     String commaToPoint(String value);
 
+    /**
+     * Converts angle value from d.mmss format to radians
+     * @param value string
+     * @return double
+     */
+    double dmsToRadians(String value);
+
+    /**
+     * Converts angle value from radians to d.mmss format
+     * @param value double
+     * @return String
+     */
+    String radiansToDms(double value);
+
 }
