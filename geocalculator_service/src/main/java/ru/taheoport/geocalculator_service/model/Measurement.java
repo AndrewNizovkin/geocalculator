@@ -20,64 +20,64 @@ public class Measurement {
     private String targetName;
 
     /**
-     * Direction from station to this target in radians
+     * Direction from station to this target in seconds
      */
-    private double targetDirection;
+    private long targetDirection;
 
     /**
-     * Inclined distance from station to this target in meters
+     * Inclined distance from station to this target in millimeters
      */
-    private double targetInclinedDistance;
+    private long targetInclinedDistance;
 
     /**
-     * Tilt angle to target in radians
+     * Tilt angle to target in seconds
      */
-    private double targetTiltAngle;
+    private long targetTiltAngle;
 
     /**
-     * The height of the reflector over the target in meters
+     * The height of the reflector over the target in millimeters
      */
-    private double targetHeight;
+    private long targetHeight;
 
     /**
      * The horizontal distance between the station and the target
      */
-    private double targetHorizontalDistance;
+    private long targetHorizontalDistance;
 
     /**
-     * Direction angle from station to this target in radians
+     * Direction angle from station to this target in seconds
      */
-    private double targetDirectionAngle;
+    private long targetDirectionAngle;
 
     /**
-     * The X-axis coordinate increment between the station and this target in meters
+     * The X-axis coordinate increment between the station and this target in millimeters
      */
-    private double targetDeltaX;
+    private long targetDeltaX;
 
     /**
-     * The Y-axis coordinate increment between the station and this target in meters
+     * The Y-axis coordinate increment between the station and this target in millimeters
      */
-    private double targetDeltaY;
+    private long targetDeltaY;
 
     /**
-     * The Z-axis coordinate increment between the station and this target in meters
+     * The Z-axis coordinate increment between the station and this target in millimeters
      */
-    private double targetDeltaZ;
+    private long targetDeltaZ;
 
     /**
-     * Coordinate X of the target in meters
+     * Coordinate X of the target in millimeters
      */
-    private double targetX;
+    private long targetX;
 
     /**
-     * Coordinate Y of the target in meters
+     * Coordinate Y of the target in millimeters
      */
-    private double targetY;
+    private long targetY;
 
     /**
-     * Coordinate Z of the target in meters
+     * Coordinate Z of the target in millimeters
      */
-    private double targetZ;
+    private long targetZ;
 
 
 }

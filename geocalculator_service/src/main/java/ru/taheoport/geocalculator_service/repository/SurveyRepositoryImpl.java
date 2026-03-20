@@ -90,40 +90,40 @@ public class SurveyRepositoryImpl implements SurveyRepository {
     /**
      * Gets coordinate X in meters of station with specified index
      * @param stationIndex int
-     * @return double coordinate X
+     * @return long coordinate X
      */
     @Override
-    public double getStationX(int stationIndex) {
+    public long getStationX(int stationIndex) {
         return surveyStations.get(stationIndex).getStationX();
     }
 
     /**
      * Saves coordinate X in meters to station with specified index
      * @param stationIndex int
-     * @param stationX     double coordinate X
+     * @param stationX     long coordinate X
      */
     @Override
-    public void saveStationX(int stationIndex, double stationX) {
+    public void saveStationX(int stationIndex, long stationX) {
         surveyStations.get(stationIndex).setStationX(stationX);
     }
 
     /**
      * Gets coordinate Y in meters of station with specified index
      * @param stationIndex int
-     * @return double coordinate Y
+     * @return long coordinate Y
      */
     @Override
-    public double getStationY(int stationIndex) {
+    public long getStationY(int stationIndex) {
         return surveyStations.get(stationIndex).getStationY();
     }
 
     /**
      * Saves coordinate Y in meters to station with specified index
      * @param stationIndex int
-     * @param stationY double coordinate Y
+     * @param stationY long coordinate Y
      */
     @Override
-    public void saveStationY(int stationIndex, double stationY) {
+    public void saveStationY(int stationIndex, long stationY) {
         surveyStations.get(stationIndex).setStationY(stationY);
 
     }
@@ -131,20 +131,20 @@ public class SurveyRepositoryImpl implements SurveyRepository {
     /**
      * Gets coordinate Z in meters of station with specified index
      * @param stationIndex int
-     * @return double coordinate Z
+     * @return long coordinate Z
      */
     @Override
-    public double getStationZ(int stationIndex) {
+    public long getStationZ(int stationIndex) {
         return surveyStations.get(stationIndex).getStationZ();
     }
 
     /**
      * Saves coordinate Z in meters to station with specified index
      * @param stationIndex int
-     * @param stationZ     double coordinate Z
+     * @param stationZ     long coordinate Z
      */
     @Override
-    public void saveStationZ(int stationIndex, double stationZ) {
+    public void saveStationZ(int stationIndex, long stationZ) {
         surveyStations.get(stationIndex).setStationZ(stationZ);
     }
 
@@ -152,10 +152,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * Gets height of the tool over the point in meters of
      * station with specified index
      * @param stationIndex int
-     * @return double
+     * @return long
      */
     @Override
-    public double getStationHeight(int stationIndex) {
+    public long getStationHeight(int stationIndex) {
         return surveyStations.get(stationIndex).getStationHeight();
     }
 
@@ -163,10 +163,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * Saves height of the tool over the point in meters to
      * station with specified index
      * @param stationIndex  int
-     * @param stationHeight double
+     * @param stationHeight long
      */
     @Override
-    public void saveStationHeight(int stationIndex, double stationHeight) {
+    public void saveStationHeight(int stationIndex, long stationHeight) {
         surveyStations.get(stationIndex).setStationHeight(stationHeight);
     }
 
@@ -174,10 +174,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * Gets direction to back point (landmark) in radians of
      * station with specified index
      * @param stationIndex int
-     * @return double
+     * @return long
      */
     @Override
-    public double getOrDirection(int stationIndex) {
+    public long getOrDirection(int stationIndex) {
         return surveyStations.get(stationIndex).getOrDirection();
     }
 
@@ -185,10 +185,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * Saves direction to back point (landmark) in radians to
      * station with specified index
      * @param stationIndex int
-     * @param orDirection  double
+     * @param orDirection  long
      */
     @Override
-    public void saveOrDirection(int stationIndex, double orDirection) {
+    public void saveOrDirection(int stationIndex, long orDirection) {
         surveyStations.get(stationIndex).setOrDirection(orDirection);
     }
 
@@ -217,10 +217,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * Gets coordinate X in meters of back point (landmark)
      * of station with specified index
      * @param stationIndex int
-     * @return double coordinate X of landmark
+     * @return long coordinate X of landmark
      */
     @Override
-    public double getOrX(int stationIndex) {
+    public long getOrX(int stationIndex) {
         return surveyStations.get(stationIndex).getOrX();
     }
 
@@ -228,10 +228,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * Saves coordinate X in meters of back point (landmark)
      * to station with specified index
      * @param stationIndex int
-     * @param orX double
+     * @param orX long
      */
     @Override
-    public void saveOrX(int stationIndex, double orX) {
+    public void saveOrX(int stationIndex, long orX) {
         surveyStations.get(stationIndex).setOrX(orX);
     }
 
@@ -239,10 +239,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * Gets coordinate Y in meters of back point (landmark)
      * of station with specified index
      * @param stationIndex int
-     * @return double coordinate Y of landmark
+     * @return long coordinate Y of landmark
      */
     @Override
-    public double getOrY(int stationIndex) {
+    public long getOrY(int stationIndex) {
         return surveyStations.get(stationIndex).getOrY();
     }
 
@@ -250,10 +250,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * Saves coordinate Y in meters of back point (landmark)
      * to station with specified index
      * @param stationIndex int
-     * @param orY double
+     * @param orY long
      */
     @Override
-    public void saveOrY(int stationIndex, double orY) {
+    public void saveOrY(int stationIndex, long orY) {
         surveyStations.get(stationIndex).setOrY(orY);
     }
 
@@ -264,7 +264,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * @return double
      */
     @Override
-    public double getBaseDirectionAngle(int stationIndex) {
+    public long getBaseDirectionAngle(int stationIndex) {
         return surveyStations.get(stationIndex).getBaseDirectionAngle();
     }
 
@@ -272,10 +272,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * Saves direction angle of baseline in radians to
      * station with specified index
      * @param stationIndex       int
-     * @param baseDirectionAngle double
+     * @param baseDirectionAngle long
      */
     @Override
-    public void saveBaseDirectionAngle(int stationIndex, double baseDirectionAngle) {
+    public void saveBaseDirectionAngle(int stationIndex, long baseDirectionAngle) {
         surveyStations.get(stationIndex).setBaseDirectionAngle(baseDirectionAngle);
     }
 
@@ -308,10 +308,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @return String
+     * @return long
      */
     @Override
-    public double getTargetDirection(int stationIndex, int targetIndex) {
+    public long getTargetDirection(int stationIndex, int targetIndex) {
         return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetDirection();
     }
 
@@ -320,10 +320,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex    int
      * @param targetIndex     int
-     * @param targetDirection double
+     * @param targetDirection long
      */
     @Override
-    public void saveTargetDirection(int stationIndex, int targetIndex, double targetDirection) {
+    public void saveTargetDirection(int stationIndex, int targetIndex, long targetDirection) {
         surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetDirection(targetDirection);
     }
 
@@ -332,10 +332,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @return double
+     * @return long
      */
     @Override
-    public double getTargetInclinedDistance(int stationIndex, int targetIndex) {
+    public long getTargetInclinedDistance(int stationIndex, int targetIndex) {
         return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetInclinedDistance();
     }
 
@@ -344,10 +344,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex           int
      * @param targetIndex            int
-     * @param targetInclinedDistance double
+     * @param targetInclinedDistance long
      */
     @Override
-    public void saveTargetInclinedDistance(int stationIndex, int targetIndex, double targetInclinedDistance) {
+    public void saveTargetInclinedDistance(int stationIndex, int targetIndex, long targetInclinedDistance) {
         surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetInclinedDistance(targetInclinedDistance);
     }
 
@@ -357,10 +357,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      *
      * @param stationIndex int
      * @param targetIndex  int
-     * @return double
+     * @return long
      */
     @Override
-    public double getTargetTiltAngle(int stationIndex, int targetIndex) {
+    public long getTargetTiltAngle(int stationIndex, int targetIndex) {
         return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetTiltAngle();
     }
 
@@ -369,10 +369,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex    int
      * @param targetIndex     int
-     * @param targetTiltAngle double
+     * @param targetTiltAngle long
      */
     @Override
-    public void saveTargetTiltAngle(int stationIndex, int targetIndex, double targetTiltAngle) {
+    public void saveTargetTiltAngle(int stationIndex, int targetIndex, long targetTiltAngle) {
         surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetTiltAngle(targetTiltAngle);
     }
 
@@ -381,10 +381,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @return double
+     * @return long
      */
     @Override
-    public double getTargetHeight(int stationIndex, int targetIndex) {
+    public long getTargetHeight(int stationIndex, int targetIndex) {
         return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetHeight();
     }
 
@@ -393,10 +393,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @param targetHeight double
+     * @param targetHeight long
      */
     @Override
-    public void saveTargetHeight(int stationIndex, int targetIndex, double targetHeight) {
+    public void saveTargetHeight(int stationIndex, int targetIndex, long targetHeight) {
         surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetHeight(targetHeight);
     }
 
@@ -405,10 +405,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @return double
+     * @return long
      */
     @Override
-    public double getTargetHorizontalDistance(int stationIndex, int targetIndex) {
+    public long getTargetHorizontalDistance(int stationIndex, int targetIndex) {
         return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetHorizontalDistance();
     }
 
@@ -417,10 +417,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @param targetHorizontalDistance double
+     * @param targetHorizontalDistance long
      */
     @Override
-    public void saveTargetHorizontalDistance(int stationIndex, int targetIndex, double targetHorizontalDistance) {
+    public void saveTargetHorizontalDistance(int stationIndex, int targetIndex, long targetHorizontalDistance) {
         surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetHorizontalDistance(targetHorizontalDistance);
     }
 
@@ -429,10 +429,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @return double
+     * @return long
      */
     @Override
-    public double getTargetDirectionAngle(int stationIndex, int targetIndex) {
+    public long getTargetDirectionAngle(int stationIndex, int targetIndex) {
         return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetDirectionAngle();
     }
 
@@ -441,10 +441,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex         int
      * @param targetIndex          int
-     * @param targetDirectionAngle double
+     * @param targetDirectionAngle long
      */
     @Override
-    public void saveTargetDirectionAngle(int stationIndex, int targetIndex, double targetDirectionAngle) {
+    public void saveTargetDirectionAngle(int stationIndex, int targetIndex, long targetDirectionAngle) {
         surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetDirectionAngle(targetDirectionAngle);
     }
 
@@ -453,10 +453,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @return double
+     * @return long
      */
     @Override
-    public double getTargetDeltaX(int stationIndex, int targetIndex) {
+    public long getTargetDeltaX(int stationIndex, int targetIndex) {
         return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetDeltaX();
     }
 
@@ -465,10 +465,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @param targetDeltaX double
+     * @param targetDeltaX long
      */
     @Override
-    public void saveTargetDeltaX(int stationIndex, int targetIndex, double targetDeltaX) {
+    public void saveTargetDeltaX(int stationIndex, int targetIndex, long targetDeltaX) {
         surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetDeltaX(targetDeltaX);
     }
 
@@ -477,10 +477,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @return double
+     * @return long
      */
     @Override
-    public double getTargetDeltaY(int stationIndex, int targetIndex) {
+    public long getTargetDeltaY(int stationIndex, int targetIndex) {
         return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetDeltaY();
     }
 
@@ -489,10 +489,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @param targetDeltaY double
+     * @param targetDeltaY long
      */
     @Override
-    public void saveTargetDeltaY(int stationIndex, int targetIndex, double targetDeltaY) {
+    public void saveTargetDeltaY(int stationIndex, int targetIndex, long targetDeltaY) {
         surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetDeltaY(targetDeltaY);
     }
 
@@ -501,10 +501,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @return double
+     * @return long
      */
     @Override
-    public double getTargetDeltaZ(int stationIndex, int targetIndex) {
+    public long getTargetDeltaZ(int stationIndex, int targetIndex) {
         return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetDeltaZ();
     }
 
@@ -513,10 +513,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @param targetDeltaZ double
+     * @param targetDeltaZ long
      */
     @Override
-    public void saveTargetDeltaZ(int stationIndex, int targetIndex, double targetDeltaZ) {
+    public void saveTargetDeltaZ(int stationIndex, int targetIndex, long targetDeltaZ) {
         surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetDeltaZ(targetDeltaZ);
     }
 
@@ -525,10 +525,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @return double
+     * @return long
      */
     @Override
-    public double getTargetX(int stationIndex, int targetIndex) {
+    public long getTargetX(int stationIndex, int targetIndex) {
         return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetX();
     }
 
@@ -537,10 +537,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @param targetX double
+     * @param targetX long
      */
     @Override
-    public void saveTargetX(int stationIndex, int targetIndex, double targetX) {
+    public void saveTargetX(int stationIndex, int targetIndex, long targetX) {
         surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetX(targetX);
 
     }
@@ -550,10 +550,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @return double
+     * @return long
      */
     @Override
-    public double getTargetY(int stationIndex, int targetIndex) {
+    public long getTargetY(int stationIndex, int targetIndex) {
         return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetY();
     }
 
@@ -562,10 +562,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @param targetY double
+     * @param targetY long
      */
     @Override
-    public void saveTargetY(int stationIndex, int targetIndex, double targetY) {
+    public void saveTargetY(int stationIndex, int targetIndex, long targetY) {
         surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetY(targetY);
     }
 
@@ -574,10 +574,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @return double
+     * @return long
      */
     @Override
-    public double getTargetZ(int stationIndex, int targetIndex) {
+    public long getTargetZ(int stationIndex, int targetIndex) {
         return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetZ();
     }
 
@@ -586,10 +586,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex  int
-     * @param targetZ double
+     * @param targetZ long
      */
     @Override
-    public void saveTargetZ(int stationIndex, int targetIndex, double targetZ) {
+    public void saveTargetZ(int stationIndex, int targetIndex, long targetZ) {
         surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetZ(targetZ);
     }
 }

@@ -58,74 +58,74 @@ public interface SurveyRepository {
      * @param stationIndex int
      * @return double coordinate X
      */
-    double getStationX(int stationIndex);
+    long getStationX(int stationIndex);
 
     /**
      * Saves coordinate X in meters to station with specified index
      * @param stationIndex int
      * @param stationX double coordinate X
      */
-    void saveStationX(int stationIndex, double stationX);
+    void saveStationX(int stationIndex, long stationX);
 
     /**
      * Gets coordinate Y in meters of station with specified index
      * @param stationIndex int
-     * @return double coordinate Y
+     * @return long coordinate Y
      */
-    double getStationY(int stationIndex);
+    long getStationY(int stationIndex);
 
     /**
      * Saves coordinate Y in meters to station with specified index
      * @param stationIndex int
-     * @param stationY double coordinate Y
+     * @param stationY long coordinate Y
      */
-    void saveStationY(int stationIndex, double stationY);
+    void saveStationY(int stationIndex, long stationY);
 
     /**
      * Gets coordinate Z in meters of station with specified index
      * @param stationIndex int
-     * @return double coordinate Z
+     * @return long coordinate Z
      */
-    double getStationZ(int stationIndex);
+    long getStationZ(int stationIndex);
 
     /**
      * Saves coordinate Z in meters to station with specified index
      * @param stationIndex int
-     * @param stationZ double coordinate Z
+     * @param stationZ long coordinate Z
      */
-    void saveStationZ(int stationIndex, double stationZ);
+    void saveStationZ(int stationIndex, long stationZ);
 
     /**
      * Gets height of the tool over the point in meters of
      * station with specified index
      * @param stationIndex int
-     * @return double
+     * @return long
      */
-    double getStationHeight(int stationIndex);
+    long getStationHeight(int stationIndex);
 
     /**
      * Saves height of the tool over the point in meters to
      * station with specified index
      * @param stationIndex int
-     * @param stationHeight double
+     * @param stationHeight long
      */
-    void saveStationHeight(int stationIndex, double stationHeight);
+    void saveStationHeight(int stationIndex, long stationHeight);
 
     /**
      * Gets direction to back point (landmark) in radians of
      * station with specified index
      * @param stationIndex int
-     * @return double
+     * @return long
      */
-    double getOrDirection(int stationIndex);
+    long getOrDirection(int stationIndex);
 
     /**
      * Saves direction to back point (landmark) in radians to
      * station with specified index
      * @param stationIndex int
-     * @param orDirection double
+     * @param orDirection long
      */
-    void saveOrDirection(int stationIndex, double orDirection);
+    void saveOrDirection(int stationIndex, long orDirection);
 
     /**
      * Gets name of the station with specified index
@@ -145,49 +145,49 @@ public interface SurveyRepository {
      * Gets coordinate X in meters of back point (landmark)
      * of station with specified index
      * @param stationIndex int
-     * @return double coordinate X of landmark
+     * @return long coordinate X of landmark
      */
-    double getOrX(int stationIndex);
+    long getOrX(int stationIndex);
 
     /**
      * Saves coordinate X in meters of back point (landmark)
      * to station with specified index
      * @param stationIndex int
-     * @param  orX double
+     * @param  orX long
      */
-    void saveOrX(int stationIndex, double orX);
+    void saveOrX(int stationIndex, long orX);
 
     /**
      * Gets coordinate Y in meters of back point (landmark)
      * of station with specified index
      * @param stationIndex int
-     * @return double coordinate Y of landmark
+     * @return long coordinate Y of landmark
      */
-    double getOrY(int stationIndex);
+    long getOrY(int stationIndex);
 
     /**
      * Saves coordinate Y in meters of back point (landmark)
      * to station with specified index
      * @param stationIndex int
-     * @param  orY double
+     * @param  orY long
      */
-    void saveOrY(int stationIndex, double orY);
+    void saveOrY(int stationIndex, long orY);
 
     /**
      * Gets direction angle of baseline in radians of
      * station with specified index
      * @param stationIndex int
-     * @return double
+     * @return long
      */
-    double getBaseDirectionAngle(int stationIndex);
+    long getBaseDirectionAngle(int stationIndex);
 
     /**
      * Saves direction angle of baseline in radians to
      * station with specified index
      * @param stationIndex int
-     * @param baseDirectionAngle double
+     * @param baseDirectionAngle long
      */
-    void saveBaseDirectionAngle(int stationIndex, double baseDirectionAngle);
+    void saveBaseDirectionAngle(int stationIndex, long baseDirectionAngle);
 
     /**
      * Gets name of target with specified index in measurements collection
@@ -212,216 +212,216 @@ public interface SurveyRepository {
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @return String
+     * @return long
      */
-    double getTargetDirection(int stationIndex, int targetIndex);
+    long getTargetDirection(int stationIndex, int targetIndex);
 
     /**
      * Saves direction from station to this target in radians
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @param targetDirection double
+     * @param targetDirection long
      */
-    void saveTargetDirection(int stationIndex, int targetIndex, double targetDirection);
+    void saveTargetDirection(int stationIndex, int targetIndex, long targetDirection);
 
     /**
      * Gets inclined distance from station to this target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @return double
+     * @return long
      */
-    double getTargetInclinedDistance(int stationIndex, int targetIndex);
+    long getTargetInclinedDistance(int stationIndex, int targetIndex);
 
     /**
      * Saves inclined distance from station to this target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @param targetInclinedDistance double
+     * @param targetInclinedDistance long
      */
-    void saveTargetInclinedDistance(int stationIndex, int targetIndex, double targetInclinedDistance);
+    void saveTargetInclinedDistance(int stationIndex, int targetIndex, long targetInclinedDistance);
 
     /**
      * Gets tilt angle from station to this target in radians
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @return double
+     * @return long
      */
-    double getTargetTiltAngle(int stationIndex, int targetIndex);
+    long getTargetTiltAngle(int stationIndex, int targetIndex);
 
     /**
      * Saves tilt angle from station to this target in radians
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @param targetTiltAngle double
+     * @param targetTiltAngle long
      */
-    void saveTargetTiltAngle(int stationIndex, int targetIndex, double targetTiltAngle);
+    void saveTargetTiltAngle(int stationIndex, int targetIndex, long targetTiltAngle);
 
     /**
      * Gets height of the reflector over the target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @return double
+     * @return long
      */
-    double getTargetHeight(int stationIndex, int targetIndex);
+    long getTargetHeight(int stationIndex, int targetIndex);
 
     /**
      * Saves height of the reflector over the target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @param targetHeight double
+     * @param targetHeight long
      */
-    void saveTargetHeight(int stationIndex, int targetIndex, double targetHeight);
+    void saveTargetHeight(int stationIndex, int targetIndex, long targetHeight);
 
     /**
      * Gets horizontal distance from station to target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @return double
+     * @return long
      */
-    double getTargetHorizontalDistance(int stationIndex, int targetIndex);
+    long getTargetHorizontalDistance(int stationIndex, int targetIndex);
 
     /**
      * Saves horizontal distance from station to target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @param targetHorizontalDistance double
+     * @param targetHorizontalDistance long
      */
-    void saveTargetHorizontalDistance(int stationIndex, int targetIndex, double targetHorizontalDistance);
+    void saveTargetHorizontalDistance(int stationIndex, int targetIndex, long targetHorizontalDistance);
 
     /**
      * Gets direction angle from station to target in radians
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @return double
+     * @return long
      */
-    double getTargetDirectionAngle(int stationIndex, int targetIndex);
+    long getTargetDirectionAngle(int stationIndex, int targetIndex);
 
     /**
      * Saves direction angle from station to target in radians
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @param targetDirectionAngle double
+     * @param targetDirectionAngle long
      */
-    void saveTargetDirectionAngle(int stationIndex, int targetIndex, double targetDirectionAngle);
+    void saveTargetDirectionAngle(int stationIndex, int targetIndex, long targetDirectionAngle);
 
     /**
      * Gets the X-axis coordinate increment between the station and target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @return double
+     * @return long
      */
-    double getTargetDeltaX(int stationIndex, int targetIndex);
+    long getTargetDeltaX(int stationIndex, int targetIndex);
 
     /**
      * Saves the X-axis coordinate increment between the station and target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @param targetDeltaX double
+     * @param targetDeltaX long
      */
-    void saveTargetDeltaX(int stationIndex, int targetIndex, double targetDeltaX);
+    void saveTargetDeltaX(int stationIndex, int targetIndex, long targetDeltaX);
 
     /**
      * Gets the Y-axis coordinate increment between the station and target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @return double
+     * @return long
      */
-    double getTargetDeltaY(int stationIndex, int targetIndex);
+    long getTargetDeltaY(int stationIndex, int targetIndex);
 
     /**
      * Saves the Y-axis coordinate increment between the station and target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @param targetDeltaY double
+     * @param targetDeltaY long
      */
-    void saveTargetDeltaY(int stationIndex, int targetIndex, double targetDeltaY);
+    void saveTargetDeltaY(int stationIndex, int targetIndex, long targetDeltaY);
 
     /**
      * Gets the Z-axis coordinate increment between the station and target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @return double
+     * @return long
      */
-    double getTargetDeltaZ(int stationIndex, int targetIndex);
+    long getTargetDeltaZ(int stationIndex, int targetIndex);
 
     /**
      * Saves the Z-axis coordinate increment between the station and target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @param targetDeltaZ double
+     * @param targetDeltaZ long
      */
-    void saveTargetDeltaZ(int stationIndex, int targetIndex, double targetDeltaZ);
+    void saveTargetDeltaZ(int stationIndex, int targetIndex, long targetDeltaZ);
 
     /**
      * Gets coordinate X of target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @return double
+     * @return long
      */
-    double getTargetX(int stationIndex, int targetIndex);
+    long getTargetX(int stationIndex, int targetIndex);
 
     /**
      * Saves coordinate X of target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @param targetX double
+     * @param targetX long
      */
-    void saveTargetX(int stationIndex, int targetIndex, double targetX);
+    void saveTargetX(int stationIndex, int targetIndex, long targetX);
 
     /**
      * Gets coordinate Y of target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @return double
+     * @return long
      */
-    double getTargetY(int stationIndex, int targetIndex);
+    long getTargetY(int stationIndex, int targetIndex);
 
     /**
      * Saves coordinate Y of target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @param targetY double
+     * @param targetY long
      */
-    void saveTargetY(int stationIndex, int targetIndex, double targetY);
+    void saveTargetY(int stationIndex, int targetIndex, long targetY);
 
     /**
      * Gets coordinate Z of target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @return double
+     * @return long
      */
-    double getTargetZ(int stationIndex, int targetIndex);
+    long getTargetZ(int stationIndex, int targetIndex);
 
     /**
      * Saves coordinate Z of target in meters
      * with specified indexes of station and target
      * @param stationIndex int
      * @param targetIndex int
-     * @param targetZ double
+     * @param targetZ long
      */
-    void saveTargetZ(int stationIndex, int targetIndex, double targetZ);
+    void saveTargetZ(int stationIndex, int targetIndex, long targetZ);
 
 
 

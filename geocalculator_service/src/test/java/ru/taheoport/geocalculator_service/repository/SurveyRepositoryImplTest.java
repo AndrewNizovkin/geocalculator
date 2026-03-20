@@ -77,21 +77,21 @@ class SurveyRepositoryImplTest {
 
     @ParameterizedTest
     @CsvSource({
-            "station1, 1000.000, 1000.000, 100.000, 1.678, 0.0000, or1, 200.000, 200.000, 45.4545, 5",
-            "station2, 451000.000, 100450.000, 100.000, 1.978, 5.0000, or2, 200.000, 200.000, 270.4545, 10",
-            "station3, 165000.000, 1000.000, 10.000, 1.778, 0.0800, or3, 200.000, 200.000, 89.4545, 1000"
+            "station1, 1000000, 1000000, 100000, 1678, 0, or1, 200000, 200000, 324000, 5",
+            "station2, 451000000, 100450000, 100000, 1978, 18000, or2, 200000, 200000, 1296000, 10",
+            "station3, 165000000, 1000000, 10000, 1778, 480, or3, 200000, 200000, 123456, 1000"
     })
     void addNewStation(
             String stationName,
-            double stationX,
-            double stationY,
-            double stationZ,
-            double stationHeight,
-            double orDirection,
+            long stationX,
+            long stationY,
+            long stationZ,
+            long stationHeight,
+            long orDirection,
             String orName,
-            double orX,
-            double orY,
-            double baseDirectionAngle,
+            long orX,
+            long orY,
+            long baseDirectionAngle,
             int expectMeasurementSize
     ) {
         SurveyStation expectSurveyStation = surveyRepository.addNewStation();
@@ -127,25 +127,25 @@ class SurveyRepositoryImplTest {
 
     @ParameterizedTest
     @CsvSource({
-            "picket1, 0.0003, 39.456, 0.0113, 0.000, 39.451, 345.1358, -3.456, 28.567, -0.345, 456567.321, 2567890.345, 111.657",
-            "picket1, 0.0003, 39.456, 0.0113, 2000.000, 0.451, 345.1358, -3.456, 28.567, -0.345, 456567.321, 2567890.345, 11.657",
-            "picket1, 0.0003, 39.456, 0.0113, 1.600, 639.451, 345.1358, -3.456, 28.567, 0.345, 456567.321, 2567890.345, 151.657",
-            "picket1, 0.0003, 39.456, 0.0113, 1.600, 39.451, 345.1358, 3.456, 28.567, -0.345, 456567.321, 2567890.345, 111.667",
+            "picket1, 3, 39456, 113, 0, 39451, 3451358, -3456, 28567, -0345, 456567321, 2567890345, 111657",
+            "picket1, 3, 39456, 456113, 2000000, 451, 3451358, -3456, 28567, -345, 456567321, 2567890345, 11657",
+            "picket1, 45675, 39456, -113, 1600, 639451, 3451358, -3456, 28567, 345, 456567321, 2567890345, 151657",
+            "picket1, 4663, 39456, 8113, 1600, 39451, 3451358, 3456, 28567, -345, 456567321, 2567890345, 111667",
     })
     void addNewMeasurement(
             String targetName,
-            double targetDirection,
-            double targetInclinedDistance,
-            double targetTiltAngle,
-            double targetHeight,
-            double targetHorizontalDistance,
-            double targetDirectionAngle,
-            double targetDeltaX,
-            double targetDeltaY,
-            double targetDeltaZ,
-            double targetX,
-            double targetY,
-            double targetZ
+            long targetDirection,
+            long targetInclinedDistance,
+            long targetTiltAngle,
+            long targetHeight,
+            long targetHorizontalDistance,
+            long targetDirectionAngle,
+            long targetDeltaX,
+            long targetDeltaY,
+            long targetDeltaZ,
+            long targetX,
+            long targetY,
+            long targetZ
     ) {
         surveyRepository.addNewStation();
         int currentStationIndex = surveyRepository.size() - 1;

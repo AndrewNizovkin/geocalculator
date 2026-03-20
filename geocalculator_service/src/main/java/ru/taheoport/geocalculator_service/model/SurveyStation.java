@@ -22,29 +22,29 @@ public class SurveyStation {
     private String stationName;
 
     /**
-     * Coordinate X of the survey station in meters
+     * Coordinate X of the survey station in millimeters
      */
-    private  double stationX;
+    private long stationX;
 
     /**
-     * Coordinate Y of the survey station in meters
+     * Coordinate Y of the survey station in millimeters
      */
-    private double stationY;
+    private long stationY;
 
     /**
-     * Coordinate Z of the survey station in meters
+     * Coordinate Z of the survey station in millimeters
      */
-    private double stationZ;
+    private long stationZ;
 
     /**
-     * The height of the tool over the point in meters
+     * The height of the tool over the point in millimeters
      */
-    private double stationHeight;
+    private long stationHeight;
 
     /**
-     * Direction to back point (landmark) in radians
+     * Direction to back point (landmark) in seconds
      */
-    private double orDirection;
+    private long orDirection;
 
     /**
      * Name of the back point (landmark)
@@ -52,19 +52,19 @@ public class SurveyStation {
     private String orName;
 
     /**
-     * Coordinate X of the back point (landmark) in meters
+     * Coordinate X of the back point (landmark) in millimeters
      */
-    private double orX;
+    private long orX;
 
     /**
-     * Coordinate Y of the back point (landmark) in meters
+     * Coordinate Y of the back point (landmark) in millimeters
      */
-    private double orY;
+    private long orY;
 
     /**
-     * Direction angle of baseline
+     * Direction angle of baseline in seconds
      */
-    private double baseDirectionAngle;
+    private long baseDirectionAngle;
 
     /**
      * Collection of measurements of this survey station
