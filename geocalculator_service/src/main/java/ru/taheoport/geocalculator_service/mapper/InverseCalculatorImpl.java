@@ -5,12 +5,20 @@ import org.springframework.stereotype.Component;
 import static java.lang.Math.*;
 
 /**
- * This class implements methods of interface InverseCalculator
+ * This class provides methods for solving the inverse geodetic task.
  * @author Nizovkin A.V.
  */
 @Component
 public class InverseCalculatorImpl implements InverseCalculator {
 
+    /**
+     * Gets horizontal distance between too points with 2D coordinates
+     * @param baseX Coordinate X of base point in millimeters
+     * @param baseY Coordinate Y of base point in millimeters
+     * @param targetX Coordinate X of target point in millimeters
+     * @param targetY Coordinate Y of target point in millimeters
+     * @return long result in millimeters
+     */
     @Override
     public long getHorDistance(long baseX, long baseY, long targetX, long targetY) {
         double result;
@@ -20,6 +28,16 @@ public class InverseCalculatorImpl implements InverseCalculator {
 
     }
 
+    /**
+     * Gets inclined distance between too points with 3D coordinates
+     * @param baseX Coordinate X of base point in millimeters
+     * @param baseY Coordinate Y of base point in millimeters
+     * @param baseZ Coordinate Z of base point in millimeters
+     * @param targetX Coordinate X of target point in millimeters
+     * @param targetY Coordinate Y of target point in millimeters
+     * @param targetZ Coordinate Y of target point in millimeters
+     * @return double result in millimeters
+     */
     @Override
     public long getInclinedDistance(long baseX, long baseY, long baseZ, long targetX, long targetY, long targetZ) {
         double result;
@@ -29,6 +47,14 @@ public class InverseCalculatorImpl implements InverseCalculator {
         return round(result);
     }
 
+    /**
+     * Gets directional angle base->target line
+     * @param baseX Coordinate X of base point in millimeters
+     * @param baseY Coordinate Y of base point in millimeters
+     * @param targetX Coordinate X of target point in millimeters
+     * @param targetY Coordinate Y of target point in millimeters
+     * @return result in seconds
+     */
     @Override
     public long getDirection(long baseX, long baseY, long targetX, long targetY) {
         double dir = 0.0;
@@ -69,6 +95,12 @@ public class InverseCalculatorImpl implements InverseCalculator {
         return round(toDegrees(dir) * 3600);
     }
 
+    /**
+     * Gets height difference between the target and the base
+     * @param baseZ Coordinate Z of base point in millimeters
+     * @param targetZ Coordinate Y of target point in millimeters
+     * @return result in millimeters
+     */
     @Override
     public long getElevation(long baseZ, long targetZ) {
         return targetZ - baseZ;

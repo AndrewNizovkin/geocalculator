@@ -46,6 +46,6 @@ public interface SurveyMapper {
      * @param surveyRepository survey model
      * @return list of strings
      */
-    List<String> surveyToResponse(SurveyRepository surveyRepository);
+    List<String> surveyToReports(SurveyRepository surveyRepository);
 
 }

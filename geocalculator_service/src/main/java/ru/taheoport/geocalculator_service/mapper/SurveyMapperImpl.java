@@ -1,5 +1,6 @@
 package ru.taheoport.geocalculator_service.mapper;
 
+import org.springframework.stereotype.Component;
 import ru.taheoport.geocalculator_service.repository.SurveyRepository;
 
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
  * This class provides methods for
  * converting external data to and from the model format.
  */
+@Component
 public class SurveyMapperImpl implements SurveyMapper{
     /**
      * Extracts model data from the Leica total station file
@@ -63,7 +65,7 @@ public class SurveyMapperImpl implements SurveyMapper{
      * @return list of strings
      */
     @Override
-    public List<String> surveyToResponse(SurveyRepository surveyRepository) {
+    public List<String> surveyToReports(SurveyRepository surveyRepository) {
         return List.of();
     }
 }

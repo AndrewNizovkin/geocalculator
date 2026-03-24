@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.taheoport.geocalculator_service.mapper.DirectCalculator;
 import ru.taheoport.geocalculator_service.mapper.InverseCalculator;
+import ru.taheoport.geocalculator_service.mapper.SurveyMapper;
 import ru.taheoport.geocalculator_service.repository.SurveyRepository;
 
 import java.util.List;
@@ -17,7 +18,10 @@ public class SurveyServiceImpl implements SurveyService {
 
     private final InverseCalculator inverseCalculator;
 
+    private final SurveyMapper surveyMapper;
+
     private final SurveyRepository surveyRepository;
+
     /**
      * Converts geodetic data from different types of total stations
      *
@@ -46,5 +50,76 @@ public class SurveyServiceImpl implements SurveyService {
     @Override
     public void calculateSurvey() {
 
+        for (int i = 0; i < surveyRepository.size(); i++) {
+            surveyRepository.saveBaseDirectionAngle(
+                    i,
+                    inverseCalculator.getDirection(
+                            surveyRepository.getStationX(i),
+                            surveyRepository.getStationY(i),
+                            surveyRepository.getOrX(i),
+                            surveyRepository.getOrY(i)
+                    ));
+        }
+
+        for (int i = 0; i < surveyRepository.size(); i++) {
+
+            for (int j = 0; j < surveyRepository.measurementSize(i); j++) {
+
+                surveyRepository.saveTargetDirectionAngle(
+                        i,
+                        j,
+                        directCalculator.getDirectionalAngle(
+                                surveyRepository.getBaseDirectionAngle(i),
+                                surveyRepository.getOrDirection(i),
+                                surveyRepository.getTargetDirection(i, j)
+                        ));
+
+                surveyRepository.saveTargetDeltaX(
+                        i,
+                        j,
+                        directCalculator.getDeltaX(
+                                surveyRepository.getTargetDirectionAngle(i, j),
+                                surveyRepository.getTargetInclinedDistance(i, j),
+                                surveyRepository.getTargetTiltAngle(i, j)
+                        ));
+
+                surveyRepository.saveTargetDeltaY(
+                        i,
+                        j,
+                        directCalculator.getDeltaY(
+                                surveyRepository.getTargetDirectionAngle(i, j),
+                                surveyRepository.getTargetInclinedDistance(i, j),
+                                surveyRepository.getTargetTiltAngle(i, j)
+                        ));
+
+                surveyRepository.saveTargetDeltaZ(
+                        i,
+                        j,
+                        directCalculator.getDeltaZ(
+                                surveyRepository.getTargetInclinedDistance(i, j),
+                                surveyRepository.getTargetTiltAngle(i, j)
+                        ) + surveyRepository.getStationHeight(i) - surveyRepository.getTargetHeight(i, j));
+
+
+                surveyRepository.saveTargetX(
+                        i,
+                        j,
+                        surveyRepository.getStationX(i) + surveyRepository.getTargetDeltaX(i, j)
+                );
+
+                surveyRepository.saveTargetY(
+                        i,
+                        j,
+                        surveyRepository.getStationY(i) + surveyRepository.getTargetDeltaY(i, j)
+                );
+
+                surveyRepository.saveTargetZ(
+                        i,
+                        j,
+                        surveyRepository.getStationZ(i) + surveyRepository.getTargetDeltaZ(i, j)
+                );
+            }
+
+        }
     }
 }
