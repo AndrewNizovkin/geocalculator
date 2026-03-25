@@ -41,6 +41,34 @@ public class SurveyServiceImpl implements SurveyService {
      */
     @Override
     public List<String> getSurveyReports(List<String> surveyRequest) {
+        String importType = "";
+
+        if (!surveyRequest.isEmpty()) {
+            importType = surveyRequest.removeFirst();
+        }
+
+        switch (importType) {
+
+            case "import-leica" -> {
+                if (surveyMapper.readFromLeica(surveyRequest, surveyRepository)) {
+                    return surveyMapper.surveyToListTah(surveyRepository);
+                }
+            }
+
+            case "import-nikon" -> {
+                if (surveyMapper.readFromNikon(surveyRequest,surveyRepository)) {
+                    return surveyMapper.surveyToListTah(surveyRepository);
+                }
+            }
+
+            case "import-topcon" -> {
+                if (surveyMapper.readFromTopcon(surveyRequest,surveyRepository)) {
+                    return surveyMapper.surveyToListTah(surveyRepository);
+                }
+            }
+
+        }
+
         return List.of();
     }
 

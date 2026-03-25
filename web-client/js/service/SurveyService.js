@@ -139,6 +139,7 @@ export class SurveyService {
             await this.#surveyProvider.getStringArrayFromDevice(fileImport).then((linesArray) => {
                 linesArray.unshift(typeImport);
                 for (let line of linesArray) {
+                    // send to backend linesArray as request
                     console.log(line);
                 }
 

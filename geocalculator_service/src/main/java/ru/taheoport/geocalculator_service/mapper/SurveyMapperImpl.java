@@ -1,8 +1,10 @@
 package ru.taheoport.geocalculator_service.mapper;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.taheoport.geocalculator_service.repository.SurveyRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +12,10 @@ import java.util.List;
  * converting external data to and from the model format.
  */
 @Component
+@RequiredArgsConstructor
 public class SurveyMapperImpl implements SurveyMapper{
+
+    private final DataMapper dataMapper;
     /**
      * Extracts model data from the Leica total station file
      *
@@ -55,7 +60,43 @@ public class SurveyMapperImpl implements SurveyMapper{
      */
     @Override
     public List<String> surveyToListTah(SurveyRepository surveyRepository) {
-        return List.of();
+        List<String> listTah = new ArrayList<>();
+
+        String separator = " ";
+
+        for (int i = 0; i < surveyRepository.size(); i++) {
+            StringBuilder line = new StringBuilder();
+
+            line.append(surveyRepository.getStationName(i)).append(separator);
+            line.append(dataMapper.millimeterToMeter(surveyRepository.getStationX(i))).append(separator);
+            line.append(dataMapper.millimeterToMeter(surveyRepository.getStationY(i))).append(separator);
+            line.append(dataMapper.millimeterToMeter(surveyRepository.getStationZ(i))).append(separator);
+            line.append(dataMapper.millimeterToMeter(surveyRepository.getStationHeight(i))).append(separator);
+            line.append(surveyRepository.getOrName(i)).append(separator);
+            line.append(dataMapper.millimeterToMeter(surveyRepository.getOrX(i))).append(separator);
+            line.append(dataMapper.millimeterToMeter(surveyRepository.getOrY(i)));
+
+            listTah.add(line.toString());
+        }
+
+        listTah.add("//");
+
+        for (int i = 0; i < surveyRepository.size(); i++) {
+            for (int j = 0; j < surveyRepository.measurementSize(i); j++) {
+                StringBuilder line = new StringBuilder();
+
+                line.append(surveyRepository.getTargetName(i, j)).append(separator);
+                line.append(dataMapper.millimeterToMeter(surveyRepository.getTargetInclinedDistance(i, j))).append(separator);
+                line.append(dataMapper.secondsToDms(surveyRepository.getTargetDirection(i, j))).append(separator);
+                line.append(dataMapper.secondsToDms(surveyRepository.getTargetTiltAngle(i, j))).append(separator);
+                line.append(dataMapper.millimeterToMeter(surveyRepository.getTargetHeight(i, j))).append(separator);
+                line.append(i);
+
+                listTah.add(line.toString());
+            }
+            listTah.add("//");
+        }
+        return listTah;
     }
 
     /**

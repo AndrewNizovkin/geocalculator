@@ -90,6 +90,24 @@ class DataMapperDefaultTest {
 
     @ParameterizedTest
     @CsvSource({
+            "0.000, 0",
+            "1.000, 1000",
+            "00001.000, 1000",
+            "-1.000, -1000",
+            "14578965.412, 14578965412",
+            "-14578965.412, -14578965412"
+    })
+    void meterToMillimeterTest(String meters, long expectMillimeters) {
+
+        long actualMillimeters = dataMapper.meterToMillimeter(meters);
+
+        assertEquals(expectMillimeters, actualMillimeters);
+
+    }
+
+
+    @ParameterizedTest
+    @CsvSource({
             "0.0000, 0",
             "0.0059, 0.00028604",
             "-0.0059, -0.00028604",

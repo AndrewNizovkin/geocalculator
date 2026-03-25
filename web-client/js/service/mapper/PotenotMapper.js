@@ -1,4 +1,3 @@
-import { UnitsConverter } from './UnitsConverter.js';
 import {PotenotRequest} from '../../dto/PotenotRequest.js';
 import { PotenotResponse } from '../../dto/PotenotResponse.js';
 
