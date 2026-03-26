@@ -17,67 +17,66 @@ public class Measurement {
     /**
      * Name of the target (reference point, picket)
      */
-    private String targetName;
+    private String targetName = "noname";
 
     /**
      * Direction from station to this target in seconds
      */
-    private long targetDirection;
+    private long targetDirection = 0;
 
     /**
      * Inclined distance from station to this target in millimeters
      */
-    private long targetInclinedDistance;
+    private long targetInclinedDistance = 0;
 
     /**
      * Tilt angle to target in seconds
      */
-    private long targetTiltAngle;
+    private long targetTiltAngle = 0;
 
     /**
      * The height of the reflector over the target in millimeters
      */
-    private long targetHeight;
+    private long targetHeight = 0;
 
     /**
      * The horizontal distance between the station and the target
      */
-    private long targetHorizontalDistance;
+    private long targetHorizontalDistance = 0;
 
     /**
      * Direction angle from station to this target in seconds
      */
-    private long targetDirectionAngle;
+    private long targetDirectionAngle = 0;
 
     /**
      * The X-axis coordinate increment between the station and this target in millimeters
      */
-    private long targetDeltaX;
+    private long targetDeltaX = 0;
 
     /**
      * The Y-axis coordinate increment between the station and this target in millimeters
      */
-    private long targetDeltaY;
+    private long targetDeltaY = 0;
 
     /**
      * The Z-axis coordinate increment between the station and this target in millimeters
      */
-    private long targetDeltaZ;
+    private long targetDeltaZ = 0;
 
     /**
      * Coordinate X of the target in millimeters
      */
-    private long targetX;
+    private long targetX = 0;
 
     /**
      * Coordinate Y of the target in millimeters
      */
-    private long targetY;
+    private long targetY = 0;
 
     /**
      * Coordinate Z of the target in millimeters
      */
-    private long targetZ;
-
+    private long targetZ = 0;
 
 }

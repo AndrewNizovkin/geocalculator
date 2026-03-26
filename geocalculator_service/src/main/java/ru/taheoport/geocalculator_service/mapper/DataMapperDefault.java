@@ -152,4 +152,67 @@ public class DataMapperDefault implements DataMapper {
 
         return secondsToDms(valueSeconds);
     }
+
+    /**
+     * Removes insignificant zeros at the beginning of the string
+     *
+     * @param value String
+     * @return String
+     */
+    @Override
+    public String removeFirstZero(String value) {
+        if (value == null || value.isEmpty()) return value;
+
+        int firstNotZeroIndex = 0;
+        while (firstNotZeroIndex < value.length() && value.charAt(firstNotZeroIndex) == '0') {
+            firstNotZeroIndex++;
+        }
+
+        if (firstNotZeroIndex == value.length()) return "0";
+
+        return value.substring(firstNotZeroIndex);
+    }
+
+    /**
+     * Converts string value from gis16 to millimeters
+     *
+     * @param value String
+     * @return long line value in millimeters
+     */
+    @Override
+    public long leicaToMillimeter(String value) {
+        return Long.parseLong(value);
+    }
+
+    /**
+     * Converts string value of horizontal angle from gis16 to seconds
+     *
+     * @param value String
+     * @return long angle value in seconds
+     */
+    @Override
+    public long leicaToDirection(String value) {
+        value = value.substring(0, value.length() - 1);
+        long degrees = Long.parseLong(value.substring(0, value.length() - 4));
+        long minutes = Long.parseLong(value.substring(value.length() - 4, value.length() - 2));
+        long seconds = Long.parseLong(value.substring(value.length() - 2));
+
+        return degrees * 3600 + minutes * 60 + seconds;
+    }
+
+    /**
+     * Converts string value of tilt angle from gis16 to seconds
+     *
+     * @param value String
+     * @return long angle in seconds
+     */
+    @Override
+    public long leicaToTiltAngle(String value) {
+
+        long angle = leicaToDirection(value);
+
+        if (angle == 0) return 0;
+
+        return -1 * (leicaToDirection(value) - 324000);
+    }
 }

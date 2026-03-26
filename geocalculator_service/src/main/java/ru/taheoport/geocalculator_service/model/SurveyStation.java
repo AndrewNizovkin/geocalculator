@@ -19,52 +19,52 @@ public class SurveyStation {
     /**
      * Name of the survey station
      */
-    private String stationName;
+    private String stationName = "noname";
 
     /**
      * Coordinate X of the survey station in millimeters
      */
-    private long stationX;
+    private long stationX = 0;
 
     /**
      * Coordinate Y of the survey station in millimeters
      */
-    private long stationY;
+    private long stationY = 0;
 
     /**
      * Coordinate Z of the survey station in millimeters
      */
-    private long stationZ;
+    private long stationZ = 0;
 
     /**
      * The height of the tool over the point in millimeters
      */
-    private long stationHeight;
+    private long stationHeight = 0;
 
     /**
      * Direction to back point (landmark) in seconds
      */
-    private long orDirection;
+    private long orDirection = 0;
 
     /**
      * Name of the back point (landmark)
      */
-    private String orName;
+    private String orName = "noname";
 
     /**
      * Coordinate X of the back point (landmark) in millimeters
      */
-    private long orX;
+    private long orX = 0;
 
     /**
      * Coordinate Y of the back point (landmark) in millimeters
      */
-    private long orY;
+    private long orY = 0;
 
     /**
      * Direction angle of baseline in seconds
      */
-    private long baseDirectionAngle;
+    private long baseDirectionAngle = 0;
 
     /**
      * Collection of measurements of this survey station

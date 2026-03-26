@@ -2,6 +2,8 @@ package ru.taheoport.geocalculator_service.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ru.taheoport.geocalculator_service.model.Measurement;
+import ru.taheoport.geocalculator_service.model.SurveyStation;
 import ru.taheoport.geocalculator_service.repository.SurveyRepository;
 
 import java.util.ArrayList;
@@ -25,7 +27,85 @@ public class SurveyMapperImpl implements SurveyMapper{
      */
     @Override
     public boolean readFromLeica(List<String> lines, SurveyRepository surveyRepository) {
-        return false;
+        surveyRepository.clearAll();
+        boolean success = true;
+        String separator = "\\s+";
+//        String separator = " ";
+        String code = "Not";
+        String currentToolHeight = "2000";
+        String[] lineArray;
+        String[] stringBuffer;
+
+        while (!lines.isEmpty()) {
+            lineArray = lines.removeFirst().split(separator);
+            stringBuffer = new String[6];
+
+            switch (lineArray[0].substring(0, 2)) {
+
+                case "41" -> {
+                    code = lineArray[0].substring(7);
+                }
+
+                case "11" -> {
+                    for (String string : lineArray) {
+                        switch (string.substring(0, 2)){
+
+                            //targetNumber
+                            case "11" -> {
+                                stringBuffer[0] = string.substring(7);
+                            }
+
+                            //targetInclinedDistance
+                            case "31" -> {
+                                stringBuffer[1] = string.substring(7);
+                            }
+
+                            //targetDirection
+                            case "21" -> {
+                                stringBuffer[2] = string.substring(7);
+                            }
+
+                            //targetTiltAngle
+                            case "22" -> {
+                                stringBuffer[3] = string.substring(7);
+                            }
+
+                            //targetHeight
+                            case "87" -> {
+                                stringBuffer[4] = string.substring(7);
+                            }
+
+                            //stationHeight
+                            case "88" -> {
+                                stringBuffer[5] = string.substring(7);
+                            }
+                        }
+
+                        stringBuffer[0] = code.equals("Not") ? stringBuffer[0] : code;
+
+                    }
+
+                    if (!currentToolHeight.equals(stringBuffer[5])) {
+                        currentToolHeight = stringBuffer[5];
+                        SurveyStation station = surveyRepository.addNewStation();
+                        station.setStationHeight(dataMapper.leicaToMillimeter(stringBuffer[5]));
+                    }
+
+                    Measurement target = surveyRepository.addNewMeasurement(surveyRepository.size() - 1);
+                    target.setTargetName(dataMapper.removeFirstZero(stringBuffer[0]));
+                    target.setTargetInclinedDistance(dataMapper.leicaToMillimeter(stringBuffer[1]));
+                    target.setTargetDirection(dataMapper.leicaToDirection(stringBuffer[2]));
+                    target.setTargetTiltAngle(dataMapper.leicaToTiltAngle(stringBuffer[3]));
+                    target.setTargetHeight(dataMapper.leicaToMillimeter(stringBuffer[4]));
+
+                }
+
+            }
+        }
+
+        if (surveyRepository.size() == 0) success = false;
+
+        return success;
     }
 
     /**

@@ -140,6 +140,65 @@ class DataMapperDefaultTest {
         String actualValue = dataMapper.radiansToDms(value);
 
         assertEquals(expectValue, actualValue);
+    }
 
+    @ParameterizedTest
+    @CsvSource({
+            "00009901, 9901",
+            "00000000, 0",
+            "0000T144, T144"
+    })
+    void removeFirstZeroTest(
+            String value,
+            String expectValue
+    ) {
+        String actualValue = dataMapper.removeFirstZero(value);
+
+        assertEquals(expectValue, actualValue);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "00152081, 152081",
+            "00000000, 0",
+            "+00001536, +1536",
+            "-00001536, -1536",
+    })
+    void leicaToMillimeterTest(String value, long expectValue) {
+
+        long actualValue = dataMapper.leicaToMillimeter(value);
+
+        assertEquals(expectValue, actualValue);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "35959550, 1295995",
+            "00000000, 0",
+            "00009500, 590",
+            "00000010, 1",
+
+    })
+    void leicaToDirection(String value, long expectValue) {
+
+        long actualValue = dataMapper.leicaToDirection(value);
+
+        assertEquals(expectValue, actualValue);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "09009340, -574",
+            "09009340, -574",
+            "00000000, 0",
+            "09129300, -5370",
+            "08927300, 1950",
+            "08956410, 199",
+    })
+    void leicaToTiltAngle(String value, long expectValue) {
+
+        long actualValue = dataMapper.leicaToTiltAngle(value);
+
+        assertEquals(expectValue, actualValue);
     }
 }

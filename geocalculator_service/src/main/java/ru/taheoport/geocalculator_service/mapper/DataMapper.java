@@ -54,4 +54,32 @@ public interface DataMapper {
      */
     String radiansToDms(double value);
 
+    /**
+     * Removes insignificant zeros at the beginning of the string
+     * @param value String
+     * @return String
+     */
+    String removeFirstZero(String value);
+
+    /**
+     * Converts string value from gis16 to millimeters
+     * @param value String
+     * @return long line value in millimeters
+     */
+    long leicaToMillimeter(String value);
+
+    /**
+     * Converts string value of horizontal angle from gis16 to seconds
+     * @param value String
+     * @return long angle value in seconds
+     */
+    long leicaToDirection(String value);
+
+    /**
+     * Converts string value of tilt angle from gis16 to seconds
+     * @param value String
+     * @return long angle in seconds
+     */
+    long leicaToTiltAngle(String value);
+
 }
