@@ -110,14 +110,44 @@ public class SurveyMapperImpl implements SurveyMapper{
 
     /**
      * Extracts model data from the Nikon total station file
-     *
-     * @param lines            list of string in gis-format
+     * @param lines list of string in gis-format
      * @param surveyRepository survey model
      * @return This is true if the data contains a geodetic survey.
      */
     @Override
     public boolean readFromNikon(List<String> lines, SurveyRepository surveyRepository) {
-        return false;
+        surveyRepository.clearAll();
+        boolean success = true;
+        String separator = ",";
+
+        while (!lines.isEmpty()) {
+            String[] linesArray = lines.removeFirst().split(separator);
+
+            switch (linesArray[0]) {
+
+                case "ST" -> {
+                    SurveyStation station = surveyRepository.addNewStation();
+                    station.setStationName(linesArray[1]);
+                    station.setOrName(linesArray[3]);
+                    station.setStationHeight(dataMapper.meterToMillimeter(linesArray[5]));
+                }
+
+                case "SS" -> {
+                    if (surveyRepository.size() > 0 ) {
+                        Measurement target = surveyRepository.addNewMeasurement(surveyRepository.size() - 1);
+                        target.setTargetName(linesArray[7]);
+                        target.setTargetInclinedDistance(dataMapper.meterToMillimeter(linesArray[3]));
+                        target.setTargetDirection(dataMapper.dmsToSeconds(linesArray[4]));
+                        target.setTargetTiltAngle(dataMapper.dmsToSeconds(linesArray[5]));
+                        target.setTargetHeight(dataMapper.meterToMillimeter(linesArray[2]));
+                    }
+                }
+            }
+        }
+
+        if (surveyRepository.size() == 0) success = false;
+
+        return success;
     }
 
     /**
@@ -129,6 +159,8 @@ public class SurveyMapperImpl implements SurveyMapper{
      */
     @Override
     public boolean readFromTopcon(List<String> lines, SurveyRepository surveyRepository) {
+
+
         return false;
     }
 

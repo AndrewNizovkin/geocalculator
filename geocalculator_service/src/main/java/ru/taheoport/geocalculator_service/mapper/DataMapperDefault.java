@@ -215,4 +215,16 @@ public class DataMapperDefault implements DataMapper {
 
         return -1 * (leicaToDirection(value) - 324000);
     }
+
+    /**
+     * Replaces special characters with spaces
+     *
+     * @param line String
+     * @return String
+     */
+    @Override
+    public String specialCharsToSpaces(String line) {
+
+        return line.replaceAll("[+?*_(),dm\\n]", " ");
+    }
 }

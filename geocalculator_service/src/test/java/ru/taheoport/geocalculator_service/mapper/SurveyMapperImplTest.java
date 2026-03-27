@@ -9,6 +9,7 @@ import ru.taheoport.geocalculator_service.repository.SurveyRepository;
 import ru.taheoport.geocalculator_service.repository.SurveyRepositoryImpl;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -66,12 +67,23 @@ class SurveyMapperImplTest {
     void readFromLeicaTest() {
         surveyRepository.clearAll();
         List<String> importLeicaList = getImportLeicaTestList();
-        importLeicaList.removeFirst();
-
 
         boolean actualSuccess = surveyMapper.readFromLeica(importLeicaList, surveyRepository);
 
         assertTrue(actualSuccess);
+    }
+
+    @Test
+    void readFromNikonTest() {
+        surveyRepository.clearAll();
+        List<String> importNikonList = getImportNikonTestList();
+        int expectSize = 3;
+
+        boolean actualSuccess = surveyMapper.readFromNikon(importNikonList, surveyRepository);
+        int actualSize = surveyRepository.size();
+
+        assertTrue(actualSuccess);
+        assertEquals(expectSize, actualSize);
 
     }
 
@@ -166,7 +178,6 @@ class SurveyMapperImplTest {
      */
     private List<String> getImportLeicaTestList() {
         List<String> importLeicaList = new ArrayList<>();
-        importLeicaList.add("import-leica");
         importLeicaList.add("410001+00009901 42....+00000000 43....+00000000 44....+00000000 45....+00000000 46....+00000000 47....+00000000 48....+00000000 49....+00000000 ");
         importLeicaList.add("110002+00000001 21.324+35959550 22.324+09002380 31...0+00152081 51....+0000+000 87...0+00001600 88...0+00001531 ");
         importLeicaList.add("410003+000T100  42....+00000000 43....+00000000 44....+00000000 45....+00000000 46....+00000000 47....+00000000 48....+00000000 49....+00000000 ");
@@ -187,6 +198,53 @@ class SurveyMapperImplTest {
         importLeicaList.add("110543+00000349 21.324+12537430 22.324+09006440 31...0+00026790 51....+0000+000 87...0+00001600 88...0+00001537 ");
 
         return importLeicaList;
+    }
+
+    /**
+     * Creates test list for import from total station Nikon
+     * @return List strings in raw format
+     */
+    private List<String> getImportNikonTestList() {
+        List<String> importNikonList = new ArrayList<>();
+        importNikonList.add("Waiting to receive…");
+        importNikonList.add("CO,Nikon RAW data format V2.00");
+        importNikonList.add("CO,161226-1");
+        importNikonList.add("CO,Description:");
+        importNikonList.add("CO,Client:");
+        importNikonList.add("CO,Comments:");
+        importNikonList.add("CO,Downloaded 26-Dec-2016 15:57:43");
+        importNikonList.add("CO,Software: Pre-install version: 1.1.3.1");
+        importNikonList.add("CO,Instrument: Nivo3.M");
+        importNikonList.add("CO,Dist Units: Metres");
+        importNikonList.add("CO,Angle Units: DDDMMSS");
+        importNikonList.add("CO,Zero azimuth: North");
+        importNikonList.add("CO,Zero VA: Compass");
+        importNikonList.add("CO,Coord Order: NEZ");
+        importNikonList.add("CO,HA Raw data: HA zero to BS");
+        importNikonList.add("CO,Tilt Correction:  VA:ON HA:ON");
+        importNikonList.add("CO, 161226-1 <JOB> Created 26-Dec-2016 10:13:32");
+        importNikonList.add("CO,S/N:A150710");
+        importNikonList.add("CO,Temp:15C Press:760mmHg Prism:34 26-Dec-2016 10:15:46");
+        importNikonList.add("CO,HA set in Quick Station");
+        importNikonList.add("ST,2819,,150,,1.588,0.0000,0.0000");
+        importNikonList.add("SS,1,1.600,250.223,2.4012,-0.0330,10:20:45,T156");
+        importNikonList.add("CO,Temp:15C Press:760mmHg Prism:34 26-Dec-2016 10:31:08");
+        importNikonList.add("CO,HA set in Quick Station");
+        importNikonList.add("ST,156,,2819,,1.597,0.0000,0.0000");
+        importNikonList.add("SS,2,1.600,113.376,205.0223,-0.0207,10:39:12,T157");
+        importNikonList.add("CO,Temp:15C Press:760mmHg Prism:0 26-Dec-2016 10:39:56");
+        importNikonList.add("SS,3,1.670,64.19,205.1503,-0.0332,10:39:56,2");
+        importNikonList.add("SS,4,1.670,51.64,205.1626,-0.0126,10:40:12,2");
+        importNikonList.add("CO,Input HD:0.750");
+        importNikonList.add("CO,Temp:15C Press:760mmHg Prism:0 26-Dec-2016 10:57:12");
+        importNikonList.add("CO,HA set in Quick Station");
+        importNikonList.add("ST,157,,156,,1.556,0.0000,0.0000");
+        importNikonList.add("CO,Temp:15C Press:760mmHg Prism:34 26-Dec-2016 10:57:51");
+        importNikonList.add("SS,28,1.600,113.379,0.0001,0.0309,10:57:51,T156");
+        importNikonList.add("SS,29,1.600,97.740,182.5923,-0.2934,11:03:50,T158");
+        importNikonList.add("SS,30,1.600,97.58,184.0216,-0.2843,11:04:03,2");
+
+        return importNikonList;
     }
 
 

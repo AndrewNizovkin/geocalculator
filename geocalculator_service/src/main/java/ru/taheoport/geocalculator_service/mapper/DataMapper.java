@@ -82,4 +82,11 @@ public interface DataMapper {
      */
     long leicaToTiltAngle(String value);
 
+    /**
+     * Replaces special characters with spaces
+     * @param line String
+     * @return String
+     */
+    String specialCharsToSpaces(String line);
+
 }
