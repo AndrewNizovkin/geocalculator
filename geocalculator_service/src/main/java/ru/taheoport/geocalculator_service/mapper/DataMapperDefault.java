@@ -186,13 +186,16 @@ public class DataMapperDefault implements DataMapper {
 
     /**
      * Converts string value of horizontal angle from gis16 to seconds
-     *
      * @param value String
+     * @param rightShift int number of chars for right shift int rightShift
      * @return long angle value in seconds
      */
     @Override
-    public long leicaToDirection(String value) {
-        value = value.substring(0, value.length() - 1);
+    public long leicaToDirection(String value, int rightShift) {
+        for (int i = 0; i < rightShift; i++) {
+            value = value.substring(0, value.length() - 1);
+        }
+
         long degrees = Long.parseLong(value.substring(0, value.length() - 4));
         long minutes = Long.parseLong(value.substring(value.length() - 4, value.length() - 2));
         long seconds = Long.parseLong(value.substring(value.length() - 2));
@@ -204,16 +207,17 @@ public class DataMapperDefault implements DataMapper {
      * Converts string value of tilt angle from gis16 to seconds
      *
      * @param value String
+     * @param rightShift int number of chars for right shift int rightShift
      * @return long angle in seconds
      */
     @Override
-    public long leicaToTiltAngle(String value) {
+    public long leicaToTiltAngle(String value, int rightShift ) {
 
-        long angle = leicaToDirection(value);
+        long angle = leicaToDirection(value, rightShift);
 
         if (angle == 0) return 0;
 
-        return -1 * (leicaToDirection(value) - 324000);
+        return -1 * (leicaToDirection(value, rightShift) - 324000);
     }
 
     /**
@@ -226,5 +230,6 @@ public class DataMapperDefault implements DataMapper {
     public String specialCharsToSpaces(String line) {
 
         return line.replaceAll("[+?*_(),dm\\n]", " ");
+//        P100_ ?+00014487m0874204+0480358d+00014475***+00+00000_*_,1.595
     }
 }

@@ -1,5 +1,6 @@
 package ru.taheoport.geocalculator_service.mapper;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -173,32 +174,45 @@ class DataMapperDefaultTest {
 
     @ParameterizedTest
     @CsvSource({
-            "35959550, 1295995",
-            "00000000, 0",
-            "00009500, 590",
-            "00000010, 1",
+            "35959550, 1295995, 1",
+            "3595955, 1295995, 0",
+            "00000000, 0, 1",
+            "0000000, 0, 0",
+            "00009500, 590, 1",
+            "00000010, 1, 1",
 
     })
-    void leicaToDirection(String value, long expectValue) {
+    void leicaToDirection(String value, long expectValue, int rightShift) {
 
-        long actualValue = dataMapper.leicaToDirection(value);
+        long actualValue = dataMapper.leicaToDirection(value, rightShift);
 
         assertEquals(expectValue, actualValue);
     }
 
     @ParameterizedTest
     @CsvSource({
-            "09009340, -574",
-            "09009340, -574",
-            "00000000, 0",
-            "09129300, -5370",
-            "08927300, 1950",
-            "08956410, 199",
+            "09009340, -574, 1",
+            "09009340, -574, 1",
+            "00000000, 0, 1",
+            "09129300, -5370, 1",
+            "0912930, -5370, 0",
+            "08927300, 1950, 1",
+            "08956410, 199, 1",
+            "0895641, 199, 0"
     })
-    void leicaToTiltAngle(String value, long expectValue) {
+    void leicaToTiltAngle(String value, long expectValue, int rightShift) {
 
-        long actualValue = dataMapper.leicaToTiltAngle(value);
+        long actualValue = dataMapper.leicaToTiltAngle(value, rightShift);
 
         assertEquals(expectValue, actualValue);
     }
+
+//    @ParameterizedTest
+//    @CsvSource({
+//            ""
+//    })
+//    void specialCharsToSpacesTest() {
+//
+//    }
+
 }

@@ -94,8 +94,8 @@ public class SurveyMapperImpl implements SurveyMapper{
                     Measurement target = surveyRepository.addNewMeasurement(surveyRepository.size() - 1);
                     target.setTargetName(dataMapper.removeFirstZero(stringBuffer[0]));
                     target.setTargetInclinedDistance(dataMapper.leicaToMillimeter(stringBuffer[1]));
-                    target.setTargetDirection(dataMapper.leicaToDirection(stringBuffer[2]));
-                    target.setTargetTiltAngle(dataMapper.leicaToTiltAngle(stringBuffer[3]));
+                    target.setTargetDirection(dataMapper.leicaToDirection(stringBuffer[2], 1));
+                    target.setTargetTiltAngle(dataMapper.leicaToTiltAngle(stringBuffer[3], 1));
                     target.setTargetHeight(dataMapper.leicaToMillimeter(stringBuffer[4]));
 
                 }
@@ -159,9 +159,47 @@ public class SurveyMapperImpl implements SurveyMapper{
      */
     @Override
     public boolean readFromTopcon(List<String> lines, SurveyRepository surveyRepository) {
+        surveyRepository.clearAll();
+        boolean success = true;
+        String[] stations;
+        String[] targets;
+        String[] measurements;
+
+        for (String line : lines) {
+
+            stations = line.split("_'");
+            for (String station : stations) {
+                SurveyStation surveyStation = surveyRepository.addNewStation();
+                surveyStation.setStationName(station.substring(0, station.indexOf('_')));
+                surveyStation.setStationHeight(dataMapper.meterToMillimeter(station.substring(
+                        station.indexOf(')') + 1,
+                        station.indexOf('_')
+                )));
+                targets = station.substring(station.indexOf("_+") + 2)
+                        .split("_\\+");
+                for (String target : targets) {
+                    Measurement measurement = surveyRepository.addNewMeasurement(surveyRepository.size() - 1);
+                    measurement.setTargetName(target.substring(0, target.indexOf('_')));
+
+                    measurements = target
+                            .substring(target.indexOf('?'))
+                            .replaceAll("[+?*_(),dm\\n]", " ")
+                            .trim()
+                            .split("\\s+");
+                    measurement.setTargetInclinedDistance(dataMapper.leicaToMillimeter(measurements[0]));
+                    measurement.setTargetTiltAngle(dataMapper.leicaToTiltAngle(measurements[1], 0));
+                    measurement.setTargetDirection(dataMapper.leicaToDirection(measurements[2], 0));
+                    measurement.setTargetHeight(dataMapper.meterToMillimeter(measurements[6]));
+                }
+
+            }
+
+        }
+
+        if (surveyRepository.size() == 0) success = false;
 
 
-        return false;
+        return success;
     }
 
     /**

@@ -71,16 +71,18 @@ public interface DataMapper {
     /**
      * Converts string value of horizontal angle from gis16 to seconds
      * @param value String
+     * @param rightShift int number of chars for right shift int rightShift
      * @return long angle value in seconds
      */
-    long leicaToDirection(String value);
+    long leicaToDirection(String value, int rightShift);
 
     /**
      * Converts string value of tilt angle from gis16 to seconds
      * @param value String
+     * @param rightShift int number of chars for right shift int rightShift
      * @return long angle in seconds
      */
-    long leicaToTiltAngle(String value);
+    long leicaToTiltAngle(String value, int rightShift);
 
     /**
      * Replaces special characters with spaces
