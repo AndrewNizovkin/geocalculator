@@ -127,10 +127,30 @@ class SurveyServiceImplTest {
         assertNotNull(actualTahList);
         int actualTahSize = actualTahList.size();
         assertEquals(expectTahSize, actualTahSize);
+
         for (int i = 0; i < expectTahSize; i++) {
             String expectLine = expectTahList.removeFirst();
             String actualLine = actualTahList.removeFirst();
 
+            assertEquals(expectLine, actualLine);
+        }
+    }
+
+    @Test
+    void importFromTotalStationTopconTest() {
+        List<String> expectTahList = getExpectTopconTahList();
+        int expectSize = expectTahList.size();
+
+        List<String> importTopconList = getImportTopconList();
+        List<String> actualTahList = surveyService.importFromTotalStation(importTopconList);
+
+        assertNotNull(actualTahList);
+        int actualSize = actualTahList.size();
+        assertEquals(expectSize, actualSize);
+
+        for (int i = 0; i < expectSize; i++) {
+            String expectLine = expectTahList.removeFirst();
+            String actualLine = actualTahList.removeFirst();
 
             assertEquals(expectLine, actualLine);
         }
@@ -262,6 +282,44 @@ class SurveyServiceImplTest {
 
         return importNikonList;
     }
+
+    /**
+     * Creates expect list for testing import from Topcon
+     * @return list strings in tah-format
+     */
+    private List<String> getExpectTopconTahList() {
+        List<String> expectTopconTahList = new ArrayList<>();
+        expectTopconTahList.add("T3 0.000 0.000 0.000 1.595 noname 0.000 0.000");
+        expectTopconTahList.add("T6 0.000 0.000 0.000 1.620 noname 0.000 0.000");
+        expectTopconTahList.add("T5 0.000 0.000 0.000 1.650 noname 0.000 0.000");
+        expectTopconTahList.add("//");
+        expectTopconTahList.add("T4 9.294 359.5959 -0.0645 1.595 0");
+        expectTopconTahList.add("P100 14.487 48.0358 2.1756 1.595 0");
+        expectTopconTahList.add("P151 15.557 206.0742 5.2132 2.720 0");
+        expectTopconTahList.add("//");
+        expectTopconTahList.add("T3 42.091 359.5959 -3.4713 1.620 1");
+        expectTopconTahList.add("P200 17.622 9.4544 -7.1011 1.620 1");
+        expectTopconTahList.add("P201 19.137 16.4505 -5.4634 1.620 1");
+        expectTopconTahList.add("//");
+        expectTopconTahList.add("T4 31.776 0.0000 4.4023 1.650 2");
+        expectTopconTahList.add("P500 30.113 346.1252 2.5322 1.650 2");
+        expectTopconTahList.add("P502 24.110 344.4233 3.1748 1.650 2");
+        expectTopconTahList.add("//");
+
+        return expectTopconTahList;
+    }
+    /**
+     * Creates test list for import from total station Topcon
+     * @return List strings in topcon format
+     */
+    private List<String> getImportTopconList() {
+        List<String> importTopconList = new ArrayList<>();
+        importTopconList.add("import-topcon");
+        importTopconList.add("_'T3_(_)1.595_+T4_ ?+00009294m0900645+3595959d+00009294***+00+00000_*_,1.595_+P100_ ?+00014487m0874204+0480358d+00014475***+00+00000_*_,1.595_+P151_ ?+00015557m0843828+2060742d+00015489***+00+00000_*_,2.720_'T6_(_)1.620_+T3_ ?+00042091m0934713+3595959d+00041999***+00+00000_*_,1.620_+P200_ ?+00017622m0971011+0094544d+00017484***+00+00000_*_,1.620_+P201_ ?+00019137m0954634+0164505d+00019040***+00+00000_*_,1.620_'T5_(_)1.650_+T4_ ?+00031776m0851937+0000000d+00031670***+00+00000_*_,1.650_+P500_ ?+00030113m0870638+3461252d+00030075***+00+00000_*_,1.650_+P502_ ?+00024110m0864212+3444233d+00024070***+00+00000_*_,1.650_\n");
+
+        return importTopconList;
+    }
+
 
 
     /**

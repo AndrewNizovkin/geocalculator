@@ -137,8 +137,12 @@ export class SurveyService {
     async importFromTotalStation(fileImport, typeImport) {
         try {
             await this.#surveyProvider.getStringArrayFromDevice(fileImport).then((linesArray) => {
-                linesArray.unshift(typeImport);
-                console.log(linesArray.size);
+                let string = "";
+                for (let line of linesArray) {
+                    string += line;
+                }
+                linesArray = [typeImport, string]
+
                 for (let line of linesArray) {
                     // send to backend linesArray as request
                     console.log(line);

@@ -169,11 +169,12 @@ public class SurveyMapperImpl implements SurveyMapper{
 
             stations = line.split("_'");
             for (String station : stations) {
+                if (station.isEmpty()) continue;
                 SurveyStation surveyStation = surveyRepository.addNewStation();
                 surveyStation.setStationName(station.substring(0, station.indexOf('_')));
                 surveyStation.setStationHeight(dataMapper.meterToMillimeter(station.substring(
                         station.indexOf(')') + 1,
-                        station.indexOf('_')
+                        station.indexOf("_+")
                 )));
                 targets = station.substring(station.indexOf("_+") + 2)
                         .split("_\\+");
@@ -197,7 +198,6 @@ public class SurveyMapperImpl implements SurveyMapper{
         }
 
         if (surveyRepository.size() == 0) success = false;
-
 
         return success;
     }
@@ -258,5 +258,59 @@ public class SurveyMapperImpl implements SurveyMapper{
     @Override
     public List<String> surveyToReports(SurveyRepository surveyRepository) {
         return List.of();
+    }
+
+    /**
+     * Extracts model data from surveyRequest
+     *
+     * @param surveyRequest    list of string in tah+ format
+     * @param surveyRepository survey model
+     * @return This is true if the data contains a geodetic survey.
+     */
+    @Override
+    public boolean surveyRequestToSurvey(List<String> surveyRequest, SurveyRepository surveyRepository) {
+        boolean success = true;
+        if (surveyRequest.isEmpty()) return false;
+        String[] station;
+        String[] target;
+        int stationIndex;
+        String line = surveyRequest.removeFirst();
+
+        while (!line.equals("//") && !line.isEmpty()) {
+            station = line.split("\\s+");
+            if (station.length != 9) continue;
+
+            SurveyStation surveyStation = surveyRepository.addNewStation();
+            surveyStation.setStationName(station[0]);
+            surveyStation.setStationX(dataMapper.meterToMillimeter(station[1]));
+            surveyStation.setStationY(dataMapper.meterToMillimeter(station[2]));
+            surveyStation.setStationZ(dataMapper.meterToMillimeter(station[3]));
+            surveyStation.setStationHeight(dataMapper.meterToMillimeter(station[4]));
+            surveyStation.setOrDirection(dataMapper.dmsToSeconds(station[5]));
+            surveyStation.setOrName(station[6]);
+            surveyStation.setOrX(dataMapper.meterToMillimeter(station[7]));
+            surveyStation.setOrY(dataMapper.meterToMillimeter(station[8]));
+            line = surveyRequest.removeFirst();
+        }
+
+        while (!line.isEmpty()) {
+            line = surveyRequest.removeFirst();
+            if (line.equals("//")) continue;
+
+            target = line.split("\\s+");
+            if (target.length != 6) continue;
+
+            stationIndex = Integer.parseInt(target[5]);
+            Measurement measurement = surveyRepository.addNewMeasurement(stationIndex);
+            measurement.setTargetName(target[0]);
+            measurement.setTargetInclinedDistance(dataMapper.meterToMillimeter(target[1]));
+            measurement.setTargetDirection(dataMapper.dmsToSeconds(target[2]));
+            measurement.setTargetTiltAngle(dataMapper.dmsToSeconds(target[3]));
+            measurement.setTargetHeight(dataMapper.meterToMillimeter(target[4]));
+        }
+
+        if (surveyRepository.size() == 0) success = false;
+
+        return success;
     }
 }

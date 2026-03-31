@@ -52,6 +52,8 @@ public class SurveyServiceImpl implements SurveyService {
 
             case "import-topcon" -> {
                 if (surveyMapper.readFromTopcon(importRequest,surveyRepository)) {
+                    List<String> list = surveyMapper.surveyToListTah(surveyRepository);
+                    list.forEach(System.out::println);
                     return surveyMapper.surveyToListTah(surveyRepository);
                 }
             }

@@ -87,6 +87,20 @@ class SurveyMapperImplTest {
 
     }
 
+    @Test
+    void readFromTopconTest() {
+        surveyRepository.clearAll();
+        List<String> importTopconList = getImportTopconList();
+        int expectSize = 3;
+
+        boolean actualSuccess = surveyMapper.readFromTopcon(importTopconList, surveyRepository);
+        int actualSize = surveyRepository.size();
+
+        assertTrue(actualSuccess);
+        assertEquals(expectSize, actualSize);
+
+    }
+
     /**
      * Creates a repository with tested parameters
      */
@@ -245,6 +259,17 @@ class SurveyMapperImplTest {
         importNikonList.add("SS,30,1.600,97.58,184.0216,-0.2843,11:04:03,2");
 
         return importNikonList;
+    }
+
+    /**
+     * Creates test list for import from total station Topcon
+     * @return List strings in topcon format
+     */
+    private List<String> getImportTopconList() {
+        List<String> importTopconList = new ArrayList<>();
+        importTopconList.add("_'T3_(_)1.595_+T4_ ?+00009294m0900645+3595959d+00009294***+00+00000_*_,1.595_+P100_ ?+00014487m0874204+0480358d+00014475***+00+00000_*_,1.595_+P151_ ?+00015557m0843828+2060742d+00015489***+00+00000_*_,2.720_'T6_(_)1.620_+T3_ ?+00042091m0934713+3595959d+00041999***+00+00000_*_,1.620_+P200_ ?+00017622m0971011+0094544d+00017484***+00+00000_*_,1.620_+P201_ ?+00019137m0954634+0164505d+00019040***+00+00000_*_,1.620_'T5_(_)1.650_+T4_ ?+00031776m0851937+0000000d+00031670***+00+00000_*_,1.650_+P500_ ?+00030113m0870638+3461252d+00030075***+00+00000_*_,1.650_+P502_ ?+00024110m0864212+3444233d+00024070***+00+00000_*_,1.650_\n");
+
+        return importTopconList;
     }
 
 
