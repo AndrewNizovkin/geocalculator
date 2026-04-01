@@ -45,7 +45,7 @@ class SurveyServiceImplTest {
     @ParameterizedTest
     @CsvSource({
             "1035419, 1035412, 9237, -29094, 206, 478685350, 2296938170, 11426, 0, 0",
-            "1035419, 408167, -15825, 36604, 16, 478660288, 2297003868, 11236, 0, 1",
+            "1035419, 408167, -15824, 36604, 16, 478660289, 2297003868, 11236, 0, 1",
             "1056205, 383231, -12884, 43628, -115, 478647399, 2297047490, 11116, 1, 0",
             "1000888, 1000888, 6018, -42685, 8078, 478656732, 2297029055, 19008, 2, 0",
             "1000888, 1001444, 6133, -42672, -1991977, 478656847, 2297029068, -1981047, 2, 1",
@@ -154,6 +154,142 @@ class SurveyServiceImplTest {
 
             assertEquals(expectLine, actualLine);
         }
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1035419, 1035412, 9237, -29094, 206, 478685350, 2296938170, 11426, 0, 0",
+            "1035419, 408167, -15824, 36604, 16, 478660289, 2297003868, 11236, 0, 1",
+            "1056205, 383231, -12884, 43628, -115, 478647399, 2297047490, 11116, 1, 0",
+            "1000888, 1000888, 6018, -42685, 8078, 478656732, 2297029055, 19008, 2, 0",
+            "1000888, 1001444, 6133, -42672, -1991977, 478656847, 2297029068, -1981047, 2, 1",
+            "1000888, 937454, -5016, -29668, -1997212, 478645698, 2297042072, -1986282, 2, 2",
+    })
+    void surveyRequestToSurveyTest(
+            long expectBaseDirectionAngle,
+            long expectDirectionAngle,
+            long expectDeltaX,
+            long expectDeltaY,
+            long expectDeltaZ,
+            long expectTargetX,
+            long expectTargetY,
+            long expectTargetZ,
+            int stationIndex,
+            int targetIndex
+    ) {
+        surveyRepository.clearAll();
+        List<String> surveyRequestTest = getSurveyRequestTest();
+
+        boolean success = surveyMapper.surveyRequestToSurvey(surveyRequestTest, surveyRepository);
+
+        assertTrue(success);
+
+        surveyService.calculateSurvey();
+
+        int actualSizeSurvey = surveyRepository.size();
+        int actualMeasurementSize = surveyRepository.measurementSize(2);
+
+        long actualBaseDirectionAngle = surveyRepository.getBaseDirectionAngle(stationIndex);
+        long actualDirectionAngle = surveyRepository.getTargetDirectionAngle(stationIndex, targetIndex);
+        long actualDeltaX = surveyRepository.getTargetDeltaX(stationIndex, targetIndex);
+        long actualDeltaY = surveyRepository.getTargetDeltaY(stationIndex, targetIndex);
+        long actualDeltaZ = surveyRepository.getTargetDeltaZ(stationIndex, targetIndex);
+        long actualX = surveyRepository.getTargetX(stationIndex, targetIndex);
+        long actualY = surveyRepository.getTargetY(stationIndex, targetIndex);
+        long actualZ = surveyRepository.getTargetZ(stationIndex, targetIndex);
+
+
+        assertEquals(3, actualSizeSurvey);
+        assertEquals(3,actualMeasurementSize);
+
+        assertEquals(expectBaseDirectionAngle, actualBaseDirectionAngle, 1);
+        assertEquals(expectDirectionAngle, actualDirectionAngle, 1);
+        assertEquals(expectDeltaX, actualDeltaX, 1);
+        assertEquals(expectDeltaY, actualDeltaY, 1);
+        assertEquals(expectDeltaZ, actualDeltaZ, 1);
+        assertEquals(expectTargetX, actualX, 1);
+        assertEquals(expectTargetY, actualY, 1);
+        assertEquals(expectTargetZ, actualZ, 1);
+    }
+
+    @Test
+    void surveyToReportsTest() {
+        surveyRepository.clearAll();
+        List<String> surveyRequest = getSurveyRequestTest();
+        List<String> expectSurveyReports = getExpectSurveyReports();
+        int expectSize = expectSurveyReports.size();
+
+        List<String> actualSurveyReports = surveyService.getSurveyReports(surveyRequest);
+
+        assertNotNull(actualSurveyReports);
+        int actualSize = actualSurveyReports.size();
+        assertEquals(expectSize, actualSize);
+
+        for (int i = 0; i < expectSize; i++) {
+            String expectLine = expectSurveyReports.removeFirst();
+            String actualLine = actualSurveyReports.removeFirst();
+
+            assertEquals(expectLine, actualLine);
+        }
+
+
+    }
+
+    /**
+     * Creates expect survey reports
+     * @return list of strings in survey reports format
+     */
+    private List<String> getExpectSurveyReports() {
+        List<String> expectSurveyReports = new ArrayList<>();
+        expectSurveyReports.add("#survey-report");
+        expectSurveyReports.add("//");
+        expectSurveyReports.add("1301 478676.113 2296967.264 11.220");
+        expectSurveyReports.add("1302 478685.352 2296938.168 0.000");
+        expectSurveyReports.add("1302 478685.350 2296938.170 11.426");
+        expectSurveyReports.add("T100 478660.289 2297003.868 11.236");
+        expectSurveyReports.add("//");
+        expectSurveyReports.add("100 478660.283 2297003.862 11.231");
+        expectSurveyReports.add("1301 478676.113 2296967.264 0.000");
+        expectSurveyReports.add("74 478647.399 2297047.490 11.116");
+        expectSurveyReports.add("//");
+        expectSurveyReports.add("101 478650.714 2297071.740 10.930");
+        expectSurveyReports.add("100 478660.283 2297003.862 0.000");
+        expectSurveyReports.add("999 478656.732 2297029.055 19.008");
+        expectSurveyReports.add("12 478656.847 2297029.068 -1981.047");
+        expectSurveyReports.add("40 478645.698 2297042.072 -1986.282");
+
+        expectSurveyReports.add("#processing-report");
+        expectSurveyReports.add("                           В  Е  Д  О  М  О  С  Т  Ь    В  Ы  Ч  И  С  Л  Е  Н  И  Я    К  О  О  Р  Д  И  Н  А  Т");
+        expectSurveyReports.add("------------------------------------------------------------------------------------------------------------------------------------------------");
+        expectSurveyReports.add("|  Название   |  Длина  | Направ-  |   Угол   |  Высота  |   Дир.   |        П р и р а щ е н и я      |            К о о р д и н а т ы         |");
+        expectSurveyReports.add("|   точки     |  линии  |  ление   |  наклона | наведения|   угол   |---------------------------------|----------------------------------------|");
+        expectSurveyReports.add("|             |    м.   |  г.мс    |    г.мс  |     м.   |   г.мс   |   DX, м. |   DY, м. |   DZ, м.  |     X, м.   |    Y, м.    |     Z, м.  |");
+        expectSurveyReports.add("|-------------|---------|----------|----------|----------|----------|----------|----------|-----------|--------- ---|-------------|------------|");
+        expectSurveyReports.add("|      1      |     2   |     3    |     4    |     5    |     6    |     7    |     8    |      9    |     10      |      11     |      12    |");
+        expectSurveyReports.add("------------------------------------------------------------------------------------------------------------------------------------------------");
+        expectSurveyReports.add("                                   Станция 1301       Ориентир 1302       Высота инструмента i = 1.538");
+        expectSurveyReports.add("------------------------------------------------------------------------------------------------------------------------------------------------");
+        expectSurveyReports.add("|       1301 |          |          |          |          |          |          |          |           |  478676.113 | 2296967.264 |     11.220 |");
+        expectSurveyReports.add("|       1302 |          |          |          |          |          |          |          |           |  478685.352 | 2296938.168 |            |");
+        expectSurveyReports.add("|       1302 |   30.526 | 359.5953 |   0.3009 |    1.600 | 287.3652 |    9.237 |  -29.094 |     0.206 |  478685.350 | 2296938.170 |     11.426 |");
+        expectSurveyReports.add("|       T100 |   39.878 | 185.4548 |   0.0646 |    1.600 | 113.2247 |  -15.824 |   36.604 |     0.016 |  478660.289 | 2297003.868 |     11.236 |");
+        expectSurveyReports.add("------------------------------------------------------------------------------------------------------------------------------------------------");
+        expectSurveyReports.add("                                   Станция 100        Ориентир 1301       Высота инструмента i = 1.580");
+        expectSurveyReports.add("------------------------------------------------------------------------------------------------------------------------------------------------");
+        expectSurveyReports.add("|        100 |          |          |          |          |          |          |          |           |  478660.283 | 2297003.862 |     11.231 |");
+        expectSurveyReports.add("|       1301 |          |          |          |          |          |          |          |           |  478676.113 | 2296967.264 |            |");
+        expectSurveyReports.add("|         74 |   45.491 | 173.0346 |  -0.0709 |    1.600 | 106.2711 |  -12.884 |   43.628 |    -0.115 |  478647.399 | 2297047.490 |     11.116 |");
+        expectSurveyReports.add("------------------------------------------------------------------------------------------------------------------------------------------------");
+        expectSurveyReports.add("                                   Станция 101        Ориентир 100        Высота инструмента i = 1.550");
+        expectSurveyReports.add("------------------------------------------------------------------------------------------------------------------------------------------------");
+        expectSurveyReports.add("|        101 |          |          |          |          |          |          |          |           |  478650.714 | 2297071.740 |     10.930 |");
+        expectSurveyReports.add("|        100 |          |          |          |          |          |          |          |           |  478660.283 | 2297003.862 |            |");
+        expectSurveyReports.add("|        999 |   43.599 | 163.5600 |   8.3641 |    0.000 | 278.0128 |    6.018 |  -42.685 |     8.078 |  478656.732 | 2297029.055 |     19.008 |");
+        expectSurveyReports.add("|         12 |   43.594 | 164.0516 |   8.3222 | 2000.000 | 278.1044 |    6.133 |  -42.672 | -1991.977 |  478656.847 | 2297029.068 |  -1981.047 |");
+        expectSurveyReports.add("|         40 |   30.114 | 146.1846 |   2.2124 | 2000.000 | 260.2414 |   -5.016 |  -29.668 | -1997.212 |  478645.698 | 2297042.072 |  -1986.282 |");
+        expectSurveyReports.add("------------------------------------------------------------------------------------------------------------------------------------------------");
+
+        return expectSurveyReports;
     }
 
     /**
@@ -318,6 +454,29 @@ class SurveyServiceImplTest {
         importTopconList.add("_'T3_(_)1.595_+T4_ ?+00009294m0900645+3595959d+00009294***+00+00000_*_,1.595_+P100_ ?+00014487m0874204+0480358d+00014475***+00+00000_*_,1.595_+P151_ ?+00015557m0843828+2060742d+00015489***+00+00000_*_,2.720_'T6_(_)1.620_+T3_ ?+00042091m0934713+3595959d+00041999***+00+00000_*_,1.620_+P200_ ?+00017622m0971011+0094544d+00017484***+00+00000_*_,1.620_+P201_ ?+00019137m0954634+0164505d+00019040***+00+00000_*_,1.620_'T5_(_)1.650_+T4_ ?+00031776m0851937+0000000d+00031670***+00+00000_*_,1.650_+P500_ ?+00030113m0870638+3461252d+00030075***+00+00000_*_,1.650_+P502_ ?+00024110m0864212+3444233d+00024070***+00+00000_*_,1.650_\n");
 
         return importTopconList;
+    }
+
+    /**
+     * Creates test surveyRequest
+     * @return list strings in surveyRequest format
+     */
+    private List<String> getSurveyRequestTest() {
+        List<String> surveyRequestTest = new ArrayList<>();
+        surveyRequestTest.add("1301 478676.113 2296967.264 11.220 1.538 0.0000 1302 478685.352 2296938.168");
+        surveyRequestTest.add("100 478660.283 2297003.862 11.231 1.580 0.0000 1301 478676.113 2296967.264");
+        surveyRequestTest.add("101 478650.714 2297071.740 10.930 1.550 163.5600 100 478660.283 2297003.862");
+        surveyRequestTest.add("//");
+        surveyRequestTest.add("1302 30.526 359.5953 0.3009 1.600 0");
+        surveyRequestTest.add("T100 39.878 185.4548 0.0646 1.600 0");
+        surveyRequestTest.add("//");
+        surveyRequestTest.add("74 45.491 173.0346 -0.0709 1.600 1");
+        surveyRequestTest.add("//");
+        surveyRequestTest.add("999 43.599 163.5600 8.3641 0.000 2");
+        surveyRequestTest.add("12 43.594 164.0516 8.3222 2000.000 2");
+        surveyRequestTest.add("40 30.114 146.1846 2.2124 2000.000 2");
+        surveyRequestTest.add("//");
+
+        return surveyRequestTest;
     }
 
 

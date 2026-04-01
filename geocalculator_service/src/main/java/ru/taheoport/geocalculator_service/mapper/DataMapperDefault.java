@@ -221,15 +221,35 @@ public class DataMapperDefault implements DataMapper {
     }
 
     /**
-     * Replaces special characters with spaces
-     *
-     * @param line String
-     * @return String
+     * Creates a table cell of the specified width
+     * with the contents aligned to the right
+     * @param string    String value
+     * @param cellWidth int sell width
+     * @return String sell
      */
     @Override
-    public String specialCharsToSpaces(String line) {
+    public String stringToTableRight(String string, int cellWidth) {
+        StringBuilder sell = new StringBuilder(" ".repeat(cellWidth));
+        sell.append(string);
+        int startIndex = sell.length() - cellWidth;
 
-        return line.replaceAll("[+?*_(),dm\\n]", " ");
-//        P100_ ?+00014487m0874204+0480358d+00014475***+00+00000_*_,1.595
+        return sell.substring(startIndex);
     }
+
+    /**
+     * Creates a table cell of the specified width
+     * with the contents aligned to the left
+     *
+     * @param string    String value
+     * @param cellWidth int sell width
+     * @return String sell
+     */
+    @Override
+    public String stringToTableLeft(String string, int cellWidth) {
+        StringBuilder sell = new StringBuilder(string);
+        sell.append(" ".repeat(cellWidth));
+
+        return sell.substring(0, cellWidth);
+    }
+
 }

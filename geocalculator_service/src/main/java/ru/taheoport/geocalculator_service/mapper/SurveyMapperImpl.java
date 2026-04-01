@@ -257,7 +257,126 @@ public class SurveyMapperImpl implements SurveyMapper{
      */
     @Override
     public List<String> surveyToReports(SurveyRepository surveyRepository) {
-        return List.of();
+        List<String> surveyReports = new ArrayList<>();
+        StringBuilder reportLine = new StringBuilder();
+
+        surveyReports.add("#survey-report");
+        for (int i = 0; i < surveyRepository.size(); i++) {
+            surveyReports.add("//");
+
+            reportLine
+                    .append(surveyRepository.getStationName(i))
+                    .append(" ")
+                    .append(dataMapper.millimeterToMeter(surveyRepository.getStationX(i)))
+                    .append(" ")
+                    .append(dataMapper.millimeterToMeter(surveyRepository.getStationY(i)))
+                    .append(" ")
+                    .append(dataMapper.millimeterToMeter(surveyRepository.getStationZ(i)));
+            surveyReports.add(reportLine.toString());
+            reportLine.setLength(0);
+
+            reportLine.append(surveyRepository.getOrName(i))
+                    .append(" ")
+                    .append(dataMapper.millimeterToMeter(surveyRepository.getOrX(i)))
+                    .append(" ")
+                    .append(dataMapper.millimeterToMeter(surveyRepository.getOrY(i)))
+                    .append(" ")
+                    .append("0.000");
+            surveyReports.add(reportLine.toString());
+            reportLine.setLength(0);
+
+            for (int j = 0; j < surveyRepository.measurementSize(i); j++) {
+                reportLine.append(surveyRepository.getTargetName(i, j)).append(" ");
+                reportLine.append(dataMapper.millimeterToMeter(surveyRepository.getTargetX(i, j))).append(" ");
+                reportLine.append(dataMapper.millimeterToMeter(surveyRepository.getTargetY(i, j))).append(" ");
+                reportLine.append(dataMapper.millimeterToMeter(surveyRepository.getTargetZ(i, j)));
+
+                surveyReports.add(reportLine.toString());
+                reportLine.setLength(0);
+            }
+        }
+
+        surveyReports.add("#processing-report");
+        surveyReports.add("                           В  Е  Д  О  М  О  С  Т  Ь    В  Ы  Ч  И  С  Л  Е  Н  И  Я    К  О  О  Р  Д  И  Н  А  Т");
+        surveyReports.add("------------------------------------------------------------------------------------------------------------------------------------------------");
+        surveyReports.add("|  Название   |  Длина  | Направ-  |   Угол   |  Высота  |   Дир.   |        П р и р а щ е н и я      |            К о о р д и н а т ы         |");
+        surveyReports.add("|   точки     |  линии  |  ление   |  наклона | наведения|   угол   |---------------------------------|----------------------------------------|");
+        surveyReports.add("|             |    м.   |  г.мс    |    г.мс  |     м.   |   г.мс   |   DX, м. |   DY, м. |   DZ, м.  |     X, м.   |    Y, м.    |     Z, м.  |");
+        surveyReports.add("|-------------|---------|----------|----------|----------|----------|----------|----------|-----------|--------- ---|-------------|------------|");
+        surveyReports.add("|      1      |     2   |     3    |     4    |     5    |     6    |     7    |     8    |      9    |     10      |      11     |      12    |");
+        surveyReports.add("------------------------------------------------------------------------------------------------------------------------------------------------");
+
+        for (int i = 0; i < surveyRepository.size(); i++) {
+            reportLine
+                    .append("                                   Станция ")
+                    .append(dataMapper.stringToTableLeft(surveyRepository.getStationName(i), 10))
+                    .append(" Ориентир ")
+                    .append(dataMapper.stringToTableLeft(surveyRepository.getOrName(i), 10))
+                    .append(" Высота инструмента i = ")
+                    .append(dataMapper.millimeterToMeter(surveyRepository.getStationHeight(i)));
+            surveyReports.add(reportLine.toString());
+            reportLine.setLength(0);
+
+            surveyReports.add("------------------------------------------------------------------------------------------------------------------------------------------------");
+
+            reportLine
+                    .append("| ")
+                    .append(dataMapper.stringToTableRight(surveyRepository.getStationName(i), 10))
+                    .append(" |          |          |          |          |          |          |          |           | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(surveyRepository.getStationX(i)), 11))
+                    .append(" | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(surveyRepository.getStationY(i)), 11))
+                    .append(" | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(surveyRepository.getStationZ(i)), 10))
+                    .append(" |");
+            surveyReports.add(reportLine.toString());
+            reportLine.setLength(0);
+
+            reportLine
+                    .append("| ")
+                    .append(dataMapper.stringToTableRight(surveyRepository.getOrName(i), 10))
+                    .append(" |          |          |          |          |          |          |          |           | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(surveyRepository.getOrX(i)), 11))
+                    .append(" | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(surveyRepository.getOrY(i)), 11))
+                    .append(" |            |");
+            surveyReports.add(reportLine.toString());
+            reportLine.setLength(0);
+
+            for (int j = 0; j < surveyRepository.measurementSize(i); j++) {
+                reportLine
+                        .append("| ")
+                        .append(dataMapper.stringToTableRight(surveyRepository.getTargetName(i, j), 10))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(surveyRepository.getTargetInclinedDistance(i, j)), 8))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.secondsToDms(surveyRepository.getTargetDirection(i, j)), 8))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.secondsToDms(surveyRepository.getTargetTiltAngle(i, j)), 8))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(surveyRepository.getTargetHeight(i, j)), 8))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.secondsToDms(surveyRepository.getTargetDirectionAngle(i, j)), 8))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(surveyRepository.getTargetDeltaX(i, j)), 8))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(surveyRepository.getTargetDeltaY(i, j)), 8))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(surveyRepository.getTargetDeltaZ(i, j)), 9))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(surveyRepository.getTargetX(i, j)), 11))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(surveyRepository.getTargetY(i, j)), 11))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(surveyRepository.getTargetZ(i, j)), 10))
+                        .append(" |");
+                surveyReports.add(reportLine.toString());
+                reportLine.setLength(0);
+            }
+            surveyReports.add("------------------------------------------------------------------------------------------------------------------------------------------------");
+        }
+
+        return surveyReports;
     }
 
     /**
@@ -276,7 +395,7 @@ public class SurveyMapperImpl implements SurveyMapper{
         int stationIndex;
         String line = surveyRequest.removeFirst();
 
-        while (!line.equals("//") && !line.isEmpty()) {
+        while (!line.equals("//") && !surveyRequest.isEmpty()) {
             station = line.split("\\s+");
             if (station.length != 9) continue;
 
@@ -293,7 +412,7 @@ public class SurveyMapperImpl implements SurveyMapper{
             line = surveyRequest.removeFirst();
         }
 
-        while (!line.isEmpty()) {
+        while (!surveyRequest.isEmpty()) {
             line = surveyRequest.removeFirst();
             if (line.equals("//")) continue;
 

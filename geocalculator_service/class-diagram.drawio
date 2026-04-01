@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36" version="29.6.6">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36">
   <diagram name="Страница-1" id="o-5GadF2C5qq2WKj6GCM">
-    <mxGraphModel dx="21352" dy="10369" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="15889" dy="7302" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -170,7 +170,7 @@
           <mxGeometry height="26" width="340" y="173" as="geometry" />
         </mxCell>
         <mxCell id="GjvT4wyWlkf6znBe7ioO-66" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;" vertex="1">
-          <mxGeometry height="381" width="230" x="-2370" y="134" as="geometry" />
+          <mxGeometry height="407" width="230" x="-2370" y="134" as="geometry" />
         </mxCell>
         <mxCell id="GjvT4wyWlkf6znBe7ioO-67" parent="GjvT4wyWlkf6znBe7ioO-66" style="html=1;whiteSpace=wrap;" value="&lt;b&gt;DataMapper&lt;/b&gt;" vertex="1">
           <mxGeometry height="35" width="230" y="26" as="geometry" />
@@ -211,8 +211,11 @@
         <mxCell id="zSw-YxZGgJS6_G6AJKVD-5" parent="GjvT4wyWlkf6znBe7ioO-66" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ leicaToTiltAngle(String): long" vertex="1">
           <mxGeometry height="26" width="230" y="329" as="geometry" />
         </mxCell>
-        <mxCell id="PZH_AdAqTKv8O5LyT1tv-1" parent="GjvT4wyWlkf6znBe7ioO-66" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+&amp;nbsp;&lt;span style=&quot;white-space-collapse: preserve;&quot;&gt;specialС&lt;/span&gt;&lt;span class=&quot;YPkS7KbdpWfGdYKd3QB9&quot; data-src-align=&quot;14:11&quot; style=&quot;white-space-collapse: preserve;&quot;&gt;harsToS&lt;/span&gt;&lt;span class=&quot;YPkS7KbdpWfGdYKd3QB9&quot; data-src-align=&quot;28:7&quot; style=&quot;white-space-collapse: preserve;&quot;&gt;paces&lt;/span&gt;(String): String" vertex="1">
+        <mxCell id="PZH_AdAqTKv8O5LyT1tv-1" parent="GjvT4wyWlkf6znBe7ioO-66" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ &lt;span style=&quot;white-space-collapse: preserve;&quot;&gt;stringToTableRight&lt;/span&gt;(int): String" vertex="1">
           <mxGeometry height="26" width="230" y="355" as="geometry" />
+        </mxCell>
+        <mxCell id="douNRcDTL9l44-xS0BUu-1" parent="GjvT4wyWlkf6znBe7ioO-66" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ &lt;span style=&quot;white-space-collapse: preserve;&quot;&gt;stringToTableLeft&lt;/span&gt;(int): String" vertex="1">
+          <mxGeometry height="26" width="230" y="381" as="geometry" />
         </mxCell>
         <mxCell id="GjvT4wyWlkf6znBe7ioO-75" edge="1" parent="1" source="GjvT4wyWlkf6znBe7ioO-53" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="GjvT4wyWlkf6znBe7ioO-49" value="">
           <mxGeometry relative="1" width="160" as="geometry">

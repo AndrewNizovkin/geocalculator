@@ -7,6 +7,7 @@ import ru.taheoport.geocalculator_service.mapper.InverseCalculator;
 import ru.taheoport.geocalculator_service.mapper.SurveyMapper;
 import ru.taheoport.geocalculator_service.repository.SurveyRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -71,8 +72,13 @@ public class SurveyServiceImpl implements SurveyService {
      */
     @Override
     public List<String> getSurveyReports(List<String> surveyRequest) {
+        if (!surveyMapper.surveyRequestToSurvey(surveyRequest, surveyRepository)) {
+            return List.of();
+        }
 
-        return List.of();
+        calculateSurvey();
+
+        return surveyMapper.surveyToReports(surveyRepository);
     }
 
     /**

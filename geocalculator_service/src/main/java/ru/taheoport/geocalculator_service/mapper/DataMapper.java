@@ -85,10 +85,21 @@ public interface DataMapper {
     long leicaToTiltAngle(String value, int rightShift);
 
     /**
-     * Replaces special characters with spaces
-     * @param line String
-     * @return String
+     * Creates a table cell of the specified width
+     * with the contents aligned to the right
+     * @param string String value
+     * @param cellWidth int sell width
+     * @return String sell
      */
-    String specialCharsToSpaces(String line);
+    String stringToTableRight(String string, int cellWidth);
+
+    /**
+     * Creates a table cell of the specified width
+     * with the contents aligned to the left
+     * @param string String value
+     * @param cellWidth int sell width
+     * @return String sell
+     */
+    String stringToTableLeft(String string, int cellWidth);
 
 }

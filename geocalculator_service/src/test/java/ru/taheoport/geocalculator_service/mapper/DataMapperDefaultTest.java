@@ -1,12 +1,9 @@
 package ru.taheoport.geocalculator_service.mapper;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -200,19 +197,55 @@ class DataMapperDefaultTest {
             "08956410, 199, 1",
             "0895641, 199, 0"
     })
-    void leicaToTiltAngle(String value, long expectValue, int rightShift) {
+    void leicaToTiltAngleTest(String value, long expectValue, int rightShift) {
 
         long actualValue = dataMapper.leicaToTiltAngle(value, rightShift);
 
         assertEquals(expectValue, actualValue);
     }
 
-//    @ParameterizedTest
-//    @CsvSource({
-//            ""
-//    })
-//    void specialCharsToSpacesTest() {
-//
-//    }
+    @ParameterizedTest
+    @CsvSource({
+            "1301, '      1301', 10",
+            "30.526, '  30.526', 8",
+            "-0.0709, '-0.0709', 7",
+            "0.3009, ' 0.3009', 7",
+            "1.600, '   1.600', 8",
+            "293.2325, '293.2325', 8",
+            "2297003.862, '2297003.862', 11"
+    })
+    void stringToTableRightTest(
+            String value,
+            String expectValue,
+            int sellWidth
+    ) {
+        String actualValue = dataMapper.stringToTableRight(value, sellWidth);
+
+        assertNotNull(actualValue);
+        assertEquals(expectValue, actualValue
+        );
+
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "123456789, '123456', 6",
+            "1301, '1301      ', 10",
+            "1301, '1301      ', 10",
+            "1301, '1301  ', 6"
+    })
+    void stringToTableLeftTest(
+            String value,
+            String expectValue,
+            int sellWidth
+    ) {
+        String actualValue = dataMapper.stringToTableLeft(value, sellWidth);
+
+        assertNotNull(actualValue);
+        assertEquals(expectValue, actualValue
+        );
+
+    }
+
 
 }
