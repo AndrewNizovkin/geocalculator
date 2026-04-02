@@ -136,23 +136,19 @@ export class SurveyService {
      */
     async importFromTotalStation(fileImport, typeImport) {
         try {
-            await this.#surveyProvider.getStringArrayFromDevice(fileImport).then((linesArray) => {
-                let string = "";
-                for (let line of linesArray) {
-                    string += line;
-                }
-                linesArray = [typeImport, string]
+            await this.#surveyProvider.getStringArrayFromDevice(fileImport).then( async (linesArray) => {
+                const importRequest = [];
+                importRequest.push(typeImport);
 
                 for (let line of linesArray) {
-                    // send to backend linesArray as request
-                    console.log(line);
+                    importRequest.push(line);
                 }
 
-                // let fileTah = this.#surveyProvider.importTah(linesArray);
-
-                this.#surveyRepository.clearAll();
-                this.#surveyRepository.addNewStation();
-                this.#surveyRepository.addNewMeasurement(0);
+                await this.#surveyProvider.importTah(importRequest).then((fileTah) =>{
+                    this.#surveyRepository.clearAll();
+                    this.#surveyMapper.arrayToSurveyRepository(fileTah, this.#surveyRepository);
+                      
+                });
 
             });
         } catch (err) {

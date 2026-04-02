@@ -7,5 +7,5 @@ export class AppConfigurator {
     static directEndPoint = 'direct/str';
     static inverseEndPoint = 'inverse/str';
     static potenotEndPoint = 'potenot/str';
-    static surveyImportEndPoint = 'import';
+    static surveyImportEndPoint = 'survey/import';
 }

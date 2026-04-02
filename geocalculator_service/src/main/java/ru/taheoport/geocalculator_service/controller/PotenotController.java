@@ -26,15 +26,6 @@ public class PotenotController {
     private final PotenotService potenotService;
     private final PotenotValidator potenotValidator;
 
-//    @Operation(summary = "Reverse geodetic serif", description =
-//            "Обратная геодезическая засечка или задача Потенота определяет " +
-//                    "координаты точки target по координатам трёх или более точек с " +
-//                    "известными координатами и угловыми направлениями с target на каждую из них")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "201", description = "Created"),
-//            @ApiResponse(responseCode = "400", description = "Bad request"),
-//            @ApiResponse(responseCode = "500", description = "Internal server error")
-//    })
     @PostMapping
     public ResponseEntity<PotenotTaskResponse> solvePotenotTask(@RequestBody List<PotenotTaskRequest> potenotTaskRequestList) {
         try {

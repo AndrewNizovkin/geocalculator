@@ -1,4 +1,5 @@
 import { TextFileReader } from "./TextFileReader.js";
+import { AppConfigurator } from "../../AppConfigurator.js";
 
 /**
  * This class provides methods 
@@ -24,10 +25,10 @@ export class SurveyProvider {
      * @returns {string[]}
      */
     async importTah(importRequest) {
-        const urlServer = `http://${AppConfigurator.baseUrl}/${AppConfigurator.directEndPoint}`;
+        const urlServer = `http://${AppConfigurator.baseUrl}/${AppConfigurator.surveyImportEndPoint}`;
 
         try {
-            const response = await fetch('http://192.168.0.12:8181/import', {
+            const response = await fetch(urlServer, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
