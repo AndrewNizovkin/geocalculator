@@ -53,9 +53,26 @@ export class SurveyProvider {
      * @param {string[]} surveyRequest 
      * @returns {string[]}
      */
-    async getSurveyResponse(reportFile) {
+    async getSurveyResponse(surveyRequest) {
+        const urlServer = `http://${AppConfigurator.baseUrl}/${AppConfigurator.surveyReportEndPoint}`;
 
-        return TextFileReader.readFromTextFile(reportFile);
+        try {
+            const response = await fetch(urlServer, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(surveyRequest)
+            });
+
+            if(!response.ok) throw new Error(`Ошибка HTTP ${response.status}`);
+
+            return await response.json();
+        } catch(error) {
+            alert(`Ошибка отправки данных: ${error.message}`);
+            // throw error;
+        }
+
     }
 
     /**

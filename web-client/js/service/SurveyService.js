@@ -31,15 +31,19 @@ export class SurveyService {
      * Updates reports after mathematical processing 
      * of survey data
      */
-    async calculateSurvey(reportFile) {
+    async calculateSurvey() {
         this.clearSurveyReports();
         let surveyRequest = this.#surveyMapper.surveyRepositoryToSurveyRequest(this.#surveyRepository);
-        for (let line of surveyRequest) {
-            console.log(line);
-        }
+
+        // for (let line of surveyRequest) {
+        //     console.log(line);
+        // }
 
         try {
-            await this.#surveyProvider.getSurveyResponse(reportFile).then((surveyResponse) => {
+            await this.#surveyProvider.getSurveyResponse(surveyRequest).then((surveyResponse) => {
+                for (let line of surveyResponse) {
+                    console.log(line);
+                }
                 this.#surveyMapper.surveyResponseToReports(
                     surveyResponse, 
                     this.#reportSurveyProcessing, 
@@ -56,6 +60,13 @@ export class SurveyService {
      * updates reportExtractProcessing and reportExtractPol
      */
     async extractPolygon(extractFile) {
+
+        if (this.#surveyRepository.size() < 3) return false;
+
+        for (let i = 0; i < this.#surveyRepository.size(); i++) {
+            if (this.#surveyRepository.measurementSize(i) < 2) return false; 
+        }
+
         this.clearExtactReports();
         // let extractRequest = this.#surveyMapper.surveyRepositoryToArray(this.#surveyRepository);
 
@@ -70,6 +81,7 @@ export class SurveyService {
         } catch (err) {
             console.error(err.message);
         }
+        return true;
     }
 
     /**

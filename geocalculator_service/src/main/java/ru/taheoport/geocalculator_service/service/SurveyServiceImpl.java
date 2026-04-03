@@ -72,6 +72,7 @@ public class SurveyServiceImpl implements SurveyService {
      */
     @Override
     public List<String> getSurveyReports(List<String> surveyRequest) {
+        surveyRepository.clearAll();
         if (!surveyMapper.surveyRequestToSurvey(surveyRequest, surveyRepository)) {
             return List.of();
         }

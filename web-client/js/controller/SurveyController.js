@@ -125,8 +125,8 @@ export class SurveyController {
               <table class="table-measurements">
                 <thead>
                   <th title="Название пикета">Название</th>
-                  <th title="Горизонтальный угол левый, г.ммсс">&#946;</th>
                   <th title="Расстояние наклонное, м.">L</th>
+                  <th title="Горизонтальный угол левый, г.ммсс">&#946;</th>
                   <th title="Угол наклона, г.ммсс">&#965;</th>
                   <th title="Высота цели над пикетом, м.">V</th>
                 </thead>
@@ -271,31 +271,17 @@ export class SurveyController {
           }
           break;
 
-        case "survey-report-input":
-          try {
-            let file = element.files[0];
-            if (!file) throw new Error("Select a file!");
-            this.#surveyService.calculateSurvey(file).then(() => {
-              this.#reportsActual = true;
-              let countMeasurements = 0;
-              for (let i = 0; i < this.#surveyService.size(); i++) {
-                countMeasurements += this.#surveyService.measurementSize(i);
-              }
-              let message = `${countMeasurements} измерений успешно обработаны`;
-              Informer.showMessage(message);
-            });      
-          } catch (error) {
-            console.error(error.message);
-          }
-          break;
-
         case "survey-extract-input":
           try {
             let file = element.files[0];
             if (!file) throw new Error("Select a file!");
-            this.#surveyService.extractPolygon(file).then(() => {
-              this.#polygonService.readArrayPol(this.#surveyService.getReportExtractPol());
-              this.#loadPageExtract();
+            this.#surveyService.extractPolygon(file).then((access) => {
+              if (access) {
+                this.#polygonService.readArrayPol(this.#surveyService.getReportExtractPol());
+                this.#loadPageExtract();
+              } else {
+                Informer.showMessage("Неодстаточно данных");
+              }
             });      
           } catch (error) {
             console.error(error.message);
@@ -376,9 +362,19 @@ export class SurveyController {
 
 
         case "survey-run":
-          this.#isValidData().then((result) => {
+          this.#isValidData().then(async (result) => {
             if (result) {
-              surveyReportInput.click();
+
+              await this.#surveyService.calculateSurvey().then(() => {
+                this.#reportsActual = true;
+                let countMeasurements = 0;
+                for (let i = 0; i < this.#surveyService.size(); i++) {
+                  countMeasurements += this.#surveyService.measurementSize(i);
+                }
+                let message = `${countMeasurements} измерений успешно обработаны`;
+                Informer.showMessage(message);
+              });      
+
             } else {
               Informer.showMessage("Данные содержат ошибки");
             }
@@ -837,22 +833,22 @@ export class SurveyController {
         sell = document.createElement('td');
         item = document.createElement('input');
         item.type = "text";
-        item.size = "8";
-        item.setAttribute('data-target', 'direction');
+        item.size = "6";
+        item.setAttribute('data-target', 'distance');
         item.setAttribute('data-measurement-id', i);
-        item.value = this.#surveyService.getTargetDirection(this.#currentSurveyStation, i);
-        ValueValidator.checkHorisontalAngle(item);
+        item.value = this.#surveyService.getTargetDistance(this.#currentSurveyStation, i);
+        ValueValidator.checkPositiveNumber(item);
         sell.append(item);
         row.append(sell);
 
         sell = document.createElement('td');
         item = document.createElement('input');
         item.type = "text";
-        item.size = "6";
-        item.setAttribute('data-target', 'distance');
+        item.size = "8";
+        item.setAttribute('data-target', 'direction');
         item.setAttribute('data-measurement-id', i);
-        item.value = this.#surveyService.getTargetDistance(this.#currentSurveyStation, i);
-        ValueValidator.checkPositiveNumber(item);
+        item.value = this.#surveyService.getTargetDirection(this.#currentSurveyStation, i);
+        ValueValidator.checkHorisontalAngle(item);
         sell.append(item);
         row.append(sell);
 
@@ -974,5 +970,7 @@ export class SurveyController {
 
     return result;
   }
+
+
 
 }
