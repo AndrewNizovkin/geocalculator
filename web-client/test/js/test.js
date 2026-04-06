@@ -121,6 +121,32 @@ describe("secondToDms", function() {
 
 });
 
+describe("formatToDms", function() {
+
+    it("Formats from 12.50 to 12.5000", function() {
+        let actualValue = formatToDms("12.50");
+        assert.strictEqual("12.5000", actualValue);
+    } )
+
+    it("Formats from .0001 to 0.0001", function() {
+        let actualValue = formatToDms(".0001");
+        assert.strictEqual("0.0001", actualValue);
+    } )
+
+    it("Formats from -1.001 to -0.0010", function() {
+        let actualValue = formatToDms("-1.001");
+        assert.strictEqual("-1.0010", actualValue);
+    } )
+
+    it("Formats from 0 to 0.0000", function() {
+        let actualValue = formatToDms("0");
+        assert.strictEqual("0.0000", actualValue);
+    } )
+
+
+
+});
+
 /**
  * Tests isValidName
  */

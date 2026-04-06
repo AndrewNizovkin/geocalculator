@@ -58,3 +58,14 @@ function secondToDms(value) {
 
     return String(signum + degee + "." + minute + second);
 }
+
+/**
+ * Formats number to d.mmss format
+ * @param {string} value 
+ * @returns {string} formatted value
+ */
+function formatToDms(value) {
+    let numberValue = parseFloat(value);
+
+    return numberValue.toFixed(4);
+}

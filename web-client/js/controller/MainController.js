@@ -81,6 +81,8 @@ export class MainController {
         this.#addListenersMainMenu();
         this.#addListenersNavMenu();
         this.#addListenersPanelReports();
+        
+
     }
 
     /**

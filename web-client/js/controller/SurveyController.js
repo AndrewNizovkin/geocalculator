@@ -242,6 +242,7 @@ export class SurveyController {
           try {
             let file = element.files[0];
             if (!file) throw new Error("Select a file!");
+            this.#surveyService.clearAll()
             this.#surveyService.readFromDevice(file).then(() => {
               this.#currentSurveyStation = 0;
               this.#currentMeasurement = 0;
@@ -258,6 +259,7 @@ export class SurveyController {
           try {
             let file = element.files[0];
             if (!file) throw new Error("Select a file!");
+            this.#surveyService.clearAll()
             this.#surveyService.importFromTotalStation(file, this.#surveyImportType).then(() => {
                 this.#currentSurveyStation = 0;
                 this.#currentMeasurement = 0;              
@@ -365,14 +367,16 @@ export class SurveyController {
           this.#isValidData().then(async (result) => {
             if (result) {
 
-              await this.#surveyService.calculateSurvey().then(() => {
-                this.#reportsActual = true;
-                let countMeasurements = 0;
-                for (let i = 0; i < this.#surveyService.size(); i++) {
-                  countMeasurements += this.#surveyService.measurementSize(i);
+              await this.#surveyService.calculateSurvey().then((access) => {
+                if (access) {
+                  this.#reportsActual = true;
+                  let countMeasurements = 0;
+                  for (let i = 0; i < this.#surveyService.size(); i++) {
+                    countMeasurements += this.#surveyService.measurementSize(i);
+                  }
+                  let message = `${countMeasurements} измерений успешно обработаны`;
+                  Informer.showMessage(message);
                 }
-                let message = `${countMeasurements} измерений успешно обработаны`;
-                Informer.showMessage(message);
               });      
 
             } else {
@@ -441,6 +445,7 @@ export class SurveyController {
             }
             this.#setSurveyStation();
             this.#setTableMeasurements();
+            this.#clearReports();
           }
           break;
         
@@ -450,6 +455,7 @@ export class SurveyController {
           this.#setListSurveyStations();
           this.#setSurveyStation();
           this.#setTableMeasurements();
+          this.#clearReports();
           break;
 
         case "after-station":
@@ -459,6 +465,7 @@ export class SurveyController {
           this.#setListSurveyStations();
           this.#setSurveyStation();
           this.#setTableMeasurements();
+          this.#clearReports();
           break;
       }
     });
@@ -473,10 +480,7 @@ export class SurveyController {
     let overlay = document.getElementById("overlay");
 
     surveyPanelStation.addEventListener('input', () => {
-      if (this.#reportsActual) {
-        this.#surveyService.clearSurveyReports();
-        this.#reportsActual = false;
-      }
+      this.#clearReports();
     });
 
     surveyPanelStation.addEventListener('click', (event) => {
@@ -619,10 +623,7 @@ export class SurveyController {
     const panelMeasurements = document.getElementById("panel-measurements");
 
     panelMeasurements.addEventListener('input', () => {
-      if (this.#reportsActual) {
-        this.#surveyService.clearSurveyReports();
-        this.#reportsActual = false;
-      }
+      this.#clearReports();
     });
 
     document.getElementById("toolbar-survey-measurements").addEventListener('click', (event) => {
@@ -638,6 +639,7 @@ export class SurveyController {
           if(this.#surveyService.measurementSize() > 1) {
             this.#surveyService.removeMeasurement(this.#currentSurveyStation, this.#currentMeasurement);
             this.#setTableMeasurements();
+            this.#clearReports();
             if(this.#currentMeasurement == this.#surveyService.measurementSize(this.#currentSurveyStation)) {
               this.#currentMeasurement--;
             }
@@ -647,12 +649,14 @@ export class SurveyController {
         case "before-measurement":
           this.#surveyService.insertNewMeasurement(this.#currentSurveyStation, this.#currentMeasurement);
           this.#setTableMeasurements();
+          this.#clearReports();
           break;
 
         case "after-measurement":
           this.#currentMeasurement++;
           this.#surveyService.insertNewMeasurement(this.#currentSurveyStation, this.#currentMeasurement);
           this.#setTableMeasurements();
+          this.#clearReports();
           break;
       }
     });
@@ -971,6 +975,15 @@ export class SurveyController {
     return result;
   }
 
+  /**
+   * Clears survey reports
+   */
+  #clearReports() {
+    if (this.#reportsActual) {
+      this.#surveyService.clearSurveyReports();
+      this.#reportsActual = false;
+    }
+  }
 
 
 }

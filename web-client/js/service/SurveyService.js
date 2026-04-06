@@ -32,27 +32,27 @@ export class SurveyService {
      * of survey data
      */
     async calculateSurvey() {
+        let access = true;
         this.clearSurveyReports();
         let surveyRequest = this.#surveyMapper.surveyRepositoryToSurveyRequest(this.#surveyRepository);
 
-        // for (let line of surveyRequest) {
-        //     console.log(line);
-        // }
-
         try {
             await this.#surveyProvider.getSurveyResponse(surveyRequest).then((surveyResponse) => {
-                for (let line of surveyResponse) {
-                    console.log(line);
+                if (typeof(surveyResponse) != "undefined") {
+                    this.#surveyMapper.surveyResponseToReports(
+                        surveyResponse, 
+                        this.#reportSurveyProcessing, 
+                        this.#reportSurveyCatalog
+                    );
+                } else {
+                    access = false;
                 }
-                this.#surveyMapper.surveyResponseToReports(
-                    surveyResponse, 
-                    this.#reportSurveyProcessing, 
-                    this.#reportSurveyCatalog
-                );
+
             });
         } catch (err) {
             console.error(err.message);
         }
+        return access;
     }
 
     /**

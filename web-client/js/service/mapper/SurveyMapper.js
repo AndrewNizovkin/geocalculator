@@ -28,14 +28,14 @@ export class SurveyMapper {
                 if(itemsArray.length == 8) {
                     surveyRepository.addNewStation();
 
-                    surveyRepository.saveStationName(-1, itemsArray[0]);
-                    surveyRepository.saveStationX(-1, itemsArray[1]);
-                    surveyRepository.saveStationY(-1, itemsArray[2]);
-                    surveyRepository.saveStationZ(-1, itemsArray[3]);
-                    surveyRepository.saveStationHeight(-1, itemsArray[4]);
-                    surveyRepository.saveOrName(-1, itemsArray[5]);
-                    surveyRepository.saveOrX(-1, itemsArray[6]);
-                    surveyRepository.saveOrY(-1, itemsArray[7]);
+                    surveyRepository.saveStationName(-1, itemsArray[0].trim());
+                    surveyRepository.saveStationX(-1, itemsArray[1].trim());
+                    surveyRepository.saveStationY(-1, itemsArray[2].trim());
+                    surveyRepository.saveStationZ(-1, itemsArray[3].trim());
+                    surveyRepository.saveStationHeight(-1, itemsArray[4].trim());
+                    surveyRepository.saveOrName(-1, itemsArray[5].trim());
+                    surveyRepository.saveOrX(-1, itemsArray[6].trim());
+                    surveyRepository.saveOrY(-1, itemsArray[7].trim());
                 }
                 
                 line = linesArray.shift();
@@ -51,11 +51,15 @@ export class SurveyMapper {
                 if(itemsArray.length == 6) {
                     currentSurveyStation = +itemsArray[5];
                     surveyRepository.addNewMeasurement(currentSurveyStation);
-                    surveyRepository.saveTargetName(currentSurveyStation, -1, itemsArray[0]);
-                    surveyRepository.saveTargetDistance(currentSurveyStation, -1, itemsArray[1]);
-                    surveyRepository.saveTargetDirection(currentSurveyStation, -1, itemsArray[2]);
-                    surveyRepository.saveTargetTiltAngle(currentSurveyStation, -1, itemsArray[3]);
-                    surveyRepository.saveTargetHeight(currentSurveyStation, -1, itemsArray[4]);
+                    surveyRepository.saveTargetName(currentSurveyStation, -1, itemsArray[0].trim());
+                    surveyRepository.saveTargetDistance(currentSurveyStation, -1, itemsArray[1].trim());
+
+                    surveyRepository.saveTargetDirection(currentSurveyStation, -1, this.formatToDms(itemsArray[2]));
+
+                    // surveyRepository.saveTargetTiltAngle(currentSurveyStation, -1, itemsArray[3].trim());
+                    surveyRepository.saveTargetTiltAngle(currentSurveyStation, -1, this.formatToDms(itemsArray[3]));
+
+                    surveyRepository.saveTargetHeight(currentSurveyStation, -1, itemsArray[4].trim());
                 }
                 
                 line = linesArray.shift();
@@ -218,5 +222,16 @@ export class SurveyMapper {
         }
 
     }
+
+    /**
+     * Formats number to d.mmss format
+     * @param {string} value 
+     * @returns {string} formatted value
+     */
+    formatToDms(value) {
+        let numberValue = parseFloat(value);
+
+        return numberValue.toFixed(4);
+    }    
 
 }
