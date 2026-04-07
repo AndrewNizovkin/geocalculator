@@ -95,12 +95,12 @@ export class ValueValidator {
    * @param {HTMLElement} element 
    */
   static checkName(element) {
-    
-    // if (element.value === '') {
-    //   element.value = 'noname';
-    // }
+    element.value = element.value.trim();    
+    if (element.value === '') {
+      element.value = 'noname';
+    }
 
-    // element.value = element.value.trim();
+
 
     if (ValueValidator.isValidName(element.value)) {
       if (element.classList.contains('novalid')) {
@@ -119,11 +119,11 @@ export class ValueValidator {
    * @param {HTMLElement} element 
    */
   static checkNumber(element) {
-    
-    // if (element.value === '') {
-    //   element.value = '0.000';
-    // }
-    // element.value = element.value.trim();
+    element.value = element.value.trim();    
+    if (element.value === '') {
+      element.value = '0.000';
+    }
+
 
     if (ValueValidator.isValidDigitalNumber(element.value)) {
       let valueNumber = +element.value;
@@ -145,11 +145,11 @@ export class ValueValidator {
    * @param {HTMLElement} element 
    */
   static checkPositiveNumber(element) {
-    
-    // if (element.value === '') {
-    //   element.value = '0.000';
-    // }
-    // element.value = element.value.trim();    
+    element.value = element.value.trim();        
+    if (element.value === '') {
+      element.value = '0.000';
+    }
+
     if (ValueValidator.isValidPositiveNumber(element.value)) {
       let valueNumber = +element.value;
       element.value = valueNumber.toFixed(3);
@@ -170,15 +170,15 @@ export class ValueValidator {
    * @param {HTMLElement} element 
    */
   static checkHorisontalAngle(element) {
-    // // if (element.value === '') {
-    // //   element.value = '0.0000';
-    // // }
-    // element.value = element.value.trim();    
+    element.value = element.value.trim();    
+    if (element.value === '') {
+      element.value = '0.0000';
+    }
 
-    // if (ValueValidator.isValidPositiveNumber(element.value)) {
-    //   let valueNumber = +element.value;
-    //   element.value = valueNumber.toFixed(4);
-    // }
+    if (ValueValidator.isValidPositiveNumber(element.value)) {
+      let valueNumber = +element.value;
+      element.value = valueNumber.toFixed(4);
+    }
     
     if (ValueValidator.isValidHorizontalAngle(element.value)) {
       if (element.classList.contains('novalid')) {
@@ -198,10 +198,10 @@ export class ValueValidator {
    * @param {HTMLElement} element 
    */
   static checkTiltAngle(element) {
-    // element.value = element.value.trim();    
-    // if (element.value === '') {
-    //   element.value = '0.0000';
-    // }
+    element.value = element.value.trim();    
+    if (element.value === '') {
+      element.value = '0.0000';
+    }
     // if (ValueValidator.isValidDigitalNumber(element.value)) {
     //   let valueNumber = +element.value;
     //   element.value = valueNumber.toFixed(4);
