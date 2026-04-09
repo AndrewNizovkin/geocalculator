@@ -10,9 +10,12 @@ import ru.taheoport.geocalculator_service.repository.SurveyRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class provides methods for processing of
+ * geodetic survey data
+ */
 @Service
 @RequiredArgsConstructor
-
 public class SurveyServiceImpl implements SurveyService {
 
     private final DirectCalculator directCalculator;

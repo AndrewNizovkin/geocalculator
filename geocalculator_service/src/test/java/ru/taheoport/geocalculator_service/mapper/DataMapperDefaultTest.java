@@ -93,7 +93,9 @@ class DataMapperDefaultTest {
             "00001.000, 1000",
             "-1.000, -1000",
             "14578965.412, 14578965412",
-            "-14578965.412, -14578965412"
+            "-14578965.412, -14578965412",
+            "64.987, 64987",
+            "-64.987, -64987"
     })
     void meterToMillimeterTest(String meters, long expectMillimeters) {
 
