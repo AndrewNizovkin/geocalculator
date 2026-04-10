@@ -49,4 +49,9 @@ public class Residuals {
      */
     private long perimeter;
 
+    /**
+     * The type of polygon binding to the reference geodetic network
+     */
+    private BindType bindType = BindType.ZZ;
+
 }
