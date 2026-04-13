@@ -1,9 +1,12 @@
 package ru.taheoport.geocalculator_service.mapper;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.taheoport.geocalculator_service.model.BindType;
+import ru.taheoport.geocalculator_service.model.PolygonStation;
 import ru.taheoport.geocalculator_service.model.Residuals;
 import ru.taheoport.geocalculator_service.model.ValidResiduals;
 import ru.taheoport.geocalculator_service.repository.PolygonRepository;
@@ -40,6 +43,9 @@ class PolygonCalculatorImplTest {
 
     @Autowired
     private Residuals residuals;
+
+    @Autowired
+    private InverseCalculator inverseCalculator;
 
     @Test
     void setBindTypeTestTT() {
@@ -167,7 +173,66 @@ class PolygonCalculatorImplTest {
         assertEquals(expectBindType, actualBindType);
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "1, 4, 224560",
+            "0, 6, 224560",
+            "1, 3, 190830"
+    })
+    void  setPerimeterTest(int start, int end, long expectPerimeter) {
+        List<String> polygonRequest = getTestPolygonRequestTT();
 
+        boolean access = polygonMapper.polygonRequestToPolygon(
+                polygonRequest,
+                polygonRepository,
+                validResiduals
+        );
+        assertTrue(access);
+        polygonCalculator.setPerimeter(start, end);
+        long actualPerimeter = residuals.getPerimeter();
+        assertEquals(expectPerimeter, actualPerimeter);
+    }
+
+    @Test
+    void setCorrectionHorAngleTest(){
+        List<String> polygonRequest = getTestPolygonRequestTT();
+        long expectResidualsAngle = 55;
+        double expectCorrectionAngle = -11.0;
+
+        boolean access = polygonMapper.polygonRequestToPolygon(
+                polygonRequest,
+                polygonRepository,
+                validResiduals
+        );
+        assertTrue(access);
+
+        int sizePolygon = polygonRepository.size();
+        PolygonStation baseA = polygonRepository.getStationById(0);
+        PolygonStation baseB = polygonRepository.getStationById(1);
+        PolygonStation baseC = polygonRepository.getStationById(sizePolygon - 2);
+        PolygonStation baseD = polygonRepository.getStationById(sizePolygon - 1);
+        baseA.setDirectionAngle(inverseCalculator.getDirection(
+                baseA.getStationX(),
+                baseA.getStationY(),
+                baseB.getStationX(),
+                baseB.getStationY()
+        ));
+        baseC.setDirectionAngle(inverseCalculator.getDirection(
+                baseC.getStationX(),
+                baseC.getStationY(),
+                baseD.getStationX(),
+                baseD.getStationY()
+        ));
+        polygonCalculator.setCorrectionHorAngle(1, sizePolygon - 2);
+
+        long actualResidualsAngle = residuals.getAngle();
+
+        assertEquals(expectResidualsAngle, actualResidualsAngle);
+        for (int i = 1; i <= sizePolygon - 2; i++) {
+            double actualCorrectionAngle = polygonRepository.getStationById(i).getCorrectionHorAngle();
+            assertEquals(expectCorrectionAngle, actualCorrectionAngle, 0.00000001);
+        }
+    }
 
     /**
      * Creates test polygonResponse with bindType = TT

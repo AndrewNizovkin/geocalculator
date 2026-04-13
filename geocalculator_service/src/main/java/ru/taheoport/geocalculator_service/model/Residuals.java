@@ -22,7 +22,7 @@ public class Residuals {
     /**
      * Actual angle residuals in seconds
      */
-    private double angle;
+    private long angle;
 
     /**
      * X-axis linear residuals in millimeters

@@ -6,9 +6,7 @@ import ru.taheoport.geocalculator_service.mapper.DirectCalculator;
 import ru.taheoport.geocalculator_service.mapper.InverseCalculator;
 import ru.taheoport.geocalculator_service.mapper.PolygonCalculator;
 import ru.taheoport.geocalculator_service.mapper.PolygonMapper;
-import ru.taheoport.geocalculator_service.model.BindType;
-import ru.taheoport.geocalculator_service.model.Residuals;
-import ru.taheoport.geocalculator_service.model.ValidResiduals;
+import ru.taheoport.geocalculator_service.model.*;
 import ru.taheoport.geocalculator_service.repository.PolygonRepository;
 
 import java.util.List;
@@ -53,9 +51,7 @@ public class PolygonServiceImpl implements PolygonService{
         polygonCalculator.setBindType();
         if (residuals.getBindType() == BindType.ZZ) return polygonMapper.getErrorResponse("Unknown polygon binding scheme!");
 
-        //TODO
-
-
+        polygonCalculator.adjustPolygon();
 
         return polygonMapper.polygonToPolygonResponse(
                 polygonRepository,
@@ -70,6 +66,14 @@ public class PolygonServiceImpl implements PolygonService{
      */
     @Override
     public void calculatePolygon() {
+        int sizePolygon = polygonRepository.size();
+
+        PolygonStation baseA = polygonRepository.getStationById(0);
+        PolygonStation baseB = polygonRepository.getStationById(1);
+        PolygonStation baseC = polygonRepository.getStationById(sizePolygon - 2);
+        PolygonStation baseD = polygonRepository.getStationById(sizePolygon - 1);
+
+//        baseA.setDirectionAngle();
 
     }
 }

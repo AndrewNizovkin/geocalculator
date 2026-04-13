@@ -9,6 +9,11 @@ import ru.taheoport.geocalculator_service.model.BindType;
 public interface PolygonCalculator {
 
     /**
+     * Adjusts polygon
+     */
+    void adjustPolygon();
+
+    /**
      * Defines type of polygon binding to the reference geodetic network
      */
     void setBindType();
