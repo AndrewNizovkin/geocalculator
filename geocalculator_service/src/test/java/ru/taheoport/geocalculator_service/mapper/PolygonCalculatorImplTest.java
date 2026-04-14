@@ -234,6 +234,57 @@ class PolygonCalculatorImplTest {
         }
     }
 
+    @Test
+    void setDirectionAngleDirectOrderTest() {
+        List<String> polygonRequest = getTestPolygonRequestTT();
+        long expectResidualsAngle = 55;
+        long expectFirst = 6142;
+        long expectSecond = 1290184;
+        long expectThird = 997390;
+        long expectFourth = 973013;
+
+        boolean access = polygonMapper.polygonRequestToPolygon(
+                polygonRequest,
+                polygonRepository,
+                validResiduals
+        );
+        assertTrue(access);
+
+        int sizePolygon = polygonRepository.size();
+        PolygonStation baseA = polygonRepository.getStationById(0);
+        PolygonStation baseB = polygonRepository.getStationById(1);
+        PolygonStation baseC = polygonRepository.getStationById(sizePolygon - 2);
+        PolygonStation baseD = polygonRepository.getStationById(sizePolygon - 1);
+        baseA.setDirectionAngle(inverseCalculator.getDirection(
+                baseA.getStationX(),
+                baseA.getStationY(),
+                baseB.getStationX(),
+                baseB.getStationY()
+        ));
+        baseC.setDirectionAngle(inverseCalculator.getDirection(
+                baseC.getStationX(),
+                baseC.getStationY(),
+                baseD.getStationX(),
+                baseD.getStationY()
+        ));
+        polygonCalculator.setCorrectionHorAngle(1, sizePolygon - 2);
+        polygonCalculator.setDirectionAngle(1, sizePolygon - 3);
+        long actualResidualsAngle = residuals.getAngle();
+        long actualFirst = polygonRepository.getStationById(1).getDirectionAngle();
+        long actualSecond = polygonRepository.getStationById(2).getDirectionAngle();
+        long actualThird = polygonRepository.getStationById(3).getDirectionAngle();
+        long actualFourth = polygonRepository.getStationById(4).getDirectionAngle();
+
+        assertEquals(expectResidualsAngle, actualResidualsAngle);
+        assertEquals(expectFirst, actualFirst);
+        assertEquals(expectSecond, actualSecond);
+        assertEquals(expectThird, actualThird);
+        assertEquals(expectFourth, actualFourth);
+
+
+
+    }
+
     /**
      * Creates test polygonResponse with bindType = TT
      * @return list of strings

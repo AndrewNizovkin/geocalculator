@@ -161,13 +161,37 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
     /**
      * Sets the direction angle for polygon stations
      * in the specified range of indexes
-     *
      * @param start int beginning of the range
      * @param end   int end of range
      */
     @Override
     public void setDirectionAngle(int start, int end) {
+        long correctionAngle;
+        double sign;
+        long actualDirectionAngle;
+        if (start < end) {
+            for (int i = start; i <= end; i++) {
+                sign = Math.signum(polygonRepository.getStationById(i).getCorrectionHorAngle());
+                correctionAngle = (long) (sign * Math.round(Math.abs(polygonRepository.getStationById(i).getCorrectionHorAngle())));
+                actualDirectionAngle = polygonRepository.getStationById(i - 1).getDirectionAngle() +
+                        polygonRepository.getStationById(i).getHorAngle() +
+                        648000 +
+                        correctionAngle;
+                while (actualDirectionAngle >= 1296000) {
+                    actualDirectionAngle -= 1296000;
+                }
+                polygonRepository.getStationById(i).setDirectionAngle(actualDirectionAngle);
+            }
+        } else {
+            for (int i = start; i >= end; i--) {
+                actualDirectionAngle = polygonRepository.getStationById(i + 1).getDirectionAngle() -
+                        polygonRepository.getStationById(i + 1).getHorAngle() - 648000;
+                        while (actualDirectionAngle < 0) {
+                            actualDirectionAngle += 1296000;
+                }
 
+            }
+        }
     }
 
     /**

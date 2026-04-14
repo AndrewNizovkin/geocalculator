@@ -94,9 +94,9 @@ public class DataMapperDefault implements DataMapper {
         } catch (NumberFormatException e) {
             return 0;
         }
-        double signum = Math.signum(millimeter);
+        double sing = Math.signum(millimeter);
         millimeter = Math.abs(millimeter);
-        return (long) (signum * Math.ceil(millimeter));
+        return (long) (sing * Math.ceil(millimeter));
     }
 
     /**
