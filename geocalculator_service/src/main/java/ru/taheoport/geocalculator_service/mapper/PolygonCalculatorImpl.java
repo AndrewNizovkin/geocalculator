@@ -203,18 +203,67 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
      */
     @Override
     public void setDeltaXY(int start, int end) {
+        PolygonStation station;
 
+        for (int i = start; i <= end; i++) {
+            station = polygonRepository.getStationById(i);
+            station.setDeltaX(directCalculator.getDeltaX(
+                    station.getDirectionAngle(),
+                    station.getHorDistance(),
+                    0
+            ));
+            station.setDeltaY(directCalculator.getDeltaY(
+                    station.getDirectionAngle(),
+                    station.getHorDistance(),
+                    0
+            ));
+        }
     }
 
     /**
      * Sets the correctionX and correctionY for polygon stations
      * in the specified range of indexes
-     *
      * @param start int beginning of the range
      * @param end   int end of range
      */
     @Override
     public void setCorrectionXY(int start, int end) {
+        long sumDeltaX = 0;
+        long sumDeltaY = 0;
+
+        for (int i = start; i <= end; i++) {
+            sumDeltaX += polygonRepository.getStationById(i).getDeltaX();
+            sumDeltaY += polygonRepository.getStationById(i).getDeltaY();
+        }
+
+        residuals.setLinearX(
+                polygonRepository.getStationById(start).getStationX() +
+                        sumDeltaX -
+                        polygonRepository.getStationById(end + 1).getStationX()
+                );
+
+        residuals.setLinearY(
+                polygonRepository.getStationById(start).getStationY() +
+                        sumDeltaY -
+                        polygonRepository.getStationById(end + 1).getStationY()
+        );
+
+        residuals.setAbsolute(Math.round(Math.hypot(residuals.getLinearX(), residuals.getLinearY())));
+
+        double denominator =  1 / ((double) residuals.getAbsolute() / (double) residuals.getPerimeter());
+
+        residuals.setRelative("1:" + Math.round(denominator));
+
+        double ratioX = (double) residuals.getLinearX() / (double) residuals.getPerimeter();
+        double ratioY = (double) residuals.getLinearY() / (double) residuals.getPerimeter();
+
+        for (int i = start; i <= end; i++) {
+            PolygonStation station = polygonRepository.getStationById(i);
+            station.setCorrectionX(doubleToLong(ratioX * (double) station.getHorDistance()));
+            station.setCorrectionY(doubleToLong(ratioY * (double) station.getHorDistance()));
+        }
+
+
 
     }
 
@@ -240,5 +289,17 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
     @Override
     public void setXYZ(int start, int end) {
 
+    }
+
+    /**
+     * Converts double value to long
+     * @param value double value
+     * @return long value
+     */
+    @Override
+    public long doubleToLong(double value) {
+        double sign = Math.signum(value);
+        value = Math.abs(value);
+        return (long) sign * Math.round(value);
     }
 }

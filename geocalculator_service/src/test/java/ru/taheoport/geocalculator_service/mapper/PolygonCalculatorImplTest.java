@@ -47,6 +47,22 @@ class PolygonCalculatorImplTest {
     @Autowired
     private InverseCalculator inverseCalculator;
 
+    @ParameterizedTest
+    @CsvSource({
+            "0.124, 0",
+            "0.678, 1",
+            "0.546, 1",
+            "2.567, 3"
+    })
+    void doubleToLongTest(
+            double value,
+            long expectValue
+    ) {
+        long actualValue = polygonCalculator.doubleToLong(value);
+
+        assertEquals(expectValue, actualValue);
+    }
+
     @Test
     void setBindTypeTestTT() {
         BindType expectBindType = BindType.TT;
@@ -195,34 +211,12 @@ class PolygonCalculatorImplTest {
 
     @Test
     void setCorrectionHorAngleTest(){
-        List<String> polygonRequest = getTestPolygonRequestTT();
+        boolean success = loadTestPolygonTT();
+        assertTrue(success);
+
         long expectResidualsAngle = 55;
         double expectCorrectionAngle = -11.0;
-
-        boolean access = polygonMapper.polygonRequestToPolygon(
-                polygonRequest,
-                polygonRepository,
-                validResiduals
-        );
-        assertTrue(access);
-
         int sizePolygon = polygonRepository.size();
-        PolygonStation baseA = polygonRepository.getStationById(0);
-        PolygonStation baseB = polygonRepository.getStationById(1);
-        PolygonStation baseC = polygonRepository.getStationById(sizePolygon - 2);
-        PolygonStation baseD = polygonRepository.getStationById(sizePolygon - 1);
-        baseA.setDirectionAngle(inverseCalculator.getDirection(
-                baseA.getStationX(),
-                baseA.getStationY(),
-                baseB.getStationX(),
-                baseB.getStationY()
-        ));
-        baseC.setDirectionAngle(inverseCalculator.getDirection(
-                baseC.getStationX(),
-                baseC.getStationY(),
-                baseD.getStationX(),
-                baseD.getStationY()
-        ));
         polygonCalculator.setCorrectionHorAngle(1, sizePolygon - 2);
 
         long actualResidualsAngle = residuals.getAngle();
@@ -236,19 +230,106 @@ class PolygonCalculatorImplTest {
 
     @Test
     void setDirectionAngleDirectOrderTest() {
-        List<String> polygonRequest = getTestPolygonRequestTT();
+        boolean success = loadTestPolygonTT();
+        assertTrue(success);
+
         long expectResidualsAngle = 55;
         long expectFirst = 6142;
         long expectSecond = 1290184;
         long expectThird = 997390;
         long expectFourth = 973013;
+        int sizePolygon = polygonRepository.size();
+        polygonCalculator.setCorrectionHorAngle(1, sizePolygon - 2);
+        polygonCalculator.setDirectionAngle(1, sizePolygon - 3);
 
-        boolean access = polygonMapper.polygonRequestToPolygon(
+        long actualResidualsAngle = residuals.getAngle();
+        long actualFirst = polygonRepository.getStationById(1).getDirectionAngle();
+        long actualSecond = polygonRepository.getStationById(2).getDirectionAngle();
+        long actualThird = polygonRepository.getStationById(3).getDirectionAngle();
+        long actualFourth = polygonRepository.getStationById(4).getDirectionAngle();
+
+        assertEquals(expectResidualsAngle, actualResidualsAngle);
+        assertEquals(expectFirst, actualFirst);
+        assertEquals(expectSecond, actualSecond);
+        assertEquals(expectThird, actualThird);
+        assertEquals(expectFourth, actualFourth);
+    }
+
+    @Test
+    void setDeltaXYTest() {
+        boolean success = loadTestPolygonTT();
+        assertTrue(success);
+        long expectFirstDx = 68659;
+        long expectFirstDy = 2045;
+        long expectSecondDx = 64961;
+        long expectSecondDy = -1832;
+        long expectThirdDx = 7018;
+        long expectThirdDy = -56722;
+        long expectFourthDx = 166;
+        long expectFourthDy = -33730;
+        int sizePolygon = polygonRepository.size();
+        polygonCalculator.setCorrectionHorAngle(1, sizePolygon - 2);
+        polygonCalculator.setDirectionAngle(1, sizePolygon - 3);
+        polygonCalculator.setDeltaXY(1, sizePolygon - 3);
+
+        long actualFirstDx = polygonRepository.getStationById(1).getDeltaX();
+        long actualFirstDy = polygonRepository.getStationById(1).getDeltaY();
+        long actualSecondDx = polygonRepository.getStationById(2).getDeltaX();
+        long actualSecondDy = polygonRepository.getStationById(2).getDeltaY();
+        long actualThirdDx = polygonRepository.getStationById(3).getDeltaX();
+        long actualThirdDy = polygonRepository.getStationById(3).getDeltaY();
+        long actualFourthDx = polygonRepository.getStationById(4).getDeltaX();
+        long actualFourthDy = polygonRepository.getStationById(4).getDeltaY();
+
+        assertEquals(expectFirstDx, actualFirstDx);
+        assertEquals(expectFirstDy, actualFirstDy);
+        assertEquals(expectSecondDx, actualSecondDx);
+        assertEquals(expectSecondDy, actualSecondDy);
+        assertEquals(expectThirdDx, actualThirdDx);
+        assertEquals(expectThirdDy, actualThirdDy);
+        assertEquals(expectFourthDx, actualFourthDx);
+        assertEquals(expectFourthDy, actualFourthDy);
+    }
+
+    @Test
+    void setCorrectionXYTestResiduals() {
+        boolean success = loadTestPolygonTT();
+        assertTrue(success);
+        long expectFx = -15;
+        long expectFy = -13;
+        long expectAbsolute = 20;
+        String expectRelative = "1:11228";
+        int sizePolygon = polygonRepository.size();
+        polygonCalculator.setCorrectionHorAngle(1, sizePolygon - 2);
+        polygonCalculator.setDirectionAngle(1, sizePolygon - 3);
+        polygonCalculator.setDeltaXY(1, sizePolygon - 3);
+        polygonCalculator.setPerimeter(1, sizePolygon - 3);
+        polygonCalculator.setCorrectionXY(1, sizePolygon - 3);
+
+        long actualFx = residuals.getLinearX();
+        long actualFy = residuals.getLinearY();
+        double actualAbsolute = residuals.getAbsolute();
+        String actualRelative = residuals.getRelative();
+
+        assertEquals(expectFx, actualFx);
+        assertEquals(expectFy, actualFy);
+        assertEquals(expectAbsolute, actualAbsolute, 0.0000007);
+        assertEquals(expectRelative, actualRelative);
+    }
+
+    /**
+     * Loads to model test polygon with bindType TT
+     * and sets base direction angle
+     * @return boolean result of loading
+     */
+    private boolean loadTestPolygonTT() {
+        List<String> polygonRequest = getTestPolygonRequestTT();
+
+        boolean success = polygonMapper.polygonRequestToPolygon(
                 polygonRequest,
                 polygonRepository,
                 validResiduals
         );
-        assertTrue(access);
 
         int sizePolygon = polygonRepository.size();
         PolygonStation baseA = polygonRepository.getStationById(0);
@@ -267,22 +348,7 @@ class PolygonCalculatorImplTest {
                 baseD.getStationX(),
                 baseD.getStationY()
         ));
-        polygonCalculator.setCorrectionHorAngle(1, sizePolygon - 2);
-        polygonCalculator.setDirectionAngle(1, sizePolygon - 3);
-        long actualResidualsAngle = residuals.getAngle();
-        long actualFirst = polygonRepository.getStationById(1).getDirectionAngle();
-        long actualSecond = polygonRepository.getStationById(2).getDirectionAngle();
-        long actualThird = polygonRepository.getStationById(3).getDirectionAngle();
-        long actualFourth = polygonRepository.getStationById(4).getDirectionAngle();
-
-        assertEquals(expectResidualsAngle, actualResidualsAngle);
-        assertEquals(expectFirst, actualFirst);
-        assertEquals(expectSecond, actualSecond);
-        assertEquals(expectThird, actualThird);
-        assertEquals(expectFourth, actualFourth);
-
-
-
+        return success;
     }
 
     /**

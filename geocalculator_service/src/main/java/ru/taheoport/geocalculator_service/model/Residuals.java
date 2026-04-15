@@ -37,7 +37,7 @@ public class Residuals {
     /**
      * Actual absolute linear mistake
      */
-    private double absolute;
+    private long absolute;
 
     /**
      * Actual relative linear mistake

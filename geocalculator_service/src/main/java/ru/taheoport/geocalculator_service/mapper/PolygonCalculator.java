@@ -27,7 +27,7 @@ public interface PolygonCalculator {
     void setPerimeter(int start, int end);
 
     /**
-     * Defines the correction to the horizontal angles of the polygon
+     * Defines angle residuals and correction to the horizontal angles of the polygon
      * in the specified range of station indexes
      * @param start int beginning of the range
      * @param end int end of range
@@ -73,4 +73,11 @@ public interface PolygonCalculator {
      * @param end int end of range
      */
     void setXYZ(int start, int end);
+
+    /**
+     * Converts double value to long
+     * @param value double value
+     * @return long value
+     */
+    long doubleToLong(double value);
 }
