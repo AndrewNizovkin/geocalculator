@@ -51,7 +51,8 @@ public interface PolygonCalculator {
     void setDeltaXY(int start, int end);
 
     /**
-     * Sets the correctionX and correctionY for polygon stations
+     * Defines linear residuals and
+     * sets the correctionX and correctionY for polygon stations
      * in the specified range of indexes
      * @param start int beginning of the range
      * @param end int end of range

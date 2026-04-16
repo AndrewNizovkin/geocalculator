@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.taheoport.geocalculator_service.model.PolygonStation;
+import ru.taheoport.geocalculator_service.model.Residuals;
 import ru.taheoport.geocalculator_service.model.ValidResiduals;
 import ru.taheoport.geocalculator_service.repository.PolygonRepository;
 import ru.taheoport.geocalculator_service.repository.PolygonRepositoryImpl;
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
         PolygonMapperImpl.class,
         PolygonRepositoryImpl.class,
         ValidResiduals.class,
+        Residuals.class,
         DataMapperDefault.class
 })
 class PolygonMapperImplTest {
@@ -46,11 +48,7 @@ class PolygonMapperImplTest {
         String expectRelative = "1:2000";
         List<String> polygonRequest = getTestPolygonRequest();
 
-        boolean actualSuccess = polygonMapper.polygonRequestToPolygon(
-                polygonRequest,
-                polygonRepository,
-                validResiduals
-        );
+        boolean actualSuccess = polygonMapper.polygonRequestToPolygon(polygonRequest);
 
 
         assertTrue(actualSuccess);
@@ -81,19 +79,16 @@ class PolygonMapperImplTest {
             boolean expectStatus,
             int stationIndex
     ) {
-        List<String> polygonRequest = getTestPolygonRequest();
+//        List<String> polygonRequest = getTestPolygonRequest();
         int expectSize = 7;
 
-        boolean actualSuccess = polygonMapper.polygonRequestToPolygon(
-                polygonRequest,
-                polygonRepository,
-                validResiduals
-        );
+        boolean actualSuccess = polygonMapper.polygonRequestToPolygon(getTestPolygonRequest());
 
         assertTrue(actualSuccess);
         int actualSize = polygonRepository.size();
         assertEquals(expectSize, actualSize);
         PolygonStation actualStation = polygonRepository.getStationById(stationIndex);
+
         assertEquals(expectStationName,actualStation.getStationName());
         assertEquals(expectHorAngle, actualStation.getHorAngle());
         assertEquals(expectHorDistance, actualStation.getHorDistance());
@@ -109,11 +104,7 @@ class PolygonMapperImplTest {
         List<String> polygonBadRequest = new ArrayList<>();
         polygonBadRequest.add("asdfasf");
 
-        boolean actualSuccess = polygonMapper.polygonRequestToPolygon(
-                polygonBadRequest,
-                polygonRepository,
-                validResiduals
-        );
+        boolean actualSuccess = polygonMapper.polygonRequestToPolygon(polygonBadRequest);
 
         assertFalse(actualSuccess);
     }

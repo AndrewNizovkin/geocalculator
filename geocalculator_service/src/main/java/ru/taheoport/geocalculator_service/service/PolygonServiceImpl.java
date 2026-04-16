@@ -39,10 +39,7 @@ public class PolygonServiceImpl implements PolygonService{
     @Override
     public List<String> getPolygonReports(List<String> polygonResponse) {
 
-        boolean success = polygonMapper.polygonRequestToPolygon(
-                polygonResponse,
-                polygonRepository,
-                validResiduals);
+        boolean success = polygonMapper.polygonRequestToPolygon(polygonResponse);
 
         if (!success) return polygonMapper.getErrorResponse("Bad request!");
 
@@ -53,12 +50,7 @@ public class PolygonServiceImpl implements PolygonService{
 
         polygonCalculator.adjustPolygon();
 
-        return polygonMapper.polygonToPolygonResponse(
-                polygonRepository,
-                validResiduals,
-                residuals
-        );
-
+        return polygonMapper.polygonToPolygonResponse();
     }
 
     /**

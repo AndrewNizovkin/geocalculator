@@ -15,28 +15,15 @@ public interface PolygonMapper {
     /**
      * Extract data from polygonRequest and fills polygon model
      * @param polygonRequest list of string with data
-     * @param polygonRepository polygon station repository
-     * @param validResiduals instance of ValidResiduals
      * @return true if polygonRequest contains valid geodetic data
      */
-    boolean polygonRequestToPolygon(
-            List<String> polygonRequest,
-            PolygonRepository polygonRepository,
-            ValidResiduals validResiduals
-    );
+    boolean polygonRequestToPolygon(List<String> polygonRequest);
 
     /**
      * Creates response contains processing reports
-     * @param polygonRepository polygon station repository
-     * @param validResiduals instance of ValidResiduals
-     * @param residuals instance of Residuals
      * @return List of strings
      */
-    List<String> polygonToPolygonResponse(
-            PolygonRepository polygonRepository,
-            ValidResiduals validResiduals,
-            Residuals residuals
-    );
+    List<String> polygonToPolygonResponse();
 
     /**
      * Creates error response

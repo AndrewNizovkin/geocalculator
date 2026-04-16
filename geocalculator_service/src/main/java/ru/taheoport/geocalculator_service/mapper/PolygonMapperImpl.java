@@ -20,19 +20,20 @@ public class PolygonMapperImpl implements PolygonMapper{
 
     private final DataMapper dataMapper;
 
+    private final PolygonRepository polygonRepository;
+
+    private final Residuals residuals;
+
+    private final ValidResiduals validResiduals;
+
     /**
      * Extract data from polygonRequest and fills polygon model
      *
      * @param polygonRequest    list of string with data
-     * @param polygonRepository polygon station repository
-     * @param validResiduals    instance of ValidResiduals
      * @return true if polygonRequest contains valid geodetic data
      */
     @Override
-    public boolean polygonRequestToPolygon(
-            List<String> polygonRequest,
-            PolygonRepository polygonRepository,
-            ValidResiduals validResiduals) {
+    public boolean polygonRequestToPolygon(List<String> polygonRequest) {
         polygonRepository.clearAll();
         boolean Success = true;
         String target = "";
@@ -118,17 +119,10 @@ public class PolygonMapperImpl implements PolygonMapper{
 
     /**
      * Creates response contains processing reports
-     *
-     * @param polygonRepository polygon station repository
-     * @param validResiduals    instance of ValidResiduals
-     * @param residuals         instance of Residuals
      * @return List of strings
      */
     @Override
-    public List<String> polygonToPolygonResponse(
-            PolygonRepository polygonRepository,
-            ValidResiduals validResiduals,
-            Residuals residuals) {
+    public List<String> polygonToPolygonResponse() {
         return List.of();
     }
 

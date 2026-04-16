@@ -28,6 +28,7 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
      */
     @Override
     public void adjustPolygon() {
+        setBindType();
         int sizePolygon = polygonRepository.size();
 
         PolygonStation baseA = polygonRepository.getStationById(0);
@@ -38,7 +39,7 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
         switch (residuals.getBindType()) {
 
             case TT -> {
-                setPerimeter(1, 3);
+                setPerimeter(1, sizePolygon - 3);
                 baseA.setDirectionAngle(inverseCalculator.getDirection(
                         baseA.getStationX(),
                         baseA.getStationY(),
@@ -52,10 +53,27 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
                         baseD.getStationY()
                 ));
                 setCorrectionHorAngle(1, sizePolygon - 2);
-
-
+                setDirectionAngle(1, sizePolygon - 3);
+                setDeltaXY(1, sizePolygon - 3);
+                setCorrectionXY(1, sizePolygon - 3);
+                setCorrectionZ(1, sizePolygon - 3);
+                setXYZ(2, sizePolygon - 3);
             }
 
+            case TO -> {
+                setPerimeter(1, sizePolygon - 2);
+                baseA.setDirectionAngle(inverseCalculator.getDirection(
+                        baseA.getStationX(),
+                        baseA.getStationY(),
+                        baseB.getStationX(),
+                        baseB.getStationY()
+                ));
+                setDirectionAngle(1, sizePolygon - 2);
+                setDeltaXY(1, sizePolygon - 2);
+                setCorrectionXY(1, sizePolygon - 2);
+                setCorrectionZ(1, sizePolygon - 2);
+                setXYZ(1, sizePolygon - 2);
+            }
         }
 
 
@@ -221,7 +239,8 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
     }
 
     /**
-     * Sets the correctionX and correctionY for polygon stations
+     * Defines linear residuals and
+     * sets the correctionX and correctionY for polygon stations
      * in the specified range of indexes
      * @param start int beginning of the range
      * @param end   int end of range
@@ -254,17 +273,14 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
 
         residuals.setRelative("1:" + Math.round(denominator));
 
-        double ratioX = (double) residuals.getLinearX() / (double) residuals.getPerimeter();
-        double ratioY = (double) residuals.getLinearY() / (double) residuals.getPerimeter();
+        double ratioX = -1 * (double) residuals.getLinearX() / (double) residuals.getPerimeter();
+        double ratioY = -1 * (double) residuals.getLinearY() / (double) residuals.getPerimeter();
 
         for (int i = start; i <= end; i++) {
             PolygonStation station = polygonRepository.getStationById(i);
             station.setCorrectionX(doubleToLong(ratioX * (double) station.getHorDistance()));
             station.setCorrectionY(doubleToLong(ratioY * (double) station.getHorDistance()));
         }
-
-
-
     }
 
     /**
@@ -276,19 +292,55 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
      */
     @Override
     public void setCorrectionZ(int start, int end) {
+        long sumElevation = 0;
+        for (int i = start; i <= end; i++) {
+            sumElevation += polygonRepository.getStationById(i).getElevation();
+        }
 
+        residuals.setElevation(polygonRepository.getStationById(start).getStationZ() +
+                sumElevation - polygonRepository.getStationById(end + 1).getStationZ());
+
+        double ratioZ = -1 * (double) residuals.getElevation() / (double) residuals.getPerimeter();
+
+        for (int i = start; i <= end; i++) {
+            PolygonStation station = polygonRepository.getStationById(i);
+            station.setCorrectionZ(ratioZ * (double) station.getHorDistance());
+        }
     }
 
     /**
      * Sets the final XYZ coordinates for polygon stations
      * in the specified range of indexes
-     *
      * @param start int beginning of the range
      * @param end   int end of range
      */
     @Override
     public void setXYZ(int start, int end) {
+        PolygonStation backStation;
+        PolygonStation station;
 
+        for (int i = start; i <= end; i++) {
+            backStation = polygonRepository.getStationById(i - 1);
+            station = polygonRepository.getStationById(i);
+
+            station.setStationX(
+                    backStation.getStationX() +
+                            backStation.getDeltaX() +
+                            backStation.getCorrectionX()
+            );
+
+            station.setStationY(
+                    backStation.getStationY() +
+                            backStation.getDeltaY() +
+                            backStation.getCorrectionY()
+            );
+
+            station.setStationZ(
+                    backStation.getStationZ() +
+                            backStation.getElevation() +
+                            doubleToLong(backStation.getCorrectionZ())
+            );
+        }
     }
 
     /**
