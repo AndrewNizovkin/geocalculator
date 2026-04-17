@@ -72,7 +72,48 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
                 setDeltaXY(1, sizePolygon - 2);
                 setCorrectionXY(1, sizePolygon - 2);
                 setCorrectionZ(1, sizePolygon - 2);
-                setXYZ(1, sizePolygon - 2);
+                setXYZ(2, sizePolygon - 2);
+            }
+
+            case OT -> {
+                setPerimeter(0, sizePolygon - 3);
+                baseC.setDirectionAngle(inverseCalculator.getDirection(
+                        baseC.getStationX(),
+                        baseC.getStationY(),
+                        baseD.getStationX(),
+                        baseD.getStationY()
+                ));
+                setDirectionAngle(sizePolygon - 3, 0);
+                setDeltaXY(0, sizePolygon - 3);
+                setCorrectionXY(0, sizePolygon - 3);
+                setCorrectionZ(0, sizePolygon - 3);
+                setXYZ(1, sizePolygon - 3);
+            }
+
+            case TZ -> {
+                setPerimeter(1, sizePolygon - 2);
+                baseA.setDirectionAngle(inverseCalculator.getDirection(
+                        baseA.getStationX(),
+                        baseA.getStationY(),
+                        baseB.getStationX(),
+                        baseB.getStationY()
+                ));
+                setDirectionAngle(1, sizePolygon - 2);
+                setDeltaXY(1, sizePolygon - 2);
+                setXYZ(2, sizePolygon - 1);
+            }
+
+            case ZT -> {
+                setPerimeter(0, sizePolygon - 3);
+                baseC.setDirectionAngle(inverseCalculator.getDirection(
+                        baseC.getStationX(),
+                        baseC.getStationY(),
+                        baseD.getStationX(),
+                        baseD.getStationY()
+                ));
+                setDirectionAngle(sizePolygon - 3, 0);
+                setDeltaXY(0, sizePolygon - 3);
+                setXYZ(sizePolygon - 3, 0);
             }
         }
 
@@ -185,12 +226,10 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
     @Override
     public void setDirectionAngle(int start, int end) {
         long correctionAngle;
-        double sign;
         long actualDirectionAngle;
         if (start < end) {
             for (int i = start; i <= end; i++) {
-                sign = Math.signum(polygonRepository.getStationById(i).getCorrectionHorAngle());
-                correctionAngle = (long) (sign * Math.round(Math.abs(polygonRepository.getStationById(i).getCorrectionHorAngle())));
+                correctionAngle = doubleToLong(polygonRepository.getStationById(i).getCorrectionHorAngle());
                 actualDirectionAngle = polygonRepository.getStationById(i - 1).getDirectionAngle() +
                         polygonRepository.getStationById(i).getHorAngle() +
                         648000 +
@@ -204,9 +243,12 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
             for (int i = start; i >= end; i--) {
                 actualDirectionAngle = polygonRepository.getStationById(i + 1).getDirectionAngle() -
                         polygonRepository.getStationById(i + 1).getHorAngle() - 648000;
-                        while (actualDirectionAngle < 0) {
-                            actualDirectionAngle += 1296000;
+                while (actualDirectionAngle < 0) {
+                    actualDirectionAngle += 1296000;
                 }
+                polygonRepository.getStationById(i).setDirectionAngle(actualDirectionAngle);
+
+
 
             }
         }
@@ -319,28 +361,56 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
         PolygonStation backStation;
         PolygonStation station;
 
-        for (int i = start; i <= end; i++) {
-            backStation = polygonRepository.getStationById(i - 1);
-            station = polygonRepository.getStationById(i);
+        if (start < end) {
+            for (int i = start; i <= end; i++) {
 
-            station.setStationX(
-                    backStation.getStationX() +
-                            backStation.getDeltaX() +
-                            backStation.getCorrectionX()
-            );
+                backStation = polygonRepository.getStationById(i - 1);
+                station = polygonRepository.getStationById(i);
 
-            station.setStationY(
-                    backStation.getStationY() +
-                            backStation.getDeltaY() +
-                            backStation.getCorrectionY()
-            );
+                station.setStationX(
+                        backStation.getStationX() +
+                                backStation.getDeltaX() +
+                                backStation.getCorrectionX()
+                );
 
-            station.setStationZ(
-                    backStation.getStationZ() +
-                            backStation.getElevation() +
-                            doubleToLong(backStation.getCorrectionZ())
-            );
+                station.setStationY(
+                        backStation.getStationY() +
+                                backStation.getDeltaY() +
+                                backStation.getCorrectionY()
+                );
+
+                station.setStationZ(
+                        backStation.getStationZ() +
+                                backStation.getElevation() +
+                                doubleToLong(backStation.getCorrectionZ())
+                );
+            }
+        } else {
+            for (int i = start; i >= end; i--) {
+                backStation = polygonRepository.getStationById(i + 1);
+                station = polygonRepository.getStationById(i);
+
+                station.setStationX(
+                        backStation.getStationX() -
+                                station.getDeltaX() -
+                                station.getCorrectionX()
+                );
+
+                station.setStationY(
+                        backStation.getStationY() -
+                                station.getDeltaY()-
+                                station.getCorrectionY()
+                );
+
+                station.setStationZ(
+                        backStation.getStationZ() -
+                                station.getElevation() -
+                                doubleToLong(station.getCorrectionZ())
+                );
+            }
+
         }
+
     }
 
     /**

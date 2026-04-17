@@ -225,6 +225,38 @@ class PolygonCalculatorImplTest {
     }
 
     @Test
+    void setDirectionAngleReverseOrderTest() {
+        boolean success = polygonMapper.polygonRequestToPolygon(getTestPolygonRequestOT());
+
+        int sizePolygon = polygonRepository.size();
+        PolygonStation baseC = polygonRepository.getStationById(sizePolygon - 2);
+        PolygonStation baseD = polygonRepository.getStationById(sizePolygon - 1);
+        baseC.setDirectionAngle(inverseCalculator.getDirection(
+                baseC.getStationX(),
+                baseC.getStationY(),
+                baseD.getStationX(),
+                baseD.getStationY()
+        ));
+
+        long expectFirst = 6098;
+        long expectSecond = 1290151;
+        long expectThird = 997368;
+        long expectFourth = 973002;
+        polygonCalculator.setDirectionAngle(sizePolygon - 3, 0);
+
+        long actualFirst = polygonRepository.getStationById(0).getDirectionAngle();
+        long actualSecond = polygonRepository.getStationById(1).getDirectionAngle();
+        long actualThird = polygonRepository.getStationById(2).getDirectionAngle();
+        long actualFourth = polygonRepository.getStationById(3).getDirectionAngle();
+
+        assertEquals(expectFirst, actualFirst);
+        assertEquals(expectSecond, actualSecond);
+        assertEquals(expectThird, actualThird);
+        assertEquals(expectFourth, actualFourth);
+    }
+
+
+    @Test
     void setDeltaXYTest() {
         boolean success = loadTestPolygonTT();
         assertTrue(success);
@@ -352,7 +384,7 @@ class PolygonCalculatorImplTest {
     }
 
     @Test
-    void setXYZTest() {
+    void setXYZTestDirectOrder() {
         boolean success = loadTestPolygonTT();
         assertTrue(success);
         long expectFirstX = 457057454L;
@@ -451,6 +483,199 @@ class PolygonCalculatorImplTest {
         assertEquals(expectThirdZ, actualThirdZ);
     }
 
+    @Test
+    void adjustPolygonTestTO() {
+        BindType expectBindType = BindType.TO;
+        long expectPerimeter = 224560;
+        long expectFx = -30;
+        long expectFy = -9;
+        long expectAbsolute = 31;
+        String expectRelative = "1:7244";
+        long expectFirstX = 457057457L;
+        long expectFirstY = 2261204248L;
+        long expectFirstZ = 17432L;
+        long expectSecondX = 457122427L;
+        long expectSecondY = 2261202426L;
+        long expectSecondZ = 17257L;
+        long expectThirdX = 457129462L;
+        long expectThirdY = 2261145708L;
+        long expectThirdZ = 16328L;
+        boolean success = polygonMapper.polygonRequestToPolygon(getTestPolygonRequestTO());
+        assertTrue(success);
+        polygonCalculator.adjustPolygon();
+
+        BindType actualBindType = residuals.getBindType();
+        long actualPerimeter = residuals.getPerimeter();
+        long actualFx = residuals.getLinearX();
+        long actualFy = residuals.getLinearY();
+        double actualAbsolute = residuals.getAbsolute();
+        String actualRelative = residuals.getRelative();
+        long actualFirstX = polygonRepository.getStationById(2).getStationX();
+        long actualFirstY = polygonRepository.getStationById(2).getStationY();
+        long actualFirstZ = polygonRepository.getStationById(2).getStationZ();
+        long actualSecondX = polygonRepository.getStationById(3).getStationX();
+        long actualSecondY = polygonRepository.getStationById(3).getStationY();
+        long actualSecondZ = polygonRepository.getStationById(3).getStationZ();
+        long actualThirdX = polygonRepository.getStationById(4).getStationX();
+        long actualThirdY = polygonRepository.getStationById(4).getStationY();
+        long actualThirdZ = polygonRepository.getStationById(4).getStationZ();
+
+        assertEquals(expectBindType, actualBindType);
+        assertEquals(expectPerimeter, actualPerimeter);
+        assertEquals(expectFx, actualFx);
+        assertEquals(expectFy, actualFy);
+        assertEquals(expectAbsolute, actualAbsolute, 0.0000007);
+        assertEquals(expectRelative, actualRelative);
+        assertEquals(expectFirstX, actualFirstX);
+        assertEquals(expectFirstY, actualFirstY);
+        assertEquals(expectFirstZ, actualFirstZ);
+        assertEquals(expectSecondX, actualSecondX);
+        assertEquals(expectSecondY, actualSecondY);
+        assertEquals(expectSecondZ, actualSecondZ);
+        assertEquals(expectThirdX, actualThirdX);
+        assertEquals(expectThirdY, actualThirdY);
+        assertEquals(expectThirdZ, actualThirdZ);
+    }
+
+    @Test
+    void adjustPolygonTestTZ() {
+        BindType expectBindType = BindType.TZ;
+        long expectPerimeter = 190830;
+        long expectFirstX = 457057448L;
+        long expectFirstY = 2261204245L;
+        long expectFirstZ = 17434L;
+        long expectSecondX = 457122409L;
+        long expectSecondY = 2261202420L;
+        long expectSecondZ = 17260L;
+        long expectThirdX = 457129436L;
+        long expectThirdY = 2261145700L;
+        long expectThirdZ = 16332L;
+        boolean success = polygonMapper.polygonRequestToPolygon(getTestPolygonRequestTZ());
+        assertTrue(success);
+        polygonCalculator.adjustPolygon();
+
+        BindType actualBindType = residuals.getBindType();
+        long actualPerimeter = residuals.getPerimeter();
+        long actualFirstX = polygonRepository.getStationById(2).getStationX();
+        long actualFirstY = polygonRepository.getStationById(2).getStationY();
+        long actualFirstZ = polygonRepository.getStationById(2).getStationZ();
+        long actualSecondX = polygonRepository.getStationById(3).getStationX();
+        long actualSecondY = polygonRepository.getStationById(3).getStationY();
+        long actualSecondZ = polygonRepository.getStationById(3).getStationZ();
+        long actualThirdX = polygonRepository.getStationById(4).getStationX();
+        long actualThirdY = polygonRepository.getStationById(4).getStationY();
+        long actualThirdZ = polygonRepository.getStationById(4).getStationZ();
+
+        assertEquals(expectBindType, actualBindType);
+        assertEquals(expectPerimeter, actualPerimeter);
+        assertEquals(expectFirstX, actualFirstX);
+        assertEquals(expectFirstY, actualFirstY);
+        assertEquals(expectFirstZ, actualFirstZ);
+        assertEquals(expectSecondX, actualSecondX);
+        assertEquals(expectSecondY, actualSecondY);
+        assertEquals(expectSecondZ, actualSecondZ);
+        assertEquals(expectThirdX, actualThirdX);
+        assertEquals(expectThirdY, actualThirdY);
+        assertEquals(expectThirdZ, actualThirdZ);
+    }
+
+    @Test
+    void adjustPolygonTestOT() {
+        BindType expectBindType = BindType.OT;
+        long expectPerimeter = 224560;
+        long expectFx = -23;
+        long expectFy = -39;
+        long expectAbsolute = 45;
+        String expectRelative = "1:4990";
+        long expectFirstX = 457057456L;
+        long expectFirstY = 2261204238L;
+        long expectFirstZ = 17432L;
+        long expectSecondX = 457122424L;
+        long expectSecondY = 2261202406L;
+        long expectSecondZ = 17257L;
+        long expectThirdX = 457129442L;
+        long expectThirdY = 2261145694L;
+        long expectThirdZ = 16328L;
+        boolean success = polygonMapper.polygonRequestToPolygon(getTestPolygonRequestOT());
+        assertTrue(success);
+        polygonCalculator.adjustPolygon();
+
+        BindType actualBindType = residuals.getBindType();
+        long actualPerimeter = residuals.getPerimeter();
+        long actualFx = residuals.getLinearX();
+        long actualFy = residuals.getLinearY();
+        double actualAbsolute = residuals.getAbsolute();
+        String actualRelative = residuals.getRelative();
+        long actualFirstX = polygonRepository.getStationById(1).getStationX();
+        long actualFirstY = polygonRepository.getStationById(1).getStationY();
+        long actualFirstZ = polygonRepository.getStationById(1).getStationZ();
+        long actualSecondX = polygonRepository.getStationById(2).getStationX();
+        long actualSecondY = polygonRepository.getStationById(2).getStationY();
+        long actualSecondZ = polygonRepository.getStationById(2).getStationZ();
+        long actualThirdX = polygonRepository.getStationById(3).getStationX();
+        long actualThirdY = polygonRepository.getStationById(3).getStationY();
+        long actualThirdZ = polygonRepository.getStationById(3).getStationZ();
+
+        assertEquals(expectBindType, actualBindType);
+        assertEquals(expectPerimeter, actualPerimeter);
+        assertEquals(expectFx, actualFx);
+        assertEquals(expectFy, actualFy);
+        assertEquals(expectAbsolute, actualAbsolute, 0.0000007);
+        assertEquals(expectRelative, actualRelative);
+        assertEquals(expectFirstX, actualFirstX);
+        assertEquals(expectFirstY, actualFirstY);
+        assertEquals(expectFirstZ, actualFirstZ);
+        assertEquals(expectSecondX, actualSecondX);
+        assertEquals(expectSecondY, actualSecondY);
+        assertEquals(expectSecondZ, actualSecondZ);
+        assertEquals(expectThirdX, actualThirdX);
+        assertEquals(expectThirdY, actualThirdY);
+        assertEquals(expectThirdZ, actualThirdZ);
+    }
+
+    @Test
+    void adjustPolygonTestZT() {
+        BindType expectBindType = BindType.ZT;
+        long expectPerimeter = 155871;
+        long expectFirstX = 457057472L;
+        long expectFirstY = 2261204265L;
+        long expectFirstZ = 17429L;
+        long expectSecondX = 457122433L;
+        long expectSecondY = 2261202422L;
+        long expectSecondZ = 17255L;
+        long expectThirdX = 457129445L;
+        long expectThirdY = 2261145700L;
+        long expectThirdZ = 16327L;
+        boolean success = polygonMapper.polygonRequestToPolygon(getTestPolygonRequestZT());
+        assertTrue(success);
+        polygonCalculator.adjustPolygon();
+
+        BindType actualBindType = residuals.getBindType();
+        long actualPerimeter = residuals.getPerimeter();
+        long actualFirstX = polygonRepository.getStationById(0).getStationX();
+        long actualFirstY = polygonRepository.getStationById(0).getStationY();
+        long actualFirstZ = polygonRepository.getStationById(0).getStationZ();
+        long actualSecondX = polygonRepository.getStationById(1).getStationX();
+        long actualSecondY = polygonRepository.getStationById(1).getStationY();
+        long actualSecondZ = polygonRepository.getStationById(1).getStationZ();
+        long actualThirdX = polygonRepository.getStationById(2).getStationX();
+        long actualThirdY = polygonRepository.getStationById(2).getStationY();
+        long actualThirdZ = polygonRepository.getStationById(2).getStationZ();
+
+        assertEquals(expectBindType, actualBindType);
+        assertEquals(expectPerimeter, actualPerimeter);
+        assertEquals(expectFirstX, actualFirstX);
+        assertEquals(expectFirstY, actualFirstY);
+        assertEquals(expectFirstZ, actualFirstZ);
+        assertEquals(expectSecondX, actualSecondX);
+        assertEquals(expectSecondY, actualSecondY);
+        assertEquals(expectSecondZ, actualSecondZ);
+        assertEquals(expectThirdX, actualThirdX);
+        assertEquals(expectThirdY, actualThirdY);
+        assertEquals(expectThirdZ, actualThirdZ);
+    }
+
+
     /**
      * Loads to model test polygon with bindType TT
      * and sets base direction angle
@@ -522,7 +747,7 @@ class PolygonCalculatorImplTest {
         polygonRequest.add("100 176.4053 64.987 -0.174 Not Not Not");
         polygonRequest.add("101 98.4017 57.154 -0.928 Not Not Not");
         polygonRequest.add("102 173.1354 33.73 -0.56 Not Not Not");
-        polygonRequest.add("1003 181.2628 Not Not 457129.609 2261111.97 15.767");
+        polygonRequest.add("1003 181.2628 Not Not 457129.639 2261111.979 15.767");
 
         return polygonRequest;
     }
