@@ -1949,7 +1949,7 @@
           <mxGeometry height="26" width="170" y="390" as="geometry" />
         </mxCell>
         <mxCell id="tuHNr6xR5rBpdWVQoY2A-1" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;" vertex="1">
-          <mxGeometry height="303" width="260" x="-1140" y="5580" as="geometry" />
+          <mxGeometry height="355" width="260" x="-1140" y="5580" as="geometry" />
         </mxCell>
         <mxCell id="tuHNr6xR5rBpdWVQoY2A-2" parent="tuHNr6xR5rBpdWVQoY2A-1" style="html=1;whiteSpace=wrap;" value="&lt;b&gt;PolygonCalculator&lt;/b&gt;" vertex="1">
           <mxGeometry height="35" width="260" y="26" as="geometry" />
@@ -1984,6 +1984,12 @@
         <mxCell id="tuHNr6xR5rBpdWVQoY2A-12" parent="tuHNr6xR5rBpdWVQoY2A-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ setXYZ(int, int): void" vertex="1">
           <mxGeometry height="26" width="260" y="277" as="geometry" />
         </mxCell>
+        <mxCell id="7J1HLi_TUYM1ERDc2va0-2" parent="tuHNr6xR5rBpdWVQoY2A-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ doubleToLong(): long" vertex="1">
+          <mxGeometry height="26" width="260" y="303" as="geometry" />
+        </mxCell>
+        <mxCell id="7J1HLi_TUYM1ERDc2va0-1" parent="tuHNr6xR5rBpdWVQoY2A-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getPolygonRotationAngle(): long" vertex="1">
+          <mxGeometry height="26" width="260" y="329" as="geometry" />
+        </mxCell>
         <mxCell id="tuHNr6xR5rBpdWVQoY2A-13" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&amp;lt;&amp;lt;component&amp;gt;&amp;gt;" vertex="1">
           <mxGeometry height="173" width="260" x="-1140" y="5350" as="geometry" />
         </mxCell>
@@ -2011,7 +2017,7 @@
             <mxPoint x="-1010" y="5330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="tuHNr6xR5rBpdWVQoY2A-19" edge="1" parent="1" source="tuHNr6xR5rBpdWVQoY2A-12" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;exitX=0.432;exitY=1.033;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="tuHNr6xR5rBpdWVQoY2A-20" value="">
+        <mxCell id="tuHNr6xR5rBpdWVQoY2A-19" edge="1" parent="1" source="7J1HLi_TUYM1ERDc2va0-1" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;exitX=0.417;exitY=1.122;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="tuHNr6xR5rBpdWVQoY2A-20" value="">
           <mxGeometry relative="1" width="160" as="geometry">
             <Array as="points">
               <mxPoint x="-1030" y="6030" />

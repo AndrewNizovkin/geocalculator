@@ -115,21 +115,22 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
                 setDeltaXY(0, sizePolygon - 3);
                 setXYZ(sizePolygon - 3, 0);
             }
+
+            case OO -> {
+                setPerimeter(0, sizePolygon - 2);
+                baseA.setDirectionAngle(0);
+                setDirectionAngle(1, sizePolygon - 2);
+                setDeltaXY(0, sizePolygon - 2);
+
+                baseA.setDirectionAngle(getPolygonRotationAngle());
+
+                setDirectionAngle(1, sizePolygon - 2);
+                setDeltaXY(0, sizePolygon - 2);
+                setCorrectionXY(0, sizePolygon - 2);
+                setCorrectionZ(0, sizePolygon - 2);
+                setXYZ(1, sizePolygon - 2);
+            }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     /**
@@ -423,5 +424,45 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
         double sign = Math.signum(value);
         value = Math.abs(value);
         return (long) sign * Math.round(value);
+    }
+
+    /**
+     * Gets the angle of rotation of the actual position of the
+     * extreme points of the polygon relative to the calculated ones
+     *
+     * @return long angle in seconds
+     */
+    @Override
+    public long getPolygonRotationAngle() {
+        int sizePolygon = polygonRepository.size();
+        long pseudoEndX = 0;
+        long pseudoEndY = 0;
+        for (int i = 0; i <= sizePolygon - 2; i++) {
+            pseudoEndX += polygonRepository.getStationById(i).getDeltaX();
+            pseudoEndY += polygonRepository.getStationById(i).getDeltaY();
+        }
+        pseudoEndX += polygonRepository.getStationById(0).getStationX();
+        pseudoEndY += polygonRepository.getStationById(0).getStationY();
+
+        long actualLockDirectionAngle = inverseCalculator.getDirection(
+                polygonRepository.getStationById(0).getStationX(),
+                polygonRepository.getStationById(0).getStationY(),
+                polygonRepository.getStationById(sizePolygon - 1).getStationX(),
+                polygonRepository.getStationById(sizePolygon - 1).getStationY()
+        );
+
+        long pseudoLockDirectionAngle = inverseCalculator.getDirection(
+                polygonRepository.getStationById(0).getStationX(),
+                polygonRepository.getStationById(0).getStationY(),
+                pseudoEndX,
+                pseudoEndY
+        );
+
+        long polygonRotationAngle = actualLockDirectionAngle - pseudoLockDirectionAngle;
+
+        while (polygonRotationAngle < 0) {
+            polygonRotationAngle += 1296000;
+        }
+        return polygonRotationAngle;
     }
 }

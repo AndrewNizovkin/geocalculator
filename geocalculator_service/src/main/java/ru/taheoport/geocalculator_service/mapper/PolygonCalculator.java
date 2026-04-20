@@ -81,4 +81,11 @@ public interface PolygonCalculator {
      * @return long value
      */
     long doubleToLong(double value);
+
+    /**
+     * Gets the angle of rotation of the actual position of the
+     * extreme points of the polygon relative to the calculated ones
+     * @return long angle in seconds
+     */
+    long getPolygonRotationAngle();
 }
