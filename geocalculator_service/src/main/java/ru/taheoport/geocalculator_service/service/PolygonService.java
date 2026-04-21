@@ -20,4 +20,9 @@ public interface PolygonService {
      * Calculates geodetic polygon
      */
     void calculatePolygon();
+
+    /**
+     * Clears all components
+     */
+    void clearAll();
 }

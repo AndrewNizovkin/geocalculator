@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import ru.taheoport.geocalculator_service.dto.ReportResiduals;
 import ru.taheoport.geocalculator_service.model.PolygonStation;
 import ru.taheoport.geocalculator_service.model.Residuals;
 import ru.taheoport.geocalculator_service.model.ValidResiduals;
@@ -22,7 +23,8 @@ import static org.junit.jupiter.api.Assertions.*;
         PolygonRepositoryImpl.class,
         ValidResiduals.class,
         Residuals.class,
-        DataMapperDefault.class
+        DataMapperDefault.class,
+        ReportResiduals.class
 })
 class PolygonMapperImplTest {
 
@@ -34,6 +36,9 @@ class PolygonMapperImplTest {
 
     @Autowired
     private ValidResiduals validResiduals;
+
+    @Autowired
+    private ReportResiduals reportResiduals;
 
     @BeforeEach
     void clearPolygonRepository() {
@@ -126,6 +131,36 @@ class PolygonMapperImplTest {
 
         assertEquals(expectTitle, actualTitle);
         assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void clearReportResidualsTest() {
+        String expectValue = "-.-";
+        polygonMapper.clearReportResiduals();
+
+        String actualPerimeter = reportResiduals.getPerimeter();
+        String actualActualElevation = reportResiduals.getActualElevation();
+        String actualActualAngle = reportResiduals.getActualAngle();
+        String actualActualX = reportResiduals.getActualX();
+        String actualActualY = reportResiduals.getActualY();
+        String actualActualAbsolute = reportResiduals.getActualAbsolute();
+        String actualActualRelative = reportResiduals.getActualRelative();
+        String actualValidElevation = reportResiduals.getValidElevation();
+        String actualValidAngle = reportResiduals.getValidAngle();
+        String actualValidAbsolute = reportResiduals.getValidAbsolute();
+        String actualValidRelative = reportResiduals.getValidRelative();
+
+        assertEquals(expectValue, actualPerimeter);
+        assertEquals(expectValue, actualActualElevation);
+        assertEquals(expectValue, actualActualAngle);
+        assertEquals(expectValue, actualActualX);
+        assertEquals(expectValue, actualActualY);
+        assertEquals(expectValue, actualActualAbsolute);
+        assertEquals(expectValue, actualActualRelative);
+        assertEquals(expectValue, actualValidElevation);
+        assertEquals(expectValue, actualValidAngle);
+        assertEquals(expectValue, actualValidAbsolute);
+        assertEquals(expectValue, actualValidRelative);
     }
 
     /**

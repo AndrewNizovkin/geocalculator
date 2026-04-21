@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import ru.taheoport.geocalculator_service.dto.ReportResiduals;
 import ru.taheoport.geocalculator_service.model.BindType;
 import ru.taheoport.geocalculator_service.model.PolygonStation;
 import ru.taheoport.geocalculator_service.model.Residuals;
@@ -25,7 +26,8 @@ import static org.junit.jupiter.api.Assertions.*;
         Residuals.class,
         PolygonMapperImpl.class,
         DataMapperDefault.class,
-        ValidResiduals.class
+        ValidResiduals.class,
+        ReportResiduals.class
 })
 class PolygonCalculatorImplTest {
 

@@ -39,6 +39,8 @@ public class PolygonServiceImpl implements PolygonService{
     @Override
     public List<String> getPolygonReports(List<String> polygonResponse) {
 
+        clearAll();
+
         boolean success = polygonMapper.polygonRequestToPolygon(polygonResponse);
 
         if (!success) return polygonMapper.getErrorResponse("Bad request!");
@@ -49,6 +51,9 @@ public class PolygonServiceImpl implements PolygonService{
         if (residuals.getBindType() == BindType.ZZ) return polygonMapper.getErrorResponse("Unknown polygon binding scheme!");
 
         polygonCalculator.adjustPolygon();
+
+        polygonMapper.clearReportResiduals();
+        polygonMapper.setReportResiduals();
 
         return polygonMapper.polygonToPolygonResponse();
     }
@@ -67,5 +72,27 @@ public class PolygonServiceImpl implements PolygonService{
 
 //        baseA.setDirectionAngle();
 
+    }
+
+    /**
+     * Clears all components
+     */
+    @Override
+    public void clearAll() {
+        polygonRepository.clearAll();
+
+        residuals.setPerimeter(0);
+        residuals.setElevation(0);
+        residuals.setAngle(0);
+        residuals.setLinearX(0);
+        residuals.setLinearY(0);
+        residuals.setAbsolute(0);
+        residuals.setRelative("");
+        residuals.setBindType(BindType.ZZ);
+
+        validResiduals.setValidRelative("");
+        validResiduals.setValidElevation(0);
+        validResiduals.setValidAngle(0);
+        validResiduals.setValidAbsolute("");
     }
 }

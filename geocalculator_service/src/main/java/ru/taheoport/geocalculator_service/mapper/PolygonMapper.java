@@ -31,4 +31,14 @@ public interface PolygonMapper {
      * @return list of strings
      */
     List<String> getErrorResponse(String message);
+
+    /**
+     * Sets blank values for reportResiduals
+     */
+    void clearReportResiduals();
+
+    /**
+     * Sets report residuals
+     */
+    void setReportResiduals();
 }
