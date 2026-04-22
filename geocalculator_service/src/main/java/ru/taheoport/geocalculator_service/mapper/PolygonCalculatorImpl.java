@@ -348,6 +348,7 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
         for (int i = start; i <= end; i++) {
             PolygonStation station = polygonRepository.getStationById(i);
             station.setCorrectionZ(ratioZ * (double) station.getHorDistance());
+            station.setElevationCorrected(station.getElevation() + doubleToLong(station.getCorrectionZ()));
         }
     }
 

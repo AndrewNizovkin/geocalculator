@@ -197,15 +197,266 @@ public class PolygonMapperImpl implements PolygonMapper{
         polygonReports.add("|------------|----------|----------|---------|----------|----------|--------|----------|--------|--------------|--------------|");
         polygonReports.add("|     1      |     2    |     3    |    4    |     5    |     6    |    7   |     8    |    9   |       10     |      11      |");
         polygonReports.add("|------------|----------|----------|---------|----------|----------|--------|----------|--------|--------------|--------------|");
+
+        PolygonStation firstStation = polygonRepository.getStationById(0);
+        switch (residuals.getBindType()) {
+
+            case TT, TO, TZ -> {
+                reportLine
+                        .append("| ")
+                        .append(dataMapper.stringToTableRight(firstStation.getStationName(), 10))
+                        .append(" |          |          |         |          |          |        |          |        | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(firstStation.getStationX()), 12))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(firstStation.getStationY()), 12))
+                        .append(" |");
+                polygonReports.add(reportLine.toString());
+                reportLine.setLength(0);
+                polygonReports.add("|            |          |          |         |          |          |        |          |        |              |              |");
+            }
+
+            case OO, OT, ZT -> {
+                reportLine
+                        .append("| ")
+                        .append(dataMapper.stringToTableRight(firstStation.getStationName(), 10))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.secondsToDms(firstStation.getHorAngle()), 8))
+                        .append(" |          | ")
+                        .append(dataMapper.stringToTableRight(String.format("%.2f", firstStation.getCorrectionHorAngle()), 7))
+                        .append(" |          |          |        |          |        | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(firstStation.getStationX()), 12))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(firstStation.getStationY()), 12))
+                        .append(" |");
+                polygonReports.add(reportLine.toString());
+                reportLine.setLength(0);
+                reportLine
+                        .append("|            |          | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(firstStation.getHorDistance()), 8))
+                        .append(" |         | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.secondsToDms(firstStation.getDirectionAngle()), 8))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(firstStation.getDeltaX()), 8))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(firstStation.getCorrectionX()), 6))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(firstStation.getDeltaY()), 8))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(firstStation.getCorrectionY()), 6))
+                        .append(" |              |              |");
+                polygonReports.add(reportLine.toString());
+                reportLine.setLength(0);
+            }
+        }
+
+        PolygonStation station;
+        for (int i = 1; i < polygonRepository.size(); i++) {
+            station = polygonRepository.getStationById(i);
+            reportLine
+                    .append("| ")
+                    .append(dataMapper.stringToTableRight(station.getStationName(), 10))
+                    .append(" | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.secondsToDms(station.getHorAngle()), 8))
+                    .append(" |          | ")
+                    .append(dataMapper.stringToTableRight(String.format("%.2f", station.getCorrectionHorAngle()), 7))
+                    .append(" |          |          |        |          |        | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(station.getStationX()), 12))
+                    .append(" | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(station.getStationY()), 12))
+                    .append(" |");
+            polygonReports.add(reportLine.toString());
+            reportLine.setLength(0);
+            reportLine
+                    .append("|            |          | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(station.getHorDistance()), 8))
+                    .append(" |         | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.secondsToDms(station.getDirectionAngle()), 8))
+                    .append(" | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(station.getDeltaX()), 8))
+                    .append(" | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(station.getCorrectionX()), 6))
+                    .append(" | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(station.getDeltaY()), 8))
+                    .append(" | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(station.getCorrectionY()), 6))
+                    .append(" |              |              |");
+            polygonReports.add(reportLine.toString());
+            reportLine.setLength(0);
+        }
+
+        PolygonStation beforeLastStation = polygonRepository.getStationById(polygonRepository.size() - 2);
+        reportLine
+                .append("| ")
+                .append(dataMapper.stringToTableRight(beforeLastStation.getStationName(), 10))
+                .append(" | ")
+                .append(dataMapper.stringToTableRight(dataMapper.secondsToDms(beforeLastStation.getHorAngle()), 8))
+                .append(" |          | ")
+                .append(dataMapper.stringToTableRight(String.format("%.2f", beforeLastStation.getCorrectionHorAngle()), 7))
+                .append(" |          |          |        |          |        | ")
+                .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(beforeLastStation.getStationX()), 12))
+                .append(" | ")
+                .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(beforeLastStation.getStationY()), 12))
+                .append(" |");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
+        switch (residuals.getBindType()) {
+            case OO, TO, TZ -> {
+                reportLine
+                        .append("|            |          | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(beforeLastStation.getHorDistance()), 8))
+                        .append(" |         | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.secondsToDms(beforeLastStation.getDirectionAngle()), 8))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(beforeLastStation.getDeltaX()), 8))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(beforeLastStation.getCorrectionX()), 6))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(beforeLastStation.getDeltaY()), 8))
+                        .append(" | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(beforeLastStation.getCorrectionY()), 6))
+                        .append(" |              |              |");
+                polygonReports.add(reportLine.toString());
+                reportLine.setLength(0);
+            }
+
+            case TT, OT, ZT -> polygonReports.add("|            |          |          |         |          |          |        |          |        |              |              |");
+        }
+
+        PolygonStation lastStation = polygonRepository.getStationById(polygonRepository.size() - 1);
+        reportLine
+                .append("| ")
+                .append(dataMapper.stringToTableRight(lastStation.getStationName(), 10))
+                .append(" |          |          |         |          |          |        |          |        | ")
+                .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(lastStation.getStationX()), 12))
+                .append(" | ")
+                .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(lastStation.getStationY()), 12))
+                .append(" |");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
+        polygonReports.add("-------------------------------------------------------------------------------------------------------------------------------");
         polygonReports.add("");
+        polygonReports.add("   Технические параметры полигона");
+
+        reportLine.append("Периметр полигона : ").append(reportResiduals.getPerimeter()).append("м.");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
+
+        polygonReports.add("     1. Угловые невязки");
+        reportLine.append("фактическая : ").append(reportResiduals.getActualAngle()).append("сек.");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
+        reportLine.append("допустимая : ").append(reportResiduals.getValidAngle()).append("сек.");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
+
+        polygonReports.add("     2. Линейные невязки");
+        reportLine.append("DX : ").append(reportResiduals.getActualX()).append("м.");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
+        reportLine.append("DY : ").append(reportResiduals.getActualY()).append("м.");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
+        reportLine.append("фактическая абсолютная : ").append(reportResiduals.getActualAbsolute()).append("м.");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
+        reportLine.append("допустимая абсолютная : ").append(reportResiduals.getValidAbsolute()).append("м.");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
+        reportLine.append("фактическая относительная : ").append(reportResiduals.getActualRelative()).append("м.");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
+        reportLine.append("допустимая относительная : ").append(reportResiduals.getValidRelative()).append("м.");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
+
+        polygonReports.add("#report-elevation");
         polygonReports.add("");
+        polygonReports.add("           В Е Д О М О С Т Ь  В Ы Ч И С Л Е Н И Я  В Ы С О Т");
+        polygonReports.add("");
+        polygonReports.add("-----------------------------------------------------------------------");
+        polygonReports.add("|Наименование|  Длина   | Измеренное |Поправка|Исправленное|Абсолютная|");
+        polygonReports.add("|    пункта  | стороны  | превышение |        | превышение | отметка  |");
+        polygonReports.add("|            |     м.   |      м.    |   мм.  |     м.     |    м.    |");
+        polygonReports.add("|------------|----------|------------|--------|------------|----------|");
+        polygonReports.add("|     1      |     2    |      3     |    4   |      5     |     6    |");
+        polygonReports.add("|------------|----------|------------|--------|------------|----------|");
+
+//        long dZCorrected;
+        long sumElevation = 0;
+        double sumCorrectionZ = 0.0;
+        long sumElevationCorrected = 0;
+        int start = 0;
+        int end = polygonRepository.size() - 1;
+        if (residuals.getBindType() == BindType.TT ||
+                        residuals.getBindType() == BindType.TO ||
+                        residuals.getBindType() == BindType.TZ) start = 1;
+        if (residuals.getBindType() == BindType.TT ||
+                residuals.getBindType() == BindType.OT ||
+                residuals.getBindType() == BindType.ZT) end = polygonRepository.size() - 2;
+
+        PolygonStation polygonStation;
+        for (int i = start; i < end; i++) {
+            polygonStation = polygonRepository.getStationById(i);
+            sumElevation += polygonStation.getElevation();
+            sumCorrectionZ += polygonStation.getCorrectionZ();
+            sumElevationCorrected += polygonStation.getElevationCorrected();
+
+            reportLine
+                    .append("| ")
+                    .append(dataMapper.stringToTableRight(polygonStation.getStationName(), 10))
+                    .append(" |          |            |        |            | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(polygonStation.getStationZ()), 8))
+                    .append(" |");
+            polygonReports.add(reportLine.toString());
+            reportLine.setLength(0);
+            reportLine
+                    .append("|            | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(polygonStation.getHorDistance()), 8))
+                    .append(" | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(polygonStation.getElevation()), 10))
+                    .append(" | ")
+                    .append(dataMapper.stringToTableRight(String.format("%.2f", polygonStation.getCorrectionZ()), 6))
+                    .append(" | ")
+                    .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(polygonStation.getElevationCorrected()), 10))
+                    .append(" |          |");
+            polygonReports.add(reportLine.toString());
+            reportLine.setLength(0);
+        }
+        polygonReports.add("|------------|----------|------------|--------|------------|----------|");
+        reportLine
+                .append("|контр.суммы | ")
+                .append(dataMapper.stringToTableRight(reportResiduals.getPerimeter(), 8))
+                .append(" | ")
+                .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(sumElevation), 10))
+                .append(" | ")
+                .append(dataMapper.stringToTableRight(String.format("%.2f", sumCorrectionZ), 6))
+                .append(" | ")
+                .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(sumElevationCorrected), 10))
+                .append(" |          |");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
+        polygonReports.add("-----------------------------------------------------------------------");
         polygonReports.add("");
 
-
-
-
-
-
+        polygonReports.add("   Технические параметры полигона");
+        reportLine
+                .append("Периметр полигона : ")
+                .append(reportResiduals.getPerimeter())
+                .append("м.");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
+        reportLine
+                .append("фактическая высотная невязка : ")
+                .append(reportResiduals.getActualElevation())
+                .append("мм.");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
+        reportLine
+                .append("допустимая высотная невязка : ")
+                .append(reportResiduals.getValidElevation())
+                .append("мм.");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
 
         return polygonReports;
     }

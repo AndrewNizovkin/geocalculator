@@ -76,7 +76,7 @@ public class PolygonStation {
     /**
      * Increment of coordinates along the Z axis in millimeters
      */
-    private long deltaZ = 0;
+    private long elevationCorrected = 0;
 
     /**
      * X-axis correction in millimeters
