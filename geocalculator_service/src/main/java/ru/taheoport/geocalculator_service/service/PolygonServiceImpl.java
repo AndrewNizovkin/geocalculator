@@ -33,15 +33,15 @@ public class PolygonServiceImpl implements PolygonService{
      * Gets general reports of processing and
      * adjusting of geodetic polygon
      *
-     * @param polygonResponse list of string with geodetic data
+     * @param polygonRequest list of string with geodetic data
      * @return list of strings
      */
     @Override
-    public List<String> getPolygonReports(List<String> polygonResponse) {
+    public List<String> getPolygonReports(List<String> polygonRequest) {
 
         clearAll();
 
-        boolean success = polygonMapper.polygonRequestToPolygon(polygonResponse);
+        boolean success = polygonMapper.polygonRequestToPolygon(polygonRequest);
 
         if (!success) return polygonMapper.getErrorResponse("Bad request!");
 

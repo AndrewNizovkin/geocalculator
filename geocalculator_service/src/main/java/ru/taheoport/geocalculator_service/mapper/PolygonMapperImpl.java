@@ -11,6 +11,7 @@ import ru.taheoport.geocalculator_service.repository.PolygonRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * This class provides methods for
@@ -212,7 +213,14 @@ public class PolygonMapperImpl implements PolygonMapper{
                         .append(" |");
                 polygonReports.add(reportLine.toString());
                 reportLine.setLength(0);
-                polygonReports.add("|            |          |          |         |          |          |        |          |        |              |              |");
+                reportLine
+                        .append("|            |          |          |         | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.secondsToDms(firstStation.getDirectionAngle()), 8))
+                        .append(" |          |        |          |        |              |              |");
+                polygonReports.add(reportLine.toString());
+                reportLine.setLength(0);
+
+//                polygonReports.add("|            |          |          |         |          |          |        |          |        |              |              |");
             }
 
             case OO, OT, ZT -> {
@@ -222,7 +230,7 @@ public class PolygonMapperImpl implements PolygonMapper{
                         .append(" | ")
                         .append(dataMapper.stringToTableRight(dataMapper.secondsToDms(firstStation.getHorAngle()), 8))
                         .append(" |          | ")
-                        .append(dataMapper.stringToTableRight(String.format("%.2f", firstStation.getCorrectionHorAngle()), 7))
+                        .append(dataMapper.stringToTableRight(String.format(Locale.US,"%.2f", firstStation.getCorrectionHorAngle()), 7))
                         .append(" |          |          |        |          |        | ")
                         .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(firstStation.getStationX()), 12))
                         .append(" | ")
@@ -250,7 +258,7 @@ public class PolygonMapperImpl implements PolygonMapper{
         }
 
         PolygonStation station;
-        for (int i = 1; i < polygonRepository.size(); i++) {
+        for (int i = 1; i < polygonRepository.size() - 2; i++) {
             station = polygonRepository.getStationById(i);
             reportLine
                     .append("| ")
@@ -258,7 +266,7 @@ public class PolygonMapperImpl implements PolygonMapper{
                     .append(" | ")
                     .append(dataMapper.stringToTableRight(dataMapper.secondsToDms(station.getHorAngle()), 8))
                     .append(" |          | ")
-                    .append(dataMapper.stringToTableRight(String.format("%.2f", station.getCorrectionHorAngle()), 7))
+                    .append(dataMapper.stringToTableRight(String.format(Locale.US,"%.2f", station.getCorrectionHorAngle()), 7))
                     .append(" |          |          |        |          |        | ")
                     .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(station.getStationX()), 12))
                     .append(" | ")
@@ -291,7 +299,7 @@ public class PolygonMapperImpl implements PolygonMapper{
                 .append(" | ")
                 .append(dataMapper.stringToTableRight(dataMapper.secondsToDms(beforeLastStation.getHorAngle()), 8))
                 .append(" |          | ")
-                .append(dataMapper.stringToTableRight(String.format("%.2f", beforeLastStation.getCorrectionHorAngle()), 7))
+                .append(dataMapper.stringToTableRight(String.format(Locale.US, "%.2f", beforeLastStation.getCorrectionHorAngle()), 7))
                 .append(" |          |          |        |          |        | ")
                 .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(beforeLastStation.getStationX()), 12))
                 .append(" | ")
@@ -319,7 +327,14 @@ public class PolygonMapperImpl implements PolygonMapper{
                 reportLine.setLength(0);
             }
 
-            case TT, OT, ZT -> polygonReports.add("|            |          |          |         |          |          |        |          |        |              |              |");
+            case TT, OT, ZT -> {
+                reportLine
+                        .append("|            |          |          |         | ")
+                        .append(dataMapper.stringToTableRight(dataMapper.secondsToDms(beforeLastStation.getDirectionAngle()), 8))
+                        .append(" |          |        |          |        |              |              |");
+                polygonReports.add(reportLine.toString());
+                reportLine.setLength(0);
+            }
         }
 
         PolygonStation lastStation = polygonRepository.getStationById(polygonRepository.size() - 1);
@@ -362,10 +377,10 @@ public class PolygonMapperImpl implements PolygonMapper{
         reportLine.append("допустимая абсолютная : ").append(reportResiduals.getValidAbsolute()).append("м.");
         polygonReports.add(reportLine.toString());
         reportLine.setLength(0);
-        reportLine.append("фактическая относительная : ").append(reportResiduals.getActualRelative()).append("м.");
+        reportLine.append("фактическая относительная : ").append(reportResiduals.getActualRelative());
         polygonReports.add(reportLine.toString());
         reportLine.setLength(0);
-        reportLine.append("допустимая относительная : ").append(reportResiduals.getValidRelative()).append("м.");
+        reportLine.append("допустимая относительная : ").append(reportResiduals.getValidRelative());
         polygonReports.add(reportLine.toString());
         reportLine.setLength(0);
 
@@ -381,7 +396,6 @@ public class PolygonMapperImpl implements PolygonMapper{
         polygonReports.add("|     1      |     2    |      3     |    4   |      5     |     6    |");
         polygonReports.add("|------------|----------|------------|--------|------------|----------|");
 
-//        long dZCorrected;
         long sumElevation = 0;
         double sumCorrectionZ = 0.0;
         long sumElevationCorrected = 0;
@@ -415,13 +429,24 @@ public class PolygonMapperImpl implements PolygonMapper{
                     .append(" | ")
                     .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(polygonStation.getElevation()), 10))
                     .append(" | ")
-                    .append(dataMapper.stringToTableRight(String.format("%.2f", polygonStation.getCorrectionZ()), 6))
+                    .append(dataMapper.stringToTableRight(String.format(Locale.US, "%.2f", polygonStation.getCorrectionZ()), 6))
                     .append(" | ")
                     .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(polygonStation.getElevationCorrected()), 10))
                     .append(" |          |");
             polygonReports.add(reportLine.toString());
             reportLine.setLength(0);
         }
+
+        reportLine
+                .append("| ")
+                .append(dataMapper.stringToTableRight(polygonRepository.getStationById(end).getStationName(), 10))
+                .append(" |          |            |        |            | ")
+                .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(polygonRepository.getStationById(end).getStationZ()), 8))
+                .append(" |");
+        polygonReports.add(reportLine.toString());
+        reportLine.setLength(0);
+
+
         polygonReports.add("|------------|----------|------------|--------|------------|----------|");
         reportLine
                 .append("|контр.суммы | ")
@@ -429,7 +454,7 @@ public class PolygonMapperImpl implements PolygonMapper{
                 .append(" | ")
                 .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(sumElevation), 10))
                 .append(" | ")
-                .append(dataMapper.stringToTableRight(String.format("%.2f", sumCorrectionZ), 6))
+                .append(dataMapper.stringToTableRight(String.format(Locale.US, "%.2f", sumCorrectionZ), 6))
                 .append(" | ")
                 .append(dataMapper.stringToTableRight(dataMapper.millimeterToMeter(sumElevationCorrected), 10))
                 .append(" |          |");
