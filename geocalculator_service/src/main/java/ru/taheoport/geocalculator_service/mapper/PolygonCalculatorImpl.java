@@ -100,6 +100,9 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
                 ));
                 setDirectionAngle(1, sizePolygon - 2);
                 setDeltaXY(1, sizePolygon - 2);
+                for (int i = 1; i <= sizePolygon - 2; i++) {
+                    polygonRepository.getStationById(i).setElevationCorrected(polygonRepository.getStationById(i).getElevation());
+                }
                 setXYZ(2, sizePolygon - 1);
             }
 
@@ -113,6 +116,9 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
                 ));
                 setDirectionAngle(sizePolygon - 3, 0);
                 setDeltaXY(0, sizePolygon - 3);
+                for (int i = 0; i <= sizePolygon - 3; i++) {
+                    polygonRepository.getStationById(i).setElevationCorrected(polygonRepository.getStationById(i).getElevation());
+                }
                 setXYZ(sizePolygon - 3, 0);
             }
 
