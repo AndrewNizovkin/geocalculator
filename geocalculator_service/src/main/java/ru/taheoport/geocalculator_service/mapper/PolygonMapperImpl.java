@@ -98,8 +98,10 @@ public class PolygonMapperImpl implements PolygonMapper{
 
                     if (record[3].equals("Not")) {
                         polygonStation.setElevation(0);
+                        polygonStation.setElevationCorrected(0);
                     } else {
                         polygonStation.setElevation(dataMapper.meterToMillimeter(record[3]));
+                        polygonStation.setElevationCorrected(polygonStation.getElevation());
                     }
 
                     if (record[4].equals("Not") || record[5].equals("Not") || record[6].equals("Not")) {
