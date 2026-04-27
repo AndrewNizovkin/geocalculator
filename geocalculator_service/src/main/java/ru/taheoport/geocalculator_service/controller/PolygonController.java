@@ -22,15 +22,4 @@ public class PolygonController {
 
     }
 
-
-
-
-
-//    @PostMapping("import")
-//    public ResponseEntity<List<String>> importFromTotalStation(@RequestBody List<String> importRequest) {
-//
-//        return ResponseEntity.ok().body(surveyService.importFromTotalStation(importRequest));
-//    }
-
-
 }

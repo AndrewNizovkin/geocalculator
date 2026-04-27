@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36">
   <diagram name="Страница-1" id="o-5GadF2C5qq2WKj6GCM">
-    <mxGraphModel dx="21232" dy="10369" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="7920" dy="2842" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1526,7 +1526,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="IRnVhdAn4cT-wsXNe-tm-58" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;" vertex="1">
-          <mxGeometry height="225" width="400" x="-1808" y="4290" as="geometry" />
+          <mxGeometry height="251" width="400" x="-1808" y="4290" as="geometry" />
         </mxCell>
         <mxCell id="IRnVhdAn4cT-wsXNe-tm-59" parent="IRnVhdAn4cT-wsXNe-tm-58" style="html=1;whiteSpace=wrap;" value="&lt;b&gt;SurveyMapper&lt;/b&gt;" vertex="1">
           <mxGeometry height="35" width="400" y="26" as="geometry" />
@@ -1551,6 +1551,9 @@
         </mxCell>
         <mxCell id="CpvNb_1ordIasWHTHzYy-1" parent="IRnVhdAn4cT-wsXNe-tm-58" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ surveyRequestToSurvey(List&amp;lt;String&amp;gt;, SurveyRepository): boolean" vertex="1">
           <mxGeometry height="26" width="400" y="199" as="geometry" />
+        </mxCell>
+        <mxCell id="rD8UxKBE5xq44VXZtLYs-1" parent="IRnVhdAn4cT-wsXNe-tm-58" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getErrorResponse(String): List&amp;lt;String&amp;gt;" vertex="1">
+          <mxGeometry height="26" width="400" y="225" as="geometry" />
         </mxCell>
         <mxCell id="IRnVhdAn4cT-wsXNe-tm-65" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&amp;lt;&amp;lt;component&amp;gt;&amp;gt;" vertex="1">
           <mxGeometry height="121" width="260" x="-2240" y="4290" as="geometry" />

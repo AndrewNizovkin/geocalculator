@@ -101,6 +101,25 @@ class SurveyMapperImplTest {
 
     }
 
+    @Test
+    void getErrorResponseTest() {
+        String expectMessage = "Bad request";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualErrorResponse = surveyMapper.getErrorResponse(expectMessage);
+
+        assertNotNull(actualErrorResponse);
+        int actualSize = actualErrorResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualErrorResponse.get(0);
+        String actualMessage = actualErrorResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
     /**
      * Creates a repository with tested parameters
      */

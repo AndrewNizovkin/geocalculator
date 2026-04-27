@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * This interface defines methods for
  * converting external data to and from the model format.
+ * @author Nizovkin_A.V.
  */
 public interface SurveyMapper {
 
@@ -55,5 +56,12 @@ public interface SurveyMapper {
      * @return This is true if the data contains a geodetic survey.
      */
     boolean surveyRequestToSurvey(List<String> surveyRequest, SurveyRepository surveyRepository);
+
+    /**
+     * Creates error response
+     * @param message string message
+     * @return list of strings
+     */
+    List<String> getErrorResponse(String message);
 
 }

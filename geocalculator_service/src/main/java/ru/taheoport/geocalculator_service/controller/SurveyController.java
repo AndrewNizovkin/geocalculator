@@ -23,11 +23,9 @@ public class SurveyController {
     }
 
 
-
-
     @PostMapping("report")
     public ResponseEntity<List<String>> getSurveyReports(@RequestBody List<String> surveyRequest) {
 
-        return new ResponseEntity<>(surveyService.getSurveyReports(surveyRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(surveyService.getSurveyReports(surveyRequest), HttpStatus.OK);
     }
 }

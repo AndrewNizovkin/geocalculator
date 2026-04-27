@@ -232,8 +232,29 @@ class SurveyServiceImplTest {
             assertEquals(expectLine, actualLine);
         }
 
-
     }
+
+    @Test
+    void surveyToReportsTestBadRequest() {
+        String expectMessage = "Bad request!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+        List<String> badRequest = new ArrayList<>();
+        badRequest.add("asdfasefas");
+        badRequest.add("654654354135");
+
+        List<String> actualResponse = surveyService.getSurveyReports(badRequest);
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.get(0);
+        String actualMessage = actualResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+
 
     /**
      * Creates expect survey reports

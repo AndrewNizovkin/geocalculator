@@ -77,7 +77,7 @@ public class SurveyServiceImpl implements SurveyService {
     public List<String> getSurveyReports(List<String> surveyRequest) {
         surveyRepository.clearAll();
         if (!surveyMapper.surveyRequestToSurvey(surveyRequest, surveyRepository)) {
-            return List.of();
+            return surveyMapper.getErrorResponse("Bad request!");
         }
 
         calculateSurvey();

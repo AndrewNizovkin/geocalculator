@@ -397,7 +397,10 @@ public class SurveyMapperImpl implements SurveyMapper{
 
         while (!line.equals("//") && !surveyRequest.isEmpty()) {
             station = line.split("\\s+");
-            if (station.length != 9) continue;
+            if (station.length != 9) {
+                line = surveyRequest.removeFirst();
+                continue;
+            }
 
             SurveyStation surveyStation = surveyRepository.addNewStation();
             surveyStation.setStationName(station[0]);
@@ -431,5 +434,15 @@ public class SurveyMapperImpl implements SurveyMapper{
         if (surveyRepository.size() == 0) success = false;
 
         return success;
+    }
+
+    /**
+     * Creates error response
+     * @param message string message
+     * @return list of strings
+     */
+    @Override
+    public List<String> getErrorResponse(String message) {
+        return List.of("#error", message);
     }
 }
