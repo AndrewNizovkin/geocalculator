@@ -2207,10 +2207,10 @@
         <mxCell id="CJYxr8jrnQjgCnN5_ta2-43" parent="CJYxr8jrnQjgCnN5_ta2-39" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ size(): int" vertex="1">
           <mxGeometry height="26" width="250" y="95" as="geometry" />
         </mxCell>
-        <mxCell id="CJYxr8jrnQjgCnN5_ta2-44" parent="CJYxr8jrnQjgCnN5_ta2-39" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ addNewExtract(): Extract" vertex="1">
+        <mxCell id="CJYxr8jrnQjgCnN5_ta2-44" parent="CJYxr8jrnQjgCnN5_ta2-39" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ addNewExtraction(): Extraction" vertex="1">
           <mxGeometry height="26" width="250" y="121" as="geometry" />
         </mxCell>
-        <mxCell id="CJYxr8jrnQjgCnN5_ta2-45" parent="CJYxr8jrnQjgCnN5_ta2-39" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getExtractById(int): Extract" vertex="1">
+        <mxCell id="CJYxr8jrnQjgCnN5_ta2-45" parent="CJYxr8jrnQjgCnN5_ta2-39" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getExtractionById(int): Extraction" vertex="1">
           <mxGeometry height="26" width="250" y="147" as="geometry" />
         </mxCell>
         <mxCell id="CJYxr8jrnQjgCnN5_ta2-46" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&amp;lt;&amp;lt;repository&amp;gt;&amp;gt;" vertex="1">
@@ -2225,7 +2225,7 @@
         <mxCell id="CJYxr8jrnQjgCnN5_ta2-48" parent="CJYxr8jrnQjgCnN5_ta2-46" style="html=1;whiteSpace=wrap;" value="&lt;span style=&quot;font-weight: 700;&quot;&gt;ExtractRepositoryImpl&lt;/span&gt;" vertex="1">
           <mxGeometry height="35" width="260" y="26" as="geometry" />
         </mxCell>
-        <mxCell id="CJYxr8jrnQjgCnN5_ta2-49" parent="CJYxr8jrnQjgCnN5_ta2-46" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- extractions: List&amp;lt;Extract&amp;gt;" vertex="1">
+        <mxCell id="CJYxr8jrnQjgCnN5_ta2-49" parent="CJYxr8jrnQjgCnN5_ta2-46" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- extractions: List&amp;lt;Extraction&amp;gt;" vertex="1">
           <mxGeometry height="26" width="260" y="61" as="geometry" />
         </mxCell>
         <mxCell id="CJYxr8jrnQjgCnN5_ta2-50" parent="CJYxr8jrnQjgCnN5_ta2-46" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
