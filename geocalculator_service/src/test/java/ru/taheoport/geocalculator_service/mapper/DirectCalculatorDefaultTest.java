@@ -6,6 +6,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @SpringBootTest(classes = {DirectCalculatorDefault.class})
 class DirectCalculatorDefaultTest {
 
@@ -102,4 +104,48 @@ class DirectCalculatorDefaultTest {
 
         Assertions.assertEquals(expect, actualDeltaZ);
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "0, 0, 0",
+            "100000, 0, 100000",
+            "100000, 3723, 99984",
+            "100000, -3723, 99984",
+            "100000, 1, 100000",
+            "100000, 54061, 96585"
+    })
+    void getHorAngleTest(
+            long inclinedDistance,
+            long tiltAngle,
+            long expectHorAngle) {
+
+        long actualHorDistance = directCalculator.getHorDistance(
+                inclinedDistance,
+                tiltAngle
+        );
+
+        Assertions.assertEquals(expectHorAngle, actualHorDistance);
+    }
+
+
+    @ParameterizedTest
+    @CsvSource({
+            "0.124, 0",
+            "-0.124, 0",
+            "0.678, 1",
+            "-0.678, -1",
+            "0.546, 1",
+            "-0.546, -1",
+            "2.567, 3",
+            "-2.567, -3"
+    })
+    void doubleToLongTest(
+            double value,
+            long expectValue
+    ) {
+        long actualValue = directCalculator.doubleToLong(value);
+
+        assertEquals(expectValue, actualValue);
+    }
+
 }

@@ -41,5 +41,21 @@ public interface DirectCalculator {
      */
     long getDeltaZ(long inclinedDistance, long tiltAngle);
 
+    /**
+     * Defines the horizontal projection of inclined distance
+     * @param inclinedDistance inclined distance in millimeters
+     * @param tiltAngle tilt angle in seconds
+     * @return horizontal distance in millimeter
+     */
+    long getHorDistance(long inclinedDistance, long tiltAngle);
+
+    /**
+     * Converts double value to long
+     * @param value double value
+     * @return long value
+     */
+    long doubleToLong(double value);
+
+
 
 }

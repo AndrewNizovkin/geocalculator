@@ -40,7 +40,7 @@ public class DirectCalculatorDefault implements DirectCalculator{
         double deltaX = cos(toRadians((double) targetDirectionalAngle / 3600)) *
                 inclinedDistance *
                 cos(toRadians((double) tiltAngle / 3600));
-        return round(deltaX);
+        return doubleToLong(deltaX);
     }
 
     /**
@@ -55,12 +55,37 @@ public class DirectCalculatorDefault implements DirectCalculator{
         double deltaY = sin(toRadians((double) targetDirectionalAngle / 3600)) *
                 inclinedDistance *
                 cos(toRadians((double) tiltAngle / 3600));
-         return round(deltaY);
+        return doubleToLong(deltaY);
     }
 
     @Override
     public long getDeltaZ(long inclinedDistance, long tiltAngle) {
         double deltaZ = inclinedDistance * sin(toRadians((double) tiltAngle / 3600));
-        return round(deltaZ);
+        return doubleToLong(deltaZ);
+    }
+
+    /**
+     * Defines the horizontal projection of inclined distance
+     * @param inclinedDistance inclined distance in millimeters
+     * @param tiltAngle        tilt angle in seconds
+     * @return horizontal distance in millimeter
+     */
+    @Override
+    public long getHorDistance(long inclinedDistance, long tiltAngle) {
+        double horDistance = inclinedDistance * cos(toRadians((double) tiltAngle / 3600));
+        return doubleToLong(horDistance);
+    }
+
+    /**
+     * Converts double value to long
+     *
+     * @param value double value
+     * @return long value
+     */
+    @Override
+    public long doubleToLong(double value) {
+        double sign = Math.signum(value);
+        value = Math.abs(value);
+        return (long) sign * Math.round(value);
     }
 }

@@ -76,13 +76,6 @@ public interface PolygonCalculator {
     void setXYZ(int start, int end);
 
     /**
-     * Converts double value to long
-     * @param value double value
-     * @return long value
-     */
-    long doubleToLong(double value);
-
-    /**
      * Gets the angle of rotation of the actual position of the
      * extreme points of the polygon relative to the calculated ones
      * @return long angle in seconds

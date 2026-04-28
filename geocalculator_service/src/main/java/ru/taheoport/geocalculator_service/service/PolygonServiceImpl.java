@@ -59,22 +59,6 @@ public class PolygonServiceImpl implements PolygonService{
     }
 
     /**
-     * Calculates geodetic polygon
-     */
-    @Override
-    public void calculatePolygon() {
-        int sizePolygon = polygonRepository.size();
-
-        PolygonStation baseA = polygonRepository.getStationById(0);
-        PolygonStation baseB = polygonRepository.getStationById(1);
-        PolygonStation baseC = polygonRepository.getStationById(sizePolygon - 2);
-        PolygonStation baseD = polygonRepository.getStationById(sizePolygon - 1);
-
-//        baseA.setDirectionAngle();
-
-    }
-
-    /**
      * Clears all components
      */
     @Override

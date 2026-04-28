@@ -49,26 +49,6 @@ class PolygonCalculatorImplTest {
     @Autowired
     private InverseCalculator inverseCalculator;
 
-    @ParameterizedTest
-    @CsvSource({
-            "0.124, 0",
-            "-0.124, 0",
-            "0.678, 1",
-            "-0.678, -1",
-            "0.546, 1",
-            "-0.546, -1",
-            "2.567, 3",
-            "-2.567, -3"
-    })
-    void doubleToLongTest(
-            double value,
-            long expectValue
-    ) {
-        long actualValue = polygonCalculator.doubleToLong(value);
-
-        assertEquals(expectValue, actualValue);
-    }
-
     @Test
     void setBindTypeTestTT() {
         BindType expectBindType = BindType.TT;

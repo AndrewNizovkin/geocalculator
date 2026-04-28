@@ -17,11 +17,6 @@ public interface PolygonService {
     List<String> getPolygonReports(List<String> polygonResponse);
 
     /**
-     * Calculates geodetic polygon
-     */
-    void calculatePolygon();
-
-    /**
      * Clears all components
      */
     void clearAll();

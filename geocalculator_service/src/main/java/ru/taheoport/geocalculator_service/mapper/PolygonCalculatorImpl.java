@@ -230,7 +230,7 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
         long actualDirectionAngle;
         if (start < end) {
             for (int i = start; i <= end; i++) {
-                correctionAngle = doubleToLong(polygonRepository.getStationById(i).getCorrectionHorAngle());
+                correctionAngle = directCalculator.doubleToLong(polygonRepository.getStationById(i).getCorrectionHorAngle());
                 actualDirectionAngle = polygonRepository.getStationById(i - 1).getDirectionAngle() +
                         polygonRepository.getStationById(i).getHorAngle() +
                         648000 +
@@ -321,8 +321,8 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
 
         for (int i = start; i <= end; i++) {
             PolygonStation station = polygonRepository.getStationById(i);
-            station.setCorrectionX(doubleToLong(ratioX * (double) station.getHorDistance()));
-            station.setCorrectionY(doubleToLong(ratioY * (double) station.getHorDistance()));
+            station.setCorrectionX(directCalculator.doubleToLong(ratioX * (double) station.getHorDistance()));
+            station.setCorrectionY(directCalculator.doubleToLong(ratioY * (double) station.getHorDistance()));
         }
     }
 
@@ -348,7 +348,7 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
         for (int i = start; i <= end; i++) {
             PolygonStation station = polygonRepository.getStationById(i);
             station.setCorrectionZ(ratioZ * (double) station.getHorDistance());
-            station.setElevationCorrected(station.getElevation() + doubleToLong(station.getCorrectionZ()));
+            station.setElevationCorrected(station.getElevation() + directCalculator.doubleToLong(station.getCorrectionZ()));
         }
     }
 
@@ -384,7 +384,7 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
                 station.setStationZ(
                         backStation.getStationZ() +
                                 backStation.getElevation() +
-                                doubleToLong(backStation.getCorrectionZ())
+                                directCalculator.doubleToLong(backStation.getCorrectionZ())
                 );
             }
         } else {
@@ -407,24 +407,12 @@ public class PolygonCalculatorImpl implements PolygonCalculator{
                 station.setStationZ(
                         backStation.getStationZ() -
                                 station.getElevation() -
-                                doubleToLong(station.getCorrectionZ())
+                                directCalculator.doubleToLong(station.getCorrectionZ())
                 );
             }
 
         }
 
-    }
-
-    /**
-     * Converts double value to long
-     * @param value double value
-     * @return long value
-     */
-    @Override
-    public long doubleToLong(double value) {
-        double sign = Math.signum(value);
-        value = Math.abs(value);
-        return (long) sign * Math.round(value);
     }
 
     /**
