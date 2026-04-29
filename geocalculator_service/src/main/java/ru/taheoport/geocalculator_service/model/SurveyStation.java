@@ -69,7 +69,7 @@ public class SurveyStation {
     /**
      * Collection of measurements of this survey station
      */
-    private List<Measurement> measurements = new ArrayList<>();
+    private List<Target> targets = new ArrayList<>();
 
 
 }

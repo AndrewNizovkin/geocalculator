@@ -1,14 +1,12 @@
 package ru.taheoport.geocalculator_service.repository;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.taheoport.geocalculator_service.model.Measurement;
+import ru.taheoport.geocalculator_service.model.Target;
 import ru.taheoport.geocalculator_service.model.SurveyStation;
-import ru.taheoport.geocalculator_service.validator.ValidatorDefault;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -106,7 +104,7 @@ class SurveyRepositoryImplTest {
         expectSurveyStation.setOrY(orY);
         expectSurveyStation.setBaseDirectionAngle(baseDirectionAngle);
         for (int i = 0; i < expectMeasurementSize; i++) {
-            expectSurveyStation.getMeasurements().add(new Measurement());
+            expectSurveyStation.getTargets().add(new Target());
         }
 
         int actualStationIndex = surveyRepository.size() - 1;
@@ -149,36 +147,36 @@ class SurveyRepositoryImplTest {
     ) {
         surveyRepository.addNewStation();
         int currentStationIndex = surveyRepository.size() - 1;
-        Measurement expectMeasurement = surveyRepository.addNewMeasurement(currentStationIndex);
-        expectMeasurement.setTargetName(targetName);
-        expectMeasurement.setTargetDirection(targetDirection);
-        expectMeasurement.setTargetInclinedDistance(targetInclinedDistance);
-        expectMeasurement.setTargetTiltAngle(targetTiltAngle);
-        expectMeasurement.setTargetHeight(targetHeight);
-        expectMeasurement.setTargetHorizontalDistance(targetHorizontalDistance);
-        expectMeasurement.setTargetDirectionAngle(targetDirectionAngle);
-        expectMeasurement.setTargetDeltaX(targetDeltaX);
-        expectMeasurement.setTargetDeltaY(targetDeltaY);
-        expectMeasurement.setTargetDeltaZ(targetDeltaZ);
-        expectMeasurement.setTargetX(targetX);
-        expectMeasurement.setTargetY(targetY);
-        expectMeasurement.setTargetZ(targetZ);
+        Target expectTarget = surveyRepository.addNewMeasurement(currentStationIndex);
+        expectTarget.setTargetName(targetName);
+        expectTarget.setTargetDirection(targetDirection);
+        expectTarget.setTargetInclinedDistance(targetInclinedDistance);
+        expectTarget.setTargetTiltAngle(targetTiltAngle);
+        expectTarget.setTargetHeight(targetHeight);
+        expectTarget.setTargetHorizontalDistance(targetHorizontalDistance);
+        expectTarget.setTargetDirectionAngle(targetDirectionAngle);
+        expectTarget.setTargetDeltaX(targetDeltaX);
+        expectTarget.setTargetDeltaY(targetDeltaY);
+        expectTarget.setTargetDeltaZ(targetDeltaZ);
+        expectTarget.setTargetX(targetX);
+        expectTarget.setTargetY(targetY);
+        expectTarget.setTargetZ(targetZ);
 
         int actualMeasurementIndex = surveyRepository.measurementSize(currentStationIndex) - 1;
 
-        assertEquals(expectMeasurement.getTargetName(), surveyRepository.getTargetName(currentStationIndex, actualMeasurementIndex));
-        assertEquals(expectMeasurement.getTargetDirection(), surveyRepository.getTargetDirection(currentStationIndex, actualMeasurementIndex));
-        assertEquals(expectMeasurement.getTargetInclinedDistance(), surveyRepository.getTargetInclinedDistance(currentStationIndex, actualMeasurementIndex));
-        assertEquals(expectMeasurement.getTargetTiltAngle(), surveyRepository.getTargetTiltAngle(currentStationIndex, actualMeasurementIndex));
-        assertEquals(expectMeasurement.getTargetHeight(), surveyRepository.getTargetHeight(currentStationIndex, actualMeasurementIndex));
-        assertEquals(expectMeasurement.getTargetHorizontalDistance(), surveyRepository.getTargetHorizontalDistance(currentStationIndex, actualMeasurementIndex));
-        assertEquals(expectMeasurement.getTargetDirectionAngle(), surveyRepository.getTargetDirectionAngle(currentStationIndex, actualMeasurementIndex));
-        assertEquals(expectMeasurement.getTargetDeltaX(), surveyRepository.getTargetDeltaX(currentStationIndex, actualMeasurementIndex));
-        assertEquals(expectMeasurement.getTargetDeltaY(), surveyRepository.getTargetDeltaY(currentStationIndex, actualMeasurementIndex));
-        assertEquals(expectMeasurement.getTargetDeltaZ(), surveyRepository.getTargetDeltaZ(currentStationIndex, actualMeasurementIndex));
-        assertEquals(expectMeasurement.getTargetX(), surveyRepository.getTargetX(currentStationIndex, actualMeasurementIndex));
-        assertEquals(expectMeasurement.getTargetY(), surveyRepository.getTargetY(currentStationIndex, actualMeasurementIndex));
-        assertEquals(expectMeasurement.getTargetZ(), surveyRepository.getTargetZ(currentStationIndex, actualMeasurementIndex));
+        assertEquals(expectTarget.getTargetName(), surveyRepository.getTargetName(currentStationIndex, actualMeasurementIndex));
+        assertEquals(expectTarget.getTargetDirection(), surveyRepository.getTargetDirection(currentStationIndex, actualMeasurementIndex));
+        assertEquals(expectTarget.getTargetInclinedDistance(), surveyRepository.getTargetInclinedDistance(currentStationIndex, actualMeasurementIndex));
+        assertEquals(expectTarget.getTargetTiltAngle(), surveyRepository.getTargetTiltAngle(currentStationIndex, actualMeasurementIndex));
+        assertEquals(expectTarget.getTargetHeight(), surveyRepository.getTargetHeight(currentStationIndex, actualMeasurementIndex));
+        assertEquals(expectTarget.getTargetHorizontalDistance(), surveyRepository.getTargetHorizontalDistance(currentStationIndex, actualMeasurementIndex));
+        assertEquals(expectTarget.getTargetDirectionAngle(), surveyRepository.getTargetDirectionAngle(currentStationIndex, actualMeasurementIndex));
+        assertEquals(expectTarget.getTargetDeltaX(), surveyRepository.getTargetDeltaX(currentStationIndex, actualMeasurementIndex));
+        assertEquals(expectTarget.getTargetDeltaY(), surveyRepository.getTargetDeltaY(currentStationIndex, actualMeasurementIndex));
+        assertEquals(expectTarget.getTargetDeltaZ(), surveyRepository.getTargetDeltaZ(currentStationIndex, actualMeasurementIndex));
+        assertEquals(expectTarget.getTargetX(), surveyRepository.getTargetX(currentStationIndex, actualMeasurementIndex));
+        assertEquals(expectTarget.getTargetY(), surveyRepository.getTargetY(currentStationIndex, actualMeasurementIndex));
+        assertEquals(expectTarget.getTargetZ(), surveyRepository.getTargetZ(currentStationIndex, actualMeasurementIndex));
     }
 
 }

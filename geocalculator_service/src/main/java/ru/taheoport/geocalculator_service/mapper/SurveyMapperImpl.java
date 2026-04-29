@@ -2,7 +2,7 @@ package ru.taheoport.geocalculator_service.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.taheoport.geocalculator_service.model.Measurement;
+import ru.taheoport.geocalculator_service.model.Target;
 import ru.taheoport.geocalculator_service.model.SurveyStation;
 import ru.taheoport.geocalculator_service.repository.SurveyRepository;
 
@@ -91,7 +91,7 @@ public class SurveyMapperImpl implements SurveyMapper{
                         station.setStationHeight(dataMapper.leicaToMillimeter(stringBuffer[5]));
                     }
 
-                    Measurement target = surveyRepository.addNewMeasurement(surveyRepository.size() - 1);
+                    Target target = surveyRepository.addNewMeasurement(surveyRepository.size() - 1);
                     target.setTargetName(dataMapper.removeFirstZero(stringBuffer[0]));
                     target.setTargetInclinedDistance(dataMapper.leicaToMillimeter(stringBuffer[1]));
                     target.setTargetDirection(dataMapper.leicaToDirection(stringBuffer[2], 1));
@@ -134,7 +134,7 @@ public class SurveyMapperImpl implements SurveyMapper{
 
                 case "SS" -> {
                     if (surveyRepository.size() > 0 ) {
-                        Measurement target = surveyRepository.addNewMeasurement(surveyRepository.size() - 1);
+                        Target target = surveyRepository.addNewMeasurement(surveyRepository.size() - 1);
                         target.setTargetName(linesArray[7]);
                         target.setTargetInclinedDistance(dataMapper.meterToMillimeter(linesArray[3]));
                         target.setTargetDirection(dataMapper.dmsToSeconds(linesArray[4]));
@@ -179,7 +179,7 @@ public class SurveyMapperImpl implements SurveyMapper{
                 targets = station.substring(station.indexOf("_+") + 2)
                         .split("_\\+");
                 for (String target : targets) {
-                    Measurement measurement = surveyRepository.addNewMeasurement(surveyRepository.size() - 1);
+                    Target measurement = surveyRepository.addNewMeasurement(surveyRepository.size() - 1);
                     measurement.setTargetName(target.substring(0, target.indexOf('_')));
 
                     measurements = target
@@ -423,7 +423,7 @@ public class SurveyMapperImpl implements SurveyMapper{
             if (target.length != 6) continue;
 
             stationIndex = Integer.parseInt(target[5]);
-            Measurement measurement = surveyRepository.addNewMeasurement(stationIndex);
+            Target measurement = surveyRepository.addNewMeasurement(stationIndex);
             measurement.setTargetName(target[0]);
             measurement.setTargetInclinedDistance(dataMapper.meterToMillimeter(target[1]));
             measurement.setTargetDirection(dataMapper.dmsToSeconds(target[2]));

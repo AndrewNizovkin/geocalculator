@@ -1,6 +1,6 @@
 package ru.taheoport.geocalculator_service.repository;
 
-import ru.taheoport.geocalculator_service.model.Measurement;
+import ru.taheoport.geocalculator_service.model.Target;
 import ru.taheoport.geocalculator_service.model.SurveyStation;
 
 /**
@@ -37,7 +37,7 @@ public interface SurveyRepository {
      * @param stationIndex int
      * @return instance of Measurement that was added
      */
-    Measurement addNewMeasurement(int stationIndex);
+    Target addNewMeasurement(int stationIndex);
 
     /**
      * Gets name of station with specified index

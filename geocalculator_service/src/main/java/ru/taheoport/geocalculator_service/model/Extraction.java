@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This class encapsulates the data extracted
  * from the geodetic survey to build the polygon.
@@ -22,56 +25,6 @@ public class Extraction {
      * Height of total station over point
      */
     private long stationHeight = 0;
-
-    /**
-     * Name of back point
-     */
-    private String backName = "noname";
-
-    /**
-     * Direction to back point in seconds
-     */
-    private long backDirection = 0;
-
-    /**
-     * Inclined distance from station to back point in millimeters
-     */
-    private long backInclinedDistance = 0;
-
-    /**
-     * Tilt angle line from station to back point in seconds
-     */
-    private long backTiltAngle = 0;
-
-    /**
-     * Height of the reflector over back point in millimeters
-     */
-    private long backHeight = 0;
-
-    /**
-     * Name of front point
-     */
-    private String frontName = "noname";
-
-    /**
-     * Direction to front point in seconds
-     */
-    private long frontDirection = 0;
-
-    /**
-     * Inclined distance from station to front point in millimeters
-     */
-    private long frontInclinedDistance = 0;
-
-    /**
-     * Tilt angle line from station to front point in seconds
-     */
-    private long frontTiltAngle = 0;
-
-    /**
-     * Height of the reflector over front point in millimeters
-     */
-    private long frontHeight = 0;
 
     /**
      * The horizontal angle between
@@ -123,5 +76,9 @@ public class Extraction {
      */
     private long deltaElevation = 0;
 
+    /**
+     * Geodetic measurement collection
+     */
+    private List<Measurement> measurements = new ArrayList<>();
 
 }

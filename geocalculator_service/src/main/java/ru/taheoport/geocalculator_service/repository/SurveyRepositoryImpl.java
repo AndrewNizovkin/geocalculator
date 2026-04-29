@@ -1,7 +1,7 @@
 package ru.taheoport.geocalculator_service.repository;
 
 import org.springframework.stereotype.Repository;
-import ru.taheoport.geocalculator_service.model.Measurement;
+import ru.taheoport.geocalculator_service.model.Target;
 import ru.taheoport.geocalculator_service.model.SurveyStation;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public int measurementSize(int stationIndex) {
-        return surveyStations.get(stationIndex).getMeasurements().size();
+        return surveyStations.get(stationIndex).getTargets().size();
     }
 
     /**
@@ -61,10 +61,10 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      * @return instance of Measurement that was added
      */
     @Override
-    public Measurement addNewMeasurement(int stationIndex) {
-        Measurement measurement = new Measurement();
-        surveyStations.get(stationIndex).getMeasurements().add(measurement);
-        return measurement;
+    public Target addNewMeasurement(int stationIndex) {
+        Target target = new Target();
+        surveyStations.get(stationIndex).getTargets().add(target);
+        return target;
     }
 
     /**
@@ -288,7 +288,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public String getTargetName(int stationIndex, int targetIndex) {
-        return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetName();
+        return surveyStations.get(stationIndex).getTargets().get(targetIndex).getTargetName();
     }
 
     /**
@@ -300,7 +300,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public void saveTargetName(int stationIndex, int targetIndex, String targetName) {
-        surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetName(targetName);
+        surveyStations.get(stationIndex).getTargets().get(targetIndex).setTargetName(targetName);
     }
 
     /**
@@ -312,7 +312,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public long getTargetDirection(int stationIndex, int targetIndex) {
-        return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetDirection();
+        return surveyStations.get(stationIndex).getTargets().get(targetIndex).getTargetDirection();
     }
 
     /**
@@ -324,7 +324,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public void saveTargetDirection(int stationIndex, int targetIndex, long targetDirection) {
-        surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetDirection(targetDirection);
+        surveyStations.get(stationIndex).getTargets().get(targetIndex).setTargetDirection(targetDirection);
     }
 
     /**
@@ -336,7 +336,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public long getTargetInclinedDistance(int stationIndex, int targetIndex) {
-        return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetInclinedDistance();
+        return surveyStations.get(stationIndex).getTargets().get(targetIndex).getTargetInclinedDistance();
     }
 
     /**
@@ -348,7 +348,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public void saveTargetInclinedDistance(int stationIndex, int targetIndex, long targetInclinedDistance) {
-        surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetInclinedDistance(targetInclinedDistance);
+        surveyStations.get(stationIndex).getTargets().get(targetIndex).setTargetInclinedDistance(targetInclinedDistance);
     }
 
     /**
@@ -361,7 +361,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public long getTargetTiltAngle(int stationIndex, int targetIndex) {
-        return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetTiltAngle();
+        return surveyStations.get(stationIndex).getTargets().get(targetIndex).getTargetTiltAngle();
     }
 
     /**
@@ -373,7 +373,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public void saveTargetTiltAngle(int stationIndex, int targetIndex, long targetTiltAngle) {
-        surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetTiltAngle(targetTiltAngle);
+        surveyStations.get(stationIndex).getTargets().get(targetIndex).setTargetTiltAngle(targetTiltAngle);
     }
 
     /**
@@ -385,7 +385,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public long getTargetHeight(int stationIndex, int targetIndex) {
-        return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetHeight();
+        return surveyStations.get(stationIndex).getTargets().get(targetIndex).getTargetHeight();
     }
 
     /**
@@ -397,7 +397,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public void saveTargetHeight(int stationIndex, int targetIndex, long targetHeight) {
-        surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetHeight(targetHeight);
+        surveyStations.get(stationIndex).getTargets().get(targetIndex).setTargetHeight(targetHeight);
     }
 
     /**
@@ -409,7 +409,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public long getTargetHorizontalDistance(int stationIndex, int targetIndex) {
-        return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetHorizontalDistance();
+        return surveyStations.get(stationIndex).getTargets().get(targetIndex).getTargetHorizontalDistance();
     }
 
     /**
@@ -421,7 +421,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public void saveTargetHorizontalDistance(int stationIndex, int targetIndex, long targetHorizontalDistance) {
-        surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetHorizontalDistance(targetHorizontalDistance);
+        surveyStations.get(stationIndex).getTargets().get(targetIndex).setTargetHorizontalDistance(targetHorizontalDistance);
     }
 
     /**
@@ -433,7 +433,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public long getTargetDirectionAngle(int stationIndex, int targetIndex) {
-        return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetDirectionAngle();
+        return surveyStations.get(stationIndex).getTargets().get(targetIndex).getTargetDirectionAngle();
     }
 
     /**
@@ -445,7 +445,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public void saveTargetDirectionAngle(int stationIndex, int targetIndex, long targetDirectionAngle) {
-        surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetDirectionAngle(targetDirectionAngle);
+        surveyStations.get(stationIndex).getTargets().get(targetIndex).setTargetDirectionAngle(targetDirectionAngle);
     }
 
     /**
@@ -457,7 +457,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public long getTargetDeltaX(int stationIndex, int targetIndex) {
-        return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetDeltaX();
+        return surveyStations.get(stationIndex).getTargets().get(targetIndex).getTargetDeltaX();
     }
 
     /**
@@ -469,7 +469,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public void saveTargetDeltaX(int stationIndex, int targetIndex, long targetDeltaX) {
-        surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetDeltaX(targetDeltaX);
+        surveyStations.get(stationIndex).getTargets().get(targetIndex).setTargetDeltaX(targetDeltaX);
     }
 
     /**
@@ -481,7 +481,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public long getTargetDeltaY(int stationIndex, int targetIndex) {
-        return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetDeltaY();
+        return surveyStations.get(stationIndex).getTargets().get(targetIndex).getTargetDeltaY();
     }
 
     /**
@@ -493,7 +493,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public void saveTargetDeltaY(int stationIndex, int targetIndex, long targetDeltaY) {
-        surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetDeltaY(targetDeltaY);
+        surveyStations.get(stationIndex).getTargets().get(targetIndex).setTargetDeltaY(targetDeltaY);
     }
 
     /**
@@ -505,7 +505,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public long getTargetDeltaZ(int stationIndex, int targetIndex) {
-        return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetDeltaZ();
+        return surveyStations.get(stationIndex).getTargets().get(targetIndex).getTargetDeltaZ();
     }
 
     /**
@@ -517,7 +517,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public void saveTargetDeltaZ(int stationIndex, int targetIndex, long targetDeltaZ) {
-        surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetDeltaZ(targetDeltaZ);
+        surveyStations.get(stationIndex).getTargets().get(targetIndex).setTargetDeltaZ(targetDeltaZ);
     }
 
     /**
@@ -529,7 +529,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public long getTargetX(int stationIndex, int targetIndex) {
-        return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetX();
+        return surveyStations.get(stationIndex).getTargets().get(targetIndex).getTargetX();
     }
 
     /**
@@ -541,7 +541,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public void saveTargetX(int stationIndex, int targetIndex, long targetX) {
-        surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetX(targetX);
+        surveyStations.get(stationIndex).getTargets().get(targetIndex).setTargetX(targetX);
 
     }
 
@@ -554,7 +554,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public long getTargetY(int stationIndex, int targetIndex) {
-        return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetY();
+        return surveyStations.get(stationIndex).getTargets().get(targetIndex).getTargetY();
     }
 
     /**
@@ -566,7 +566,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public void saveTargetY(int stationIndex, int targetIndex, long targetY) {
-        surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetY(targetY);
+        surveyStations.get(stationIndex).getTargets().get(targetIndex).setTargetY(targetY);
     }
 
     /**
@@ -578,7 +578,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public long getTargetZ(int stationIndex, int targetIndex) {
-        return surveyStations.get(stationIndex).getMeasurements().get(targetIndex).getTargetZ();
+        return surveyStations.get(stationIndex).getTargets().get(targetIndex).getTargetZ();
     }
 
     /**
@@ -590,6 +590,6 @@ public class SurveyRepositoryImpl implements SurveyRepository {
      */
     @Override
     public void saveTargetZ(int stationIndex, int targetIndex, long targetZ) {
-        surveyStations.get(stationIndex).getMeasurements().get(targetIndex).setTargetZ(targetZ);
+        surveyStations.get(stationIndex).getTargets().get(targetIndex).setTargetZ(targetZ);
     }
 }

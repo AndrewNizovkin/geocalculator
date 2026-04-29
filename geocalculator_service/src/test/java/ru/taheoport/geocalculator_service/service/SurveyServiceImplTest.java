@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.taheoport.geocalculator_service.mapper.*;
-import ru.taheoport.geocalculator_service.model.Measurement;
+import ru.taheoport.geocalculator_service.model.Target;
 import ru.taheoport.geocalculator_service.model.SurveyStation;
 import ru.taheoport.geocalculator_service.repository.SurveyRepository;
 import ru.taheoport.geocalculator_service.repository.SurveyRepositoryImpl;
@@ -520,19 +520,19 @@ class SurveyServiceImplTest {
         surveyStation.setOrX(478685352L);
         surveyStation.setOrY(2296938168L);
 
-        Measurement measurement = surveyRepository.addNewMeasurement(stationIndex);
-        measurement.setTargetName("1302");
-        measurement.setTargetDirection(1295993L);
-        measurement.setTargetInclinedDistance(30526L);
-        measurement.setTargetTiltAngle(1809L);
-        measurement.setTargetHeight(1600L);
+        Target target = surveyRepository.addNewMeasurement(stationIndex);
+        target.setTargetName("1302");
+        target.setTargetDirection(1295993L);
+        target.setTargetInclinedDistance(30526L);
+        target.setTargetTiltAngle(1809L);
+        target.setTargetHeight(1600L);
 
-        measurement = surveyRepository.addNewMeasurement(stationIndex);
-        measurement.setTargetName("T100");
-        measurement.setTargetDirection(668748L);
-        measurement.setTargetInclinedDistance(39878L);
-        measurement.setTargetTiltAngle(406L);
-        measurement.setTargetHeight(1600L);
+        target = surveyRepository.addNewMeasurement(stationIndex);
+        target.setTargetName("T100");
+        target.setTargetDirection(668748L);
+        target.setTargetInclinedDistance(39878L);
+        target.setTargetTiltAngle(406L);
+        target.setTargetHeight(1600L);
 
         surveyStation =  surveyRepository.addNewStation();
         stationIndex++;
@@ -546,12 +546,12 @@ class SurveyServiceImplTest {
         surveyStation.setOrX(478676113L);
         surveyStation.setOrY(2296967264L);
 
-        measurement = surveyRepository.addNewMeasurement(stationIndex);
-        measurement.setTargetName("74");
-        measurement.setTargetDirection(623026L);
-        measurement.setTargetInclinedDistance(45491L);
-        measurement.setTargetTiltAngle(-429L);
-        measurement.setTargetHeight(1600L);
+        target = surveyRepository.addNewMeasurement(stationIndex);
+        target.setTargetName("74");
+        target.setTargetDirection(623026L);
+        target.setTargetInclinedDistance(45491L);
+        target.setTargetTiltAngle(-429L);
+        target.setTargetHeight(1600L);
 
         surveyStation =  surveyRepository.addNewStation();
         stationIndex++;
@@ -565,25 +565,25 @@ class SurveyServiceImplTest {
         surveyStation.setOrX(478660283L);
         surveyStation.setOrY(2297003862L);
 
-        measurement = surveyRepository.addNewMeasurement(stationIndex);
-        measurement.setTargetName("999");
-        measurement.setTargetDirection(590160L);
-        measurement.setTargetInclinedDistance(43599L);
-        measurement.setTargetTiltAngle(31001L);
-        measurement.setTargetHeight(0L);
+        target = surveyRepository.addNewMeasurement(stationIndex);
+        target.setTargetName("999");
+        target.setTargetDirection(590160L);
+        target.setTargetInclinedDistance(43599L);
+        target.setTargetTiltAngle(31001L);
+        target.setTargetHeight(0L);
 
-        measurement = surveyRepository.addNewMeasurement(stationIndex);
-        measurement.setTargetName("12");
-        measurement.setTargetDirection(590716L);
-        measurement.setTargetInclinedDistance(43594L);
-        measurement.setTargetTiltAngle(30742L);
-        measurement.setTargetHeight(2000000L);
+        target = surveyRepository.addNewMeasurement(stationIndex);
+        target.setTargetName("12");
+        target.setTargetDirection(590716L);
+        target.setTargetInclinedDistance(43594L);
+        target.setTargetTiltAngle(30742L);
+        target.setTargetHeight(2000000L);
 
-        measurement = surveyRepository.addNewMeasurement(stationIndex);
-        measurement.setTargetName("40");
-        measurement.setTargetDirection(526726L);
-        measurement.setTargetInclinedDistance(30114L);
-        measurement.setTargetTiltAngle(8484L);
-        measurement.setTargetHeight(2000000L);
+        target = surveyRepository.addNewMeasurement(stationIndex);
+        target.setTargetName("40");
+        target.setTargetDirection(526726L);
+        target.setTargetInclinedDistance(30114L);
+        target.setTargetTiltAngle(8484L);
+        target.setTargetHeight(2000000L);
     }
 }

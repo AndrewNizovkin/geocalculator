@@ -78,4 +78,79 @@ class PolygonRepositoryImplTest {
         assertEquals(expectStatus, actualPolygonStation.isStatus());
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "0, 3",
+            "3, 0",
+            "3, 3"
+    })
+    void getStationByIdValidID(
+            int before,
+            int after
+    ) {
+        for (int i = 0; i < before; i++) {
+            polygonRepository.addNewStation();
+        }
+        PolygonStation expectStation = polygonRepository.addNewStation();
+        expectStation.setStationName("expectStation");
+        expectStation.setHorAngle(345);
+        expectStation.setHorDistance(100000);
+        expectStation.setElevation(456);
+        expectStation.setStationX(33334455);
+        expectStation.setStationY(2323232);
+        expectStation.setStationZ(3333333);
+        expectStation.setStatus(true);
+        expectStation.setCorrectionHorAngle(23.2323444443);
+        expectStation.setDirectionAngle(3433);
+        expectStation.setDeltaX(33333);
+        expectStation.setDeltaY(-556);
+        expectStation.setElevationCorrected(234565);
+        expectStation.setCorrectionX(23);
+        expectStation.setCorrectionY(-5);
+        expectStation.setCorrectionZ(2.2323232323);
+        int actualIndex = polygonRepository.size() - 1;
+        for (int i = 0; i < after; i++) {
+            polygonRepository.addNewStation();
+        }
+
+        PolygonStation actualStation = polygonRepository.getStationById(actualIndex);
+
+        assertEquals(expectStation.getStationName(), actualStation.getStationName());
+        assertEquals(expectStation.getHorAngle(), actualStation.getHorAngle());
+        assertEquals(expectStation.getHorDistance(), actualStation.getHorDistance());
+        assertEquals(expectStation.getElevation(), actualStation.getElevation());
+        assertEquals(expectStation.getStationX(), actualStation.getStationX());
+        assertEquals(expectStation.getStationY(), actualStation.getStationY());
+        assertEquals(expectStation.getStationZ(), actualStation.getStationZ());
+        assertEquals(expectStation.isStatus(), actualStation.isStatus());
+        assertEquals(expectStation.getCorrectionHorAngle(), actualStation.getCorrectionHorAngle());
+        assertEquals(expectStation.getDirectionAngle(), actualStation.getDirectionAngle());
+        assertEquals(expectStation.getDeltaX(), actualStation.getDeltaX());
+        assertEquals(expectStation.getDeltaY(), actualStation.getDeltaY());
+        assertEquals(expectStation.getElevationCorrected(), actualStation.getElevationCorrected());
+        assertEquals(expectStation.getCorrectionX(), actualStation.getCorrectionX());
+        assertEquals(expectStation.getCorrectionY(), actualStation.getCorrectionY());
+        assertEquals(expectStation.getCorrectionZ(), actualStation.getCorrectionZ());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "0, 0",
+            "3, 3",
+            "3, 4",
+            "3, -1"
+    })
+    void getStationByIdInvalidID(
+            int before,
+            int badIndex
+    ) {
+        for (int i = 0; i < before; i++) {
+            polygonRepository.addNewStation();
+        }
+
+        PolygonStation actualStation = polygonRepository.getStationById(badIndex);
+
+        assertNull(actualStation);
+    }
+
 }

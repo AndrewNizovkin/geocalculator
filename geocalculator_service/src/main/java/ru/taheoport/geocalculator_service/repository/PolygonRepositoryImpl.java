@@ -56,7 +56,7 @@ public class PolygonRepositoryImpl implements PolygonRepository{
      */
     @Override
     public PolygonStation getStationById(int stationIndex) {
-        if (!polygonStations.isEmpty() && stationIndex < polygonStations.size()) {
+        if (stationIndex >= 0 && stationIndex < polygonStations.size()) {
             return polygonStations.get(stationIndex);
         } else {
             return null;
