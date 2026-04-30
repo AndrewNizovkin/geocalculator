@@ -20,7 +20,7 @@ public interface PolygonMapper {
     boolean polygonRequestToPolygon(List<String> polygonRequest);
 
     /**
-     * Creates response contains processing reports
+         * Creates response contains processing reports
      * @return List of strings
      */
     List<String> polygonToPolygonResponse();

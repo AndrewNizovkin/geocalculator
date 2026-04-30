@@ -113,30 +113,113 @@ class ExtractRepositoryImplTest {
 
     @Test
     void addNewMeasurementTest() {
+        Extraction extraction = extractRepository.addNewExtraction();
+        int actualIndexExtraction = extractRepository.size() - 1;
+        Measurement expectMeasurement = extractRepository.addNewMeasurement(actualIndexExtraction);
+        fillTestMeasurement(expectMeasurement);
 
+
+        Measurement actualMeasurement = extraction.getMeasurements().getLast();
+
+        assertNotNull(actualMeasurement);
+        assertEquals(expectMeasurement.getTargetName(), actualMeasurement.getTargetName());
+        assertEquals(expectMeasurement.getTargetDirection(), actualMeasurement.getTargetDirection());
+        assertEquals(expectMeasurement.getTargetInclinedDistance(), actualMeasurement.getTargetInclinedDistance());
+        assertEquals(expectMeasurement.getTargetTiltAngle(), actualMeasurement.getTargetTiltAngle());
+        assertEquals(expectMeasurement.getTargetHeight(), actualMeasurement.getTargetHeight());
     }
 
-    @Test
-    void addNewMeasurementBadExtractionIndexTest() {
+    @ParameterizedTest
+    @CsvSource({
+            "0, 0",
+            "3, 3",
+            "3, 4",
+            "3, -1"
+    })
+    void addNewMeasurementBadExtractionIndexTest(
+            int before,
+            int badIndex
+    ) {
+        for (int i = 0; i < before; i++) {
+            extractRepository.addNewExtraction();
+        }
 
+        Measurement actualMeasurement = extractRepository.addNewMeasurement(badIndex);
+
+        assertNull(actualMeasurement);
     }
 
 
-    @Test
-    void getMeasurementByIdTest() {
+    @ParameterizedTest
+    @CsvSource({
+            "0, 3",
+            "3, 0",
+            "3, 3"
+    })
+    void getMeasurementByIdTest(int before, int after) {
+        Extraction extraction = extractRepository.addNewExtraction();
+        int indexExtraction = extractRepository.size() - 1;
+        for (int i = 0; i < before; i++) {
+            extractRepository.addNewMeasurement(indexExtraction);
+        }
+        Measurement expectMeasurement = fillTestMeasurement(extractRepository.addNewMeasurement(indexExtraction));
+        int indexMeasurement = extraction.getMeasurements().size() - 1;
+        for (int i = 0; i < after; i++) {
+            extractRepository.addNewExtraction();
+        }
 
+        Measurement actualMeasurement = extractRepository.getMeasurementById(indexExtraction, indexMeasurement);
+
+        assertNotNull(actualMeasurement);
+        assertEquals(expectMeasurement.getTargetName(), actualMeasurement.getTargetName());
+        assertEquals(expectMeasurement.getTargetDirection(), actualMeasurement.getTargetDirection());
+        assertEquals(expectMeasurement.getTargetInclinedDistance(), actualMeasurement.getTargetInclinedDistance());
+        assertEquals(expectMeasurement.getTargetTiltAngle(), actualMeasurement.getTargetTiltAngle());
+        assertEquals(expectMeasurement.getTargetHeight(), actualMeasurement.getTargetHeight());
     }
 
-    @Test
-    void getMeasurementByIdBadExtractionIndexTest() {
+    @ParameterizedTest
+    @CsvSource({
+            "0, 0",
+            "3, 3",
+            "3, 4",
+            "3, -1"
+    })
+    void getMeasurementByIdBadExtractionIndexTest(
+            int before,
+            int badIndex
+    ) {
+        for (int i = 0; i < before; i++) {
+            extractRepository.addNewExtraction();
+            extractRepository.addNewMeasurement(extractRepository.size() - 1);
+        }
 
+        Measurement actualMeasurement = extractRepository.getMeasurementById(badIndex, 0);
+
+        assertNull(actualMeasurement);
     }
 
-    @Test
-    void getMeasurementByIdBadMeasurementIndexTest() {
+    @ParameterizedTest
+    @CsvSource({
+            "0, 0",
+            "3, 3",
+            "3, 4",
+            "3, -1"
+    })
+    void getMeasurementByIdBadMeasurementIndexTest(
+            int before,
+            int badIndex
+    ) {
+        extractRepository.addNewExtraction();
+        int indexExtraction = extractRepository.size() - 1;
+        for (int i = 0; i < before; i++) {
+            extractRepository.addNewMeasurement(indexExtraction);
+        }
 
+        Measurement actualMeasurement = extractRepository.getMeasurementById(indexExtraction, badIndex);
+
+        assertNull(actualMeasurement);
     }
-
 
     /**
      * Fills the Extraction instance with test data
@@ -161,7 +244,7 @@ class ExtractRepositoryImplTest {
 
     /**
      * Fills the Measurement instance with test data
-     * @param measurement instance of Mesurement
+     * @param measurement instance of Measurement
      * @return measurement
      */
     private Measurement fillTestMeasurement(Measurement measurement) {

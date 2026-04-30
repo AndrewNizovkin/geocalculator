@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36">
   <diagram name="Страница-1" id="o-5GadF2C5qq2WKj6GCM">
-    <mxGraphModel dx="21232" dy="10369" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="13097" dy="5769" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -2300,10 +2300,10 @@
         <mxCell id="CJYxr8jrnQjgCnN5_ta2-82" parent="CJYxr8jrnQjgCnN5_ta2-80" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
           <mxGeometry height="8" width="480" y="61" as="geometry" />
         </mxCell>
-        <mxCell id="CJYxr8jrnQjgCnN5_ta2-83" parent="CJYxr8jrnQjgCnN5_ta2-80" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ extractRequestToExtract(List&amp;lt;String&amp;gt;): boolean" vertex="1">
+        <mxCell id="CJYxr8jrnQjgCnN5_ta2-83" parent="CJYxr8jrnQjgCnN5_ta2-80" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ extractRequestToExtraction(List&amp;lt;String&amp;gt;): boolean" vertex="1">
           <mxGeometry height="26" width="480" y="69" as="geometry" />
         </mxCell>
-        <mxCell id="CJYxr8jrnQjgCnN5_ta2-84" parent="CJYxr8jrnQjgCnN5_ta2-80" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ extractToExtractResponse(): List&amp;lt;String&amp;gt;" vertex="1">
+        <mxCell id="CJYxr8jrnQjgCnN5_ta2-84" parent="CJYxr8jrnQjgCnN5_ta2-80" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ extractionToExtractResponse(): List&amp;lt;String&amp;gt;" vertex="1">
           <mxGeometry height="26" width="480" y="95" as="geometry" />
         </mxCell>
         <mxCell id="CJYxr8jrnQjgCnN5_ta2-85" parent="CJYxr8jrnQjgCnN5_ta2-80" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getErrorResponse(String): List&amp;lt;String&amp;gt;" vertex="1">

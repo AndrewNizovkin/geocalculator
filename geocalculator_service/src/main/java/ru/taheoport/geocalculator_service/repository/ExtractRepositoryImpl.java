@@ -90,7 +90,7 @@ public class ExtractRepositoryImpl implements ExtractRepository{
     public Measurement getMeasurementById(int indexExtraction, int indexMeasurement) {
         Extraction extraction = getExtractionById(indexExtraction);
         if (extraction == null) return null;
-        if (indexExtraction < 0 || indexExtraction >= extraction.getMeasurements().size()) return null;
+        if (indexMeasurement < 0 || indexMeasurement >= extraction.getMeasurements().size()) return null;
 
         return extraction.getMeasurements().get(indexMeasurement);
     }
