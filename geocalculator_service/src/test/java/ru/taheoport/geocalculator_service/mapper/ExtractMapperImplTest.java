@@ -37,17 +37,17 @@ class ExtractMapperImplTest {
 
     @ParameterizedTest
     @CsvSource({
-            "101, 1550, T100, 68557, 1295994, 1061, 1600, 0, 0",
-            "101, 1550, T102, 49147, 510490, -588, 1600, 0, 1",
-            "101, 1550, 23, 46708, 512419, -462, 1600, 0, 2",
-            "102, 1507, T101, 49133, 1295997, 1242, 1600, 1, 0",
-            "102, 1507, T103, 33840, 567224, 948, 1600, 1, 1",
-            "103, 1503, T102, 33836, 7, 275, 1600, 2, 0",
-            "103, 1503, T104, 35381, 632794, 210, 1600, 2, 1",
-            "104, 1522, T103, 35374, 1295996, 873, 1600, 3, 0",
-            "104, 1522, T105, 75012, 624097, 90, 1600, 3, 1",
-            "105, 1484, T104, 75020, 1295995, 473, 1600, 4, 0",
-            "105, 1484, T106, 53068, 674105, 454, 1600, 4, 1"
+            "101, 1550, T100, 68557, 1295994, 1061, 1600, 1, 0",
+            "101, 1550, T102, 49147, 510490, -588, 1600, 1, 1",
+            "101, 1550, 23, 46708, 512419, -462, 1600, 1, 2",
+            "102, 1507, T101, 49133, 1295997, 1242, 1600, 2, 0",
+            "102, 1507, T103, 33840, 567224, 948, 1600, 2, 1",
+            "103, 1503, T102, 33836, 7, 275, 1600, 3, 0",
+            "103, 1503, T104, 35381, 632794, 210, 1600, 3, 1",
+            "104, 1522, T103, 35374, 1295996, 873, 1600, 4, 0",
+            "104, 1522, T105, 75012, 624097, 90, 1600, 4, 1",
+            "105, 1484, T104, 75020, 1295995, 473, 1600, 5, 0",
+            "105, 1484, T106, 53068, 674105, 454, 1600, 5, 1"
 
     })
     void extractRequestToExtractionTest(
@@ -76,7 +76,29 @@ class ExtractMapperImplTest {
         assertEquals(expectTargetDirection, actualMeasurement.getTargetDirection());
         assertEquals(expectTargetTiltAngle, actualMeasurement.getTargetTiltAngle());
         assertEquals(expectTargetHeight, actualMeasurement.getTargetHeight());
+    }
 
+    @Test
+    void extractRequestToExtractionBlanksTest() {
+        int expectSize = 7;
+        String expectBlankStationName = "noname";
+        long expectBlankStationHeight = 0;
+        int expectSizeMeasurementsBlank = 0;
+        boolean success = extractMapper.extractRequestToExtraction(getTestExtractRequest());
+
+        int actualSize = extractRepository.size();
+        Extraction actualFirstBlankExtraction = extractRepository.getExtractionById(0);
+        Extraction actualLastBlankExtraction = extractRepository.getExtractionById(extractRepository.size() - 1);
+
+        assertTrue(success);
+        assertEquals(expectSize, actualSize);
+        assertEquals(expectBlankStationName, actualFirstBlankExtraction.getStationName());
+        assertEquals(expectBlankStationName, actualLastBlankExtraction.getStationName());
+        assertEquals(expectBlankStationHeight, actualFirstBlankExtraction.getStationHeight());
+        assertEquals(expectBlankStationHeight, actualLastBlankExtraction.getStationHeight());
+        assertEquals(expectSizeMeasurementsBlank, actualFirstBlankExtraction.getMeasurements().size());
+        assertEquals(expectSizeMeasurementsBlank, actualFirstBlankExtraction.getMeasurements().size());
+        assertEquals(expectSizeMeasurementsBlank, actualLastBlankExtraction.getMeasurements().size());
     }
 
     @Test
