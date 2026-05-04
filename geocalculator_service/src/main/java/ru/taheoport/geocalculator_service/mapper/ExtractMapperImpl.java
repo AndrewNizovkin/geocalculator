@@ -35,7 +35,6 @@ public class ExtractMapperImpl implements ExtractMapper{
         String[] station;
         String[] target;
         int stationIndex;
-        extractRepository.addNewExtraction();
         String line = extractRequest.removeFirst();
 
         while (!line.equals("//") && !extractRequest.isEmpty()) {
@@ -58,7 +57,7 @@ public class ExtractMapperImpl implements ExtractMapper{
             target = line.split("\\s+");
             if (target.length != 6) continue;
 
-            stationIndex = Integer.parseInt(target[5]) + 1;
+            stationIndex = Integer.parseInt(target[5]);
             Measurement measurement = extractRepository.addNewMeasurement(stationIndex);
             measurement.setTargetName(target[0]);
             measurement.setTargetInclinedDistance(dataMapper.meterToMillimeter(target[1]));
@@ -67,8 +66,7 @@ public class ExtractMapperImpl implements ExtractMapper{
             measurement.setTargetHeight(dataMapper.meterToMillimeter(target[4]));
         }
 
-        if (extractRepository.size() == 1) success = false;
-        extractRepository.addNewExtraction();
+        if (extractRepository.size() == 0) success = false;
 
         return success;
     }
@@ -79,7 +77,7 @@ public class ExtractMapperImpl implements ExtractMapper{
      * @return list of strings
      */
     @Override
-    public List<String> extractionToExtractResponse() {
+    public List<String> solutionToExtractResponse() {
         return List.of();
     }
 

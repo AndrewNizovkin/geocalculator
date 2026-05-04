@@ -19,7 +19,7 @@ public interface ExtractMapper {
      * Creates response contains processing reports
      * @return list of strings
      */
-    List<String> extractionToExtractResponse();
+    List<String> solutionToExtractResponse();
 
     /**
      * Creates error response

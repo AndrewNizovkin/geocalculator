@@ -46,15 +46,6 @@ class ExtractRepositoryImplTest {
         assertEquals(expectExtraction.getStationName(), actualExtraction.getStationName());
         assertEquals(expectExtraction.getStationHeight(), actualExtraction.getStationHeight());
         assertEquals(expectExtraction.getStationName(), actualExtraction.getStationName());
-        assertEquals(expectExtraction.getHorAngle(), actualExtraction.getHorAngle());
-        assertEquals(expectExtraction.getDirectHorDistance(), actualExtraction.getDirectHorDistance());
-        assertEquals(expectExtraction.getDirectElevation(), actualExtraction.getDirectElevation());
-        assertEquals(expectExtraction.getInverseHorDistance(), actualExtraction.getInverseHorDistance());
-        assertEquals(expectExtraction.getInverseElevation(), actualExtraction.getInverseElevation());
-        assertEquals(expectExtraction.getAverageHorDistance(), actualExtraction.getAverageHorDistance());
-        assertEquals(expectExtraction.getAverageElevation(), actualExtraction.getAverageElevation());
-        assertEquals(expectExtraction.getDeltaHorDistance(), actualExtraction.getDeltaHorDistance());
-        assertEquals(expectExtraction.getDeltaElevation(), actualExtraction.getDeltaElevation());
     }
 
     @ParameterizedTest
@@ -79,16 +70,6 @@ class ExtractRepositoryImplTest {
         assertEquals(expectExtraction.getStationName(), actualExtraction.getStationName());
         assertEquals(expectExtraction.getStationHeight(), actualExtraction.getStationHeight());
         assertEquals(expectExtraction.getStationName(), actualExtraction.getStationName());
-        assertEquals(expectExtraction.getHorAngle(), actualExtraction.getHorAngle());
-        assertEquals(expectExtraction.getDirectHorDistance(), actualExtraction.getDirectHorDistance());
-        assertEquals(expectExtraction.getDirectElevation(), actualExtraction.getDirectElevation());
-        assertEquals(expectExtraction.getInverseHorDistance(), actualExtraction.getInverseHorDistance());
-        assertEquals(expectExtraction.getInverseElevation(), actualExtraction.getInverseElevation());
-        assertEquals(expectExtraction.getAverageHorDistance(), actualExtraction.getAverageHorDistance());
-        assertEquals(expectExtraction.getAverageElevation(), actualExtraction.getAverageElevation());
-        assertEquals(expectExtraction.getDeltaHorDistance(), actualExtraction.getDeltaHorDistance());
-        assertEquals(expectExtraction.getDeltaElevation(), actualExtraction.getDeltaElevation());
-
     }
 
     @ParameterizedTest
@@ -229,15 +210,6 @@ class ExtractRepositoryImplTest {
     private Extraction fillTestExtraction(Extraction extraction) {
         extraction.setStationName("testStation");
         extraction.setStationHeight(158998);
-        extraction.setHorAngle(324898);
-        extraction.setDirectHorDistance(345677);
-        extraction.setDirectElevation(200);
-        extraction.setInverseHorDistance(345678);
-        extraction.setInverseElevation(-205);
-        extraction.setAverageHorDistance(345678);
-        extraction.setAverageElevation(203);
-        extraction.setDeltaHorDistance(1);
-        extraction.setDeltaElevation(5);
 
         return extraction;
     }

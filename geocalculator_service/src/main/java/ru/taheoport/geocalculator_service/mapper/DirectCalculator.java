@@ -55,7 +55,4 @@ public interface DirectCalculator {
      * @return long value
      */
     long doubleToLong(double value);
-
-
-
 }
