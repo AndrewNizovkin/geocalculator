@@ -10,6 +10,7 @@ import ru.taheoport.geocalculator_service.model.Extraction;
 import ru.taheoport.geocalculator_service.model.Measurement;
 import ru.taheoport.geocalculator_service.repository.ExtractRepository;
 import ru.taheoport.geocalculator_service.repository.ExtractRepositoryImpl;
+import ru.taheoport.geocalculator_service.repository.SolutionRepositoryImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(classes = {
         ExtractMapperImpl.class,
         DataMapperDefault.class,
-        ExtractRepositoryImpl.class
+        ExtractRepositoryImpl.class,
+        SolutionRepositoryImpl.class,
+        ExtractCalculatorImpl.class,
+        PotenotCalculatorImpl.class,
+        DirectCalculatorDefault.class
 })
 class ExtractMapperImplTest {
 
@@ -28,6 +33,9 @@ class ExtractMapperImplTest {
 
     @Autowired
     private ExtractMapper extractMapper;
+
+    @Autowired
+    private ExtractCalculator extractCalculator;
 
     @BeforeEach
 
@@ -98,7 +106,23 @@ class ExtractMapperImplTest {
 
 
     @Test
-    void solutionToExtractResponse() {
+    void solutionToExtractResponseTest() {
+        List<String> expectResponse = getExpectExtractResponse();
+        int expectSize = expectResponse.size();
+        extractMapper.extractRequestToExtraction(getTestExtractRequest());
+        extractCalculator.ExtractionToSolution();
+
+        List<String> actualResponse = extractMapper.solutionToExtractResponse();
+        assertNotNull(actualResponse);
+        int actualSize = actualResponse.size();
+
+        assertEquals(expectSize, actualSize);
+        for (int i = 0; i < expectSize; i++) {
+            String expectLine = expectResponse.get(i);
+            String actualLine = actualResponse.get(i);
+
+            assertEquals(expectLine, actualLine);
+        }
     }
 
     @Test
@@ -151,4 +175,49 @@ class ExtractMapperImplTest {
 
         return extractRequest;
     }
+
+    /**
+     * Gets expect extractResponse
+     * @return list of string
+     */
+    private List<String> getExpectExtractResponse() {
+        List<String> extractResponse = new ArrayList<>();
+
+        extractResponse.add("#extract-pol");
+        extractResponse.add("T100 0.0000 68.556 -0.303 Not Not Not");
+        extractResponse.add("101 141.4816 49.140 -0.197 Not Not Not");
+        extractResponse.add("102 157.3347 33.838 0.058 Not Not Not");
+        extractResponse.add("103 175.4627 35.378 -0.067 Not Not Not");
+        extractResponse.add("104 173.2141 75.016 -0.051 Not Not Not");
+        extractResponse.add("105 187.1510 53.068 0.001 Not Not Not");
+        extractResponse.add("T106 0.0000 0.000 0.000 Not Not Not");
+        extractResponse.add("#extract-report");
+        extractResponse.add("");
+        extractResponse.add("              ВЕДОМОСТЬ ВЫЧИСЛЕНИЯ СРЕДНИХ ГОРИЗОНТАЛЬНЫХ ПРОЛОЖЕНИЙ И ПРЕВЫШЕНИЙ.");
+        extractResponse.add("--------------------------------------------------------------------------------------------------");
+        extractResponse.add("|Наименование|       Гор. проложение, м.      |        |          Превышение, м.        |        |");
+        extractResponse.add("|   точки    |--------------------------------| DL,мм. |--------------------------------| Dh,мм. |");
+        extractResponse.add("|  стояния   |  вперёд  |  назад   |  среднее |        |  вперёд  |   назад  |  среднее |        |");
+        extractResponse.add("|------------|----------|----------|----------|--------|----------|----------|----------|--------|");
+        extractResponse.add("|      1     |     2    |     3    |     4    |   5    |     6    |     7    |     8    |    9   |");
+        extractResponse.add("|------------|----------|----------|----------|--------|----------|----------|----------|--------|");
+        extractResponse.add("|       T100 |          |          |          |        |          |          |          |        |");
+        extractResponse.add("|            |          |   68.556 |   68.556 |        |          |    0.303 |   -0.303 |        |");
+        extractResponse.add("|        101 |          |          |          |        |          |          |          |        |");
+        extractResponse.add("|            |   49.147 |   49.132 |   49.140 |     15 |   -0.190 |    0.203 |   -0.197 |     13 |");
+        extractResponse.add("|        102 |          |          |          |        |          |          |          |        |");
+        extractResponse.add("|            |   33.840 |   33.836 |   33.838 |      4 |    0.063 |   -0.052 |    0.058 |     11 |");
+        extractResponse.add("|        103 |          |          |          |        |          |          |          |        |");
+        extractResponse.add("|            |   35.381 |   35.374 |   35.378 |      7 |   -0.061 |    0.072 |   -0.067 |     11 |");
+        extractResponse.add("|        104 |          |          |          |        |          |          |          |        |");
+        extractResponse.add("|            |   75.012 |   75.020 |   75.016 |     -8 |   -0.045 |    0.056 |   -0.051 |     11 |");
+        extractResponse.add("|        105 |          |          |          |        |          |          |          |        |");
+        extractResponse.add("|            |   53.068 |          |   53.068 |        |    0.001 |          |    0.001 |        |");
+        extractResponse.add("|       T106 |          |          |          |        |          |          |          |        |");
+        extractResponse.add("--------------------------------------------------------------------------------------------------");
+
+        return extractResponse;
+    }
+
+
 }

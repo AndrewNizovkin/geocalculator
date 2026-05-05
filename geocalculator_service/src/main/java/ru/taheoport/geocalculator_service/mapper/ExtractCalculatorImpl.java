@@ -2,6 +2,9 @@ package ru.taheoport.geocalculator_service.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ru.taheoport.geocalculator_service.model.Extraction;
+import ru.taheoport.geocalculator_service.model.Measurement;
+import ru.taheoport.geocalculator_service.model.Solution;
 import ru.taheoport.geocalculator_service.repository.ExtractRepository;
 import ru.taheoport.geocalculator_service.repository.SolutionRepository;
 
@@ -26,8 +29,11 @@ public class ExtractCalculatorImpl implements ExtractCalculator{
      */
     @Override
     public void ExtractionToSolution() {
+        solutionRepository.clearAll();
         createSolutions();
-
+        setDirectValues();
+        setInverseValues();
+        setAverageValues();
     }
 
     /**
@@ -55,36 +61,102 @@ public class ExtractCalculatorImpl implements ExtractCalculator{
     /**
      * Sets direct values of horizontal distance and elevation
      * for specified range of extractions
-     *
-     * @param start start index of extraction
-     * @param end   end index of extraction
      */
     @Override
-    public void setDirectValues(int start, int end) {
+    public void setDirectValues() {
+        Extraction station;
+        Measurement backMeasurement;
+        Measurement frontMeasurement;
+        Solution solution;
+
+        for (int i = 0; i < extractRepository.size(); i++) {
+            station = extractRepository.getExtractionById(i);
+            backMeasurement = extractRepository.getMeasurementById(i, 0);
+            frontMeasurement = extractRepository.getMeasurementById(i, 1);
+
+            solution = solutionRepository.getSolutionById(i + 1);
+
+            solution.setHorAngle(potenotCalculator.difAngle(
+                    backMeasurement.getTargetDirection(),
+                    frontMeasurement.getTargetDirection()
+            ));
+
+            solution.setDirectHorDistance(directCalculator.getHorDistance(
+                    frontMeasurement.getTargetInclinedDistance(),
+                    frontMeasurement.getTargetTiltAngle()
+            ));
+
+            solution.setDirectElevation(directCalculator.getDeltaZ(
+                    frontMeasurement.getTargetInclinedDistance(),
+                    frontMeasurement.getTargetTiltAngle()
+            ) + station.getStationHeight() - frontMeasurement.getTargetHeight());
+
+        }
+
 
     }
 
     /**
      * Sets inverse values of horizontal distance and elevation
      * for specified range of extractions
-     *
-     * @param start start index of extraction
-     * @param end   end index of extraction
      */
     @Override
-    public void setInverseValues(int start, int end) {
+    public void setInverseValues() {
+        Extraction station;
+        Measurement inverseMeasurement;
+        Solution solution;
 
+        for (int i = 0; i < extractRepository.size(); i++) {
+            station = extractRepository.getExtractionById(i);
+            inverseMeasurement = extractRepository.getMeasurementById(i, 0);
+            solution = solutionRepository.getSolutionById(i);
+
+
+            solution.setInverseHorDistance(directCalculator.getHorDistance(
+                    inverseMeasurement.getTargetInclinedDistance(),
+                    inverseMeasurement.getTargetTiltAngle()
+            ));
+
+            solution.setInverseElevation(directCalculator.getDeltaZ(
+                    inverseMeasurement.getTargetInclinedDistance(),
+                    inverseMeasurement.getTargetTiltAngle()
+            ) + station.getStationHeight() - inverseMeasurement.getTargetHeight());
+        }
     }
 
     /**
      * Sets average values of horizontal distance and elevation
      * for specified range of solutions
-     *
-     * @param start start index of extraction
-     * @param end   end index of extraction
      */
     @Override
-    public void setAverageValues(int start, int end) {
+    public void setAverageValues() {
+        Solution solution;
 
+        for (int i = 1; i < solutionRepository.size() - 2; i++) {
+            solution = solutionRepository.getSolutionById(i);
+
+            solution.setAverageHorDistance(
+                    directCalculator.doubleToLong(
+                            (double) (solution.getDirectHorDistance() + solution.getInverseHorDistance()) / 2)
+            );
+
+            solution.setAverageElevation(
+                    directCalculator.doubleToLong(
+                            (double) (solution.getDirectElevation() - solution.getInverseElevation()) / 2)
+            );
+
+            solution.setDeltaHorDistance(solution.getDirectHorDistance() - solution.getInverseHorDistance());
+
+            solution.setDeltaElevation(solution.getDirectElevation() + solution.getInverseElevation());
+
+        }
+
+        solution = solutionRepository.getSolutionById(0);
+        solution.setAverageHorDistance(solution.getInverseHorDistance());
+        solution.setAverageElevation(-1 * solution.getInverseElevation());
+
+        solution = solutionRepository.getSolutionById(solutionRepository.size() - 2);
+        solution.setAverageHorDistance(solution.getDirectHorDistance());
+        solution.setAverageElevation(solution.getDirectElevation());
     }
 }

@@ -19,25 +19,19 @@ public interface ExtractCalculator {
     /**
      * Sets direct values of horizontal distance and elevation
      * for specified range of extractions
-     * @param start start index of extraction
-     * @param end end index of extraction
      */
-    void setDirectValues(int start, int end);
+    void setDirectValues();
 
     /**
      * Sets inverse values of horizontal distance and elevation
      * for specified range of extractions
-     * @param start start index of extraction
-     * @param end end index of extraction
      */
-    void setInverseValues(int start, int end);
+    void setInverseValues();
 
     /**
      * Sets average values of horizontal distance and elevation
      * for specified range of solutions
-     * @param start start index of extraction
-     * @param end end index of extraction
      */
-    void setAverageValues(int start, int end);
+    void setAverageValues();
 
 }

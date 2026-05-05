@@ -81,8 +81,8 @@ class SolutionRepositoryImplTest {
         assertEquals(expectSolution.getDirectElevation(), actualSolution.getDirectElevation());
         assertEquals(expectSolution.getInverseHorDistance(), actualSolution.getInverseHorDistance());
         assertEquals(expectSolution.getInverseElevation(), actualSolution.getInverseElevation());
-        assertEquals(expectSolution.getAverageHorDistance(), actualSolution.getAverageHorDistance(), 0.00001);
-        assertEquals(expectSolution.getAverageElevation(), actualSolution.getAverageElevation(), 0.000001);
+        assertEquals(expectSolution.getAverageHorDistance(), actualSolution.getAverageHorDistance());
+        assertEquals(expectSolution.getAverageElevation(), actualSolution.getAverageElevation());
         assertEquals(expectSolution.getDeltaHorDistance(), actualSolution.getDeltaHorDistance());
         assertEquals(expectSolution.getDeltaElevation(), actualSolution.getDeltaElevation());
 
@@ -105,8 +105,8 @@ class SolutionRepositoryImplTest {
         solution.setDirectElevation(200);
         solution.setInverseHorDistance(345678);
         solution.setInverseElevation(-205);
-        solution.setAverageHorDistance(345678.0233);
-        solution.setAverageElevation(203.45667);
+        solution.setAverageHorDistance(345678);
+        solution.setAverageElevation(203);
         solution.setDeltaHorDistance(1);
         solution.setDeltaElevation(5);
 

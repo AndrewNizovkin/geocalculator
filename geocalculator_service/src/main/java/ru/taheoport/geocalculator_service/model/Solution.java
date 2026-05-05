@@ -50,12 +50,12 @@ public class Solution {
     /**
      * The average distance between the station and the front point in millimeters
      */
-    private double averageHorDistance = 0;
+    private long averageHorDistance = 0;
 
     /**
      * The average elevation between the station and the front point in millimeters
      */
-    private double averageElevation = 0;
+    private long averageElevation = 0;
 
     /**
      * The difference between direct and inverse horizontal distance in millimeters

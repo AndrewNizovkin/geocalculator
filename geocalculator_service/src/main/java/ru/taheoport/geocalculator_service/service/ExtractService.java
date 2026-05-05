@@ -13,9 +13,4 @@ public interface ExtractService {
      * @return List of strings
      */
     List<String> getExtractReports(List<String> extractRequest);
-
-    /**
-     * Processes extraction and creates solution
-     */
-    void extractionToSolution();
 }
