@@ -11,9 +11,9 @@ public interface ExtractMapper {
     /**
      * Extract data from polygonRequest and fills Extraction model
      * @param extractRequest list of string with geodetic data
-     * @return true if extractRequest contains valid geodetic data
+     * @return String result of extraction "OK" or error message
      */
-    boolean extractRequestToExtraction(List<String> extractRequest);
+    String extractRequestToExtraction(List<String> extractRequest);
 
     /**
      * Creates response contains processing reports

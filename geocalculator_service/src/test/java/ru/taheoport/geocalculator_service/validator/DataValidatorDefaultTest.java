@@ -7,11 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = ValidatorDefault.class)
-class ValidatorDefaultTest {
+@SpringBootTest(classes = DataValidatorDefault.class)
+class DataValidatorDefaultTest {
 
     @Autowired
-    private Validator validator;
+    private DataValidator dataValidator;
 
     @ParameterizedTest
     @CsvSource({
@@ -24,7 +24,7 @@ class ValidatorDefaultTest {
     })
     void isValidPositiveNumberTrueTest(String value) {
 
-        boolean actualResult = validator.isValidPositiveNumber(value);
+        boolean actualResult = dataValidator.isValidPositiveNumber(value);
 
         assertTrue(actualResult);
     }
@@ -41,7 +41,7 @@ class ValidatorDefaultTest {
     })
     void isPositiveNumberFalseTest(String value) {
 
-        boolean actualResult = validator.isValidPositiveNumber(value);
+        boolean actualResult = dataValidator.isValidPositiveNumber(value);
 
         assertFalse(actualResult);
     }
@@ -58,7 +58,7 @@ class ValidatorDefaultTest {
     })
     void isValidNumberTrueTest(String value) {
 
-        boolean actualResult = validator.isValidNumber(value);
+        boolean actualResult = dataValidator.isValidNumber(value);
 
         assertTrue(actualResult);
     }
@@ -73,7 +73,7 @@ class ValidatorDefaultTest {
     })
     void isValidNumberFalseTest(String value) {
 
-        boolean actualResult = validator.isValidNumber(value);
+        boolean actualResult = dataValidator.isValidNumber(value);
 
         assertFalse(actualResult);
     }
@@ -88,7 +88,7 @@ class ValidatorDefaultTest {
     })
     void isValidHorizontalAngleTrueTest(String value) {
 
-        boolean actualResult = validator.isValidHorizontalAngle(value);
+        boolean actualResult = dataValidator.isValidHorizontalAngle(value);
 
         assertTrue(actualResult);
     }
@@ -106,7 +106,7 @@ class ValidatorDefaultTest {
     })
     void isValidHorizontalAngleFalseTest(String value) {
 
-        boolean actualResult = validator.isValidHorizontalAngle(value);
+        boolean actualResult = dataValidator.isValidHorizontalAngle(value);
 
         assertFalse(actualResult);
     }
@@ -123,7 +123,7 @@ class ValidatorDefaultTest {
     })
     void isValidTiltAngleTrueTest(String value) {
 
-        boolean actualResult = validator.isValidTiltAngle(value);
+        boolean actualResult = dataValidator.isValidTiltAngle(value);
 
         assertTrue(actualResult);
     }
@@ -141,7 +141,7 @@ class ValidatorDefaultTest {
     })
     void isValidTiltAngleFalseTest(String value) {
 
-        boolean actualResult = validator.isValidTiltAngle(value);
+        boolean actualResult = dataValidator.isValidTiltAngle(value);
 
         assertFalse(actualResult);
     }

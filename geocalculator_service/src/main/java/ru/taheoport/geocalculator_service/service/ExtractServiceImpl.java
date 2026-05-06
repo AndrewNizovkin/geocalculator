@@ -21,10 +21,6 @@ public class ExtractServiceImpl implements ExtractService{
 
     private final ExtractCalculator extractCalculator;
 
-    private final ExtractRepository extractRepository;
-
-    private final SolutionRepository solutionRepository;
-
     private final ExtractMapper extractMapper;
 
     /**
@@ -36,8 +32,8 @@ public class ExtractServiceImpl implements ExtractService{
     @Override
     public List<String> getExtractReports(List<String> extractRequest) {
 
-        boolean success = extractMapper.extractRequestToExtraction(extractRequest);
-        if (!success) return extractMapper.getErrorResponse("Bad request!");
+        String message = extractMapper.extractRequestToExtraction(extractRequest);
+        if (!message.equals("OK")) return extractMapper.getErrorResponse(message);
 
         extractCalculator.ExtractionToSolution();
 

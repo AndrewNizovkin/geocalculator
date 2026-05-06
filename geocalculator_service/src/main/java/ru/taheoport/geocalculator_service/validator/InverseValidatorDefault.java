@@ -12,7 +12,7 @@ import ru.taheoport.geocalculator_service.dto.InverseStringRequest;
 @RequiredArgsConstructor
 public class InverseValidatorDefault implements InverseValidator{
 
-    private final Validator validator;
+    private final DataValidator dataValidator;
 
     /**
      * Checks the data in InverseStringRequest
@@ -21,11 +21,11 @@ public class InverseValidatorDefault implements InverseValidator{
      */
     @Override
     public boolean isValidInverseStringRequest(InverseStringRequest inverseStringRequest) {
-        return validator.isValidNumber(inverseStringRequest.getBaseX()) &&
-                validator.isValidNumber(inverseStringRequest.getBaseY()) &&
-                validator.isValidNumber(inverseStringRequest.getBaseZ()) &&
-                validator.isValidNumber(inverseStringRequest.getTargetX()) &&
-                validator.isValidNumber(inverseStringRequest.getTargetY()) &&
-                validator.isValidNumber(inverseStringRequest.getTargetZ());
+        return dataValidator.isValidNumber(inverseStringRequest.getBaseX()) &&
+                dataValidator.isValidNumber(inverseStringRequest.getBaseY()) &&
+                dataValidator.isValidNumber(inverseStringRequest.getBaseZ()) &&
+                dataValidator.isValidNumber(inverseStringRequest.getTargetX()) &&
+                dataValidator.isValidNumber(inverseStringRequest.getTargetY()) &&
+                dataValidator.isValidNumber(inverseStringRequest.getTargetZ());
     }
 }

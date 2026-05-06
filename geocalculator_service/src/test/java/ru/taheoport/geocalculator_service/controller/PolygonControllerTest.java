@@ -22,9 +22,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class PolygonControllerTest {
 
     @Autowired
-    private PolygonService polygonService;
-
-    @Autowired
     private WebTestClient webTestClient;
 
 

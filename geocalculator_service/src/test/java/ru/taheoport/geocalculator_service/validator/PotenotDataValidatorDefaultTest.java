@@ -11,9 +11,9 @@ import java.util.List;
 
 @SpringBootTest(classes = {
         PotenotValidatorDefault.class,
-        ValidatorDefault.class
+        DataValidatorDefault.class
 })
-class PotenotValidatorDefaultTest {
+class PotenotDataValidatorDefaultTest {
 
     @Autowired
     PotenotValidator potenotValidator;

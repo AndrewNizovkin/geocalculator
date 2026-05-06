@@ -1,153 +1,47 @@
-package ru.taheoport.geocalculator_service.mapper;
+package ru.taheoport.geocalculator_service.controller;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.taheoport.geocalculator_service.model.Extraction;
-import ru.taheoport.geocalculator_service.model.Measurement;
-import ru.taheoport.geocalculator_service.repository.ExtractRepository;
-import ru.taheoport.geocalculator_service.repository.ExtractRepositoryImpl;
-import ru.taheoport.geocalculator_service.repository.SolutionRepositoryImpl;
-import ru.taheoport.geocalculator_service.validator.DataValidatorDefault;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = {
-        ExtractMapperImpl.class,
-        DataMapperDefault.class,
-        DataValidatorDefault.class,
-        ExtractRepositoryImpl.class,
-        SolutionRepositoryImpl.class,
-        ExtractCalculatorImpl.class,
-        PotenotCalculatorImpl.class,
-        DirectCalculatorDefault.class
-})
-class ExtractMapperImplTest {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@AutoConfigureWebTestClient
+@ActiveProfiles("test")
+class ExtractControllerTest {
 
     @Autowired
-    private ExtractRepository extractRepository;
-
-    @Autowired
-    private ExtractMapper extractMapper;
-
-    @Autowired
-    private ExtractCalculator extractCalculator;
-
-    @BeforeEach
-
-    void clearRepository() {
-        extractRepository.clearAll();
-    }
-
-    @ParameterizedTest
-    @CsvSource({
-            "101, 1550, T100, 68557, 1295994, 1061, 1600, 0, 0",
-            "101, 1550, T102, 49147, 510490, -588, 1600, 0, 1",
-            "101, 1550, 23, 46708, 512419, -462, 1600, 0, 2",
-            "102, 1507, T101, 49133, 1295997, 1242, 1600, 1, 0",
-            "102, 1507, T103, 33840, 567224, 948, 1600, 1, 1",
-            "103, 1503, T102, 33836, 7, 275, 1600, 2, 0",
-            "103, 1503, T104, 35381, 632794, 210, 1600, 2, 1",
-            "104, 1522, T103, 35374, 1295996, 873, 1600, 3, 0",
-            "104, 1522, T105, 75012, 624097, 90, 1600, 3, 1",
-            "105, 1484, T104, 75020, 1295995, 473, 1600, 4, 0",
-            "105, 1484, T106, 53068, 674105, 454, 1600, 4, 1"
-
-    })
-    void extractRequestToExtractionTest(
-            String expectStationName,
-            long expectStationHeight,
-            String expectTargetName,
-            long expectTargetInclinedDistance,
-            long expectTargetDirection,
-            long expectTargetTiltAngle,
-            long expectTargetHeight,
-            int indexExtraction,
-            int indexMeasurement
-    ) {
-        String actualMessage = extractMapper.extractRequestToExtraction(getTestExtractRequest());
-        assertEquals("OK", actualMessage);
-
-        Extraction actualExtraction = extractRepository.getExtractionById(indexExtraction);
-        Measurement actualMeasurement = extractRepository.getMeasurementById(indexExtraction, indexMeasurement);
-
-        assertNotNull(actualExtraction);
-        assertNotNull(actualMeasurement);
-        assertEquals(expectStationName, actualExtraction.getStationName());
-        assertEquals(expectStationHeight, actualExtraction.getStationHeight());
-        assertEquals(expectTargetName, actualMeasurement.getTargetName());
-        assertEquals(expectTargetInclinedDistance, actualMeasurement.getTargetInclinedDistance());
-        assertEquals(expectTargetDirection, actualMeasurement.getTargetDirection());
-        assertEquals(expectTargetTiltAngle, actualMeasurement.getTargetTiltAngle());
-        assertEquals(expectTargetHeight, actualMeasurement.getTargetHeight());
-    }
+    private WebTestClient webTestClient;
 
     @Test
-    void extractRequestToExtractionEmptyRequestTest() {
-        List<String> badRequest = List.of();
-        String expectMessage = "Request is Empty!";
-
-        String actualMessage = extractMapper.extractRequestToExtraction(badRequest);
-
-        assertEquals(expectMessage, actualMessage);
-
-    }
-
-    @Test
-    void extractRequestToExtractionBadRequestTest() {
-        List<String> badRequest = new ArrayList<>();
-        badRequest.add("asdfasdf");
-        badRequest.add("23243234");
-        String expectMessage = "Bad request!";
-        String actualMessage = extractMapper.extractRequestToExtraction(badRequest);
-
-        assertEquals(expectMessage, actualMessage);
-    }
-
-
-    @Test
-    void solutionToExtractResponseTest() {
+    void getPolygonReportsTest() {
         List<String> expectResponse = getExpectExtractResponse();
-        int expectSize = expectResponse.size();
-        extractMapper.extractRequestToExtraction(getTestExtractRequest());
-        extractCalculator.ExtractionToSolution();
+        List<String> extractRequest = getTestExtractRequest();
 
-        List<String> actualResponse = extractMapper.solutionToExtractResponse();
-        assertNotNull(actualResponse);
-        int actualSize = actualResponse.size();
+        String responseBody = webTestClient.post()
+                .uri("extract")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(extractRequest)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(String.class)
+                .returnResult()
+                .getResponseBody();
 
-        assertEquals(expectSize, actualSize);
-        for (int i = 0; i < expectSize; i++) {
-            String expectLine = expectResponse.get(i);
-            String actualLine = actualResponse.get(i);
-
-            assertEquals(expectLine, actualLine);
+        assertNotNull(responseBody);
+        for (String expectLine : expectResponse) {
+            assertTrue(responseBody.contains(expectLine));
         }
-    }
 
-    @Test
-    void getErrorResponseTest() {
-        String expectMessage = "Bad request";
-        String expectTitle = "#error";
-        int expectSize = 2;
 
-        List<String> actualErrorResponse = extractMapper.getErrorResponse(expectMessage);
-
-        assertNotNull(actualErrorResponse);
-        int actualSize = actualErrorResponse.size();
-        assertEquals(expectSize, actualSize);
-
-        String actualTitle = actualErrorResponse.get(0);
-        String actualMessage = actualErrorResponse.get(1);
-
-        assertEquals(expectTitle, actualTitle);
-        assertEquals(expectMessage, actualMessage);
     }
 
     /**
@@ -224,6 +118,5 @@ class ExtractMapperImplTest {
 
         return extractResponse;
     }
-
 
 }

@@ -8,9 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.taheoport.geocalculator_service.dto.InverseStringRequest;
 
 @SpringBootTest(classes = {
-        ValidatorDefault.class,
+        DataValidatorDefault.class,
         InverseValidatorDefault.class})
-class InverseValidatorDefaultTest {
+class InverseDataValidatorDefaultTest {
 
     @Autowired
     private InverseValidator inverseValidator;

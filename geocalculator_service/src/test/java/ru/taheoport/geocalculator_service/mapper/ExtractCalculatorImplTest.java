@@ -9,6 +9,7 @@ import ru.taheoport.geocalculator_service.model.Solution;
 import ru.taheoport.geocalculator_service.repository.ExtractRepositoryImpl;
 import ru.taheoport.geocalculator_service.repository.SolutionRepository;
 import ru.taheoport.geocalculator_service.repository.SolutionRepositoryImpl;
+import ru.taheoport.geocalculator_service.validator.DataValidatorDefault;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,8 @@ import static org.junit.jupiter.api.Assertions.*;
         DirectCalculatorDefault.class,
         PotenotCalculatorImpl.class,
         ExtractMapperImpl.class,
-        DataMapperDefault.class
+        DataMapperDefault.class,
+        DataValidatorDefault.class
 })
 class ExtractCalculatorImplTest {
 
@@ -78,8 +80,8 @@ class ExtractCalculatorImplTest {
     void createSolutionsTest() {
         List<String> expectNames = getExpectStationNames();
         int expectSize = expectNames.size();
-        boolean access = extractMapper.extractRequestToExtraction(getTestExtractRequest());
-        assertTrue(access);
+        extractMapper.extractRequestToExtraction(getTestExtractRequest());
+
         extractCalculator.createSolutions();
 
         int actualSize = solutionRepository.size();

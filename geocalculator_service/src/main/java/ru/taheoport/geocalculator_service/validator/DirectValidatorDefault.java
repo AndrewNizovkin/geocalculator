@@ -12,7 +12,7 @@ import ru.taheoport.geocalculator_service.dto.DirectStringRequest;
 @RequiredArgsConstructor
 public class DirectValidatorDefault implements DirectValidator{
 
-    private final Validator validator;
+    private final DataValidator dataValidator;
 
     /**
      * Checks the data in InverseStringRequest
@@ -21,16 +21,16 @@ public class DirectValidatorDefault implements DirectValidator{
      */
     @Override
     public boolean isValidDirectStringRequest(DirectStringRequest directStringRequest) {
-        return validator.isValidNumber(directStringRequest.getLandmarkX()) &&
-                validator.isValidNumber(directStringRequest.getLandmarkY()) &&
-                validator.isValidHorizontalAngle(directStringRequest.getLandmarkDirection()) &&
-                validator.isValidNumber(directStringRequest.getBaseX()) &&
-                validator.isValidNumber(directStringRequest.getBaseY()) &&
-                validator.isValidNumber(directStringRequest.getBaseZ()) &&
-                validator.isValidNumber(directStringRequest.getBaseHeight()) &&
-                validator.isValidHorizontalAngle(directStringRequest.getTargetDirection()) &&
-                validator.isValidPositiveNumber(directStringRequest.getTargetInclinedDistance()) &&
-                validator.isValidTiltAngle(directStringRequest.getTargetTiltAngle()) &&
-                validator.isValidNumber(directStringRequest.getTargetHeight());
+        return dataValidator.isValidNumber(directStringRequest.getLandmarkX()) &&
+                dataValidator.isValidNumber(directStringRequest.getLandmarkY()) &&
+                dataValidator.isValidHorizontalAngle(directStringRequest.getLandmarkDirection()) &&
+                dataValidator.isValidNumber(directStringRequest.getBaseX()) &&
+                dataValidator.isValidNumber(directStringRequest.getBaseY()) &&
+                dataValidator.isValidNumber(directStringRequest.getBaseZ()) &&
+                dataValidator.isValidNumber(directStringRequest.getBaseHeight()) &&
+                dataValidator.isValidHorizontalAngle(directStringRequest.getTargetDirection()) &&
+                dataValidator.isValidPositiveNumber(directStringRequest.getTargetInclinedDistance()) &&
+                dataValidator.isValidTiltAngle(directStringRequest.getTargetTiltAngle()) &&
+                dataValidator.isValidNumber(directStringRequest.getTargetHeight());
     }
 }

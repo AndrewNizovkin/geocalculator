@@ -3,7 +3,7 @@ package ru.taheoport.geocalculator_service.validator;
 /**
  * This interface defines methods for data checking raw data
  */
-public interface Validator {
+public interface DataValidator {
 
     /**
      * Checks whether the argument is a positive decimal number.

@@ -9,9 +9,9 @@ import ru.taheoport.geocalculator_service.dto.DirectStringRequest;
 
 @SpringBootTest(classes = {
         DirectValidatorDefault.class,
-        ValidatorDefault.class
+        DataValidatorDefault.class
 })
-class DirectValidatorDefaultTest {
+class DirectDataValidatorDefaultTest {
 
     @Autowired
     private DirectValidator directValidator;

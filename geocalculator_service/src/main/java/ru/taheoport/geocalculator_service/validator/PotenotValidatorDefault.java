@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PotenotValidatorDefault implements PotenotValidator{
 
-    private final Validator validator;
+    private final DataValidator dataValidator;
 
 
     /**
@@ -27,9 +27,9 @@ public class PotenotValidatorDefault implements PotenotValidator{
     public boolean isValidPotenotStringRequest(List<PotenotStringRequest> potenotStringRequests) {
         if (potenotStringRequests.size() != 3) return false;
         for (PotenotStringRequest potenotStringRequest: potenotStringRequests) {
-            if (!(validator.isValidNumber(potenotStringRequest.getPointX()) &&
-            validator.isValidNumber(potenotStringRequest.getPointY()) &&
-            validator.isValidHorizontalAngle(potenotStringRequest.getDirection()))) {
+            if (!(dataValidator.isValidNumber(potenotStringRequest.getPointX()) &&
+            dataValidator.isValidNumber(potenotStringRequest.getPointY()) &&
+            dataValidator.isValidHorizontalAngle(potenotStringRequest.getDirection()))) {
                 return false;
             }
         }

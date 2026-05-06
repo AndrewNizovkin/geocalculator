@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
  * This class implements Validator. Checks raw data
  */
 @Component
-public class ValidatorDefault implements Validator{
+public class DataValidatorDefault implements DataValidator {
 
     /**
      * Checks whether the argument is a positive decimal number.

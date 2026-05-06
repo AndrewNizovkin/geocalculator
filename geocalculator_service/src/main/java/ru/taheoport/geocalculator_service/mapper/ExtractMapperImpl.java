@@ -2,11 +2,13 @@ package ru.taheoport.geocalculator_service.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 import ru.taheoport.geocalculator_service.model.Extraction;
 import ru.taheoport.geocalculator_service.model.Measurement;
 import ru.taheoport.geocalculator_service.model.Solution;
 import ru.taheoport.geocalculator_service.repository.ExtractRepository;
 import ru.taheoport.geocalculator_service.repository.SolutionRepository;
+import ru.taheoport.geocalculator_service.validator.DataValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ExtractMapperImpl implements ExtractMapper{
 
+    private final DataValidator dataValidator;
+
     private final DataMapper dataMapper;
 
     private final ExtractRepository extractRepository;
@@ -28,13 +32,13 @@ public class ExtractMapperImpl implements ExtractMapper{
     /**
      * Extract data from polygonRequest and fills Extraction model
      * @param extractRequest list of string with geodetic data
-     * @return true if extractRequest contains valid geodetic data
+     * @return String result of extraction "OK" or error message
      */
     @Override
-    public boolean extractRequestToExtraction(List<String> extractRequest) {
-        boolean success = true;
+    public String extractRequestToExtraction(List<String> extractRequest) {
+        String message = "OK";
         extractRepository.clearAll();
-        if (extractRequest.isEmpty()) return false;
+        if (extractRequest.isEmpty()) return "Request is Empty!";
         String[] station;
         String[] target;
         int stationIndex;
@@ -49,6 +53,8 @@ public class ExtractMapperImpl implements ExtractMapper{
 
             Extraction extraction = extractRepository.addNewExtraction();
             extraction.setStationName(station[0]);
+
+            if (!dataValidator.isValidNumber(station[4])) return "Invalid station height!";
             extraction.setStationHeight(dataMapper.meterToMillimeter(station[4]));
             line = extractRequest.removeFirst();
         }
@@ -60,18 +66,30 @@ public class ExtractMapperImpl implements ExtractMapper{
             target = line.split("\\s+");
             if (target.length != 6) continue;
 
-            stationIndex = Integer.parseInt(target[5]);
+            try {
+                stationIndex = Integer.parseInt(target[5]);
+            } catch (NumberFormatException e) {
+                return "Invalid index station!";
+            }
             Measurement measurement = extractRepository.addNewMeasurement(stationIndex);
             measurement.setTargetName(target[0]);
+
+            if (!dataValidator.isValidNumber(target[1])) return "Invalid distance!";
             measurement.setTargetInclinedDistance(dataMapper.meterToMillimeter(target[1]));
+
+            if (!dataValidator.isValidHorizontalAngle(target[2])) return "Invalid horizontal direction!";
             measurement.setTargetDirection(dataMapper.dmsToSeconds(target[2]));
+
+            if (!dataValidator.isValidTiltAngle(target[3])) return "Invalid tilt angle!";
             measurement.setTargetTiltAngle(dataMapper.dmsToSeconds(target[3]));
+
+            if (!dataValidator.isValidNumber(target[4])) return "Invalid target height!";
             measurement.setTargetHeight(dataMapper.meterToMillimeter(target[4]));
         }
 
-        if (extractRepository.size() == 0) success = false;
+        if (extractRepository.size() == 0) message = "Bad request!";
 
-        return success;
+        return message;
     }
 
     /**
