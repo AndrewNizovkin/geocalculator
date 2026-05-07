@@ -10,6 +10,7 @@ import ru.taheoport.geocalculator_service.model.Target;
 import ru.taheoport.geocalculator_service.model.SurveyStation;
 import ru.taheoport.geocalculator_service.repository.SurveyRepository;
 import ru.taheoport.geocalculator_service.repository.SurveyRepositoryImpl;
+import ru.taheoport.geocalculator_service.validator.DataValidatorDefault;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,8 @@ import static org.junit.jupiter.api.Assertions.*;
         SurveyMapperImpl.class,
         SurveyRepositoryImpl.class,
         SurveyServiceImpl.class,
-        DataMapperDefault.class
+        DataMapperDefault.class,
+        DataValidatorDefault.class
 })
 class SurveyServiceImplTest {
 
@@ -180,9 +182,9 @@ class SurveyServiceImplTest {
         surveyRepository.clearAll();
         List<String> surveyRequestTest = getSurveyRequestTest();
 
-        boolean success = surveyMapper.surveyRequestToSurvey(surveyRequestTest, surveyRepository);
+        String actualMessage = surveyMapper.surveyRequestToSurvey(surveyRequestTest, surveyRepository);
 
-        assertTrue(success);
+        assertEquals("OK", actualMessage);
 
         surveyService.calculateSurvey();
 
@@ -254,7 +256,209 @@ class SurveyServiceImplTest {
         assertEquals(expectMessage, actualMessage);
     }
 
+    @Test
+    void surveyToReportsTestBadStationX() {
+        String expectMessage = "Invalid station X!";
+        String expectTitle = "#error";
+        int expectSize = 2;
 
+        List<String> actualResponse = surveyService.getSurveyReports(getSurveyRequestBadStationXTest());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.get(0);
+        String actualMessage = actualResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void surveyToReportsTestBadStationY() {
+        String expectMessage = "Invalid station Y!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = surveyService.getSurveyReports(getSurveyRequestBadStationYTest());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.get(0);
+        String actualMessage = actualResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void surveyToReportsTestBadStationZ() {
+        String expectMessage = "Invalid station Z!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = surveyService.getSurveyReports(getSurveyRequestBadStationZTest());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.get(0);
+        String actualMessage = actualResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void surveyToReportsTestBadStationHeight() {
+        String expectMessage = "Invalid station height!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = surveyService.getSurveyReports(getSurveyRequestBadStationHeightTest());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.get(0);
+        String actualMessage = actualResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void surveyToReportsTestBadOrDirection() {
+        String expectMessage = "Invalid back direction!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = surveyService.getSurveyReports(getSurveyRequestBadOrDirectionTest());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.get(0);
+        String actualMessage = actualResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void surveyToReportsTestBadOrX() {
+        String expectMessage = "Invalid back X!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = surveyService.getSurveyReports(getSurveyRequestBadOrXTest());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.get(0);
+        String actualMessage = actualResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void surveyToReportsTestBadOrY() {
+        String expectMessage = "Invalid back Y!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = surveyService.getSurveyReports(getSurveyRequestBadOrYTest());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.get(0);
+        String actualMessage = actualResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void surveyToReportsTestBadIndexStation() {
+        String expectMessage = "Invalid station index!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = surveyService.getSurveyReports(getSurveyRequestBadIndexStationTest());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.get(0);
+        String actualMessage = actualResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void surveyToReportsTestBadDistance() {
+        String expectMessage = "Invalid distance!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = surveyService.getSurveyReports(getSurveyRequestBadDistanceTest());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.get(0);
+        String actualMessage = actualResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void surveyToReportsTestBadTargetDirection() {
+        String expectMessage = "Invalid target direction!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = surveyService.getSurveyReports(getSurveyRequestBadTargetDirectionTest());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.get(0);
+        String actualMessage = actualResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void surveyToReportsTestBadTiltAngle() {
+        String expectMessage = "Invalid tilt angle!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = surveyService.getSurveyReports(getSurveyRequestBadTiltAngleTest());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.get(0);
+        String actualMessage = actualResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void surveyToReportsTestBadTargetHeight() {
+        String expectMessage = "Invalid target height!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = surveyService.getSurveyReports(getSurveyRequestBadTargetHeightTest());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.get(0);
+        String actualMessage = actualResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
 
     /**
      * Creates expect survey reports
@@ -586,4 +790,186 @@ class SurveyServiceImplTest {
         target.setTargetTiltAngle(8484L);
         target.setTargetHeight(2000000L);
     }
+
+    /**
+     * Creates test surveyRequest
+     * @return list strings in surveyRequest format with invalid station X
+     */
+    private List<String> getSurveyRequestBadStationXTest() {
+        List<String> surveyRequestTest = new ArrayList<>();
+        surveyRequestTest.add("1301 Ч78676.113 2296967.264 11.220 1.538 0.0000 1302 478685.352 2296938.168");
+        surveyRequestTest.add("//");
+        surveyRequestTest.add("1302 30.526 359.5953 0.3009 1.600 0");
+        surveyRequestTest.add("T100 39.878 185.4548 0.0646 1.600 0");
+        surveyRequestTest.add("//");
+
+        return surveyRequestTest;
+    }
+
+    /**
+     * Creates test surveyRequest
+     * @return list strings in surveyRequest format with invalid station Y
+     */
+    private List<String> getSurveyRequestBadStationYTest() {
+        List<String> surveyRequestTest = new ArrayList<>();
+        surveyRequestTest.add("1301 478676.113 2296967,264 11.220 1.538 0.0000 1302 478685.352 2296938.168");
+        surveyRequestTest.add("//");
+        surveyRequestTest.add("1302 30.526 359.5953 0.3009 1.600 0");
+        surveyRequestTest.add("T100 39.878 185.4548 0.0646 1.600 0");
+        surveyRequestTest.add("//");
+
+        return surveyRequestTest;
+    }
+
+    /**
+     * Creates test surveyRequest
+     * @return list strings in surveyRequest format with invalid station Z
+     */
+    private List<String> getSurveyRequestBadStationZTest() {
+        List<String> surveyRequestTest = new ArrayList<>();
+        surveyRequestTest.add("1301 478676.113 2296967.264 11.22O 1.538 0.0000 1302 478685.352 2296938.168");
+        surveyRequestTest.add("//");
+        surveyRequestTest.add("1302 30.526 359.5953 0.3009 1.600 0");
+        surveyRequestTest.add("T100 39.878 185.4548 0.0646 1.600 0");
+        surveyRequestTest.add("//");
+
+        return surveyRequestTest;
+    }
+
+    /**
+     * Creates test surveyRequest
+     * @return list strings in surveyRequest format with invalid station height
+     */
+    private List<String> getSurveyRequestBadStationHeightTest() {
+        List<String> surveyRequestTest = new ArrayList<>();
+        surveyRequestTest.add("1301 478676.113 2296967.264 11.220 1.5w8 0.0000 1302 478685.352 2296938.168");
+        surveyRequestTest.add("//");
+        surveyRequestTest.add("1302 30.526 359.5953 0.3009 1.600 0");
+        surveyRequestTest.add("T100 39.878 185.4548 0.0646 1.600 0");
+        surveyRequestTest.add("//");
+
+        return surveyRequestTest;
+    }
+
+    /**
+     * Creates test surveyRequest
+     * @return list strings in surveyRequest format with invalid back direction
+     */
+    private List<String> getSurveyRequestBadOrDirectionTest() {
+        List<String> surveyRequestTest = new ArrayList<>();
+        surveyRequestTest.add("1301 478676.113 2296967.264 11.220 1.538 0.O000 1302 478685.352 2296938.168");
+        surveyRequestTest.add("//");
+        surveyRequestTest.add("1302 30.526 359.5953 0.3009 1.600 0");
+        surveyRequestTest.add("T100 39.878 185.4548 0.0646 1.600 0");
+        surveyRequestTest.add("//");
+
+        return surveyRequestTest;
+    }
+
+    /**
+     * Creates test surveyRequest
+     * @return list strings in surveyRequest format with invalid back point X
+     */
+    private List<String> getSurveyRequestBadOrXTest() {
+        List<String> surveyRequestTest = new ArrayList<>();
+        surveyRequestTest.add("1301 478676.113 2296967.264 11.220 1.538 0.0000 1302 47-8685.352 2296938.168");
+        surveyRequestTest.add("//");
+        surveyRequestTest.add("1302 30.526 359.5953 0.3009 1.600 0");
+        surveyRequestTest.add("T100 39.878 185.4548 0.0646 1.600 0");
+        surveyRequestTest.add("//");
+
+        return surveyRequestTest;
+    }
+
+    /**
+     * Creates test surveyRequest
+     * @return list strings in surveyRequest format with invalid back point Y
+     */
+    private List<String> getSurveyRequestBadOrYTest() {
+        List<String> surveyRequestTest = new ArrayList<>();
+        surveyRequestTest.add("1301 478676.113 2296967.264 11.220 1.538 0.0000 1302 478685.352 2296938_168");
+        surveyRequestTest.add("//");
+        surveyRequestTest.add("1302 30.526 359.5953 0.3009 1.600 0");
+        surveyRequestTest.add("T100 39.878 185.4548 0.0646 1.600 0");
+        surveyRequestTest.add("//");
+
+        return surveyRequestTest;
+    }
+
+     /**
+     * Creates test surveyRequest
+     * @return list strings in surveyRequest format with invalid station index of target
+     */
+    private List<String> getSurveyRequestBadIndexStationTest() {
+        List<String> surveyRequestTest = new ArrayList<>();
+        surveyRequestTest.add("1301 478676.113 2296967.264 11.220 1.538 0.0000 1302 478685.352 2296938.168");
+        surveyRequestTest.add("//");
+        surveyRequestTest.add("1302 30.526 359.5953 0.3009 1.600 )");
+        surveyRequestTest.add("T100 39.878 185.4548 0.0646 1.600 0");
+        surveyRequestTest.add("//");
+
+        return surveyRequestTest;
+    }
+
+    /**
+     * Creates test surveyRequest
+     * @return list strings in surveyRequest format with invalid distance
+     */
+    private List<String> getSurveyRequestBadDistanceTest() {
+        List<String> surveyRequestTest = new ArrayList<>();
+        surveyRequestTest.add("1301 478676.113 2296967.264 11.220 1.538 0.0000 1302 478685.352 2296938.168");
+        surveyRequestTest.add("//");
+        surveyRequestTest.add("1302 30.j52 359.5953 0.3009 1.600 0");
+        surveyRequestTest.add("T100 39.878 185.4548 0.0646 1.600 0");
+        surveyRequestTest.add("//");
+
+        return surveyRequestTest;
+    }
+
+    /**
+     * Creates test surveyRequest
+     * @return list strings in surveyRequest format with invalid target direction
+     */
+    private List<String> getSurveyRequestBadTargetDirectionTest() {
+        List<String> surveyRequestTest = new ArrayList<>();
+        surveyRequestTest.add("1301 478676.113 2296967.264 11.220 1.538 0.0000 1302 478685.352 2296938.168");
+        surveyRequestTest.add("//");
+        surveyRequestTest.add("1302 30.152 3S9.5953 0.3009 1.600 0");
+        surveyRequestTest.add("T100 39.878 185.4548 0.0646 1.600 0");
+        surveyRequestTest.add("//");
+
+        return surveyRequestTest;
+    }
+
+    /**
+     * Creates test surveyRequest
+     * @return list strings in surveyRequest format with invalid tilt angle
+     */
+    private List<String> getSurveyRequestBadTiltAngleTest() {
+        List<String> surveyRequestTest = new ArrayList<>();
+        surveyRequestTest.add("1301 478676.113 2296967.264 11.220 1.538 0.0000 1302 478685.352 2296938.168");
+        surveyRequestTest.add("//");
+        surveyRequestTest.add("1302 30.152 359.5953 0.З009 1.600 0");
+        surveyRequestTest.add("T100 39.878 185.4548 0.0646 1.600 0");
+        surveyRequestTest.add("//");
+
+        return surveyRequestTest;
+    }
+
+    /**
+     * Creates test surveyRequest
+     * @return list strings in surveyRequest format with invalid target height
+     */
+    private List<String> getSurveyRequestBadTargetHeightTest() {
+        List<String> surveyRequestTest = new ArrayList<>();
+        surveyRequestTest.add("1301 478676.113 2296967.264 11.220 1.538 0.0000 1302 478685.352 2296938.168");
+        surveyRequestTest.add("//");
+        surveyRequestTest.add("1302 30.152 359.5953 0.3009 1.б00 0");
+        surveyRequestTest.add("T100 39.878 185.4548 0.0646 1.600 0");
+        surveyRequestTest.add("//");
+
+        return surveyRequestTest;
+    }
+
+
 }

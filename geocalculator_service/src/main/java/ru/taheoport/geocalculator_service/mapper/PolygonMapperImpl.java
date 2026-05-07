@@ -8,6 +8,7 @@ import ru.taheoport.geocalculator_service.model.PolygonStation;
 import ru.taheoport.geocalculator_service.model.Residuals;
 import ru.taheoport.geocalculator_service.model.ValidResiduals;
 import ru.taheoport.geocalculator_service.repository.PolygonRepository;
+import ru.taheoport.geocalculator_service.validator.DataValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,8 @@ public class PolygonMapperImpl implements PolygonMapper{
 
     private final DataMapper dataMapper;
 
+    private final DataValidator dataValidator;
+
     private final PolygonRepository polygonRepository;
 
     private final Residuals residuals;
@@ -35,12 +38,13 @@ public class PolygonMapperImpl implements PolygonMapper{
      * Extract data from polygonRequest and fills polygon model
      *
      * @param polygonRequest    list of string with data
-     * @return true if polygonRequest contains valid geodetic data
+     * @return String result of extraction "OK" or error message
      */
     @Override
-    public boolean polygonRequestToPolygon(List<String> polygonRequest) {
+    public String polygonRequestToPolygon(List<String> polygonRequest) {
         polygonRepository.clearAll();
-        boolean Success = true;
+        if (polygonRequest.isEmpty()) return "Request is Empty!";
+        String message = "OK";
         String target = "";
 
         for (String line : polygonRequest) {
@@ -60,11 +64,19 @@ public class PolygonMapperImpl implements PolygonMapper{
                     switch (record[0]) {
 
                         case "elevation" -> {
-                            validResiduals.setValidElevation(Integer.parseInt(record[1]));
+                            try {
+                                validResiduals.setValidElevation(Integer.parseInt(record[1]));
+                            } catch (NumberFormatException e) {
+                                return "Invalid elevation valid residuals!";
+                            }
                         }
 
                         case "angle" -> {
-                            validResiduals.setValidAngle(Integer.parseInt(record[1]));
+                            try {
+                                validResiduals.setValidAngle(Integer.parseInt(record[1]));
+                            } catch (NumberFormatException e) {
+                                return "Invalid angle valid residuals!";
+                            }
                         }
 
                         case "absolute" -> {
@@ -87,12 +99,14 @@ public class PolygonMapperImpl implements PolygonMapper{
                     if (record[1].equals("Not")) {
                         polygonStation.setHorAngle(0);
                     } else {
+                        if (!dataValidator.isValidHorizontalAngle(record[1])) return "Invalid direction!";
                         polygonStation.setHorAngle(dataMapper.dmsToSeconds(record[1]));
                     }
 
                     if (record[2].equals("Not")) {
                         polygonStation.setHorDistance(0);
                     } else {
+                        if(!dataValidator.isValidPositiveNumber(record[2])) return "Invalid distance!";
                         polygonStation.setHorDistance(dataMapper.meterToMillimeter(record[2]));
                     }
 
@@ -100,6 +114,7 @@ public class PolygonMapperImpl implements PolygonMapper{
                         polygonStation.setElevation(0);
                         polygonStation.setElevationCorrected(0);
                     } else {
+                        if(!dataValidator.isValidNumber(record[3])) return "Invalid elevation!";
                         polygonStation.setElevation(dataMapper.meterToMillimeter(record[3]));
                         polygonStation.setElevationCorrected(polygonStation.getElevation());
                     }
@@ -111,8 +126,11 @@ public class PolygonMapperImpl implements PolygonMapper{
                         polygonStation.setStationZ(0);
                     } else {
                         polygonStation.setStatus(true);
+                        if(!dataValidator.isValidNumber(record[4])) return "Invalid coordinate X!";
                         polygonStation.setStationX(dataMapper.meterToMillimeter(record[4]));
+                        if(!dataValidator.isValidNumber(record[5])) return "Invalid coordinate Y!";
                         polygonStation.setStationY(dataMapper.meterToMillimeter(record[5]));
+                        if(!dataValidator.isValidNumber(record[6])) return "Invalid coordinate Z!";
                         polygonStation.setStationZ(dataMapper.meterToMillimeter(record[6]));
                     }
                 }
@@ -120,8 +138,8 @@ public class PolygonMapperImpl implements PolygonMapper{
 
         }
 
-        if (polygonRepository.size() == 0) Success = false;
-        return Success;
+        if (polygonRepository.size() == 0) message = "Bad request!";
+        return message;
     }
 
     /**

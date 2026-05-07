@@ -10,18 +10,23 @@ import lombok.Setter;
 public class DirectStringResponse{
 
     /**
+     * Response header
+     */
+    private String header = "OK";
+
+    /**
      * Coordinate X of target in meters
      */
-    private String targetX;
+    private String targetX = "0.000";
 
     /**
      * Coordinate Y of target in meters
      */
-    private String targetY;
+    private String targetY = "0.000";
 
     /**
      * Coordinate Z of target in meters
      */
-    private String targetZ;
+    private String targetZ = "0.000";
 
 }

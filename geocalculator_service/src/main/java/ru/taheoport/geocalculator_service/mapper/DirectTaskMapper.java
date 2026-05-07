@@ -36,4 +36,17 @@ public interface DirectTaskMapper {
      */
     DirectStringResponse toDirectStringResponse(DirectTaskFullResponse directTaskFullResponse);
 
+    /**
+     * Gives response if raw data is not valid
+     * @param message String message
+     * @return DirectStringResponse
+     */
+    DirectStringResponse getDirectStringErrorResponse(String message);
+
+    /**
+     * Checks the data in directStringRequest
+     * @param directStringRequest instance of DirectStringRequest with raw geodetic data
+     * @return result of check
+     */
+    String checkDirectStringRequest(DirectStringRequest directStringRequest);
 }

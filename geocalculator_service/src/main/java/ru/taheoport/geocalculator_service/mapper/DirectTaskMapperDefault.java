@@ -3,6 +3,7 @@ package ru.taheoport.geocalculator_service.mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.taheoport.geocalculator_service.dto.*;
+import ru.taheoport.geocalculator_service.validator.DataValidator;
 
 /**
  * This class implements interface DirectTaskMapper
@@ -14,6 +15,7 @@ public class DirectTaskMapperDefault implements DirectTaskMapper{
     private final DirectCalculator directCalculator;
     private final InverseCalculator inverseCalculator;
     private final DataMapper dataMapper;
+    private final DataValidator dataValidator;
 
     @Override
     public DirectTaskResponse toDirectTaskResponse(DirectTaskRequest directTaskRequest) {
@@ -155,6 +157,42 @@ public class DirectTaskMapperDefault implements DirectTaskMapper{
         directStringResponse.setTargetZ(dataMapper.millimeterToMeter(directTaskFullResponse.getTargetZ()));
 
         return directStringResponse;
+    }
+
+    /**
+     * Gives response if raw data is not valid
+     * @param message String message
+     * @return DirectStringResponse
+     */
+    @Override
+    public DirectStringResponse getDirectStringErrorResponse(String message) {
+        DirectStringResponse directStringResponse = new DirectStringResponse();
+        directStringResponse.setHeader(message);
+        return directStringResponse;
+    }
+
+    /**
+     * Checks the data in directStringRequest
+     *
+     * @param directStringRequest instance of DirectStringRequest with raw geodetic data
+     * @return result of check
+     */
+    @Override
+    public String checkDirectStringRequest(DirectStringRequest directStringRequest) {
+
+        if (!dataValidator.isValidNumber(directStringRequest.getLandmarkX())) return "Invalid back X!";
+        if (!dataValidator.isValidNumber(directStringRequest.getLandmarkY())) return "Invalid back Y!";
+        if (!dataValidator.isValidHorizontalAngle(directStringRequest.getLandmarkDirection())) return "Invalid back direction!";
+        if (!dataValidator.isValidNumber(directStringRequest.getBaseX())) return "Invalid base X!";
+        if (!dataValidator.isValidNumber(directStringRequest.getBaseY())) return "Invalid base Y!";
+        if (!dataValidator.isValidNumber(directStringRequest.getBaseZ())) return "Invalid base Z!";
+        if (!dataValidator.isValidNumber(directStringRequest.getBaseHeight())) return "Invalid base height!";
+        if (!dataValidator.isValidHorizontalAngle(directStringRequest.getTargetDirection())) return "Invalid target direction!";
+        if (!dataValidator.isValidPositiveNumber(directStringRequest.getTargetInclinedDistance())) return "Invalid distance!";
+        if (!dataValidator.isValidTiltAngle(directStringRequest.getTargetTiltAngle())) return "Invalid tilt angle!";
+        if (!dataValidator.isValidNumber(directStringRequest.getTargetHeight())) return "Invalid target height!";
+
+        return "OK";
     }
 
 }

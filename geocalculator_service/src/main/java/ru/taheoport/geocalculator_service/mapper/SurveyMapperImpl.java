@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.taheoport.geocalculator_service.model.Target;
 import ru.taheoport.geocalculator_service.model.SurveyStation;
 import ru.taheoport.geocalculator_service.repository.SurveyRepository;
+import ru.taheoport.geocalculator_service.validator.DataValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,8 @@ import java.util.List;
 public class SurveyMapperImpl implements SurveyMapper{
 
     private final DataMapper dataMapper;
+
+    private final DataValidator dataValidator;
     /**
      * Extracts model data from the Leica total station file
      *
@@ -384,12 +387,12 @@ public class SurveyMapperImpl implements SurveyMapper{
      *
      * @param surveyRequest    list of string in tah+ format
      * @param surveyRepository survey model
-     * @return This is true if the data contains a geodetic survey.
+     * @return String result of extraction "OK" or error message
      */
     @Override
-    public boolean surveyRequestToSurvey(List<String> surveyRequest, SurveyRepository surveyRepository) {
-        boolean success = true;
-        if (surveyRequest.isEmpty()) return false;
+    public String surveyRequestToSurvey(List<String> surveyRequest, SurveyRepository surveyRepository) {
+        String message = "OK";
+        if (surveyRequest.isEmpty()) return "Request is Empty!";
         String[] station;
         String[] target;
         int stationIndex;
@@ -404,13 +407,28 @@ public class SurveyMapperImpl implements SurveyMapper{
 
             SurveyStation surveyStation = surveyRepository.addNewStation();
             surveyStation.setStationName(station[0]);
+
+            if (!dataValidator.isValidNumber(station[1])) return "Invalid station X!";
             surveyStation.setStationX(dataMapper.meterToMillimeter(station[1]));
+
+            if (!dataValidator.isValidNumber(station[2])) return "Invalid station Y!";
             surveyStation.setStationY(dataMapper.meterToMillimeter(station[2]));
+
+            if (!dataValidator.isValidNumber(station[3])) return "Invalid station Z!";
             surveyStation.setStationZ(dataMapper.meterToMillimeter(station[3]));
+
+            if (!dataValidator.isValidNumber(station[4])) return "Invalid station height!";
             surveyStation.setStationHeight(dataMapper.meterToMillimeter(station[4]));
+
+            if (!dataValidator.isValidHorizontalAngle(station[5])) return "Invalid back direction!";
             surveyStation.setOrDirection(dataMapper.dmsToSeconds(station[5]));
+
             surveyStation.setOrName(station[6]);
+
+            if (!dataValidator.isValidNumber(station[7])) return "Invalid back X!";
             surveyStation.setOrX(dataMapper.meterToMillimeter(station[7]));
+
+            if (!dataValidator.isValidNumber(station[8])) return "Invalid back Y!";
             surveyStation.setOrY(dataMapper.meterToMillimeter(station[8]));
             line = surveyRequest.removeFirst();
         }
@@ -421,19 +439,32 @@ public class SurveyMapperImpl implements SurveyMapper{
 
             target = line.split("\\s+");
             if (target.length != 6) continue;
+            try {
+                stationIndex = Integer.parseInt(target[5]);
+            } catch (NumberFormatException e) {
+                return "Invalid station index!";
+            }
 
-            stationIndex = Integer.parseInt(target[5]);
             Target measurement = surveyRepository.addNewMeasurement(stationIndex);
+
             measurement.setTargetName(target[0]);
+
+            if (!dataValidator.isValidPositiveNumber(target[1])) return "Invalid distance!";
             measurement.setTargetInclinedDistance(dataMapper.meterToMillimeter(target[1]));
+
+            if (!dataValidator.isValidHorizontalAngle(target[2])) return "Invalid target direction!";
             measurement.setTargetDirection(dataMapper.dmsToSeconds(target[2]));
+
+            if (!dataValidator.isValidTiltAngle(target[3])) return "Invalid tilt angle!";
             measurement.setTargetTiltAngle(dataMapper.dmsToSeconds(target[3]));
+
+            if (!dataValidator.isValidNumber(target[4])) return "Invalid target height!";
             measurement.setTargetHeight(dataMapper.meterToMillimeter(target[4]));
         }
 
-        if (surveyRepository.size() == 0) success = false;
+        if (surveyRepository.size() == 0) message = "Bad request!";
 
-        return success;
+        return message;
     }
 
     /**

@@ -9,6 +9,7 @@ import ru.taheoport.geocalculator_service.model.Residuals;
 import ru.taheoport.geocalculator_service.model.ValidResiduals;
 import ru.taheoport.geocalculator_service.repository.PolygonRepository;
 import ru.taheoport.geocalculator_service.repository.PolygonRepositoryImpl;
+import ru.taheoport.geocalculator_service.validator.DataValidatorDefault;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
         ValidResiduals.class,
         Residuals.class,
         DataMapperDefault.class,
+        DataValidatorDefault.class,
         ReportResiduals.class
 })
 class PolygonServiceImplTest {
@@ -52,8 +54,7 @@ class PolygonServiceImplTest {
 
     @Test
     void setReportResidualsTestTT() {
-        boolean success = polygonMapper.polygonRequestToPolygon(getTestPolygonRequestTT());
-        assertTrue(success);
+        polygonMapper.polygonRequestToPolygon(getTestPolygonRequestTT());
         String expectPerimeter = "224.560";
         String expectActualElevation = "5";
         String expectActualAngle = "55";
@@ -97,8 +98,7 @@ class PolygonServiceImplTest {
 
     @Test
     void setReportResidualsTestOO() {
-        boolean success = polygonMapper.polygonRequestToPolygon(getTestPolygonRequestOO());
-        assertTrue(success);
+        polygonMapper.polygonRequestToPolygon(getTestPolygonRequestOO());
         String expectPerimeter = "224.560";
         String expectActualElevation = "5";
         String expectActualAngle = "-.-";
@@ -142,8 +142,7 @@ class PolygonServiceImplTest {
 
     @Test
     void setReportResidualsTestTZ() {
-        boolean success = polygonMapper.polygonRequestToPolygon(getTestPolygonRequestTZ());
-        assertTrue(success);
+        polygonMapper.polygonRequestToPolygon(getTestPolygonRequestTZ());
         String expectPerimeter = "190.830";
         String expectActualElevation = "-.-";
         String expectActualAngle = "-.-";
@@ -348,6 +347,142 @@ class PolygonServiceImplTest {
 
         String actualTitle = actualResponse.get(0);
         String actualMessage = actualResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void getPolygonReportsTestBadElevationResiduals() {
+        String expectMessage = "Invalid elevation valid residuals!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = polygonService.getPolygonReports(getTestPolygonRequestBadElevationResiduals());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.get(0);
+        String actualMessage = actualResponse.get(1);
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void getPolygonReportsTestBadAngleResiduals() {
+        String expectMessage = "Invalid angle valid residuals!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = polygonService.getPolygonReports(getTestPolygonRequestBadAngleResiduals());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.getFirst();
+        String actualMessage = actualResponse.getLast();
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void getPolygonReportsTestBadHorAngle() {
+        String expectMessage = "Invalid direction!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = polygonService.getPolygonReports(getTestPolygonRequestBadHorAngle());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.getFirst();
+        String actualMessage = actualResponse.getLast();
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void getPolygonReportsTestBadDistance() {
+        String expectMessage = "Invalid distance!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = polygonService.getPolygonReports(getTestPolygonRequestBadDistance());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.getFirst();
+        String actualMessage = actualResponse.getLast();
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void getPolygonReportsTestBadElevation() {
+        String expectMessage = "Invalid elevation!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = polygonService.getPolygonReports(getTestPolygonRequestBadElevation());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.getFirst();
+        String actualMessage = actualResponse.getLast();
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void getPolygonReportsTestBadX() {
+        String expectMessage = "Invalid coordinate X!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = polygonService.getPolygonReports(getTestPolygonRequestBadX());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.getFirst();
+        String actualMessage = actualResponse.getLast();
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void getPolygonReportsTestBadY() {
+        String expectMessage = "Invalid coordinate Y!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = polygonService.getPolygonReports(getTestPolygonRequestBadY());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.getFirst();
+        String actualMessage = actualResponse.getLast();
+
+        assertEquals(expectTitle, actualTitle);
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    void getPolygonReportsTestBadZ() {
+        String expectMessage = "Invalid coordinate Z!";
+        String expectTitle = "#error";
+        int expectSize = 2;
+
+        List<String> actualResponse = polygonService.getPolygonReports(getTestPolygonRequestBadZ());
+        int actualSize = actualResponse.size();
+        assertEquals(expectSize, actualSize);
+
+        String actualTitle = actualResponse.getFirst();
+        String actualMessage = actualResponse.getLast();
 
         assertEquals(expectTitle, actualTitle);
         assertEquals(expectMessage, actualMessage);
@@ -1061,5 +1196,164 @@ class PolygonServiceImplTest {
         return polygonRequest;
     }
 
+    /**
+     * Creates test polygonResponse with invalid elevation valid residuals
+     * @return list of strings
+     */
+    private List<String> getTestPolygonRequestBadElevationResiduals() {
+        List<String> polygonRequest = new ArrayList<>();
+
+        polygonRequest.add("#valid-residuals");
+        polygonRequest.add("elevation=50e");
+        polygonRequest.add("angle=20");
+        polygonRequest.add("absolute=0.20");
+        polygonRequest.add("relative=1:2000");
+        polygonRequest.add("#polygon");
+        polygonRequest.add("1003 181.2628 Not Not 457129.609 2261111.97 15.767");
+        polygonRequest.add("100 176.4053 64.987 -0.174 Not Not Not");
+        polygonRequest.add("102 173.1354 33.73 -0.56 Not Not Not");
+
+        return polygonRequest;
+    }
+
+    /**
+     * Creates test polygonResponse with invalid angle valid residuals
+     * @return list of strings
+     */
+    private List<String> getTestPolygonRequestBadAngleResiduals() {
+        List<String> polygonRequest = new ArrayList<>();
+
+        polygonRequest.add("#valid-residuals");
+        polygonRequest.add("elevation=50");
+        polygonRequest.add("angle=#20");
+        polygonRequest.add("absolute=0.20");
+        polygonRequest.add("relative=1:2000");
+        polygonRequest.add("#polygon");
+        polygonRequest.add("1003 181.2628 Not Not 457129.609 2261111.97 15.767");
+        polygonRequest.add("100 176.4053 64.987 -0.174 Not Not Not");
+        polygonRequest.add("102 173.1354 33.73 -0.56 Not Not Not");
+
+        return polygonRequest;
+    }
+
+    /**
+     * Creates test polygonResponse with invalid horizontal angle
+     * @return list of strings
+     */
+    private List<String> getTestPolygonRequestBadHorAngle() {
+        List<String> polygonRequest = new ArrayList<>();
+
+        polygonRequest.add("#valid-residuals");
+        polygonRequest.add("elevation=50");
+        polygonRequest.add("angle=20");
+        polygonRequest.add("absolute=0.20");
+        polygonRequest.add("relative=1:2000");
+        polygonRequest.add("#polygon");
+        polygonRequest.add("1003 181.9628 Not Not 457129.609 2261111.97 15.767");
+        polygonRequest.add("100 176.4053 64.987 -0.174 Not Not Not");
+        polygonRequest.add("102 173.1354 33.73 -0.56 Not Not Not");
+
+        return polygonRequest;
+    }
+
+    /**
+     * Creates test polygonResponse with invalid distance
+     * @return list of strings
+     */
+    private List<String> getTestPolygonRequestBadDistance() {
+        List<String> polygonRequest = new ArrayList<>();
+
+        polygonRequest.add("#valid-residuals");
+        polygonRequest.add("elevation=50");
+        polygonRequest.add("angle=20");
+        polygonRequest.add("absolute=0.20");
+        polygonRequest.add("relative=1:2000");
+        polygonRequest.add("#polygon");
+        polygonRequest.add("1003 181.3628 Not Not 457129.609 2261111.97 15.767");
+        polygonRequest.add("100 176.4053 64.9S7 -0.174 Not Not Not");
+        polygonRequest.add("102 173.1354 33.73 -0.56 Not Not Not");
+
+        return polygonRequest;
+    }
+
+    /**
+     * Creates test polygonResponse with invalid distance
+     * @return list of strings
+     */
+    private List<String> getTestPolygonRequestBadElevation() {
+        List<String> polygonRequest = new ArrayList<>();
+
+        polygonRequest.add("#valid-residuals");
+        polygonRequest.add("elevation=50");
+        polygonRequest.add("angle=20");
+        polygonRequest.add("absolute=0.20");
+        polygonRequest.add("relative=1:2000");
+        polygonRequest.add("#polygon");
+        polygonRequest.add("1003 181.3628 Not Not 457129.609 2261111.97 15.767");
+        polygonRequest.add("100 176.4053 64.970 -O.174 Not Not Not");
+        polygonRequest.add("102 173.1354 33.73 -0.56 Not Not Not");
+
+        return polygonRequest;
+    }
+
+    /**
+     * Creates test polygonResponse with invalid coordinate X
+     * @return list of strings
+     */
+    private List<String> getTestPolygonRequestBadX() {
+        List<String> polygonRequest = new ArrayList<>();
+
+        polygonRequest.add("#valid-residuals");
+        polygonRequest.add("elevation=50");
+        polygonRequest.add("angle=20");
+        polygonRequest.add("absolute=0.20");
+        polygonRequest.add("relative=1:2000");
+        polygonRequest.add("#polygon");
+        polygonRequest.add("1003 181.3628 Not Not Ч57129.609 2261111.97 15.767");
+        polygonRequest.add("100 176.4053 64.970 -0.174 Not Not Not");
+        polygonRequest.add("102 173.1354 33.73 -0.56 Not Not Not");
+
+        return polygonRequest;
+    }
+
+    /**
+     * Creates test polygonResponse with invalid coordinate Y
+     * @return list of strings
+     */
+    private List<String> getTestPolygonRequestBadY() {
+        List<String> polygonRequest = new ArrayList<>();
+
+        polygonRequest.add("#valid-residuals");
+        polygonRequest.add("elevation=50");
+        polygonRequest.add("angle=20");
+        polygonRequest.add("absolute=0.20");
+        polygonRequest.add("relative=1:2000");
+        polygonRequest.add("#polygon");
+        polygonRequest.add("1003 181.3628 Not Not 457129.609 226111l.97 15.767");
+        polygonRequest.add("100 176.4053 64.970 -0.174 Not Not Not");
+        polygonRequest.add("102 173.1354 33.73 -0.56 Not Not Not");
+
+        return polygonRequest;
+    }
+
+    /**
+     * Creates test polygonResponse with invalid coordinate Z
+     * @return list of strings
+     */
+    private List<String> getTestPolygonRequestBadZ() {
+        List<String> polygonRequest = new ArrayList<>();
+
+        polygonRequest.add("#valid-residuals");
+        polygonRequest.add("elevation=50");
+        polygonRequest.add("angle=20");
+        polygonRequest.add("absolute=0.20");
+        polygonRequest.add("relative=1:2000");
+        polygonRequest.add("#polygon");
+        polygonRequest.add("1003 181.3628 Not Not 457129.609 2261111.97 15.7b7");
+        polygonRequest.add("100 176.4053 64.970 -0.174 Not Not Not");
+        polygonRequest.add("102 173.1354 33.73 -0.56 Not Not Not");
+
+        return polygonRequest;
+    }
 
 }

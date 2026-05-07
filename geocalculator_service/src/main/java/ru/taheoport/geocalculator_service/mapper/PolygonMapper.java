@@ -15,9 +15,9 @@ public interface PolygonMapper {
     /**
      * Extract data from polygonRequest and fills polygon model
      * @param polygonRequest list of string with data
-     * @return true if polygonRequest contains valid geodetic data
+     * @return String result of extraction "OK" or error message
      */
-    boolean polygonRequestToPolygon(List<String> polygonRequest);
+    String polygonRequestToPolygon(List<String> polygonRequest);
 
     /**
          * Creates response contains processing reports

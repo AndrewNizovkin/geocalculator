@@ -41,9 +41,9 @@ public class PolygonServiceImpl implements PolygonService{
 
         clearAll();
 
-        boolean success = polygonMapper.polygonRequestToPolygon(polygonRequest);
+        String message = polygonMapper.polygonRequestToPolygon(polygonRequest);
 
-        if (!success) return polygonMapper.getErrorResponse("Bad request!");
+        if (!message.equals("OK")) return polygonMapper.getErrorResponse(message);
 
         if (polygonRepository.size() < 3) return polygonMapper.getErrorResponse("Few stations!");
 

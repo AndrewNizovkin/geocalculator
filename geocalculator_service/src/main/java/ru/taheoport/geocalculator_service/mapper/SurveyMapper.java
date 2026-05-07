@@ -53,9 +53,9 @@ public interface SurveyMapper {
      * Extracts model data from surveyRequest
      * @param surveyRequest list of string in tah+ format
      * @param surveyRepository survey model
-     * @return This is true if the data contains a geodetic survey.
+     * @return String result of extraction "OK" or error message
      */
-    boolean surveyRequestToSurvey(List<String> surveyRequest, SurveyRepository surveyRepository);
+    String surveyRequestToSurvey(List<String> surveyRequest, SurveyRepository surveyRepository);
 
     /**
      * Creates error response

@@ -1,6 +1,8 @@
 package ru.taheoport.geocalculator_service.service;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.taheoport.geocalculator_service.dto.DirectStringRequest;
@@ -11,6 +13,7 @@ import ru.taheoport.geocalculator_service.mapper.DataMapperDefault;
 import ru.taheoport.geocalculator_service.mapper.DirectCalculatorDefault;
 import ru.taheoport.geocalculator_service.mapper.DirectTaskMapperDefault;
 import ru.taheoport.geocalculator_service.mapper.InverseCalculatorImpl;
+import ru.taheoport.geocalculator_service.validator.DataValidatorDefault;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -23,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
         DirectTaskMapperDefault.class,
         DirectCalculatorDefault.class,
         DataMapperDefault.class,
+        DataValidatorDefault.class,
         InverseCalculatorImpl.class
 })
 class DirectTaskServiceImplIIntegrationTest {
@@ -60,41 +64,76 @@ class DirectTaskServiceImplIIntegrationTest {
     }
 
     @Test
-    void getDirectStringResponse() {
-        DirectStringResponse expectResponse = getStringResponse();
+    void getDirectStringResponseTest() {
+        DirectStringResponse expectResponse = getExpectStringResponse();
         DirectStringRequest directStringRequest = getStringRequest();
 
         DirectStringResponse actualResponse = directTaskService.getDirectStringResponse(directStringRequest);
 
         assertNotNull(actualResponse);
+        assertEquals(expectResponse.getHeader(), actualResponse.getHeader());
         assertEquals(expectResponse.getTargetX(), actualResponse.getTargetX());
         assertEquals(expectResponse.getTargetY(), actualResponse.getTargetY());
         assertEquals(expectResponse.getTargetZ(), actualResponse.getTargetZ());
 
     }
 
-    @Test
-    void getDirectStringErrorResponseTest() {
-        DirectStringRequest expectRequest = getStringRequest();
-        String expectTargetX = "0.000";
-        String expectTargetY = "0.000";
-        String expectTargetZ = "0.000";
+    @ParameterizedTest
+    @CsvSource({
+            "Ч78685.352, 2296938.168, 0.0000, 478676.113, 2296967.264, 11.220, 1.538, 185.4548, 39.878, 0.0646, 1.600, 'Invalid back X!'",
+            "478685.352, 229d938.168, 0.0000, 478676.113, 2296967.264, 11.220, 1.538, 185.4548, 39.878, 0.0646, 1.600, 'Invalid back Y!'",
+            "478685.352, 2296938.168, O.0000, 478676.113, 2296967.264, 11.220, 1.538, 185.4548, 39.878, 0.0646, 1.600, 'Invalid back direction!'",
+            "478685.352, 2296938.168, 0.0000, 478676e113, 2296967.264, 11.220, 1.538, 185.4548, 39.878, 0.0646, 1.600, 'Invalid base X!'",
+            "478685.352, 2296938.168, 0.0000, 478676.113, 22e6967.264, 11.220, 1.538, 185.4548, 39.878, 0.0646, 1.600, 'Invalid base Y!'",
+            "478685.352, 2296938.168, 0.0000, 478676.113, 2246967.264, 11-220, 1.538, 185.4548, 39.878, 0.0646, 1.600, 'Invalid base Z!'",
+            "478685.352, 2296938.168, 0.0000, 478676.113, 2246967.264, 11.220, 1.5A8, 185.4548, 39.878, 0.0646, 1.600, 'Invalid base height!'",
+            "478685.352, 2296938.168, 0.0000, 478676.113, 2246967.264, 11.220, 1.558, 485.4548, 39.878, 0.0646, 1.600, 'Invalid target direction!'",
+            "478685.352, 2296938.168, 0.0000, 478676.113, 2246967.264, 11.220, 1.558, 285.4548, З9.878, 0.0646, 1.600, 'Invalid distance!'",
+            "478685.352, 2296938.168, 0.0000, 478676.113, 2246967.264, 11.220, 1.558, 285.4548, 39.878, 0.0b46, 1.600, 'Invalid tilt angle!'",
+            "478685.352, 2296938.168, 0.0000, 478676.113, 2246967.264, 11.220, 1.558, 285.4548, 39.878, 0.0646, l.600, 'Invalid target height!'"
+    })
+    void getDirectStringResponseBadDataTest(
+            String landmarkX,
+            String landmarkY,
+            String landmarkDirection,
+            String baseX,
+            String baseY,
+            String baseZ,
+            String baseHeight,
+            String targetDirection,
+            String targetInclinedDistance,
+            String targetTiltAngle,
+            String targetHeight,
+            String expectMessage
+    ) {
+        DirectStringRequest directStringRequest = new DirectStringRequest();
 
-        DirectStringResponse actualResponse = directTaskService.getDirectStringErrorResponse();
+        directStringRequest.setLandmarkX(landmarkX);
+        directStringRequest.setLandmarkY(landmarkY);
+        directStringRequest.setLandmarkDirection(landmarkDirection);
+        directStringRequest.setBaseX(baseX);
+        directStringRequest.setBaseY(baseY);
+        directStringRequest.setBaseZ(baseZ);
+        directStringRequest.setBaseHeight(baseHeight);
+        directStringRequest.setTargetDirection(targetDirection);
+        directStringRequest.setTargetInclinedDistance(targetInclinedDistance);
+        directStringRequest.setTargetTiltAngle(targetTiltAngle);
+        directStringRequest.setTargetHeight(targetHeight);
+
+        DirectStringResponse actualResponse = directTaskService.getDirectStringResponse(directStringRequest);
 
         assertNotNull(actualResponse);
-        assertEquals(expectTargetX, actualResponse.getTargetX());
-        assertEquals(expectTargetY, actualResponse.getTargetY());
-        assertEquals(expectTargetZ, actualResponse.getTargetZ());
-    }
+        assertEquals(expectMessage, actualResponse.getHeader());
 
+    }
 
     /**
      * Gets instance of DirectStringResponse
      * @return directStringResponse
      */
-    private DirectStringResponse getStringResponse() {
+    private DirectStringResponse getExpectStringResponse() {
         DirectStringResponse expectResponse = new DirectStringResponse();
+        expectResponse.setHeader("OK");
         expectResponse.setTargetX("478660.289");
         expectResponse.setTargetY("2297003.868");
         expectResponse.setTargetZ("11.236");

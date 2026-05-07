@@ -32,11 +32,4 @@ public interface DirectTaskService {
      * @return List of instance of DirectTaskFullResponse
      */
     DirectStringResponse getDirectStringResponse(DirectStringRequest directStringRequest);
-
-    /**
-     * Gives response if raw data is not valid
-     * @return DirectStringResponse
-     */
-    DirectStringResponse getDirectStringErrorResponse();
-
 }

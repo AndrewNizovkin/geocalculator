@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.taheoport.geocalculator_service.dto.*;
+import ru.taheoport.geocalculator_service.validator.DataValidatorDefault;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
         DirectTaskMapperDefault.class,
         InverseCalculatorImpl.class,
         DataMapperDefault.class,
+        DataValidatorDefault.class,
         DirectCalculatorDefault.class})
 class DirectTaskMapperDefaultTest {
 

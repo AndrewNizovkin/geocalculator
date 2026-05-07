@@ -12,6 +12,7 @@ import ru.taheoport.geocalculator_service.model.Residuals;
 import ru.taheoport.geocalculator_service.model.ValidResiduals;
 import ru.taheoport.geocalculator_service.repository.PolygonRepository;
 import ru.taheoport.geocalculator_service.repository.PolygonRepositoryImpl;
+import ru.taheoport.geocalculator_service.validator.DataValidatorDefault;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
         ValidResiduals.class,
         Residuals.class,
         DataMapperDefault.class,
+        DataValidatorDefault.class,
         ReportResiduals.class
 })
 class PolygonMapperImplTest {
@@ -53,10 +55,9 @@ class PolygonMapperImplTest {
         String expectRelative = "1:2000";
         List<String> polygonRequest = getTestPolygonRequest();
 
-        boolean actualSuccess = polygonMapper.polygonRequestToPolygon(polygonRequest);
+        String actualSuccess = polygonMapper.polygonRequestToPolygon(polygonRequest);
 
-
-        assertTrue(actualSuccess);
+        assertEquals("OK", actualSuccess);
         assertEquals(expectElevation, validResiduals.getValidElevation());
         assertEquals(expectAngle, validResiduals.getValidAngle());
         assertEquals(expectAbsolute, validResiduals.getValidAbsolute());
@@ -84,12 +85,9 @@ class PolygonMapperImplTest {
             boolean expectStatus,
             int stationIndex
     ) {
-//        List<String> polygonRequest = getTestPolygonRequest();
+        polygonMapper.polygonRequestToPolygon(getTestPolygonRequest());
         int expectSize = 7;
 
-        boolean actualSuccess = polygonMapper.polygonRequestToPolygon(getTestPolygonRequest());
-
-        assertTrue(actualSuccess);
         int actualSize = polygonRepository.size();
         assertEquals(expectSize, actualSize);
         PolygonStation actualStation = polygonRepository.getStationById(stationIndex);
@@ -108,10 +106,11 @@ class PolygonMapperImplTest {
     void polygonRequestToPolygonBadRequestTest() {
         List<String> polygonBadRequest = new ArrayList<>();
         polygonBadRequest.add("asdfasf");
+        String expectMessage = "Bad request!";
 
-        boolean actualSuccess = polygonMapper.polygonRequestToPolygon(polygonBadRequest);
+        String actualMessage = polygonMapper.polygonRequestToPolygon(polygonBadRequest);
 
-        assertFalse(actualSuccess);
+        assertEquals(expectMessage, actualMessage);
     }
 
     @Test

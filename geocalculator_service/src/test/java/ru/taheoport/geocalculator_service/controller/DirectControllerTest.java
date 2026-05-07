@@ -10,9 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
-import ru.taheoport.geocalculator_service.dto.DirectTaskFullResponse;
-import ru.taheoport.geocalculator_service.dto.DirectTaskRequest;
-import ru.taheoport.geocalculator_service.dto.DirectTaskResponse;
+import ru.taheoport.geocalculator_service.dto.*;
 import ru.taheoport.geocalculator_service.service.DirectTaskService;
 
 import java.util.LinkedList;
@@ -82,6 +80,59 @@ class DirectControllerTest {
         assertEquals(expectTargetY, responseBody.getTargetY());
         assertEquals(expectTargetZ, responseBody.getTargetZ());
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "0.000, 0.000, 0.0000, 0.000, 0.000, 0.000, 0.000, 0.0000, 0.000, 0.0000, 0.000, 0.000, 0.000, 0.000",
+            "2000.000, 2000.000, 0.0000, 1000.000, 1000.000, 100.000, 0.000, 30.0000, 100.000, 0.0200, 0.000, 1025.882, 1096.593, 100.058",
+            "478685.352, 2296938.168, 0.0000, 478676.113, 2296967.264, 11.220, 1.538, 185.4548, 39.878, 0.0646, 1.600, 478660.289, 2297003.868, 11.236",
+            "2000.000, 2000.000, 30.0000, 1000.000, 1000.000, 100.000, 0.000, 289.4112, 200.156, -0.1345, 0.000, 1113.906, 835.418, 99.199"})
+    void getDirectStringResponseTest(
+            String landmarkX,
+            String landmarkY,
+            String landmarkDirection,
+            String baseX,
+            String baseY,
+            String baseZ,
+            String baseHeight,
+            String targetDirection,
+            String targetInclinedDistance,
+            String targetTiltAngle,
+            String targetHeight,
+            String expectTargetX,
+            String expectTargetY,
+            String expectTargetZ
+    ) {
+        DirectStringRequest directTaskRequest  = new DirectStringRequest();
+        directTaskRequest.setLandmarkX(landmarkX);
+        directTaskRequest.setLandmarkY(landmarkY);
+        directTaskRequest.setLandmarkDirection(landmarkDirection);
+        directTaskRequest.setBaseX(baseX);
+        directTaskRequest.setBaseY(baseY);
+        directTaskRequest.setBaseZ(baseZ);
+        directTaskRequest.setBaseHeight(baseHeight);
+        directTaskRequest.setTargetDirection(targetDirection);
+        directTaskRequest.setTargetInclinedDistance(targetInclinedDistance);
+        directTaskRequest.setTargetTiltAngle(targetTiltAngle);
+        directTaskRequest.setTargetHeight(targetHeight);
+
+        DirectStringResponse responseBody = webTestClient.post()
+                .uri("direct/str")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(Mono.just(directTaskRequest), DirectStringRequest.class)
+                .exchange()
+                .expectStatus().isCreated()
+                .expectBody(DirectStringResponse.class)
+                .returnResult()
+                .getResponseBody();
+
+        assertNotNull(responseBody);
+        assertEquals("OK",responseBody.getHeader());
+        assertEquals(expectTargetX, responseBody.getTargetX());
+        assertEquals(expectTargetY, responseBody.getTargetY());
+        assertEquals(expectTargetZ, responseBody.getTargetZ());
+    }
+
 
     @Test
     void getDirectTaskFullResponse() {

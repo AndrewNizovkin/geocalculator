@@ -47,22 +47,12 @@ public class DirectTaskServiceImpl implements DirectTaskService{
      */
     @Override
     public DirectStringResponse getDirectStringResponse(DirectStringRequest directStringRequest) {
+        String message = directTaskMapper.checkDirectStringRequest(directStringRequest);
+        if (!message.equals("OK")) return directTaskMapper.getDirectStringErrorResponse(message);
+
         DirectTaskRequest directTaskRequest = directTaskMapper.toDirectTaskRequest(directStringRequest);
         DirectTaskFullResponse directTaskFullResponse = directTaskMapper.toDirectTaskFullResponse(directTaskRequest);
         return directTaskMapper.toDirectStringResponse(directTaskFullResponse);
     }
 
-    /**
-     * Gives response if raw data is not valid
-     * @return DirectStringResponse
-     */
-    @Override
-    public DirectStringResponse getDirectStringErrorResponse() {
-        DirectStringResponse directStringResponse = new DirectStringResponse();
-        directStringResponse.setTargetX("0.000");
-        directStringResponse.setTargetY("0.000");
-        directStringResponse.setTargetZ("0.000");
-        return directStringResponse;
-
-    }
 }

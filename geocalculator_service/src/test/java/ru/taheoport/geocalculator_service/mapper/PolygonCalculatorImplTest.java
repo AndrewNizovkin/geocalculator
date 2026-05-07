@@ -12,6 +12,7 @@ import ru.taheoport.geocalculator_service.model.Residuals;
 import ru.taheoport.geocalculator_service.model.ValidResiduals;
 import ru.taheoport.geocalculator_service.repository.PolygonRepository;
 import ru.taheoport.geocalculator_service.repository.PolygonRepositoryImpl;
+import ru.taheoport.geocalculator_service.validator.DataValidatorDefault;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
         Residuals.class,
         PolygonMapperImpl.class,
         DataMapperDefault.class,
+        DataValidatorDefault.class,
         ValidResiduals.class,
         ReportResiduals.class
 })
@@ -54,8 +56,7 @@ class PolygonCalculatorImplTest {
         BindType expectBindType = BindType.TT;
         List<String> polygonRequest = getTestPolygonRequestTT();
 
-        boolean access = polygonMapper.polygonRequestToPolygon(polygonRequest);
-        assertTrue(access);
+        polygonMapper.polygonRequestToPolygon(polygonRequest);
 
         polygonCalculator.setBindType();
         BindType actualBindType = residuals.getBindType();
@@ -68,8 +69,8 @@ class PolygonCalculatorImplTest {
         BindType expectBindType = BindType.TO;
         List<String> polygonRequest = getTestPolygonRequestTO();
 
-        boolean access = polygonMapper.polygonRequestToPolygon(polygonRequest);
-        assertTrue(access);
+        String actualMessage = polygonMapper.polygonRequestToPolygon(polygonRequest);
+        assertEquals("OK", actualMessage);
 
         polygonCalculator.setBindType();
         BindType actualBindType = residuals.getBindType();
@@ -82,8 +83,8 @@ class PolygonCalculatorImplTest {
         BindType expectBindType = BindType.OT;
         List<String> polygonRequest = getTestPolygonRequestOT();
 
-        boolean access = polygonMapper.polygonRequestToPolygon(polygonRequest);
-        assertTrue(access);
+        String actualMessage = polygonMapper.polygonRequestToPolygon(polygonRequest);
+        assertEquals("OK", actualMessage);
 
         polygonCalculator.setBindType();
         BindType actualBindType = residuals.getBindType();
@@ -96,8 +97,8 @@ class PolygonCalculatorImplTest {
         BindType expectBindType = BindType.OO;
         List<String> polygonRequest = getTestPolygonRequestOO();
 
-        boolean access = polygonMapper.polygonRequestToPolygon(polygonRequest);
-        assertTrue(access);
+        String actualMessage = polygonMapper.polygonRequestToPolygon(polygonRequest);
+        assertEquals("OK", actualMessage);
 
         polygonCalculator.setBindType();
         BindType actualBindType = residuals.getBindType();
@@ -110,8 +111,8 @@ class PolygonCalculatorImplTest {
         BindType expectBindType = BindType.TZ;
         List<String> polygonRequest = getTestPolygonRequestTZ();
 
-        boolean access = polygonMapper.polygonRequestToPolygon(polygonRequest);
-        assertTrue(access);
+        String actualMessage = polygonMapper.polygonRequestToPolygon(polygonRequest);
+        assertEquals("OK", actualMessage);
 
         polygonCalculator.setBindType();
         BindType actualBindType = residuals.getBindType();
@@ -124,8 +125,8 @@ class PolygonCalculatorImplTest {
         BindType expectBindType = BindType.ZT;
         List<String> polygonRequest = getTestPolygonRequestZT();
 
-        boolean access = polygonMapper.polygonRequestToPolygon(polygonRequest);
-        assertTrue(access);
+        String actualMessage = polygonMapper.polygonRequestToPolygon(polygonRequest);
+        assertEquals("OK", actualMessage);
 
         polygonCalculator.setBindType();
         BindType actualBindType = residuals.getBindType();
@@ -138,8 +139,8 @@ class PolygonCalculatorImplTest {
         BindType expectBindType = BindType.ZZ;
         List<String> polygonRequest = getTestPolygonRequestZZ();
 
-        boolean access = polygonMapper.polygonRequestToPolygon(polygonRequest);
-        assertTrue(access);
+        String actualMessage = polygonMapper.polygonRequestToPolygon(polygonRequest);
+        assertEquals("OK", actualMessage);
 
         polygonCalculator.setBindType();
         BindType actualBindType = residuals.getBindType();
@@ -181,9 +182,7 @@ class PolygonCalculatorImplTest {
 
     @Test
     void setDirectionAngleDirectOrderTest() {
-        boolean success = loadTestPolygonTT();
-        assertTrue(success);
-
+        loadTestPolygonTT();
         long expectResidualsAngle = 55;
         long expectFirst = 6142;
         long expectSecond = 1290184;
@@ -208,7 +207,7 @@ class PolygonCalculatorImplTest {
 
     @Test
     void setDirectionAngleReverseOrderTest() {
-        boolean success = polygonMapper.polygonRequestToPolygon(getTestPolygonRequestOT());
+        polygonMapper.polygonRequestToPolygon(getTestPolygonRequestOT());
 
         int sizePolygon = polygonRepository.size();
         PolygonStation baseC = polygonRepository.getStationById(sizePolygon - 2);
@@ -240,8 +239,7 @@ class PolygonCalculatorImplTest {
 
     @Test
     void setDeltaXYTest() {
-        boolean success = loadTestPolygonTT();
-        assertTrue(success);
+        loadTestPolygonTT();
         long expectFirstDx = 68659;
         long expectFirstDy = 2045;
         long expectSecondDx = 64961;
@@ -276,8 +274,7 @@ class PolygonCalculatorImplTest {
 
     @Test
     void setCorrectionXYTestResiduals() {
-        boolean success = loadTestPolygonTT();
-        assertTrue(success);
+        loadTestPolygonTT();
         long expectFx = -15;
         long expectFy = -13;
         long expectAbsolute = 20;
@@ -302,8 +299,7 @@ class PolygonCalculatorImplTest {
 
     @Test
     void setCorrectionXYTest() {
-        boolean success = loadTestPolygonTT();
-        assertTrue(success);
+        loadTestPolygonTT();
         long expectFirstCorrX = 5;
         long expectFirstCorrY = 4;
         long expectSecondCorrX = 4;
@@ -340,8 +336,7 @@ class PolygonCalculatorImplTest {
 
     @Test
     void setCorrectionZTest() {
-        boolean success = loadTestPolygonTT();
-        assertTrue(success);
+        loadTestPolygonTT();
         long expectResidualElevation = 5;
         double expectFirstCorrZ = -1.52941307445672;
         double expectSecondCorrZ = -1.4469852155326;
@@ -367,8 +362,7 @@ class PolygonCalculatorImplTest {
 
     @Test
     void setXYZTestDirectOrder() {
-        boolean success = loadTestPolygonTT();
-        assertTrue(success);
+        loadTestPolygonTT();
         long expectFirstX = 457057454L;
         long expectFirstY = 2261204245L;
         long expectFirstZ = 17432L;
@@ -426,8 +420,7 @@ class PolygonCalculatorImplTest {
         long expectThirdX = 457129441L;
         long expectThirdY = 2261145698L;
         long expectThirdZ = 16328L;
-        boolean success = polygonMapper.polygonRequestToPolygon(getTestPolygonRequestTT());
-        assertTrue(success);
+        polygonMapper.polygonRequestToPolygon(getTestPolygonRequestTT());
         polygonCalculator.adjustPolygon();
 
         BindType actualBindType = residuals.getBindType();
@@ -482,8 +475,7 @@ class PolygonCalculatorImplTest {
         long expectThirdX = 457129462L;
         long expectThirdY = 2261145708L;
         long expectThirdZ = 16328L;
-        boolean success = polygonMapper.polygonRequestToPolygon(getTestPolygonRequestTO());
-        assertTrue(success);
+        polygonMapper.polygonRequestToPolygon(getTestPolygonRequestTO());
         polygonCalculator.adjustPolygon();
 
         BindType actualBindType = residuals.getBindType();
@@ -532,8 +524,7 @@ class PolygonCalculatorImplTest {
         long expectThirdX = 457129436L;
         long expectThirdY = 2261145700L;
         long expectThirdZ = 16332L;
-        boolean success = polygonMapper.polygonRequestToPolygon(getTestPolygonRequestTZ());
-        assertTrue(success);
+        polygonMapper.polygonRequestToPolygon(getTestPolygonRequestTZ());
         polygonCalculator.adjustPolygon();
 
         BindType actualBindType = residuals.getBindType();
@@ -578,8 +569,7 @@ class PolygonCalculatorImplTest {
         long expectThirdX = 457129442L;
         long expectThirdY = 2261145694L;
         long expectThirdZ = 16328L;
-        boolean success = polygonMapper.polygonRequestToPolygon(getTestPolygonRequestOT());
-        assertTrue(success);
+        polygonMapper.polygonRequestToPolygon(getTestPolygonRequestOT());
         polygonCalculator.adjustPolygon();
 
         BindType actualBindType = residuals.getBindType();
@@ -628,8 +618,7 @@ class PolygonCalculatorImplTest {
         long expectThirdX = 457129445L;
         long expectThirdY = 2261145700L;
         long expectThirdZ = 16327L;
-        boolean success = polygonMapper.polygonRequestToPolygon(getTestPolygonRequestZT());
-        assertTrue(success);
+        polygonMapper.polygonRequestToPolygon(getTestPolygonRequestZT());
         polygonCalculator.adjustPolygon();
 
         BindType actualBindType = residuals.getBindType();
@@ -675,8 +664,7 @@ class PolygonCalculatorImplTest {
         long expectThirdX = 457129416L;
         long expectThirdY = 2261145706L;
         long expectThirdZ = 16328L;
-        boolean success = polygonMapper.polygonRequestToPolygon(getTestPolygonRequestOO());
-        assertTrue(success);
+        polygonMapper.polygonRequestToPolygon(getTestPolygonRequestOO());
         polygonCalculator.adjustPolygon();
 
         BindType actualBindType = residuals.getBindType();
@@ -717,11 +705,10 @@ class PolygonCalculatorImplTest {
     /**
      * Loads to model test polygon with bindType TT
      * and sets base direction angle
-     * @return boolean result of loading
      */
-    private boolean loadTestPolygonTT() {
+    private void loadTestPolygonTT() {
         List<String> polygonRequest = getTestPolygonRequestTT();
-        boolean success = polygonMapper.polygonRequestToPolygon(polygonRequest);
+        polygonMapper.polygonRequestToPolygon(polygonRequest);
 
         int sizePolygon = polygonRepository.size();
         PolygonStation baseA = polygonRepository.getStationById(0);
@@ -740,7 +727,6 @@ class PolygonCalculatorImplTest {
                 baseD.getStationX(),
                 baseD.getStationY()
         ));
-        return success;
     }
 
     /**

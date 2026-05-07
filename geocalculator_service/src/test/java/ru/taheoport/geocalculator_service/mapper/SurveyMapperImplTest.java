@@ -7,6 +7,7 @@ import ru.taheoport.geocalculator_service.model.Target;
 import ru.taheoport.geocalculator_service.model.SurveyStation;
 import ru.taheoport.geocalculator_service.repository.SurveyRepository;
 import ru.taheoport.geocalculator_service.repository.SurveyRepositoryImpl;
+import ru.taheoport.geocalculator_service.validator.DataValidatorDefault;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = {
         DataMapperDefault.class,
+        DataValidatorDefault.class,
         SurveyMapperImpl.class,
         SurveyRepositoryImpl.class
 })
