@@ -38,8 +38,17 @@ public interface PotenotTaskMapper {
      */
     PotenotStringResponse toPotenotStringResponse(PotenotTaskResponse potenotTaskResponse);
 
+    /**
+     * Gives response if raw data is not valid
+     * @param  message String error message
+     * @return PotenotStringResponse
+     */
+    PotenotStringResponse getPotenotStringErrorResponse(String message);
 
-//    PotenotStringResponse to
-
-
+    /**
+     * Checks data from potenotStringRequest
+     * @param potenotStringRequests  List of PotenotStringRequest
+     * @return String message: "OK" or errorMessage
+     */
+    String checkPotenotStringRequest(List<PotenotStringRequest> potenotStringRequests);
 }

@@ -9,12 +9,15 @@ import ru.taheoport.geocalculator_service.dto.InverseStringRequest;
 import ru.taheoport.geocalculator_service.dto.InverseStringResponse;
 import ru.taheoport.geocalculator_service.dto.InverseTaskFullResponse;
 import ru.taheoport.geocalculator_service.dto.InverseTaskRequest;
+import ru.taheoport.geocalculator_service.validator.DataValidatorDefault;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = {
         InverseTaskMapperDefault.class,
         InverseCalculatorImpl.class,
-        DataMapperDefault.class
+        DataMapperDefault.class,
+        DataValidatorDefault.class
 })
 class InverseTaskMapperDefaultTest {
 
@@ -93,11 +96,29 @@ class InverseTaskMapperDefaultTest {
         InverseStringResponse actualResponse = inverseTaskMapper.toInverseStringResponse(inverseTaskFullResponse);
 
         assertNotNull(actualResponse);
+        assertEquals(expectResponse.getHeader(), actualResponse.getHeader());
         assertEquals(expectResponse.getDirection(), actualResponse.getDirection());
         assertEquals(expectResponse.getHorDistance(), actualResponse.getHorDistance());
         assertEquals(expectResponse.getInclinedDistance(), actualResponse.getInclinedDistance());
         assertEquals(expectResponse.getTiltAngle(), actualResponse.getTiltAngle());
         assertEquals(expectResponse.getElevation(), actualResponse.getElevation());
+    }
+
+    @Test
+    void getInverseStringErrorResponseTest() {
+        String expectMessage = "Error message!";
+        String expectAngleValue = "0.0000";
+        String expectLinearValue = "0.000";
+
+        InverseStringResponse  actualResponse = inverseTaskMapper.getInverseStringErrorResponse(expectMessage);
+
+        assertNotNull(actualResponse);
+        assertEquals(expectMessage, actualResponse.getHeader());
+        assertEquals(expectAngleValue, actualResponse.getDirection());
+        assertEquals(expectLinearValue, actualResponse.getHorDistance());
+        assertEquals(expectLinearValue, actualResponse.getInclinedDistance());
+        assertEquals(expectAngleValue, actualResponse.getTiltAngle());
+        assertEquals(expectLinearValue, actualResponse.getElevation());
     }
 
 
@@ -107,6 +128,7 @@ class InverseTaskMapperDefaultTest {
      */
     private InverseStringResponse getInverseStringResponse() {
         InverseStringResponse expectResponse = new InverseStringResponse();
+        expectResponse.setHeader("OK");
         expectResponse.setDirection("45.0000");
         expectResponse.setHorDistance("1414213.562");
         expectResponse.setInclinedDistance("1414213.566");

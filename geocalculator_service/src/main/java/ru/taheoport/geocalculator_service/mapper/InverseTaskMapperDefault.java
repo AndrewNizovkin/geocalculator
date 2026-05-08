@@ -3,6 +3,7 @@ package ru.taheoport.geocalculator_service.mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.taheoport.geocalculator_service.dto.*;
+import ru.taheoport.geocalculator_service.validator.DataValidator;
 
 @Component
 @RequiredArgsConstructor
@@ -10,6 +11,7 @@ public class InverseTaskMapperDefault implements InverseTaskMapper{
 
     private final InverseCalculator inverseCalculator;
     private final DataMapper dataMapper;
+    private final DataValidator dataValidator;
 
     @Override
     public InverseTaskResponse toInverseTaskResponse(InverseTaskRequest inverseTaskRequest) {
@@ -130,6 +132,36 @@ public class InverseTaskMapperDefault implements InverseTaskMapper{
         return inverseStringResponse;
     }
 
+    /**
+     * Gives response if raw data is not valid
+     @param message String message with result of processing
+     * @return InverseStringResponse
+     */
+    @Override
+    public InverseStringResponse getInverseStringErrorResponse(String message) {
+        InverseStringResponse inverseStringResponse = new InverseStringResponse();
+        inverseStringResponse.setHeader(message);
+
+        return inverseStringResponse;
+    }
+
+    /**
+     * Checks data from inverseStringRequest
+     *
+     * @param inverseStringRequest InverseStringRequest with geodetic data
+     * @return String message "OK" or error message
+     */
+    @Override
+    public String checkInverseStringRequest(InverseStringRequest inverseStringRequest) {
+        if (!dataValidator.isValidNumber(inverseStringRequest.getBaseX())) return "Invalid base X";
+        if (!dataValidator.isValidNumber(inverseStringRequest.getBaseY())) return "Invalid base Y";
+        if (!dataValidator.isValidNumber(inverseStringRequest.getBaseZ())) return "Invalid base Z";
+        if (!dataValidator.isValidNumber(inverseStringRequest.getTargetX())) return "Invalid target X";
+        if (!dataValidator.isValidNumber(inverseStringRequest.getTargetY())) return "Invalid target Y";
+        if (!dataValidator.isValidNumber(inverseStringRequest.getTargetZ())) return "Invalid target Z";
+
+        return "OK";
+    }
 
 
 }

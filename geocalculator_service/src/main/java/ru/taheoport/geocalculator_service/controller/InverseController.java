@@ -1,8 +1,5 @@
 package ru.taheoport.geocalculator_service.controller;
 
-//import io.swagger.v3.oas.annotations.Operation;
-//import io.swagger.v3.oas.annotations.responses.ApiResponse;
-//import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +9,6 @@ import ru.taheoport.geocalculator_service.dto.InverseStringResponse;
 import ru.taheoport.geocalculator_service.dto.InverseTaskFullResponse;
 import ru.taheoport.geocalculator_service.dto.InverseTaskRequest;
 import ru.taheoport.geocalculator_service.service.InverseTaskService;
-import ru.taheoport.geocalculator_service.validator.InverseValidator;
 
 @RestController
 @RequestMapping("inverse")
@@ -21,8 +17,6 @@ import ru.taheoport.geocalculator_service.validator.InverseValidator;
 public class InverseController {
 
     private final InverseTaskService inverseTaskService;
-    private final InverseValidator inverseValidator;
-
 
     /**
      * Resolves Inverse Geodetic Problem
@@ -42,7 +36,7 @@ public class InverseController {
 //    })
     @PostMapping
     public ResponseEntity<InverseTaskFullResponse> solveInverseTask(@RequestBody InverseTaskRequest inverseTaskRequest) {
-        return new ResponseEntity<>(inverseTaskService.getInverseTaskFullResponse(inverseTaskRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(inverseTaskService.getInverseTaskFullResponse(inverseTaskRequest), HttpStatus.OK);
     }
 
     /**
@@ -52,11 +46,6 @@ public class InverseController {
      */
     @PostMapping("str")
     public ResponseEntity<InverseStringResponse> getInverseStringResponse(@RequestBody InverseStringRequest inverseStringRequest) {
-        if (inverseValidator.isValidInverseStringRequest(inverseStringRequest)) {
-            return new ResponseEntity<>(inverseTaskService.getInverseStringResponse(inverseStringRequest), HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(inverseTaskService.getInverseStringErrorResponse(), HttpStatus.CREATED);
-        }
-
+        return new ResponseEntity<>(inverseTaskService.getInverseStringResponse(inverseStringRequest), HttpStatus.OK);
     }
 }

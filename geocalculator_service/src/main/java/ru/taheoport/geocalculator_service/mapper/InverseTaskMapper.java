@@ -36,4 +36,19 @@ public interface InverseTaskMapper {
      */
     InverseStringResponse toInverseStringResponse(InverseTaskFullResponse inverseTaskFullResponse);
 
+    /**
+     * Gives response if raw data is not valid
+     * @return InverseStringResponse
+     * @param message String message with result of processing
+     */
+    InverseStringResponse getInverseStringErrorResponse(String message);
+
+    /**
+     * Checks data from inverseStringRequest
+     * @param inverseStringRequest InverseStringRequest with geodetic data
+     * @return String message "OK" or error message
+     */
+    String checkInverseStringRequest(InverseStringRequest inverseStringRequest);
+
+
 }

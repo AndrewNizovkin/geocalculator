@@ -37,28 +37,13 @@ public class InverseTaskServiceImpl implements InverseTaskService {
     @Override
     public InverseStringResponse getInverseStringResponse(InverseStringRequest inverseStringRequest) {
 
-        //TODO: checks raw data
+        String message = inverseTaskMapper.checkInverseStringRequest(inverseStringRequest);
+        if (!message.equals("OK")) return inverseTaskMapper.getInverseStringErrorResponse(message);
 
         InverseTaskRequest inverseTaskRequest = inverseTaskMapper.toInverseTaskRequest(inverseStringRequest);
         InverseTaskFullResponse inverseTaskFullResponse = inverseTaskMapper.toInverseTaskFullResponse(inverseTaskRequest);
 
         return inverseTaskMapper.toInverseStringResponse(inverseTaskFullResponse);
-    }
-
-    /**
-     * Gives response if raw data is not valid
-     * @return InverseStringResponse
-     */
-    @Override
-    public InverseStringResponse getInverseStringErrorResponse() {
-        InverseStringResponse inverseStringResponse = new InverseStringResponse();
-        inverseStringResponse.setDirection("0.0000");
-        inverseStringResponse.setHorDistance("0.000");
-        inverseStringResponse.setInclinedDistance("0.000");
-        inverseStringResponse.setTiltAngle("0.0000");
-        inverseStringResponse.setElevation("0.000");
-
-        return inverseStringResponse;
     }
 }
 

@@ -12,6 +12,7 @@ import ru.taheoport.geocalculator_service.dto.InverseTaskRequest;
 import ru.taheoport.geocalculator_service.mapper.DataMapperDefault;
 import ru.taheoport.geocalculator_service.mapper.InverseCalculatorImpl;
 import ru.taheoport.geocalculator_service.mapper.InverseTaskMapperDefault;
+import ru.taheoport.geocalculator_service.validator.DataValidatorDefault;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,7 +20,8 @@ import static org.junit.jupiter.api.Assertions.*;
         InverseTaskServiceImpl.class,
         InverseTaskMapperDefault.class,
         InverseCalculatorImpl.class,
-        DataMapperDefault.class
+        DataMapperDefault.class,
+        DataValidatorDefault.class
 })
 class InverseTaskServiceImplTest {
 
@@ -73,7 +75,7 @@ class InverseTaskServiceImplTest {
             "0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.0000, 0.000, 0.000, 0.0000, 0.000",
             "1000000.000, 1000000.000, 100.000, 2000000.000, 2000000.000, 200.000, 45.0000, 1414213.562, 1414213.566, 0.0015, 100.000"
     })
-    void getInverseStringResponse(
+    void getInverseStringResponseTest(
             String baseX,
             String baseY,
             String baseZ,
@@ -94,10 +96,12 @@ class InverseTaskServiceImplTest {
         inverseTaskRequest.setTargetX(targetX);
         inverseTaskRequest.setTargetY(targetY);
         inverseTaskRequest.setTargetZ(targetZ);
+        String expectHeader = "OK";
 
         InverseStringResponse actualResponse = inverseTaskService.getInverseStringResponse(inverseTaskRequest);
 
         assertNotNull(actualResponse);
+        assertEquals(expectHeader, actualResponse.getHeader());
         assertEquals(expectDirection, actualResponse.getDirection());
         assertEquals(expectHorDistance, actualResponse.getHorDistance());
         assertEquals(expectInclinedDistance, actualResponse.getInclinedDistance());
@@ -105,24 +109,39 @@ class InverseTaskServiceImplTest {
         assertEquals(expectElevation, actualResponse.getElevation());
     }
 
-    @Test
-    void toInverseStringErrorResponseTest() {
-        InverseStringRequest expectRequest = getInverseStringRequest();
-        String expectDirection = "0.0000";
-        String expectHorDistance = "0.000";
-        String expectInclinedDistance = "0.000";
-        String expectTiltAngle = "0.0000";
-        String expectElevation = "0.000";
+    @ParameterizedTest
+    @CsvSource({
+            "1000000#000, 1000000.000, 100.000, 2000000.000, 2000000.000, 200.000, 'Invalid base X'",
+            "1000000.000, l000000.000, 100.000, 2000000.000, 2000000.000, 200.000, 'Invalid base Y'",
+            "1000000.000, 1000000.000, 100.00O, 2000000.000, 2000000.000, 200.000, 'Invalid base Z'",
+            "1000000.000, 1000000.000, 100.000, 2f00000.000, 2000000.000, 200.000, 'Invalid target X'",
+            "1000000.000, 1000000.000, 100.000, 2000000.000, 2000()000.000, 200.000, 'Invalid target Y'",
+            "1000000.000, 1000000.000, 100.000, 2000000.000, 2000000.000, 200_000, 'Invalid target Z'"
+    })
+    void getInverseStringResponseBadDataTest(
+            String baseX,
+            String baseY,
+            String baseZ,
+            String targetX,
+            String targetY,
+            String targetZ,
+            String expectHeader
+    ) {
+        InverseStringRequest inverseTaskRequest = new InverseStringRequest();
+        inverseTaskRequest.setBaseX(baseX);
+        inverseTaskRequest.setBaseY(baseY);
+        inverseTaskRequest.setBaseZ(baseZ);
+        inverseTaskRequest.setTargetX(targetX);
+        inverseTaskRequest.setTargetY(targetY);
+        inverseTaskRequest.setTargetZ(targetZ);
 
-        InverseStringResponse actualResponse = inverseTaskService.getInverseStringErrorResponse();
+        InverseStringResponse actualResponse = inverseTaskService.getInverseStringResponse(inverseTaskRequest);
 
         assertNotNull(actualResponse);
-        assertEquals(expectDirection, actualResponse.getDirection());
-        assertEquals(expectHorDistance, actualResponse.getHorDistance());
-        assertEquals(expectInclinedDistance, actualResponse.getInclinedDistance());
-        assertEquals(expectTiltAngle, actualResponse.getTiltAngle());
-        assertEquals(expectElevation, actualResponse.getElevation());
+        assertEquals(expectHeader, actualResponse.getHeader());
     }
+
+
 
     /**
      * Gives test instance of InverseStringRequest

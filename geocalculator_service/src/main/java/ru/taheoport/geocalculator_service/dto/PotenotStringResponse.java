@@ -10,13 +10,18 @@ import lombok.Setter;
 public class PotenotStringResponse {
 
     /**
+     * Response header
+     */
+    private String header = "OK";
+
+    /**
      * Coordinate X in meters
      */
-    private String pointX;
+    private String pointX = "0.000";
 
     /**
      * Coordinate Y in meters
      */
-    private String pointY;
+    private String pointY = "0.000";
 
 }

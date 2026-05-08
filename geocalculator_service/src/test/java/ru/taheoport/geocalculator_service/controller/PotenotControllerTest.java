@@ -1,5 +1,6 @@
 package ru.taheoport.geocalculator_service.controller;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -10,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
+import ru.taheoport.geocalculator_service.dto.PotenotStringRequest;
+import ru.taheoport.geocalculator_service.dto.PotenotStringResponse;
 import ru.taheoport.geocalculator_service.dto.PotenotTaskRequest;
 import ru.taheoport.geocalculator_service.dto.PotenotTaskResponse;
 import ru.taheoport.geocalculator_service.service.PotenotService;
@@ -85,4 +88,49 @@ class PotenotControllerTest {
                 .expectStatus().isBadRequest();
 
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "100.000, 100.000, 251.1405, 200.000, 200.000, 351.3834, 100.000, 300.000, 112.1425, 137.114, 209.238, 'OK'",
+            "100.000, 100.000, 331.5847, 200.000, 200.000, 17.1908, 100.000, 300.000, 62.2946, 18.515, 143.314, 'OK'",
+            "100.000, 100.000, 317.1807, 200.000, 200.000, 324.3448, 100.000, 300.000, 325.5742, -709.005, 846.436, 'OK'",
+            "-100.000, -100.000, 163.0559, -200.000, -200.000, 183.5442, -100.000, -300.000, 206.2045, 150.295, -176.044, 'OK'",
+            "bad.000, 100.000, 317.1807, 200.000, 200.000, 324.3448, 100.000, 300.000, 325.5742, 0.000, 0.000, 'Invalid X of point 1!'",
+    })
+    void getPotenotStringResponseTest(
+            String firstX,
+            String firstY,
+            String firstDirection,
+            String secondX,
+            String secondY,
+            String secondDirection,
+            String thirdX,
+            String thirdY,
+            String thirdDirection,
+            String expectX,
+            String expectY,
+            String expectHeader
+    ) {
+        List<PotenotStringRequest> potenotStringRequestList = List.of(
+                new PotenotStringRequest(firstX, firstY, firstDirection),
+                new PotenotStringRequest(secondX, secondY, secondDirection),
+                new PotenotStringRequest(thirdX, thirdY, thirdDirection)
+        );
+
+        PotenotStringResponse responseBody = webTestClient.post()
+                .uri("potenot/str")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(Mono.just(potenotStringRequestList), PotenotStringRequest.class)
+                .exchange()
+                .expectStatus().isCreated()
+                .expectBody(PotenotStringResponse.class)
+                .returnResult()
+                .getResponseBody();
+
+        assertNotNull(responseBody);
+        assertEquals(expectHeader, responseBody.getHeader());
+        assertEquals(expectX, responseBody.getPointX());
+        assertEquals(expectY, responseBody.getPointY());
+    }
+
 }

@@ -10,6 +10,8 @@ import ru.taheoport.geocalculator_service.dto.PotenotStringRequest;
 import ru.taheoport.geocalculator_service.dto.PotenotStringResponse;
 import ru.taheoport.geocalculator_service.dto.PotenotTaskRequest;
 import ru.taheoport.geocalculator_service.dto.PotenotTaskResponse;
+import ru.taheoport.geocalculator_service.validator.DataValidatorDefault;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -18,7 +20,8 @@ import java.util.List;
 @SpringBootTest(classes = {
         PotenotTaskMapperImpl.class,
         PotenotCalculatorImpl.class,
-        DataMapperDefault.class
+        DataMapperDefault.class,
+        DataValidatorDefault.class
 })
 class PotenotTaskMapperImplTest {
 
@@ -154,6 +157,21 @@ class PotenotTaskMapperImplTest {
 
         return potenotStringRequests;
     }
+
+    @Test
+    void getPotenotStringErrorResponseTest() {
+        String expectMessage = "Error message!";
+        String expectLinearValue = "0.000";
+
+        PotenotStringResponse actualResponse = potenotTaskMapper.getPotenotStringErrorResponse(expectMessage);
+
+        assertNotNull(actualResponse);
+        assertEquals(expectMessage, actualResponse.getHeader());
+        assertEquals(expectLinearValue, actualResponse.getPointX());
+        assertEquals(expectLinearValue, actualResponse.getPointY());
+    }
+
+
 
     /**
      * Gets list of PotenotTaskResuest

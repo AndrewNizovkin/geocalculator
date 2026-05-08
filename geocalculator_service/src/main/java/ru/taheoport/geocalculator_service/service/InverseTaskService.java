@@ -31,10 +31,4 @@ public interface InverseTaskService {
      */
     InverseStringResponse getInverseStringResponse(InverseStringRequest inverseStringRequest);
 
-    /**
-     * Gives response if raw data is not valid
-     * @return InverseStringResponse
-     */
-    InverseStringResponse getInverseStringErrorResponse();
-
 }

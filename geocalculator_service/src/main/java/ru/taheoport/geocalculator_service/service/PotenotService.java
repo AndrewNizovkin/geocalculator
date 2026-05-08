@@ -27,9 +27,4 @@ public interface PotenotService {
      */
     PotenotStringResponse getPotenotStringResponse(List<PotenotStringRequest> potenotStringRequests);
 
-    /**
-     * Gives response if raw data is not valid
-     * @return PotenotStringResponse
-     */
-    PotenotStringResponse getPotenotStringErrorResponse();
 }
