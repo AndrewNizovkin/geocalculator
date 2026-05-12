@@ -38,7 +38,7 @@ public class PotenotController {
      */
     @PostMapping("str")
     public ResponseEntity<PotenotStringResponse> getPotenotStringResponse(@RequestBody List<PotenotStringRequest> potenotStringRequests) {
-        return new ResponseEntity<>(potenotService.getPotenotStringResponse(potenotStringRequests), HttpStatus.CREATED);
+        return new ResponseEntity<>(potenotService.getPotenotStringResponse(potenotStringRequests), HttpStatus.OK);
     }
 
 

@@ -121,7 +121,7 @@ class DirectControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(directTaskRequest), DirectStringRequest.class)
                 .exchange()
-                .expectStatus().isCreated()
+                .expectStatus().isOk()
                 .expectBody(DirectStringResponse.class)
                 .returnResult()
                 .getResponseBody();

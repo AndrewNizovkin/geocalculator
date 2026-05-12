@@ -122,7 +122,7 @@ class PotenotControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(potenotStringRequestList), PotenotStringRequest.class)
                 .exchange()
-                .expectStatus().isCreated()
+                .expectStatus().isOk()
                 .expectBody(PotenotStringResponse.class)
                 .returnResult()
                 .getResponseBody();

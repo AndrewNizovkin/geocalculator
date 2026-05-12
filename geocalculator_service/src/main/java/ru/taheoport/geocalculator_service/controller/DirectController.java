@@ -39,7 +39,7 @@ public class DirectController {
      */
     @PostMapping("str")
     public ResponseEntity<DirectStringResponse> getDirectStringResponse(@RequestBody DirectStringRequest directStringRequest) {
-        return new ResponseEntity<>(directTaskService.getDirectStringResponse(directStringRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(directTaskService.getDirectStringResponse(directStringRequest), HttpStatus.OK);
     }
 
     @PostMapping("full")
