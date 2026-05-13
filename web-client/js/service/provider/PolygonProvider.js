@@ -1,4 +1,5 @@
 import { TextFileReader } from "./TextFileReader.js";
+import { AppConfigurator } from "../../AppConfigurator.js";
 
 /**
  * This class provides methods 
@@ -23,11 +24,29 @@ export class PolygonProvider {
      * of polygonometric measurements and returns 
      * the server's response in the form of a summary report
      * @param {string[]} polygonRequest 
-     * @returns 
+     * @returns {string[]} 
      */
-    async getPolygonResponse(reportFile) {
+    async getPolygonResponse(polygonRequest) {
 
-        return TextFileReader.readFromTextFile(reportFile);
+        const urlServer = `http://${AppConfigurator.baseUrl}/${AppConfigurator.polygonReportEndPoint}`;
+
+        try {
+            const response = await fetch(urlServer, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(polygonRequest)
+            });
+
+            if(!response.ok) throw new Error(`Ошибка HTTP ${response.status}`);
+
+            return await response.json();
+        } catch(error) {
+            alert(`Ошибка отправки данных: ${error.message}`);
+            // throw error;
+        }
+
     }
 
 }

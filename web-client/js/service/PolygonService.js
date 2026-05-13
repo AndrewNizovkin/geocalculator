@@ -95,27 +95,32 @@ export class PolygonService {
      * of polygonometric measurements
      */
     async calculatePolygon(reportFile) {
-        // this.#setDemoReports();
-        // this.clearAll();
+        let access = true;
         this.clearReports();
         let polygonRequest = this.#polygonMapper.polygonRepositoryToPolygonRequest(this.#polygonRepository, this.#validResiduals);
-        for (let line of polygonRequest) {
-            console.log(line);
-        }
+        // for (let line of polygonRequest) {
+        //     console.log(line);
+        // }
 
         try {
-            await this.#polygonProvider.getPolygonResponse(reportFile).then((polygonResponse) => {
-                this.#polygonMapper.polygonResponseToReports(
-                    polygonResponse, 
-                    this.#residuals, 
-                    this.#reportCatalog,
-                    this.#reportPlan,
-                    this.#reportElevation
-                );
+            await this.#polygonProvider.getPolygonResponse(polygonRequest).then((polygonResponse) => {
+                if (typeof(polygonResponse != undefined)) {
+                    this.#polygonMapper.polygonResponseToReports(
+                        polygonResponse, 
+                        this.#residuals, 
+                        this.#reportCatalog,
+                        this.#reportPlan,
+                        this.#reportElevation
+                    );
+                } else {
+                    access = false;
+                }
             });
         } catch (err) {
             console.error(err.message);
         }
+
+        return access;
 
     }
 

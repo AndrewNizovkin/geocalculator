@@ -27,7 +27,7 @@ class ExtractControllerTest {
         List<String> extractRequest = getTestExtractRequest();
 
         String responseBody = webTestClient.post()
-                .uri("extract")
+                .uri("extract/report")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(extractRequest)
                 .exchange()

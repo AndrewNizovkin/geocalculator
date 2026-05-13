@@ -15,7 +15,7 @@ public class ExtractController {
 
     private final ExtractService extractService;
 
-    @PostMapping()
+    @PostMapping("report")
     public ResponseEntity<List<String>> getPolygonReports(@RequestBody List<String> extractRequest) {
 
         return ResponseEntity.ok().body(extractService.getExtractReports(extractRequest));

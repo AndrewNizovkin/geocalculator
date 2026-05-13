@@ -119,7 +119,8 @@ class DataValidatorDefaultTest {
             "-0.2345",
             "0.2355",
             "89.5959",
-            "0.0000"
+            "0.0000",
+            "34.6060"
     })
     void isValidTiltAngleTrueTest(String value) {
 
@@ -137,7 +138,7 @@ class DataValidatorDefaultTest {
             "-0.6355",
             "3df59.5959",
             "0",
-            "90.4545"
+            "90.4545",
     })
     void isValidTiltAngleFalseTest(String value) {
 

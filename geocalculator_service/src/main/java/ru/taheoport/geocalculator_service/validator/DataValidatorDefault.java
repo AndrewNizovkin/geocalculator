@@ -53,7 +53,7 @@ public class DataValidatorDefault implements DataValidator {
         int minutes = Integer.parseInt((parts[1].substring(0, 2)));
         int seconds = Integer.parseInt((parts[1].substring(2, 4)));
 
-        return minutes >= 0 && minutes < 60 && seconds >= 0 && seconds < 60;
+        return minutes >= 0 && minutes <= 60 && seconds >= 0 && seconds <= 60;
     }
 
     /**
@@ -77,6 +77,6 @@ public class DataValidatorDefault implements DataValidator {
         int minutes = Integer.parseInt((parts[1].substring(0, 2)));
         int seconds = Integer.parseInt((parts[1].substring(2, 4)));
 
-        return minutes >= 0 && minutes < 60 && seconds >= 0 && seconds < 60;
+        return minutes >= 0 && minutes <= 60 && seconds >= 0 && seconds <= 60;
     }
 }

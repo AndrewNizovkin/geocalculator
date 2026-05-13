@@ -581,7 +581,18 @@ export class PolygonContoller {
                 case "polygon-run":
                     this.#isValidData().then((result) => {
                         if (result) {
-                            document.getElementById("polygon-open-response").click();
+                            this.#polygonService.calculatePolygon().then((access) =>{
+                                if (access) {
+                                    this.#setResiduals();
+                                    this.#reportsIsActual = true;
+                                }
+                            });
+
+
+                            // document.getElementById("polygon-open-response").click();
+
+
+                            
                         } else {
                             Informer.showMessage("Данные содержат ошибки");
                         }

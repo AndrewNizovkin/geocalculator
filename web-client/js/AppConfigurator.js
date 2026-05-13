@@ -9,4 +9,6 @@ export class AppConfigurator {
     static potenotEndPoint = 'potenot/str';
     static surveyImportEndPoint = 'survey/import';
     static surveyReportEndPoint = 'survey/report';
+    static polygonReportEndPoint = 'polygon/report';
+    static extractReportEndPoint = 'extract/report';
 }
