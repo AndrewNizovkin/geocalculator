@@ -82,9 +82,26 @@ export class SurveyProvider {
      * @param {string[]} extractRequest 
      * @returns {string[]}
      */
-    async getExtractResponse(reportFile) {
+    async getExtractResponse(extractRequest) {
+        const urlServer = `http://${AppConfigurator.baseUrl}/${AppConfigurator.extractReportEndPoint}`;
 
-        return TextFileReader.readFromTextFile(reportFile);
+        try {
+            const response = await fetch(urlServer, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(extractRequest)
+            });
+
+            if(!response.ok) throw new Error(`Ошибка HTTP ${response.status}`);
+
+            return await response.json();
+        } catch(error) {
+            alert(`Ошибка отправки данных: ${error.message}`);
+            // throw error;
+        }
+
     }
 
 }

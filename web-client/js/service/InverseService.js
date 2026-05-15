@@ -28,19 +28,22 @@ export class InverseService {
     //  */
     async solveInverseTask() {
 
+        let message;
         let inverseRequest = this.#inverseMapper.inverseToRequest(this.#inverse);
 
         await this.#inverseProvider.getInverseResponse(inverseRequest).then(response => {
             let inverseResponse = this.#inverseMapper.responseToInverseResponse(response);
 
-        this.#inverse.direction = inverseResponse?.direction;
-        this.#inverse.horDistance = inverseResponse?.horDistance;
-        this.#inverse.inclinedDistance = inverseResponse?.inclinedDistance;
-        this.#inverse.tiltAngle = inverseResponse?.tiltAngle;
-        this.#inverse.elevation = inverseResponse?.elevation;
+            message = inverseResponse?.header;
+            this.#inverse.direction = inverseResponse?.direction;
+            this.#inverse.horDistance = inverseResponse?.horDistance;
+            this.#inverse.inclinedDistance = inverseResponse?.inclinedDistance;
+            this.#inverse.tiltAngle = inverseResponse?.tiltAngle;
+            this.#inverse.elevation = inverseResponse?.elevation;
 
         });
 
+        return message;
     }
 
     /**

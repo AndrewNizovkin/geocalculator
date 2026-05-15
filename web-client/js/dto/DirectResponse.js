@@ -3,6 +3,7 @@
  */
 export class DirectResponse {
     constructor() {
+        this.header = "";
         this.targetX = "";
         this.targetY = "";
         this.targetZ = "";

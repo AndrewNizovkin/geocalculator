@@ -35,6 +35,7 @@ export class InverseMapper {
 
         let inverseResponse = new InverseResponse();
 
+        inverseResponse.header = jsonResponse?.header;
         inverseResponse.direction = jsonResponse?.direction;
         inverseResponse.horDistance = jsonResponse?.horDistance;
         inverseResponse.inclinedDistance = jsonResponse?.inclinedDistance;

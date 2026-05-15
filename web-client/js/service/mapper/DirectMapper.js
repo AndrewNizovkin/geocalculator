@@ -45,8 +45,7 @@ export class DirectMapper {
 
         let directResponse = new DirectResponse();
 
-        // let response = JSON.parse(jsonResponse);
-
+        directResponse.header = jsonResponse?.header;
         directResponse.targetX = jsonResponse?.targetX;
         directResponse.targetY = jsonResponse?.targetY;
         directResponse.targetZ = jsonResponse?.targetZ;

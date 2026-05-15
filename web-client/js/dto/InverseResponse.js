@@ -6,6 +6,7 @@ export class InverseResponse {
      * @constructor
      */
     constructor() {
+        this.header = "";
         this.direction = "";
         this.horDistance = "";
         this.inclinedDistance = "";

@@ -53,17 +53,18 @@ export class PotenotService {
      */
     async solvePotenotTask() {
 
+        let message;
         let potenotRequests = this.#potenotMapper.potenotToPotenotRequest(this.#potenot);
 
         await this.#potenotProvider.getPotenotResponse(potenotRequests).then(response => {
             let potenotResponse = this.#potenotMapper.responseToPotenotResponse(response);
 
-            
-
+            message = potenotResponse?.header;
             this.#potenot.baseX = potenotResponse?.pointX;
             this.#potenot.baseY = potenotResponse?.pointY;
         });
 
+        return message;
     }
 
     /**

@@ -167,6 +167,11 @@ export class SurveyMapper {
         reportSurveyProcessing,
         reportSurveyCatalog
     ) {
+        if (suveyResponse.at(0) == "#error") {
+            return suveyResponse.at(1);
+        }
+
+
         let target = true;
 
         for (let line of suveyResponse) {
@@ -187,6 +192,8 @@ export class SurveyMapper {
             }
         }
 
+        return "OK";
+
     }
 
     /**
@@ -201,6 +208,9 @@ export class SurveyMapper {
         reportExtractProcessing,
         reportExtractPol
     ) {
+        if (extractResponse.at(0) == "#error") {
+            return extractResponse.at(1);
+        }
         let target = true;
 
         for (let line of extractResponse) {
@@ -220,6 +230,8 @@ export class SurveyMapper {
                 reportExtractProcessing.push(line);
             }
         }
+
+        return "OK";
 
     }
 

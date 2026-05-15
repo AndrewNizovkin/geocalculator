@@ -273,23 +273,6 @@ export class SurveyController {
           }
           break;
 
-        case "survey-extract-input":
-          try {
-            let file = element.files[0];
-            if (!file) throw new Error("Select a file!");
-            this.#surveyService.extractPolygon(file).then((access) => {
-              if (access) {
-                this.#polygonService.readArrayPol(this.#surveyService.getReportExtractPol());
-                this.#loadPageExtract();
-              } else {
-                Informer.showMessage("Неодстаточно данных");
-              }
-            });      
-          } catch (error) {
-            console.error(error.message);
-          }
-          break;
-
       }
 
       
@@ -367,14 +350,16 @@ export class SurveyController {
           this.#isValidData().then(async (result) => {
             if (result) {
 
-              await this.#surveyService.calculateSurvey().then((access) => {
-                if (access) {
+              await this.#surveyService.calculateSurvey().then((message) => {
+                if (message == "OK") {
                   this.#reportsActual = true;
                   let countMeasurements = 0;
                   for (let i = 0; i < this.#surveyService.size(); i++) {
                     countMeasurements += this.#surveyService.measurementSize(i);
                   }
-                  let message = `${countMeasurements} измерений успешно обработаны`;
+                  // let message = `${countMeasurements} измерений успешно обработаны`;
+                  Informer.showMessage(`${countMeasurements} измерений успешно обработаны`);
+                } else {
                   Informer.showMessage(message);
                 }
               });      
@@ -391,7 +376,26 @@ export class SurveyController {
           break;
 
         case "survey-extract":
-          extractInput.click();
+          this.#isValidData().then(async (result) => {
+            if (result) {
+              await this.#surveyService.extractPolygon().then((message) => {
+                if (message == "OK") {
+                  this.#polygonService.readArrayPol(this.#surveyService.getReportExtractPol());
+                  this.#loadPageExtract();
+                } else {
+                  Informer.showMessage(message);
+                }
+              });      
+
+            } else {
+              Informer.showMessage("Данные содержат ошибки");
+            }
+
+          });
+
+
+
+
           break;
 
       }
@@ -421,17 +425,6 @@ export class SurveyController {
 
     document.getElementById("toolbar-survey-stations").addEventListener('click', (event) => {
       let element = event.target;
-
-      // if (element.classList.contains('survey-button')) {
-      //   element.style.cssText += `
-      //   height: 30px;
-      //   width: 30px;
-      //   margin-left: 4px;
-      //   margin-right: 4px;
-      //   opacity: 0.7;
-      //   box-shadow: 0px 0px 0px 0px #3e5283;    
-      //   `;
-      // }
 
       switch(element.id) {
         

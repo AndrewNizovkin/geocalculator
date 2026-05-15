@@ -134,9 +134,12 @@ export class DirectController {
 
           case "direct-run":
             if (this.#isValidData()) {
-              this.#directService.solveDirectTask().then(() => {
+              this.#directService.solveDirectTask().then((message) => {
                 this.#setResult()
                 this.#resultActual = true;
+                if (message != "OK") {
+                  Informer.showMessage(message);
+                }
               });
             } else {
               Informer.showMessage("Данные содержат ошибки");

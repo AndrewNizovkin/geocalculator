@@ -51,7 +51,6 @@ export class PolygonContoller {
             <div class="survey-button run" id="polygon-run" title="Уравнять полигон"></div>
             <div class="survey-button view" id="polygon-view" title="Просмотр результатов"></div>
             <input type="file" id="polygon-open-input" accept=".pol">
-            <input type="file" id="polygon-open-response" accept=".txt">
         </div>
 
         <div class="panel" id="panel-polygon">
@@ -91,7 +90,7 @@ export class PolygonContoller {
                 <div class="panel-title">Невязки фактические</div>
 
                 <div class="row-residual">
-                    <div>Высотная, м.</div>
+                    <div>Высотная, мм.</div>
                     <div id="residual-height"></div>
                 </div>
 
@@ -544,19 +543,6 @@ export class PolygonContoller {
                     }
                     break;
 
-                case "polygon-open-response":
-                    try {
-                    let file = element.files[0];
-                    if (!file) throw new Error("Select a file!");
-                        this.#polygonService.calculatePolygon(file).then(() =>{
-                            this.#setResiduals();
-                            this.#reportsIsActual = true;
-                        });
-                    } catch (error) {
-                    console.error(error.message);
-                    }
-                    break;
-
             }
         });
 
@@ -581,18 +567,14 @@ export class PolygonContoller {
                 case "polygon-run":
                     this.#isValidData().then((result) => {
                         if (result) {
-                            this.#polygonService.calculatePolygon().then((access) =>{
-                                if (access) {
+                            this.#polygonService.calculatePolygon().then((message) =>{
+                                if (message == "OK") {
                                     this.#setResiduals();
                                     this.#reportsIsActual = true;
+                                } else {
+                                    Informer.showMessage(message);
                                 }
                             });
-
-
-                            // document.getElementById("polygon-open-response").click();
-
-
-                            
                         } else {
                             Informer.showMessage("Данные содержат ошибки");
                         }

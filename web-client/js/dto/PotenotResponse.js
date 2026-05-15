@@ -3,6 +3,7 @@
  */
 export class PotenotResponse {
     constructor() {
+        this.header = "";
         this.pointX = "";
         this.pointY = "";
     }

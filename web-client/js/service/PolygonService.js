@@ -94,18 +94,15 @@ export class PolygonService {
      * Updates reports after mathematical processing 
      * of polygonometric measurements
      */
-    async calculatePolygon(reportFile) {
-        let access = true;
+    async calculatePolygon() {
+        let message = "OK";
         this.clearReports();
         let polygonRequest = this.#polygonMapper.polygonRepositoryToPolygonRequest(this.#polygonRepository, this.#validResiduals);
-        // for (let line of polygonRequest) {
-        //     console.log(line);
-        // }
 
         try {
             await this.#polygonProvider.getPolygonResponse(polygonRequest).then((polygonResponse) => {
                 if (typeof(polygonResponse != undefined)) {
-                    this.#polygonMapper.polygonResponseToReports(
+                    message = this.#polygonMapper.polygonResponseToReports(
                         polygonResponse, 
                         this.#residuals, 
                         this.#reportCatalog,
@@ -113,14 +110,14 @@ export class PolygonService {
                         this.#reportElevation
                     );
                 } else {
-                    access = false;
+                    message = "Ошибка!";
                 }
             });
         } catch (err) {
             console.error(err.message);
         }
 
-        return access;
+        return message;
 
     }
 

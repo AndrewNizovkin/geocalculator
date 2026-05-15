@@ -103,10 +103,14 @@ export class PolygonMapper {
         reportPlan, 
         reportElevation
     ) {
+
+        if (polygonResponse.at(0) == "#error") {
+            return polygonResponse.at(1);
+        }
+
+
         const arrayResiduals = [];
         let target = "";
-        // polygonResponse = JSON.stringify(polygonResponse);
-        // polygonResponse = JSON.parse(polygonResponse);
 
         for (let line of polygonResponse) {
 
@@ -148,7 +152,6 @@ export class PolygonMapper {
                     reportElevation.push(line);
                     break;
             }
-
 
         }
 
@@ -193,7 +196,8 @@ export class PolygonMapper {
             }
 
         }
-
+        
+    return "OK";
     }
 
 }

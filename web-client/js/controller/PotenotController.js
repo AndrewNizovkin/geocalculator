@@ -183,9 +183,12 @@ export class PotenotController {
 
             case "potenot-run":
               if (this.#isValidData()) {
-                this.#potenotService.solvePotenotTask().then(() => {
+                this.#potenotService.solvePotenotTask().then((message) => {
                   this.#setResult();
                   this.#resultActual = true;
+                  if (message != "OK") {
+                    Informer.showMessage(message);
+                  }
                 });
               } else {
                 Informer.showMessage("Данные содержат ошибки");

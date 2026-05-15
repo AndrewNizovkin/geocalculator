@@ -32,47 +32,48 @@ export class SurveyService {
      * of survey data
      */
     async calculateSurvey() {
-        let access = true;
+        let message = "OK";
         this.clearSurveyReports();
         let surveyRequest = this.#surveyMapper.surveyRepositoryToSurveyRequest(this.#surveyRepository);
 
         try {
             await this.#surveyProvider.getSurveyResponse(surveyRequest).then((surveyResponse) => {
                 if (typeof(surveyResponse) != "undefined") {
-                    this.#surveyMapper.surveyResponseToReports(
+                    message = this.#surveyMapper.surveyResponseToReports(
                         surveyResponse, 
                         this.#reportSurveyProcessing, 
                         this.#reportSurveyCatalog
                     );
                 } else {
-                    access = false;
+                    message = "Bad response";
                 }
 
             });
         } catch (err) {
             console.error(err.message);
         }
-        return access;
+        return message;
     }
 
     /**
      * Extract polygon from survey and
      * updates reportExtractProcessing and reportExtractPol
      */
-    async extractPolygon(extractFile) {
+    async extractPolygon() {
+        let message = "OK";
 
-        if (this.#surveyRepository.size() < 3) return false;
+        if (this.#surveyRepository.size() < 3) return "Недостаточно станций!";
 
         for (let i = 0; i < this.#surveyRepository.size(); i++) {
-            if (this.#surveyRepository.measurementSize(i) < 2) return false; 
+            if (this.#surveyRepository.measurementSize(i) < 2) return `Недостаточно измерений на станции ${this.#surveyRepository.getStationName(i)}`; 
         }
 
         this.clearExtactReports();
-        // let extractRequest = this.#surveyMapper.surveyRepositoryToArray(this.#surveyRepository);
+        let extractRequest = this.#surveyMapper.surveyRepositoryToArray(this.#surveyRepository);
 
         try {
-            await this.#surveyProvider.getExtractResponse(extractFile).then((extractResponse) => {
-                this.#surveyMapper.extractResponseToReports(
+            await this.#surveyProvider.getExtractResponse(extractRequest).then((extractResponse) => {
+                message = this.#surveyMapper.extractResponseToReports(
                     extractResponse, 
                     this.#reportExtractProcessing, 
                     this.#reportExtractPol
@@ -81,7 +82,7 @@ export class SurveyService {
         } catch (err) {
             console.error(err.message);
         }
-        return true;
+        return message;
     }
 
     /**

@@ -196,9 +196,12 @@ export class InverseController {
 
           case "inverse-run":
             if (this.#isValidData()) {
-              this.#inverseService.solveInverseTask().then(() => {
+              this.#inverseService.solveInverseTask().then((message) => {
                 this.#setResult();
                 this.#resultActual = true;
+                if (message != "OK") {
+                  Informer.showMessage(message);
+                }
               });
             } else {
               Informer.showMessage("Данные содержат ошибки");

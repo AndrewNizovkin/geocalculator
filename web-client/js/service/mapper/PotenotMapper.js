@@ -49,8 +49,7 @@ export class PotenotMapper {
     responseToPotenotResponse(response) {
         let potenotResponse = new PotenotResponse();
 
-        // let response = JSON.parse(jsonResponse);
-
+        potenotResponse.header = response?.header;
         potenotResponse.pointX = response?.pointX;
         potenotResponse.pointY = response?.pointY;
 
