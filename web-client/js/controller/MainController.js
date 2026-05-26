@@ -54,6 +54,7 @@ export class MainController {
 
   </div>
   <div class="main">
+    <div class="left-sidebar"></div>
     <div class="nav"  id="nav-menu">
       <a href="#" class="menu-item" id="main-page">Главная</a>
       <a href="#" class="menu-item" id="points-page">Каталог</a>
@@ -67,7 +68,7 @@ export class MainController {
     </div>
     <div class="content" id="content"></div>
 
-    <div class="sidebar">Sidebar</div>
+    <div class="sidebar"></div>
   </div>
   <div class="footer">Footer</div>
   <div class="overlay" id="overlay"></div>
