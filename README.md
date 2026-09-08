@@ -1,8 +1,8 @@
 # Geocalculator
 
-Приложение **Geocalculator** состоит из слабосвязанных компонентов-сервисов, взаимодействующих посредством RestFull Api:
+Приложение **Geocalculator** это веб-приложение с клиент-серверной архитектурой, в котором компоненты взаимодействуют посредством RestFull Api:
 
-- **[geocalculator_service](./geocalculator_service/README.md)** - служит для решения различных геодезических задач:     
+- **[geocalculator_service](./geocalculator_service/README.md)** - серверная часть приложения (backend) предоставляет Api для решения различных геодезических задач:     
 
     - **_Inverse (Обратная геодезическая задача)_** - определяет расстояние и диррекционный угол между точками с известными координатами.
 
@@ -16,10 +16,20 @@
 
     - **_Extract_** - извлекает тахеометрический ход из полевых измерений
 
+    Стек технологий:
+
+        - Java JDK-21
+
+        - git, GitHub
+
+        - Spring
+
+        - PostgeSQL
+
+        - Docker
 
 - [web-client](./web-client/README.md)
 
-- **[geocalculator_web](./geocalculator_web/README.md)** - возвращает HTML-страницы, используя технологию `tymelife`. 
 
 Стек технологий:
 
