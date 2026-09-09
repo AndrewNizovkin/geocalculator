@@ -28,17 +28,5 @@
 
         - Docker
 
-- [web-client](./web-client/README.md)
+- **[web-client](./web-client/README.md)** - клиентская часть приложения (frontend) предоставляет графический пользовательский интерфейс.
 
-
-Стек технологий:
-
-- Java JDK-21
-
-- git, GitHub
-
-- Spring
-
-- PostgeSQL
-
-- Docker
